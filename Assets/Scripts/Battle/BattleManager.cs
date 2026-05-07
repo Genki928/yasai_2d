@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class BattleManager : MonoBehaviour
 {
-    [SerializeField] List<GameObject> list = new List<GameObject>();
-    GameObject[] chars;
+    [SerializeField] List<GameObject> chars = new List<GameObject>();
+    GameObject[] player = new GameObject[2];
     int[] pick_nums = { 0, 0 };
 
     void Awake()
@@ -14,8 +14,9 @@ public class BattleManager : MonoBehaviour
 
     void Start()
     {
+        // キャラクターを生成
         for (int i = 0; i < 2; i++) {
-            chars[i] = list[pick_nums[i]];
+            player[i] = Instantiate(chars[pick_nums[i]]);
         }
     }
 

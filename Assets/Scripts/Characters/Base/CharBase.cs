@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CharBase : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class CharBase : MonoBehaviour
 
     virtual protected void Update()
     {
-        ;
+        var current = Keyboard.current;
     }
 
     /// <summary> プレイヤーにダメージを与える </summary>
@@ -37,5 +38,20 @@ public class CharBase : MonoBehaviour
         {
             OnPlayerDies?.Invoke(id);
         }
+    }
+
+    virtual public void Skill1(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("Skill 1");
+    }
+
+    virtual public void Skill2(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("Skill 2");
+    }
+
+    virtual public void Skill3(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("Skill 3");
     }
 }
