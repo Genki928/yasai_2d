@@ -10,6 +10,7 @@ public class BattleManager : MonoBehaviour
 
     void Awake()
     {
+        Application.targetFrameRate = 30;
         CharBase.OnPlayerDies += Finish;
     }
 
@@ -20,6 +21,7 @@ public class BattleManager : MonoBehaviour
             // キャラクターを生成
             Vector2 pos = new Vector2(spawn_point[i].transform.position.x, spawn_point[i].transform.position.y);
             player[i] = Instantiate(chars[pick_nums[i]], pos, Quaternion.identity);
+            player[i].GetComponent<CharBase>().id = i;
         }
     }
 

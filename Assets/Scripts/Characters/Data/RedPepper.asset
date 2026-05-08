@@ -13,5 +13,10 @@ MonoBehaviour:
   m_Name: RedPepper
   m_EditorClassIdentifier: Assembly-CSharp::CharData
   speed: 3
-  burst: 0
   max_burst: 100
+  skill_1_rigid: 20
+  skill_1_cooltime: 60
+  skill_2_rigid: 0
+  skill_2_cooltime: 0
+  skill_3_rigid: 0
+  skill_3_cooltime: 0

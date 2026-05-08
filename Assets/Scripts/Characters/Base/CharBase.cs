@@ -10,7 +10,12 @@ public class CharBase : MonoBehaviour
 
     [Header("◇キャラクターデータ")]
     public CharData data;
-    protected int id;
+    public int burst = 0;
+    public int id;
+    public int rigid;
+    protected int skill_1_cooltime = 0;
+    protected int skill_2_cooltime = 0;
+    protected int skill_3_cooltime = 0;
 
     [Header("◇物理")]
     Vector2 vec;
@@ -25,12 +30,20 @@ public class CharBase : MonoBehaviour
 
     virtual protected void Update()
     {
-        var current = Keyboard.current;
+        if (rigid > 0) --rigid;
+        if (skill_1_cooltime > 0) --skill_1_cooltime;
+        if (skill_2_cooltime > 0) --skill_2_cooltime;
+        if (skill_3_cooltime > 0) --skill_3_cooltime;
     }
 
     virtual protected void FixedUpdate()
     {
-        rb.linearVelocity = vec * data.speed;
+        if (rigid == 0)
+        {
+            rb.linearVelocity = vec * data.speed;
+        }
+        else
+            rb.linearVelocity = Vector2.zero;
     }
 
     /// <summary> プレイヤーにダメージを与える </summary>
@@ -38,28 +51,30 @@ public class CharBase : MonoBehaviour
     public void Damage(int value)
     {
         // バースト値が最大なら中断
-        if (data.burst >= data.max_burst) return;
+        if (burst >= data.max_burst) return;
 
         // 受けるダメージが過剰ならセーブする
-        data.burst = data.burst + value > data.max_burst ?
-                     data.max_burst : data.burst + value;
+        burst = burst + value > data.max_burst ?
+                     data.max_burst : burst + value;
 
         // バースト値が最大なら、死亡
-        if (data.burst == data.max_burst)
+        if (burst == data.max_burst)
         {
             OnPlayerDies?.Invoke(id);
         }
     }
 
+    /// <summary> 移動関数 </summary>
     public void Move(InputAction.CallbackContext ctx)
     {
+        // ベクトルの取得
         vec = ctx.ReadValue<Vector2>();
         Debug.Log(vec + " , " + direction);
 
-        if(vec!=new Vector2(0,0))
-        { 
-        direction = vec;
-            
+        // 向きを保存
+        if (vec != new Vector2(0, 0))
+        {
+            direction = vec;
         }
     }
 
