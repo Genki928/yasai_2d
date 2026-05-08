@@ -14,6 +14,8 @@ public class CharBase : MonoBehaviour
 
     [Header("Åûï®óù")]
     Vector2 vec;
+    Vector2 direction;
+
     Rigidbody2D rb;
 
     virtual protected void Start()
@@ -57,7 +59,13 @@ public class CharBase : MonoBehaviour
     public void Move(InputAction.CallbackContext ctx)
     {
         vec = ctx.ReadValue<Vector2>();
-        Debug.Log(vec);
+        Debug.Log(vec + " , " + direction);
+
+        if(vec!=new Vector2(0,0))
+        { 
+        direction = vec;
+            
+        }
     }
 
     virtual public void Skill1(InputAction.CallbackContext ctx)

@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7264720181401941110}
   - component: {fileID: 7844761951757042004}
-  - component: {fileID: 7386155764327058538}
   - component: {fileID: 2387769583341587097}
   - component: {fileID: 8785239974707632202}
+  - component: {fileID: 3078198726510559745}
   m_Layer: 0
-  m_Name: Carrot
+  m_Name: RedPepper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 2950869812727453837, guid: 3dcda9a40728eef4ca8ee47555100ab1, type: 3}
+  m_Sprite: {fileID: -9177740170459379683, guid: 598803ad020e83c4cb796473f4370800, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -94,19 +94,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &7386155764327058538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3071852468601324621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 430d6279bb069de44923373fbb04a7b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Carrot
-  data: {fileID: 11400000, guid: dfe8ba9db7b4ea24a9cf331aaad322ef, type: 2}
 --- !u!114 &2387769583341587097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,8 +121,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7386155764327058538}
-        m_TargetAssemblyTypeName: Carrot, Assembly-CSharp
+      - m_Target: {fileID: 3078198726510559745}
+        m_TargetAssemblyTypeName: RedPepper, Assembly-CSharp
         m_MethodName: Move
         m_Mode: 0
         m_Arguments:
@@ -149,19 +136,7 @@ MonoBehaviour:
     m_ActionId: f9957526-3c8c-4cb8-bfdf-b6419de27a44
     m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7386155764327058538}
-        m_TargetAssemblyTypeName: Carrot, Assembly-CSharp
-        m_MethodName: test
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 407c77ed-9086-4d89-a4d5-40e408c16348
     m_ActionName: Player/interact
   m_NeverAutoSwitchControlSchemes: 0
@@ -196,3 +171,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &3078198726510559745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3071852468601324621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57607db52400a8348b62ed58dd7a639a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RedPepper
+  data: {fileID: 11400000, guid: 5fc51f4c973e3e64598fedd796311289, type: 2}

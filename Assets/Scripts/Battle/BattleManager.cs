@@ -5,7 +5,7 @@ public class BattleManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> chars = new List<GameObject>();
     GameObject[] player = new GameObject[2];
-    int[] pick_nums = { 0, 0 };
+    int[] pick_nums = { 1, 0 };
 
     void Awake()
     {
