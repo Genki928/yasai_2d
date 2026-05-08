@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414cba326641da042aacc708ac76fb71, type: 3}
   m_Name: RedPepper
   m_EditorClassIdentifier: Assembly-CSharp::CharData
-  speed: 0
+  speed: 3
   burst: 0
   max_burst: 100
