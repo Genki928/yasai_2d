@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7264720181401941110}
   - component: {fileID: 7844761951757042004}
+  - component: {fileID: 3078198726510559745}
   - component: {fileID: 2387769583341587097}
   - component: {fileID: 8785239974707632202}
-  - component: {fileID: 3078198726510559745}
   m_Layer: 0
   m_Name: RedPepper
   m_TagString: Untagged
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1851983597
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -9177740170459379683, guid: 598803ad020e83c4cb796473f4370800, type: 3}
@@ -94,6 +94,20 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &3078198726510559745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3071852468601324621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57607db52400a8348b62ed58dd7a639a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RedPepper
+  data: {fileID: 11400000, guid: 5fc51f4c973e3e64598fedd796311289, type: 2}
+  breath: {fileID: 3303797620011567552, guid: 13cdeee2f059e9c4b8213bf5721f9dea, type: 3}
 --- !u!114 &2387769583341587097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,7 +150,19 @@ MonoBehaviour:
     m_ActionId: f9957526-3c8c-4cb8-bfdf-b6419de27a44
     m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3078198726510559745}
+        m_TargetAssemblyTypeName: RedPepper, Assembly-CSharp
+        m_MethodName: Skill1
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 407c77ed-9086-4d89-a4d5-40e408c16348
     m_ActionName: Player/interact
   m_NeverAutoSwitchControlSchemes: 0
@@ -171,16 +197,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3078198726510559745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3071852468601324621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57607db52400a8348b62ed58dd7a639a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RedPepper
-  data: {fileID: 11400000, guid: 5fc51f4c973e3e64598fedd796311289, type: 2}

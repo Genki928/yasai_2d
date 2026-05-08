@@ -14,7 +14,7 @@ public class CharBase : MonoBehaviour
 
     [Header("◇物理")]
     Vector2 vec;
-    Vector2 direction;
+    protected Vector2 direction;
 
     Rigidbody2D rb;
 
@@ -31,11 +31,6 @@ public class CharBase : MonoBehaviour
     virtual protected void FixedUpdate()
     {
         rb.linearVelocity = vec * data.speed;
-    }
-
-    public void test(InputAction.CallbackContext ctx)
-    {
-        Debug.Log("test");
     }
 
     /// <summary> プレイヤーにダメージを与える </summary>
