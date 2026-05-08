@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +11,9 @@ public class CharBase : MonoBehaviour
     [Header("◇キャラクターデータ")]
     public CharData data;
     protected int id;
+
+    [Header("◇物理")]
+    Vector2 vec;
     Rigidbody2D rb;
 
     virtual protected void Start()
@@ -20,6 +24,16 @@ public class CharBase : MonoBehaviour
     virtual protected void Update()
     {
         var current = Keyboard.current;
+    }
+
+    virtual protected void FixedUpdate()
+    {
+        rb.linearVelocity = vec * data.speed;
+    }
+
+    public void test(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("test");
     }
 
     /// <summary> プレイヤーにダメージを与える </summary>
@@ -38,6 +52,12 @@ public class CharBase : MonoBehaviour
         {
             OnPlayerDies?.Invoke(id);
         }
+    }
+
+    public void Move(InputAction.CallbackContext ctx)
+    {
+        vec = ctx.ReadValue<Vector2>();
+        Debug.Log(vec);
     }
 
     virtual public void Skill1(InputAction.CallbackContext ctx)

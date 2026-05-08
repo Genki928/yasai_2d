@@ -83,8 +83,19 @@
                 },
                 {
                     "name": "",
+                    "id": "d3693e62-e9b8-4519-a29e-715e8f171a6a",
+                    "path": "<XInputController>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "5e766362-5607-4acb-9e95-a9362d63e75e",
-                    "path": "<XInputController>/buttonSouth",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
