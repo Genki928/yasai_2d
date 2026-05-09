@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharData
   speed: 3
   max_burst: 100
-  skill_1_rigid: 20
-  skill_1_cooltime: 60
+  skill_1_rigid: 15
+  skill_1_cooltime: 40
   skill_2_rigid: 0
   skill_2_cooltime: 0
   skill_3_rigid: 0

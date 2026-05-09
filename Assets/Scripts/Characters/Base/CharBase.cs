@@ -20,7 +20,6 @@ public class CharBase : MonoBehaviour
     [Header("•¨—")]
     Vector2 vec;
     protected Vector2 direction;
-
     Rigidbody2D rb;
 
     virtual protected void Start()
@@ -38,10 +37,10 @@ public class CharBase : MonoBehaviour
 
     virtual protected void FixedUpdate()
     {
+        // d’¼‚ª–³‚¯‚ê‚ÎˆÚ“®
         if (rigid == 0)
-        {
             rb.linearVelocity = vec * data.speed;
-        }
+        // d’¼‚ª‚ ‚ê‚ÎˆÚ“®•s‰Â
         else
             rb.linearVelocity = Vector2.zero;
     }
