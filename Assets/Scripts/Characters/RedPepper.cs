@@ -36,4 +36,12 @@ public class RedPepper : CharBase
             skill_1_cooltime = data.skill_1_cooltime;
         }
     }
+
+    public override void Skill2(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            ;
+        }
+    }
 }

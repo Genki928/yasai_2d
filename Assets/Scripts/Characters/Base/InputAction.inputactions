@@ -95,7 +95,29 @@
                 {
                     "name": "",
                     "id": "5e766362-5607-4acb-9e95-a9362d63e75e",
-                    "path": "<Keyboard>/space",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "93fed6d6-0b72-4f96-a03d-4f6b96a5a11b",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "107309d5-b266-4ccf-9e92-e4d66c264954",
+                    "path": "<Keyboard>/3",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
