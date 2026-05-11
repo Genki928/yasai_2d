@@ -32,7 +32,7 @@ public class CharBase : MonoBehaviour
         if (rigid > 0)
         {
             --rigid;
-            if(rigid == 0) vec = Vector2.zero;
+            if(rigid == 0) vec /= 2;
         }
         if (skill_1_cooltime > 0) --skill_1_cooltime;
         if (skill_2_cooltime > 0) --skill_2_cooltime;

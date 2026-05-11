@@ -111,6 +111,9 @@ MonoBehaviour:
   burst: 0
   id: 0
   rigid: 0
+  sprite: {fileID: 0}
+  tackleSpeed: 15
+  tackleTime: 0.2
 --- !u!114 &2387769583341587097
 MonoBehaviour:
   m_ObjectHideFlags: 0

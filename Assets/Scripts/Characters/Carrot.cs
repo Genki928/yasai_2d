@@ -12,7 +12,7 @@ public class Carrot : CharBase
     // タックル関連
     private Rigidbody2D rb;
     [SerializeField] private float tackleSpeed = 15f;
-    [SerializeField] private float tackleTime = 0.1f;
+    [SerializeField] private float tackleTime = 0.2f;
 
     private bool isTackling = false;
 
