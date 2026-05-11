@@ -41,7 +41,15 @@ public class RedPepper : CharBase
     {
         if (ctx.performed)
         {
-            ;
+            // 中断処理
+            if (skill_2_cooltime != 0) return;
+
+            // 処理
+            vec = direction * -2;
+
+            // 硬直・クールタイム
+            rigid += data.skill_2_rigid;
+            skill_1_cooltime = data.skill_2_cooltime;
         }
     }
 }

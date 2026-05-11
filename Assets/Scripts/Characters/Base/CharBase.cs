@@ -29,7 +29,11 @@ public class CharBase : MonoBehaviour
 
     virtual protected void Update()
     {
-        if (rigid > 0) --rigid;
+        if (rigid > 0)
+        {
+            --rigid;
+            if(rigid == 0) vec = Vector2.zero;
+        }
         if (skill_1_cooltime > 0) --skill_1_cooltime;
         if (skill_2_cooltime > 0) --skill_2_cooltime;
         if (skill_3_cooltime > 0) --skill_3_cooltime;
