@@ -16,6 +16,12 @@ public class RedPepper : CharBase
         base.Update();
     }
 
+    protected override void FixedUpdate()
+    {
+        if(rigid == 0)
+            base.FixedUpdate();
+    }
+
     override public void Skill1(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
@@ -49,7 +55,7 @@ public class RedPepper : CharBase
 
             // 硬直・クールタイム
             rigid += data.skill_2_rigid;
-            skill_1_cooltime = data.skill_2_cooltime;
+            skill_2_cooltime = data.skill_2_cooltime;
         }
     }
 }

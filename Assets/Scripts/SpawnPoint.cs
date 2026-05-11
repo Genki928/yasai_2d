@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MarkerGizmo : MonoBehaviour
+public class SpawnPoint : MonoBehaviour
 {
     private void OnDrawGizmos()
     {
