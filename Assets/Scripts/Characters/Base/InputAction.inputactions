@@ -16,9 +16,27 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "interact",
+                    "name": "Skill1",
                     "type": "Button",
                     "id": "407c77ed-9086-4d89-a4d5-40e408c16348",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Skill2",
+                    "type": "Button",
+                    "id": "a6c21087-41df-4deb-9a3d-381312032ced",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Skill3",
+                    "type": "Button",
+                    "id": "dea649c5-98ea-43cc-a587-0c7ff317da3b",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -99,29 +117,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "interact",
+                    "action": "Skill1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "93fed6d6-0b72-4f96-a03d-4f6b96a5a11b",
+                    "id": "74bdbbba-1f90-42f2-8ee2-a1eef72688d2",
                     "path": "<Keyboard>/2",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "interact",
+                    "action": "Skill2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "107309d5-b266-4ccf-9e92-e4d66c264954",
+                    "id": "a1f85c14-8ac7-4803-9573-8ad18d1f2fc8",
                     "path": "<Keyboard>/3",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "interact",
+                    "action": "Skill3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

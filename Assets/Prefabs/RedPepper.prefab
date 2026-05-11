@@ -81,7 +81,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1851983597
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -9177740170459379683, guid: 598803ad020e83c4cb796473f4370800, type: 3}
@@ -107,6 +107,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RedPepper
   data: {fileID: 11400000, guid: 5fc51f4c973e3e64598fedd796311289, type: 2}
+  burst: 0
+  id: 0
+  rigid: 0
   breath: {fileID: 3303797620011567552, guid: 13cdeee2f059e9c4b8213bf5721f9dea, type: 3}
 --- !u!114 &2387769583341587097
 MonoBehaviour:
@@ -165,6 +168,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 407c77ed-9086-4d89-a4d5-40e408c16348
     m_ActionName: Player/interact
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3078198726510559745}
+        m_TargetAssemblyTypeName: RedPepper, Assembly-CSharp
+        m_MethodName: Skill2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a6c21087-41df-4deb-9a3d-381312032ced
+    m_ActionName: 'Player/Skill2[/Keyboard/2]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3078198726510559745}
+        m_TargetAssemblyTypeName: RedPepper, Assembly-CSharp
+        m_MethodName: Skill3
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: dea649c5-98ea-43cc-a587-0c7ff317da3b
+    m_ActionName: 'Player/Skill3[/Keyboard/3]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

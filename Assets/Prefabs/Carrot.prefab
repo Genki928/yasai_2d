@@ -156,7 +156,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7386155764327058538}
         m_TargetAssemblyTypeName: Carrot, Assembly-CSharp
-        m_MethodName: test
+        m_MethodName: Skill1
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -168,6 +168,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 407c77ed-9086-4d89-a4d5-40e408c16348
     m_ActionName: Player/interact
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7386155764327058538}
+        m_TargetAssemblyTypeName: Carrot, Assembly-CSharp
+        m_MethodName: Skill2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a6c21087-41df-4deb-9a3d-381312032ced
+    m_ActionName: 'Player/Skill2[/Keyboard/2]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7386155764327058538}
+        m_TargetAssemblyTypeName: Carrot, Assembly-CSharp
+        m_MethodName: Skill3
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: dea649c5-98ea-43cc-a587-0c7ff317da3b
+    m_ActionName: 'Player/Skill3[/Keyboard/3]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
