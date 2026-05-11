@@ -18,9 +18,9 @@ public class CharBase : MonoBehaviour
     protected int skill_3_cooltime = 0;
 
     [Header("Åûï®óù")]
-    Vector2 vec;
+    protected Vector2 vec;
     protected Vector2 direction;
-    Rigidbody2D rb;
+    protected Rigidbody2D rb;
 
     virtual protected void Start()
     {
