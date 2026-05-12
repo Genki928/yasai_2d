@@ -13,5 +13,10 @@ MonoBehaviour:
   m_Name: Carrot
   m_EditorClassIdentifier: Assembly-CSharp::CharData
   speed: 5
-  burst: 0
   max_burst: 100
+  skill_1_rigid: 20
+  skill_1_cooltime: 50
+  skill_2_rigid: 0
+  skill_2_cooltime: 0
+  skill_3_rigid: 0
+  skill_3_cooltime: 0
