@@ -7,12 +7,13 @@ public class Carrot : CharBase
 {
     [SerializeField] SpriteRenderer sprite;
 
-    Sprite tackle;
+    public Sprite carrot_default;
+    public Sprite tackle;
 
     // タックル関連
     private Rigidbody2D rb;
-    [SerializeField] private float tackleSpeed = 15f;
-    [SerializeField] private float tackleTime = 0.2f;
+    [SerializeField] private float tackleSpeed = 20f;
+    [SerializeField] private float tackleTime = 0.5f;
 
     private bool isTackling = false;
 
@@ -61,9 +62,14 @@ public class Carrot : CharBase
     }
     private IEnumerator Tackle()
     {
-        Debug.Log("now");
-        Debug.Log(direction*tackleSpeed);
+
+
+        sprite.sprite = tackle;
+        Debug.Log(direction * tackleSpeed);
         isTackling = true;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
 
         // 突進
         rb.linearVelocity = direction * tackleSpeed;
@@ -73,12 +79,29 @@ public class Carrot : CharBase
 
         // 停止
         rb.linearVelocity = Vector2.zero;
-        rb.Sleep();
-        Debug.Log("end");
 
         isTackling = false;
+        sprite.sprite = carrot_default;
+        transform.rotation=Quaternion.Euler(0, 0, 0);
+    }
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.TryGetComponent<CharBase>(out var cb))
+        {
+            if (cb.id != id&&isTackling)
+            {
+                // 被弾処理
+                cb.Damage(100);
+                Debug.Log("tackle_damage");
+
+                Vector2 knockbackDir = (cb.transform.position - transform.position).normalized;
+
+                cb.KnockBack(10, knockbackDir);
+            }
+        }
     }
 }
+
 
 
 

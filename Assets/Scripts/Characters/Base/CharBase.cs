@@ -17,14 +17,18 @@ public class CharBase : MonoBehaviour
     protected int skill_2_cooltime = 0;
     protected int skill_3_cooltime = 0;
 
+
+
     [Header("◇物理")]
     protected Vector2 vec;
     protected Vector2 direction;
     protected Rigidbody2D rb;
 
+
     virtual protected void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
     }
 
     virtual protected void Update()
@@ -94,5 +98,14 @@ public class CharBase : MonoBehaviour
     virtual public void Skill3(InputAction.CallbackContext ctx)
     {
         Debug.Log("Skill 3");
+    }
+
+
+    public void KnockBack(int knockbackPower, Vector2 hitDirection)
+    {
+        // ノックバック
+        Debug.Log("knockback");
+        rb.linearVelocity = Vector2.zero;
+        rb.AddForce(hitDirection.normalized * knockbackPower, ForceMode2D.Impulse);
     }
 }
