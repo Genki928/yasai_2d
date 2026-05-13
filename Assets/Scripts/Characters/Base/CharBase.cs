@@ -17,6 +17,8 @@ public class CharBase : MonoBehaviour
     protected int skill_2_cooltime = 0;
     protected int skill_3_cooltime = 0;
     protected bool can_control = true;
+    [SerializeField] protected GameObject cursor_pf;
+    protected GameObject cursor_obj;
 
 
     [Header("Åûï®óù")]
@@ -28,7 +30,7 @@ public class CharBase : MonoBehaviour
     virtual protected void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
+        cursor_obj = Instantiate(cursor_pf, transform.position, Quaternion.identity);
     }
 
     virtual protected void Update()
@@ -37,6 +39,9 @@ public class CharBase : MonoBehaviour
         if (skill_1_cooltime > 0) --skill_1_cooltime;
         if (skill_2_cooltime > 0) --skill_2_cooltime;
         if (skill_3_cooltime > 0) --skill_3_cooltime;
+        cursor_obj.transform.position = new(transform.position.x, transform.position.y - 0.5f);
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        cursor_obj.transform.localRotation = Quaternion.Euler(0, 0, angle - 90);
     }
 
     virtual protected void FixedUpdate()

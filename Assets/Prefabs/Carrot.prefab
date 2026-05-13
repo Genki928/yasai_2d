@@ -112,6 +112,7 @@ MonoBehaviour:
   burst: 0
   id: 0
   rigid: 0
+  cursor_pf: {fileID: 5826391187326269229, guid: 50c4b14c6dc55f04f924db6a0c75f818, type: 3}
   sprite: {fileID: 0}
   carrot_default: {fileID: 2950869812727453837, guid: 3dcda9a40728eef4ca8ee47555100ab1, type: 3}
   tackle: {fileID: 1824413040164408261, guid: b205cf7e6d820bf45bb4267f2ea3f8c1, type: 3}
