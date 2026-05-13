@@ -112,6 +112,8 @@ MonoBehaviour:
   burst: 0
   id: 0
   rigid: 0
+  skill_1_cooltime: 0
+  skill_2_cooltime: 0
   cursor_pf: {fileID: 5826391187326269229, guid: 50c4b14c6dc55f04f924db6a0c75f818, type: 3}
   sprite: {fileID: 0}
   carrot_default: {fileID: 2950869812727453837, guid: 3dcda9a40728eef4ca8ee47555100ab1, type: 3}
@@ -119,6 +121,7 @@ MonoBehaviour:
   tackleSpeed: 20
   tackleTime: 0.4
   tackleDamage: 20
+  dust: {fileID: 1560168367213963595, guid: 31c763f52fdaf2d45885cba010fc705b, type: 3}
   headBangAngle: 60
   rotateSpeed: 350
   headBangDamage: 5

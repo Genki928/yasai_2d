@@ -16,6 +16,7 @@ public class Carrot : CharBase
     [SerializeField] private float tackleSpeed = 20f;
     [SerializeField] private float tackleTime = 0.5f;
     [SerializeField] private int tackleDamage = 20;
+    [SerializeField] GameObject dust;
 
     private bool isTackling = false;
 
@@ -62,6 +63,9 @@ public class Carrot : CharBase
             // 硬直・クールタイム
             rigid += data.skill_1_rigid;
             skill_1_cooltime = data.skill_1_cooltime;
+            Vector2 pos = new(transform.position.x, transform.position.y);
+            GameObject obj = Instantiate(dust, pos, Quaternion.identity);
+            if (direction.x > 0) obj.GetComponent<SpriteRenderer>().flipX = true;
         }
     }
     private IEnumerator Tackle()
