@@ -22,4 +22,10 @@ public class BurstBar : MonoBehaviour
             image.fillAmount = targetPlayer.burst / 100f;
         }
     }
+
+    public void Init(GameObject player_obj)
+    {
+        CharBase player = player_obj.GetComponent<CharBase>();
+        targetPlayer = player;
+    }
 }
