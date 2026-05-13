@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Character/CharData")]
 public class CharData : ScriptableObject
 {
+    public string char_name;
     public int speed = 0;
     public int max_burst = 100;
 

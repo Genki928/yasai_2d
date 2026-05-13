@@ -21,7 +21,6 @@ public class DamageArea : MonoBehaviour
             {
                 // ”í’eˆ—
                 cb.Damage(damage);
-                Debug.Log("damage");
             }
         }
     }

@@ -80,7 +80,6 @@ public class CharBase : MonoBehaviour
     {
         // ƒxƒNƒgƒ‹‚ÌŽæ“¾
         vec = ctx.ReadValue<Vector2>();
-        Debug.Log(vec + " , " + direction);
 
         // Œü‚«‚ð•Û‘¶
         if (vec != new Vector2(0, 0))
