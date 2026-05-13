@@ -4,6 +4,7 @@ public class DamageArea : MonoBehaviour
 {
     int id = 0;
     int damage = 0;
+    Vector2 vec;
 
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -21,7 +22,7 @@ public class DamageArea : MonoBehaviour
     }
 
     // Ž¯•Êid‚Ì•R‚Ã‚¯
-    public void Init(int id, int damage)
+    public void Init(int id, int damage, Vector2 vec)
     {
         this.id = id;
         this.damage = damage;

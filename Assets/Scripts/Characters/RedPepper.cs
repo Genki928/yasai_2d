@@ -1,15 +1,18 @@
 using System.Collections;
-using UnityEditor.Experimental.GraphView;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class RedPepper : CharBase
 {
     [SerializeField] GameObject breath;
+    SpriteRenderer sr;
+    [SerializeField] List<Sprite> img = new List<Sprite>();
 
     override protected void Start()
     {
         base.Start();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     override protected void Update()
@@ -32,14 +35,17 @@ public class RedPepper : CharBase
             // 座標・ベクトルの算出
             Vector2 pos = new Vector2(transform.position.x, transform.position.y) + direction * 1.5f;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            sr.sprite = img[1];
 
             // 炎を生成 -> idの紐づけ
             GameObject go = Instantiate(breath, pos, Quaternion.Euler(0, 0, angle - 90));
-            go.GetComponent<DamageArea>().Init(id,100);
+            go.GetComponent<DamageArea>().Init(id,100,new Vector2(0,0));
 
             // 硬直・クールタイム
-            rigid += data.skill_1_rigid;
             skill_1_cooltime = data.skill_1_cooltime;
+            rb.linearVelocity = Vector2.zero;
+            can_control = false;
+            StartCoroutine(Breath());
         }
     }
 
@@ -65,5 +71,12 @@ public class RedPepper : CharBase
         yield return new WaitForSeconds(0.05f);
         can_control = true;
         rb.linearVelocity = Vector2.zero;
+    }
+
+    IEnumerator Breath()
+    {
+        yield return new WaitForSeconds(0.5f);
+        can_control = true;
+        sr.sprite = img[0];
     }
 }
