@@ -75,11 +75,12 @@ public class RedPepper : CharBase
         yield return new WaitForSeconds(0.05f);
         can_control = true;
         rb.linearVelocity = Vector2.zero;
+        rigid += data.skill_2_rigid;
     }
 
     IEnumerator Breath()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         can_control = true;
         sr.sprite = img[0];
     }
