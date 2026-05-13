@@ -112,6 +112,9 @@ MonoBehaviour:
   id: 0
   rigid: 0
   breath: {fileID: 3303797620011567552, guid: 13cdeee2f059e9c4b8213bf5721f9dea, type: 3}
+  img:
+  - {fileID: -9177740170459379683, guid: 598803ad020e83c4cb796473f4370800, type: 3}
+  - {fileID: -2096741060980252043, guid: fb6da07ae520f294f850d29220106d79, type: 3}
 --- !u!114 &2387769583341587097
 MonoBehaviour:
   m_ObjectHideFlags: 0
