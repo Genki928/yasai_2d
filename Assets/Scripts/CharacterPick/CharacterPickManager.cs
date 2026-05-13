@@ -16,9 +16,29 @@ public class CharacterPickManager : MonoBehaviour
 
     }
 
-    public void SceneChange_CharacterPickScene(InputAction.CallbackContext ctx)
+    public void Interact(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
-            SceneManager.LoadScene("CharacterPickScene");
+            SceneManager.LoadScene("BattleScene");
+    }
+
+    public void CursorUP(InputAction.CallbackContext ctx)
+    {
+        ;
+    }
+
+    public void CursorDown(InputAction.CallbackContext ctx)
+    {
+        ;
+    }
+
+    public void CursorLeft(InputAction.CallbackContext ctx)
+    {
+        ;
+    }
+
+    public void CursorRight(InputAction.CallbackContext ctx)
+    {
+        ;
     }
 }
