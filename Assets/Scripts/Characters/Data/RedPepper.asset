@@ -12,16 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414cba326641da042aacc708ac76fb71, type: 3}
   m_Name: RedPepper
   m_EditorClassIdentifier: Assembly-CSharp::CharData
-  speed: 3
+  char_name: "\u30C8\u30A6\u30AC\u30E9\u30B7"
+  speed: 5
   max_burst: 100
-  skill_1_rigid: 15
-  skill_1_cooltime: 40
-<<<<<<< HEAD
+  skill_1_rigid: 10
+  skill_1_cooltime: 100
   skill_2_rigid: 10
-  skill_2_cooltime: 60
-=======
-  skill_2_rigid: 0
-  skill_2_cooltime: 0
->>>>>>> 2e56d6dba33f72b92e938460cab0d1a4d58d7175
+  skill_2_cooltime: 15
   skill_3_rigid: 0
   skill_3_cooltime: 0

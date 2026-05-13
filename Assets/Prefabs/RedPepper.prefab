@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57607db52400a8348b62ed58dd7a639a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RedPepper
-  data: {fileID: 11400000, guid: 5fc51f4c973e3e64598fedd796311289, type: 2}
+  data: {fileID: 11400000, guid: e1a0c2180491971498baa9a13552494c, type: 2}
   burst: 0
   id: 0
   rigid: 0
