@@ -57,7 +57,7 @@ public class Carrot : CharBase
 
 
         sprite.sprite = tackle;
-        Debug.Log(direction * tackleSpeed);
+       
         can_control = false;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -76,15 +76,15 @@ public class Carrot : CharBase
         sprite.sprite = carrot_default;
         transform.rotation=Quaternion.Euler(0, 0, 0);
     }
-    void OnCollisionEnter2D(Collision2D col)
+    void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.TryGetComponent<CharBase>(out var cb))
+        if (col.TryGetComponent<CharBase>(out var cb))
         {
+            Debug.Log("tackle_damage");
             if (cb.id != id&&!can_control)
             {
                 // îÌíeèàóù
                 cb.Damage(100);
-                Debug.Log("tackle_damage");
 
                 Vector2 knockbackDir = (cb.transform.position - transform.position).normalized;
 
