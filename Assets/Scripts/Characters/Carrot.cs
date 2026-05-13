@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,10 +14,16 @@ public class Carrot : CharBase
     // タックル関連
     [SerializeField] private float tackleSpeed = 20f;
     [SerializeField] private float tackleTime = 0.5f;
+    [SerializeField] private int tackleDamage = 20;
 
     private bool isTackling = false;
 
+    //ヘドバン関連
+    [SerializeField] private float headBangAngle = 60f;
+    [SerializeField] private float rotateSpeed = 300f;
+    [SerializeField] private int headBangDamage = 10;
 
+    private bool isHeadBanging = false;
 
     override protected void Start()
     {
@@ -80,17 +87,78 @@ public class Carrot : CharBase
     {
         if (col.TryGetComponent<CharBase>(out var cb))
         {
-            Debug.Log("tackle_damage");
+            //タックル
             if (cb.id != id&&!can_control)
             {
                 // 被弾処理
-                cb.Damage(20);
+                cb.Damage(tackleDamage);
 
                 Vector2 knockbackDir = (cb.transform.position - transform.position).normalized;
 
                 cb.KnockBack(10, knockbackDir);
             }
+            //ヘドバン
+            if (isHeadBanging)
+            {
+                cb.Damage(headBangDamage);
+
+                Vector2 knockbackDir =
+                    (cb.transform.position - transform.position).normalized;
+
+                cb.KnockBack(5, knockbackDir);
+            }
         }
+    }
+    public override void Skill2(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            // クールタイム中なら終了
+            if (skill_2_cooltime != 0) return;
+
+            StartCoroutine(HeadBang());
+
+            rigid += data.skill_2_rigid;
+            skill_2_cooltime = data.skill_2_cooltime;
+        }
+    }
+    private IEnumerator HeadBang()
+    {
+        isHeadBanging = true;
+       
+        float startZ = transform.eulerAngles.z;
+
+        float sign = direction.x < 0 ? -1f : 1f;
+
+        float currentAngle = 0;
+
+        // 倒す
+        while (currentAngle < headBangAngle)
+        {
+            currentAngle += rotateSpeed * Time.deltaTime;
+
+            transform.rotation =
+                Quaternion.Euler(0, 0, startZ - currentAngle * sign);
+
+            yield return null;
+        }
+
+        // 戻す
+        while (currentAngle > 0)
+        {
+            currentAngle -= rotateSpeed * Time.deltaTime;
+
+            transform.rotation =
+                Quaternion.Euler(0, 0, startZ - currentAngle * sign);
+
+            yield return null;
+        }
+
+        transform.rotation =
+            Quaternion.Euler(0, 0, startZ);
+
+     
+        isHeadBanging = false;
     }
 }
 

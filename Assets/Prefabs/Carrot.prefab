@@ -118,6 +118,11 @@ MonoBehaviour:
   tackle: {fileID: 1824413040164408261, guid: b205cf7e6d820bf45bb4267f2ea3f8c1, type: 3}
   tackleSpeed: 20
   tackleTime: 0.4
+  tackleDamage: 20
+  headBangAngle: 60
+  rotateSpeed: 350
+  headBangDamage: 10
+  headBangCol: {fileID: 9051219605256865004}
 --- !u!114 &2387769583341587097
 MonoBehaviour:
   m_ObjectHideFlags: 0
