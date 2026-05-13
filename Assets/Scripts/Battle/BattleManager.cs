@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour
 {
-    [SerializeField] List<GameObject> chars = new List<GameObject>();
+    [SerializeField] List<GameObject> chars = new();
     public GameObject[] spawn_point = new GameObject[2];
     GameObject[] player = new GameObject[2];
     int[] pick_nums = { 1, 0 };
@@ -21,7 +21,7 @@ public class BattleManager : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             // キャラクターを生成
-            Vector2 pos = new Vector2(spawn_point[i].transform.position.x, spawn_point[i].transform.position.y);
+            Vector2 pos = new(spawn_point[i].transform.position.x, spawn_point[i].transform.position.y);
             player[i] = Instantiate(chars[pick_nums[i]], pos, Quaternion.identity);
             player[i].GetComponent<CharBase>().id = i;
             if(bars[i].TryGetComponent<BurstBar>(out var bar)) bar.Init(player[i]);

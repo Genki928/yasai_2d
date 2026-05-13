@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.PlayerSettings;
 
 public class RedPepper : CharBase
 {
     [SerializeField] GameObject breath;
     SpriteRenderer sr;
-    [SerializeField] List<Sprite> img = new List<Sprite>();
+    [SerializeField] List<Sprite> img = new();
 
     override protected void Start()
     {
@@ -39,7 +40,7 @@ public class RedPepper : CharBase
 
             // 炎を生成 -> idの紐づけ
             GameObject go = Instantiate(breath, pos, Quaternion.Euler(0, 0, angle - 90));
-            go.GetComponent<DamageArea>().Init(id,100,new Vector2(0,0));
+            go.GetComponent<DamageArea>().Init(id, 1, new Vector2(0, 0));
 
             // 硬直・クールタイム
             skill_1_cooltime = data.skill_1_cooltime;
@@ -58,6 +59,9 @@ public class RedPepper : CharBase
 
             // 処理
             rb.linearVelocity = -direction * 30.0f;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            GameObject go = Instantiate(breath, transform.position, Quaternion.Euler(0, 0, angle - 90));
+            go.GetComponent<DamageArea>().Init(id, 1, direction * 0.05f);
 
             // 硬直・クールタイム
             can_control = false;

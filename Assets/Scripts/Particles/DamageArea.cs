@@ -6,7 +6,12 @@ public class DamageArea : MonoBehaviour
     int damage = 0;
     Vector2 vec;
 
-    void OnTriggerEnter2D(Collider2D col)
+    void Update()
+    {
+        transform.position += (Vector3)vec;
+    }
+
+    void OnTriggerStay2D(Collider2D col)
     {
         // 接触したオブジェクトが、CharBaseを持っている（継承している）なら、
         if (col.TryGetComponent<CharBase>(out var cb))
@@ -26,5 +31,6 @@ public class DamageArea : MonoBehaviour
     {
         this.id = id;
         this.damage = damage;
+        this.vec = vec;
     }
 }
