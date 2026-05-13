@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour
 {
@@ -7,6 +8,9 @@ public class BattleManager : MonoBehaviour
     public GameObject[] spawn_point = new GameObject[2];
     GameObject[] player = new GameObject[2];
     int[] pick_nums = { 1, 0 };
+
+
+ 
 
     void Awake()
     {
@@ -24,6 +28,9 @@ public class BattleManager : MonoBehaviour
             player[i].GetComponent<CharBase>().id = i;
         }
     }
+
+   
+
 
     /// <summary> バトルを終了させる </summary>
     /// <param name="id"> プレイヤーの識別id </param>
