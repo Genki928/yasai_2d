@@ -31,7 +31,7 @@ public class RedPepper : CharBase
         if (ctx.performed)
         {
             // 中断処理
-            if (skill_1_cooltime != 0) return;
+            if (skill_1_cooltime > 0) return;
 
             // 座標・ベクトルの算出
             Vector2 pos = new Vector2(transform.position.x, transform.position.y) + direction * 1.5f;
@@ -55,7 +55,7 @@ public class RedPepper : CharBase
         if (ctx.performed)
         {
             // 中断処理
-            if (skill_2_cooltime != 0) return;
+            if (skill_2_cooltime > 0) return;
 
             // 処理
             rb.linearVelocity = -direction * 30.0f;

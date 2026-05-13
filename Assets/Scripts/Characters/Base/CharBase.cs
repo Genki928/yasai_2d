@@ -13,8 +13,8 @@ public class CharBase : MonoBehaviour
     public int burst = 0;
     public int id;
     public int rigid;
-    protected int skill_1_cooltime = 0;
-    protected int skill_2_cooltime = 0;
+    public int skill_1_cooltime = 0;
+    public int skill_2_cooltime = 0;
     protected int skill_3_cooltime = 0;
     protected bool can_control = true;
     [SerializeField] protected GameObject cursor_pf;
