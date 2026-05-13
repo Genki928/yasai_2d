@@ -76,9 +76,9 @@ public class Carrot : CharBase
         sprite.sprite = carrot_default;
         transform.rotation=Quaternion.Euler(0, 0, 0);
     }
-    void OnTriggerEnter2D(Collider2D col)
+    void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.TryGetComponent<CharBase>(out var cb))
+        if (col.gameObject.TryGetComponent<CharBase>(out var cb))
         {
             if (cb.id != id&&!can_control)
             {
