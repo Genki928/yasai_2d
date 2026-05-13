@@ -11,7 +11,6 @@ public class Carrot : CharBase
     public Sprite tackle;
 
     // タックル関連
-    private Rigidbody2D rb;
     [SerializeField] private float tackleSpeed = 20f;
     [SerializeField] private float tackleTime = 0.5f;
 
@@ -33,13 +32,6 @@ public class Carrot : CharBase
 
     protected override void FixedUpdate()
     {
-       
-        if (isTackling)
-        {
-            return;
-        }
-
-       
         base.FixedUpdate();
     }
 
@@ -66,7 +58,7 @@ public class Carrot : CharBase
 
         sprite.sprite = tackle;
         Debug.Log(direction * tackleSpeed);
-        isTackling = true;
+        can_control = false;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
@@ -80,7 +72,7 @@ public class Carrot : CharBase
         // 停止
         rb.linearVelocity = Vector2.zero;
 
-        isTackling = false;
+        can_control = true;
         sprite.sprite = carrot_default;
         transform.rotation=Quaternion.Euler(0, 0, 0);
     }
@@ -88,7 +80,7 @@ public class Carrot : CharBase
     {
         if (col.TryGetComponent<CharBase>(out var cb))
         {
-            if (cb.id != id&&isTackling)
+            if (cb.id != id&&!can_control)
             {
                 // 被弾処理
                 cb.Damage(100);

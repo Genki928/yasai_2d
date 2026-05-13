@@ -16,7 +16,7 @@ public class CharBase : MonoBehaviour
     protected int skill_1_cooltime = 0;
     protected int skill_2_cooltime = 0;
     protected int skill_3_cooltime = 0;
-
+    protected bool can_control = true;
 
 
     [Header("◇物理")]
@@ -45,12 +45,15 @@ public class CharBase : MonoBehaviour
 
     virtual protected void FixedUpdate()
     {
-        // 硬直が無ければ移動
-        if (rigid == 0)
-            rb.linearVelocity = vec * data.speed;
-        // 硬直があれば移動不可
-        else
-            rb.linearVelocity = Vector2.zero;
+        if (can_control)
+        {
+            // 硬直が無ければ移動
+            if (rigid == 0)
+                rb.linearVelocity = vec * data.speed;
+            // 硬直があれば移動不可
+            else
+                rb.linearVelocity = Vector2.zero;
+        }
     }
 
     /// <summary> プレイヤーにダメージを与える </summary>

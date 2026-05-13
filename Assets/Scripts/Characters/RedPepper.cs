@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,8 +19,7 @@ public class RedPepper : CharBase
 
     protected override void FixedUpdate()
     {
-        if(rigid == 0)
-            base.FixedUpdate();
+        base.FixedUpdate();
     }
 
     override public void Skill1(InputAction.CallbackContext ctx)
@@ -35,7 +35,7 @@ public class RedPepper : CharBase
 
             // 炎を生成 -> idの紐づけ
             GameObject go = Instantiate(breath, pos, Quaternion.Euler(0, 0, angle - 90));
-            go.GetComponent<DamageArea>().Init(id);
+            go.GetComponent<DamageArea>().Init(id,100);
 
             // 硬直・クールタイム
             rigid += data.skill_1_rigid;
@@ -51,11 +51,19 @@ public class RedPepper : CharBase
             if (skill_2_cooltime != 0) return;
 
             // 処理
-            vec = direction * -2;
+            rb.linearVelocity = -direction * 30.0f;
 
             // 硬直・クールタイム
-            rigid += data.skill_2_rigid;
+            can_control = false;
             skill_2_cooltime = data.skill_2_cooltime;
+            StartCoroutine(BackShot());
         }
+    }
+
+    IEnumerator BackShot()
+    {
+        yield return new WaitForSeconds(0.05f);
+        can_control = true;
+        rb.linearVelocity = Vector2.zero;
     }
 }

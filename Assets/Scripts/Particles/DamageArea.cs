@@ -3,6 +3,7 @@ using UnityEngine;
 public class DamageArea : MonoBehaviour
 {
     int id = 0;
+    int damage = 0;
 
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -13,15 +14,16 @@ public class DamageArea : MonoBehaviour
             if(cb.id != id)
             {
                 // ”í’eˆ—
-                cb.Damage(100);
+                cb.Damage(damage);
                 Debug.Log("damage");
             }
         }
     }
 
     // ¯•Êid‚Ì•R‚Ã‚¯
-    public void Init(int id)
+    public void Init(int id, int damage)
     {
         this.id = id;
+        this.damage = damage;
     }
 }
