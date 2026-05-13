@@ -121,7 +121,7 @@ MonoBehaviour:
   tackleDamage: 20
   headBangAngle: 60
   rotateSpeed: 350
-  headBangDamage: 10
+  headBangDamage: 5
   headBangCol: {fileID: 9051219605256865004}
 --- !u!114 &2387769583341587097
 MonoBehaviour:

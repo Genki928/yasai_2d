@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -20,9 +21,12 @@ public class Carrot : CharBase
 
     //ヘドバン関連
     [SerializeField] private float headBangAngle = 60f;
-    [SerializeField] private float rotateSpeed = 300f;
-    [SerializeField] private int headBangDamage = 10;
+    [SerializeField] private float rotateSpeed = 350f;
+    [SerializeField] private int headBangDamage = 5;
+    private List<CharBase> hitList = new List<CharBase>();
+    [SerializeField] private CapsuleCollider2D headBangCol;
 
+    private Vector2 defaultSize;
     private bool isHeadBanging = false;
 
     override protected void Start()
@@ -30,6 +34,7 @@ public class Carrot : CharBase
         base.Start();
         sprite = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        defaultSize = headBangCol.size;
     }
 
     override protected void Update()
@@ -43,7 +48,7 @@ public class Carrot : CharBase
     }
 
 
-    override public void Skill1(InputAction.CallbackContext ctx)
+    override public void Skill2(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
         {
@@ -83,33 +88,8 @@ public class Carrot : CharBase
         sprite.sprite = carrot_default;
         transform.rotation=Quaternion.Euler(0, 0, 0);
     }
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.TryGetComponent<CharBase>(out var cb))
-        {
-            //タックル
-            if (cb.id != id&&!can_control)
-            {
-                // 被弾処理
-                cb.Damage(tackleDamage);
 
-                Vector2 knockbackDir = (cb.transform.position - transform.position).normalized;
-
-                cb.KnockBack(10, knockbackDir);
-            }
-            //ヘドバン
-            if (isHeadBanging)
-            {
-                cb.Damage(headBangDamage);
-
-                Vector2 knockbackDir =
-                    (cb.transform.position - transform.position).normalized;
-
-                cb.KnockBack(5, knockbackDir);
-            }
-        }
-    }
-    public override void Skill2(InputAction.CallbackContext ctx)
+    public override void Skill1(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
         {
@@ -124,8 +104,15 @@ public class Carrot : CharBase
     }
     private IEnumerator HeadBang()
     {
+        hitList.Clear();
         isHeadBanging = true;
-       
+        can_control = false;
+
+        // コライダーを1.2倍
+        headBangCol.size =
+    new Vector2(defaultSize.x * 1.2f,
+                defaultSize.y);
+
         float startZ = transform.eulerAngles.z;
 
         float sign = direction.x < 0 ? -1f : 1f;
@@ -154,12 +141,51 @@ public class Carrot : CharBase
             yield return null;
         }
 
+        // 元に戻す
         transform.rotation =
             Quaternion.Euler(0, 0, startZ);
 
-     
+        // コライダーを戻す
+        headBangCol.size = defaultSize;
+
+        can_control = true;
         isHeadBanging = false;
     }
+
+
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.TryGetComponent<CharBase>(out var cb))
+        {
+            //タックル
+            if (cb.id != id&&!can_control)
+            {
+                // 被弾処理
+                cb.Damage(tackleDamage);
+
+                Vector2 knockbackDir = (cb.transform.position - transform.position).normalized;
+
+                cb.KnockBack(10, knockbackDir);
+            }
+            //ヘドバン
+            if (cb.id != id && isHeadBanging)
+            {
+                if (!hitList.Contains(cb))
+                {
+                    hitList.Add(cb);
+
+                    cb.Damage(headBangDamage);
+
+                    Vector2 knockbackDir =
+                        (cb.transform.position - transform.position).normalized;
+
+                    cb.KnockBack(5, knockbackDir);
+                }
+            }
+        }
+    }
+   
 }
 
 
