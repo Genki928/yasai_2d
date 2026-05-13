@@ -84,7 +84,7 @@ public class Carrot : CharBase
             if (cb.id != id&&!can_control)
             {
                 // ”í’eˆ—
-                cb.Damage(100);
+                cb.Damage(20);
 
                 Vector2 knockbackDir = (cb.transform.position - transform.position).normalized;
 
