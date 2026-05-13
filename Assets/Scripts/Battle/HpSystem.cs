@@ -18,7 +18,7 @@ public class BurstBar : MonoBehaviour
     {
         if (targetPlayer != null)
         {
-            Debug.Log(targetPlayer.burst+"damage");
+            //Debug.Log(targetPlayer.burst+"damage");
             image.fillAmount = targetPlayer.burst / 100f;
         }
     }
