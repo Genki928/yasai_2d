@@ -25,6 +25,7 @@ public class BurstBar : MonoBehaviour
 
     public void Init(GameObject player_obj)
     {
+        Debug.Log("test");
         CharBase player = player_obj.GetComponent<CharBase>();
         targetPlayer = player;
     }
