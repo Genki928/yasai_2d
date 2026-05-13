@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414cba326641da042aacc708ac76fb71, type: 3}
   m_Name: Carrot
   m_EditorClassIdentifier: Assembly-CSharp::CharData
+  char_name: "\u30CB\u30F3\u30B8\u30F3"
   speed: 5
   max_burst: 100
   skill_1_rigid: 10
