@@ -8,7 +8,7 @@ public class BattleManager : MonoBehaviour
     public GameObject[] spawn_point = new GameObject[2];
     GameObject[] player = new GameObject[2];
     CharBase[] datas = new CharBase[2];
-    int[] pick_nums = { 1, 0 };
+    int[] pick_nums = { 1, 2 };
 
     [Header("ÅûGUI")]
     [SerializeField] GameObject[] bars = new GameObject[2];
