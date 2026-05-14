@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class Leek : CharBase
 {
-    [SerializeField] Collider2D[] colliders = Collider2D[4];
+    //[SerializeField] Collider2D[] colliders = Collider2D[4];
 
     override protected void Start()
     {
