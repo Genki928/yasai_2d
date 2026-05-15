@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +16,8 @@ public class BattleManager : MonoBehaviour
     [SerializeField] GameObject[] names = new GameObject[2];
     [SerializeField] GameObject[] l_gage = new GameObject[2];
     [SerializeField] GameObject[] r_gage = new GameObject[2];
+    public GUI left_gui;
+    public GUI right_gui;
 
     void Awake()
     {
@@ -32,10 +35,16 @@ public class BattleManager : MonoBehaviour
             datas[i] = player[i].GetComponent<CharBase>();
             datas[i].id = i;
 
-            // UI
-            if (bars[i].TryGetComponent<BurstBar>(out var bar)) bar.Init(player[i]);
+            // GUI
+            //if (bars[i].TryGetComponent<BurstBar>(out var bar)) bar.Init(player[i]);
             if (names[i].TryGetComponent<Text>(out var text)) text.text = player[i].GetComponent<CharBase>().data.char_name;
         }
+
+        // GUI
+        //left_gui.bar.Init(player[0]);
+        //left_gui.skill1_cooltimer.character = player[0].GetComponent<CharBase>();
+        //right_gui.bar.Init(player[1]);
+        //left_gui.skill1_cooltimer.character = player[0].GetComponent<CharBase>();
     }
 
     void Update()
@@ -44,7 +53,6 @@ public class BattleManager : MonoBehaviour
         if (l_gage[1].TryGetComponent<Image>(out var ls2)) ls2.fillAmount = 1 - datas[0].skill_2_cooltime / (float)datas[0].data.skill_2_cooltime;
         if (r_gage[0].TryGetComponent<Image>(out var s1)) s1.fillAmount = 1 - datas[1].skill_1_cooltime / (float)datas[1].data.skill_1_cooltime;
         if (r_gage[1].TryGetComponent<Image>(out var s2)) s2.fillAmount = 1 - datas[1].skill_2_cooltime / (float)datas[1].data.skill_2_cooltime;
-
     }
 
     /// <summary> ÉoÉgÉãÇèIóπÇ≥ÇπÇÈ </summary>
@@ -53,4 +61,13 @@ public class BattleManager : MonoBehaviour
     {
         Debug.Log("Player " + id + " won!");
     }
+}
+
+[Serializable]
+public class GUI
+{
+    public BurstBar bar;
+    public Text name;
+    public SkillCooltimer skill1_cooltimer;
+    public SkillCooltimer skill2_cooltimer;
 }
