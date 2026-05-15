@@ -2158,22 +2158,6 @@ MonoBehaviour:
   r_gage:
   - {fileID: 1225425197}
   - {fileID: 1584968701}
-  left_gui:
-    bar: {fileID: 0}
-    name: {fileID: 0}
-    skill1_cooltimer: {fileID: 0}
-    skill2_cooltimer: {fileID: 0}
-  right_gui:
-    bar: {fileID: 0}
-    name: {fileID: 0}
-    skill1_cooltimer: {fileID: 0}
-    skill2_cooltimer: {fileID: 0}
-  player_obj:
-  - {fileID: 4178201437919755446, guid: c6e495c33560abc4a80b03db369bd4f9, type: 3}
-  - {fileID: 7493455991842142285, guid: 69cc6b67633600840b2c059ba36d90ed, type: 3}
-  p_obj:
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!4 &1873271267
 Transform:
   m_ObjectHideFlags: 0
