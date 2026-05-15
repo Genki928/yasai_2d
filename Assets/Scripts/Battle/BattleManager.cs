@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class BattleManager : MonoBehaviour
 {
     [Header("◇キャラ生成")]
-    [SerializeField] List<GameObject> chars = new();
+    [SerializeField] List<Character> characters = new(); 
     public GameObject[] spawn_point = new GameObject[2];
     GameObject[] player = new GameObject[2];
     CharBase[] datas = new CharBase[2];
@@ -30,7 +30,7 @@ public class BattleManager : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             // キャラクターを生成
-            player[i] = Instantiate(chars[pick_nums[i]], spawn_point[i].transform.position, Quaternion.identity);
+            player[i] = Instantiate(characters[pick_nums[i]].chars, spawn_point[i].transform.position, Quaternion.identity);
             datas[i] = player[i].GetComponent<CharBase>();
             datas[i].id = i;
 
@@ -45,6 +45,7 @@ public class BattleManager : MonoBehaviour
                 gui[i].name.text = p.data.char_name;    // 名前の表示
                 p.cooltimer[0] = gui[i].skill1_cooltimer;   // スキル1のクールタイム表示
                 p.cooltimer[1] = gui[i].skill2_cooltimer;   // スキル2のクールタイム表示
+                gui[i].icon.sprite = characters[pick_nums[i]].icon; // アイコン表示
             }
         }
     }
@@ -70,6 +71,14 @@ public class GUI
 {
     public BurstBar bar;
     public Text name;
+    public SpriteRenderer icon;
     public SkillCooltimer skill1_cooltimer;
     public SkillCooltimer skill2_cooltimer;
+}
+
+[Serializable]
+public class Character
+{
+    public GameObject chars;
+    public Sprite icon;
 }

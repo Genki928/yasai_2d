@@ -99,6 +99,7 @@ public class Carrot : CharBase
 
             StartCoroutine(HeadBang());
 
+            rb.linearVelocity = Vector2.zero;
             rigid += data.skill_2_rigid;
             skill_2_cooltime = data.skill_2_cooltime;
         }
