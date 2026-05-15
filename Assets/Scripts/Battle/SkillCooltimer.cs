@@ -11,7 +11,7 @@ public class SkillCooltimer : MonoBehaviour
         image = GetComponent<Image>();
     }
 
-    void RefreshCooltimer(int cooltimer, int cooltime)
+    public void RefreshCooltimer(int cooltimer, int cooltime)
     {
         image.fillAmount = 1 - cooltimer / (float)cooltime;
     }

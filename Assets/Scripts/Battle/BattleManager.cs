@@ -12,16 +12,11 @@ public class BattleManager : MonoBehaviour
     int[] pick_nums = { 1, 0 };
 
     [Header("◇GUI")]
-    [SerializeField] GameObject[] bars = new GameObject[2];
-    [SerializeField] GameObject[] names = new GameObject[2];
-    [SerializeField] GameObject[] l_gage = new GameObject[2];
-    [SerializeField] GameObject[] r_gage = new GameObject[2];
-    public GUI left_gui;
-    public GUI right_gui;
+    public GUI[] gui = new GUI[2];
 
     //Px用
     public GameObject[] player_obj = new GameObject[2];
-    public GameObject[] p_obj = new GameObject[2];
+    GameObject[] p_obj = new GameObject[2];
 
     void Awake()
     {
@@ -34,35 +29,33 @@ public class BattleManager : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             // キャラクターを生成
-            Vector2 pos = new(spawn_point[i].transform.position.x, spawn_point[i].transform.position.y);
-            player[i] = Instantiate(chars[pick_nums[i]], pos, Quaternion.identity);
+            player[i] = Instantiate(chars[pick_nums[i]], spawn_point[i].transform.position, Quaternion.identity);
             datas[i] = player[i].GetComponent<CharBase>();
             datas[i].id = i;
 
-            //
+            // ポインター
             p_obj[i]=Instantiate(player_obj[i]);
 
             // GUI
-            if (bars[i].TryGetComponent<BurstBar>(out var bar)) bar.Init(player[i]);
-            if (names[i].TryGetComponent<Text>(out var text)) text.text = player[i].GetComponent<CharBase>().data.char_name;
+            gui[i].bar.Init(player[i]);
+            if(player[i].TryGetComponent<CharBase>(out var p))
+            {
+                gui[i].name.text = p.data.char_name;
+                p.cooltimer[0] = gui[i].skill1_cooltimer;
+                p.cooltimer[1] = gui[i].skill2_cooltimer;
+                p.burst_bar = gui[i].bar;
+                gui[i].name.text = p.data.char_name;
+            }
         }
 
         // GUI
-        //left_gui.bar.Init(player[0]);
-        //left_gui.skill1_cooltimer.character = player[0].GetComponent<CharBase>();
-        //right_gui.bar.Init(player[1]);
-        //left_gui.skill1_cooltimer.character = player[0].GetComponent<CharBase>();
+        gui[0].bar.Init(player[0]);
+        gui[1].bar.Init(player[1]);
     }
 
     void Update()
     {
-        if (l_gage[0].TryGetComponent<Image>(out var rs1)) rs1.fillAmount = 1 - datas[0].skill_1_cooltime / (float)datas[0].data.skill_1_cooltime;
-        if (l_gage[1].TryGetComponent<Image>(out var ls2)) ls2.fillAmount = 1 - datas[0].skill_2_cooltime / (float)datas[0].data.skill_2_cooltime;
-        if (r_gage[0].TryGetComponent<Image>(out var s1)) s1.fillAmount = 1 - datas[1].skill_1_cooltime / (float)datas[1].data.skill_1_cooltime;
-        if (r_gage[1].TryGetComponent<Image>(out var s2)) s2.fillAmount = 1 - datas[1].skill_2_cooltime / (float)datas[1].data.skill_2_cooltime;
-
-
-        //
+        // ポインター
         p_obj[0].transform.position = new(player[0].transform.position.x, player[0].transform.position.y+2.0f);
         p_obj[1].transform.position = new(player[1].transform.position.x, player[1].transform.position.y+2.0f);
 

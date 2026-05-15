@@ -19,7 +19,7 @@ public class BurstBar : MonoBehaviour
         if (targetPlayer != null)
         {
             //Debug.Log(targetPlayer.burst+"damage");
-            image.fillAmount = targetPlayer.burst / 100f;
+            //image.fillAmount = targetPlayer.burst / 100f;
         }
     }
 
@@ -28,5 +28,10 @@ public class BurstBar : MonoBehaviour
         Debug.Log("test");
         CharBase player = player_obj.GetComponent<CharBase>();
         targetPlayer = player;
+    }
+
+    public void Draw(int burst, int max)
+    {
+        image.fillAmount = targetPlayer.burst / 100f;
     }
 }

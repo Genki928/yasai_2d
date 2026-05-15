@@ -15,10 +15,12 @@ public class CharBase : MonoBehaviour
     public int rigid;
     public int skill_1_cooltime = 0;
     public int skill_2_cooltime = 0;
-    protected int skill_3_cooltime = 0;
     protected bool can_control = true;
     [SerializeField] protected GameObject cursor_pf;
     protected GameObject cursor_obj;
+
+    public BurstBar burst_bar;
+    public SkillCooltimer[] cooltimer = new SkillCooltimer[2];
 
 
     [Header("◇物理")]
@@ -36,9 +38,9 @@ public class CharBase : MonoBehaviour
     virtual protected void Update()
     {
         if (rigid > 0) --rigid;
-        if (skill_1_cooltime > 0) --skill_1_cooltime;
-        if (skill_2_cooltime > 0) --skill_2_cooltime;
-        if (skill_3_cooltime > 0) --skill_3_cooltime;
+        if (skill_1_cooltime > 0) cooltimer[0].RefreshCooltimer(--skill_1_cooltime, data.skill_1_cooltime);
+        if (skill_2_cooltime > 0) cooltimer[1].RefreshCooltimer(--skill_2_cooltime, data.skill_2_cooltime);
+
         cursor_obj.transform.position = new(transform.position.x, transform.position.y);
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         cursor_obj.transform.localRotation = Quaternion.Euler(0, 0, angle - 90);
@@ -67,6 +69,9 @@ public class CharBase : MonoBehaviour
         // 受けるダメージが過剰ならセーブする
         burst = burst + value > data.max_burst ?
                      data.max_burst : burst + value;
+
+        // 描画
+        burst_bar.Draw(burst, data.max_burst);
 
         // バースト値が最大なら、死亡
         if (burst == data.max_burst)
