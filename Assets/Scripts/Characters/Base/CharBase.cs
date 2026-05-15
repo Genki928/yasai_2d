@@ -16,23 +16,25 @@ public class CharBase : MonoBehaviour
     public int skill_1_cooltime = 0;
     public int skill_2_cooltime = 0;
     protected bool can_control = true;
-    [SerializeField] protected GameObject cursor_pf;
-    protected GameObject cursor_obj;
 
+    [Header("ÅûÉJÅ[É\Éã")]
+    [SerializeField] protected GameObject cursor_pf;
+    protected Arrow cursor_obj;
+
+    [Header("ÅûGUI")]
     public BurstBar burst_bar;
     public SkillCooltimer[] cooltimer = new SkillCooltimer[2];
-
 
     [Header("Åûï®óù")]
     protected Vector2 vec;
     protected Vector2 direction;
     protected Rigidbody2D rb;
 
-
     virtual protected void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        cursor_obj = Instantiate(cursor_pf, transform.position, Quaternion.identity);
+        cursor_obj = Instantiate(cursor_pf, transform.position, Quaternion.identity).GetComponent<Arrow>();
+        cursor_obj.Set(this);
     }
 
     virtual protected void Update()
@@ -40,10 +42,6 @@ public class CharBase : MonoBehaviour
         if (rigid > 0) --rigid;
         if (skill_1_cooltime > 0) cooltimer[0].RefreshCooltimer(--skill_1_cooltime, data.skill_1_cooltime);
         if (skill_2_cooltime > 0) cooltimer[1].RefreshCooltimer(--skill_2_cooltime, data.skill_2_cooltime);
-
-        cursor_obj.transform.position = new(transform.position.x, transform.position.y);
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        cursor_obj.transform.localRotation = Quaternion.Euler(0, 0, angle - 90);
     }
 
     virtual protected void FixedUpdate()
@@ -90,6 +88,7 @@ public class CharBase : MonoBehaviour
         if (vec != new Vector2(0, 0))
         {
             direction = vec;
+            cursor_obj.GetComponent<Arrow>().Refresh(vec);
         }
     }
 

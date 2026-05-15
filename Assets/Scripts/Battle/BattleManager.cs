@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour
 {
+    [Header("◇キャラ生成")]
     [SerializeField] List<GameObject> chars = new();
     public GameObject[] spawn_point = new GameObject[2];
     GameObject[] player = new GameObject[2];
@@ -38,19 +39,14 @@ public class BattleManager : MonoBehaviour
 
             // GUI
             gui[i].bar.Init(player[i]);
-            if(player[i].TryGetComponent<CharBase>(out var p))
+            if (player[i].TryGetComponent<CharBase>(out var p))
             {
-                gui[i].name.text = p.data.char_name;
-                p.cooltimer[0] = gui[i].skill1_cooltimer;
-                p.cooltimer[1] = gui[i].skill2_cooltimer;
-                p.burst_bar = gui[i].bar;
-                gui[i].name.text = p.data.char_name;
+                p.burst_bar = gui[i].bar;   // バーストゲージの表示
+                gui[i].name.text = p.data.char_name;    // 名前の表示
+                p.cooltimer[0] = gui[i].skill1_cooltimer;   // スキル1のクールタイム表示
+                p.cooltimer[1] = gui[i].skill2_cooltimer;   // スキル2のクールタイム表示
             }
         }
-
-        // GUI
-        gui[0].bar.Init(player[0]);
-        gui[1].bar.Init(player[1]);
     }
 
     void Update()

@@ -18,8 +18,6 @@ public class Carrot : CharBase
     [SerializeField] private int tackleDamage = 20;
     [SerializeField] GameObject dust;
 
-    private bool isTackling = false;
-
     //ƒwƒhƒoƒ“ŠÖ˜A
     [SerializeField] private float headBangAngle = 60f;
     [SerializeField] private float rotateSpeed = 350f;
@@ -34,7 +32,6 @@ public class Carrot : CharBase
     {
         base.Start();
         sprite = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
         defaultSize = headBangCol.size;
     }
 
