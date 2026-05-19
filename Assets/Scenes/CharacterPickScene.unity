@@ -263,12 +263,14 @@ MonoBehaviour:
   icon_img:
   - {fileID: -4152130810300491462, guid: dfe8e125370c3594a813383ad4b81e55, type: 3}
   - {fileID: 768890679745972150, guid: 75c74399fea79714f8d239d20bfe2443, type: 3}
+  - {fileID: 768890679745972150, guid: 75c74399fea79714f8d239d20bfe2443, type: 3}
+  - {fileID: 768890679745972150, guid: 75c74399fea79714f8d239d20bfe2443, type: 3}
   cursor_pf: {fileID: 1833491355377103544, guid: 5a4424b64cb2ae240a3a53a8f0033486, type: 3}
   cursor:
   - img: {fileID: -1645374030688051754, guid: 9694b69fe91b91b40a36a9b0d5ece5de, type: 3}
-    pos: {x: 0, y: 0}
+    pos: 0000000000000000
   - img: {fileID: 8533349016902187879, guid: 15996b4a8a2720d48815dae4879714c3, type: 3}
-    pos: {x: 0, y: 0}
+    pos: 0000000000000000
   mix_cursor: {fileID: 0}
 --- !u!4 &1224603757
 Transform:
