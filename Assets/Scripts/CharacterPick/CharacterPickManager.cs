@@ -16,8 +16,10 @@ public class CharacterPickManager : MonoBehaviour
     List<GameObject> cursor_obj = new();
 
     const float ICON_HORIZONTAL_SPACE = 1.5f;
-    const float ICON_VERTICAL_CPACE = 1.2f;
+    const float ICON_VERTICAL_SPACE = 1.2f;
     const int ICON_LINEFEED_COUNT = 3;
+    const int X = 0;
+    const int Y = 1;
 
     void Start()
     {
@@ -33,14 +35,14 @@ public class CharacterPickManager : MonoBehaviour
         {
             // 座標決定
             pos = new(ICON_HORIZONTAL_SPACE * (i % ICON_LINEFEED_COUNT),
-                      -ICON_VERTICAL_CPACE * (i / ICON_LINEFEED_COUNT));
+                      -ICON_VERTICAL_SPACE * (i / ICON_LINEFEED_COUNT));
             icon_obj[i].transform.position = pos;
 
             // アイコンの変更
             icon_obj[i].GetComponent<PickIcon>().SetIcon(icon_img[i]);
         }
         cursor_obj.Add(Instantiate(cursor_pf));
-        cursor[0].pos = icon_obj[0].transform.position;
+        //cursor[0].pos = icon_obj[0].transform.position;
     }
 
     // Update is called once per frame
@@ -69,11 +71,14 @@ public class CharacterPickManager : MonoBehaviour
     {
         if (ctx.performed)
         {
-            cursor_obj[0].transform.position = new(cursor_obj[0].transform.transform.position.x - ICON_HORIZONTAL_SPACE, cursor_obj[0].transform.transform.position.y);
-            if (cursor_obj[0].transform.position.x < 0)
-            {
-                cursor_obj[0].transform.position = new(ICON_HORIZONTAL_SPACE * (ICON_LINEFEED_COUNT - 1), cursor_obj[0].transform.transform.position.y);
-            }
+            if (--cursor[0].pos[X] < 0) cursor[0].pos[X] = ICON_LINEFEED_COUNT - 1;
+
+            // もしカーソルのX座標がアイコンのある位置から外れていたら、座標を右端に整える
+            if (cursor[0].pos[Y] == icon_obj.Count / ICON_LINEFEED_COUNT)
+                if (cursor[0].pos[X] % ICON_LINEFEED_COUNT > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT)
+                    cursor[0].pos[X] = (icon_obj.Count - 1) % ICON_LINEFEED_COUNT;
+
+            cursor_obj[0].transform.position = new(ICON_HORIZONTAL_SPACE * cursor[0].pos[X], ICON_VERTICAL_SPACE * cursor[0].pos[Y]);
         }
     }
 
@@ -81,11 +86,14 @@ public class CharacterPickManager : MonoBehaviour
     {
         if (ctx.performed)
         {
-            cursor_obj[0].transform.position = new(cursor_obj[0].transform.transform.position.x + ICON_HORIZONTAL_SPACE, cursor_obj[0].transform.transform.position.y);
-            if (cursor_obj[0].transform.position.x >= ICON_LINEFEED_COUNT)
-            {
-                cursor_obj[0].transform.position = new(0, cursor_obj[0].transform.transform.position.y);
-            }
+            if (++cursor[0].pos[X] > ICON_LINEFEED_COUNT - 1) cursor[0].pos[X] = 0;
+
+            // もしカーソルのX座標がアイコンのある位置から外れていたら、座標を左端に整える
+            if (cursor[0].pos[Y] == icon_obj.Count / ICON_LINEFEED_COUNT)
+                if (cursor[0].pos[X] % ICON_LINEFEED_COUNT > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT)
+                    cursor[0].pos[X] = 0;
+
+            cursor_obj[0].transform.position = new(ICON_HORIZONTAL_SPACE * cursor[0].pos[X], ICON_VERTICAL_SPACE * cursor[0].pos[Y]);
         }
     }
 }
@@ -94,5 +102,5 @@ public class CharacterPickManager : MonoBehaviour
 public class Cursor
 {
     public Sprite img;
-    public Vector2 pos = new(0, 0);
+    public int[] pos = new int[2] { 0, 0 };
 }
