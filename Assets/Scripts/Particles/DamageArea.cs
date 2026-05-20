@@ -23,6 +23,7 @@ public class DamageArea : MonoBehaviour
                 cb.Damage(damage);
             }
         }
+        Destroy(gameObject);
     }
 
     // Ž¯•Êid‚Ì•R‚Ã‚¯

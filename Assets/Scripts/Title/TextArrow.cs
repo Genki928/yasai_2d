@@ -32,11 +32,11 @@ public class TextArrow : MonoBehaviour
     {
         if (arrow_pos == 0)
         {
-            transform.position = new(texts[0].transform.position.x-4.0f, texts[0].transform.position.y+0.5f);
+            transform.position = new(texts[0].transform.position.x-4.2f, texts[0].transform.position.y + 0.2f);
         }
         else if (arrow_pos == 1)
         {
-            transform.position = new(texts[1].transform.position.x-4.0f, texts[1].transform.position.y+0.5f);
+            transform.position = new(texts[1].transform.position.x-4.2f, texts[1].transform.position.y+0.2f);
         }
 
     }

@@ -17,6 +17,7 @@ public class Carrot : CharBase
     [SerializeField] private float tackleTime = 0.5f;
     [SerializeField] private int tackleDamage = 20;
     [SerializeField] GameObject dust;
+    [SerializeField] GameObject collision;
 
     //ヘドバン関連
     [SerializeField] private float headBangAngle = 60f;
@@ -110,11 +111,6 @@ public class Carrot : CharBase
         isHeadBanging = true;
         can_control = false;
 
-        // コライダーを1.2倍
-        headBangCol.size =
-    new Vector2(defaultSize.x * 1.2f,
-                defaultSize.y);
-
         float startZ = transform.eulerAngles.z;
 
         float sign = direction.x < 0 ? -1f : 1f;
@@ -169,21 +165,6 @@ public class Carrot : CharBase
                 Vector2 knockbackDir = (cb.transform.position - transform.position).normalized;
 
                 cb.KnockBack(10, knockbackDir);
-            }
-            //ヘドバン
-            if (cb.id != id && isHeadBanging)
-            {
-                if (!hitList.Contains(cb))
-                {
-                    hitList.Add(cb);
-
-                    cb.Damage(headBangDamage);
-
-                    Vector2 knockbackDir =
-                        (cb.transform.position - transform.position).normalized;
-
-                    cb.KnockBack(5, knockbackDir);
-                }
             }
         }
     }
