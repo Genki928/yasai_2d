@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -7124284033849897494}
   m_Layer: 3
   m_Name: RedPepper
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,7 +111,13 @@ MonoBehaviour:
   burst: 0
   id: 0
   rigid: 0
+  skill_1_cooltime: 0
+  skill_2_cooltime: 0
   cursor_pf: {fileID: 5826391187326269229, guid: 50c4b14c6dc55f04f924db6a0c75f818, type: 3}
+  burst_bar: {fileID: 0}
+  cooltimer:
+  - {fileID: 0}
+  - {fileID: 0}
   breath: {fileID: 3303797620011567552, guid: 13cdeee2f059e9c4b8213bf5721f9dea, type: 3}
   img:
   - {fileID: -9177740170459379683, guid: 598803ad020e83c4cb796473f4370800, type: 3}
