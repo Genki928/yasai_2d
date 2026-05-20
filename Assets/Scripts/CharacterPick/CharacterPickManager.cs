@@ -16,10 +16,11 @@ public class CharacterPickManager : MonoBehaviour
     List<GameObject> cursor_obj = new();
 
     const float ICON_HORIZONTAL_SPACE = 1.5f;
-    const float ICON_VERTICAL_SPACE = 1.2f;
+    const float ICON_VERTICAL_SPACE = 1.4f;
     const int ICON_LINEFEED_COUNT = 3;
     const int X = 0;
     const int Y = 1;
+    public Vector2 pos = new(0, 0);
 
     void Start()
     {
@@ -30,18 +31,18 @@ public class CharacterPickManager : MonoBehaviour
         }
 
         // 移動
-        Vector2 pos = new(0, 0);
         for (int i = 0; i < icon_obj.Count; i++)
         {
+            pos = new(-ICON_HORIZONTAL_SPACE, 0);
             // 座標決定
-            pos = new(ICON_HORIZONTAL_SPACE * (i % ICON_LINEFEED_COUNT),
-                      -ICON_VERTICAL_SPACE * (i / ICON_LINEFEED_COUNT));
-            icon_obj[i].transform.position = pos;
+            icon_obj[i].transform.position = new(pos.x + ICON_HORIZONTAL_SPACE * (i % ICON_LINEFEED_COUNT),
+                                                 pos.y + -ICON_VERTICAL_SPACE * (i / ICON_LINEFEED_COUNT));
 
             // アイコンの変更
             icon_obj[i].GetComponent<PickIcon>().SetIcon(icon_img[i]);
         }
         cursor_obj.Add(Instantiate(cursor_pf));
+        cursor_obj[0].GetComponent<SpriteRenderer>().sprite = cursor[0].img;
         //cursor[0].pos = icon_obj[0].transform.position;
     }
 
@@ -59,12 +60,34 @@ public class CharacterPickManager : MonoBehaviour
 
     public void CursorUP(InputAction.CallbackContext ctx)
     {
-        ;
+        if (ctx.performed)
+        {
+            if (--cursor[0].pos[Y] < 0) cursor[0].pos[Y] = icon_obj.Count / ICON_LINEFEED_COUNT;
+            if (cursor[0].pos[Y] == icon_obj.Count / ICON_LINEFEED_COUNT)
+            {
+                if (cursor[0].pos[X] > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT)
+                {
+                    cursor[0].pos[X] = (icon_obj.Count - 1) % ICON_LINEFEED_COUNT;
+                }
+            }
+
+            cursor_obj[0].transform.position = new(pos.x + ICON_HORIZONTAL_SPACE * cursor[0].pos[X], pos.y - ICON_VERTICAL_SPACE * cursor[0].pos[Y]);
+        }
     }
 
     public void CursorDown(InputAction.CallbackContext ctx)
     {
-        ;
+        if (ctx.performed)
+        {
+            if (++cursor[0].pos[Y] > (icon_obj.Count - 1) / ICON_LINEFEED_COUNT) cursor[0].pos[Y] = 0;
+            if (icon_obj.Count % ICON_LINEFEED_COUNT != 0)
+            {
+                if (cursor[0].pos[X] > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT) cursor[0].pos[Y] = 0;
+            }
+
+
+            cursor_obj[0].transform.position = new(pos.x + ICON_HORIZONTAL_SPACE * cursor[0].pos[X], pos.y - ICON_VERTICAL_SPACE * cursor[0].pos[Y]);
+        }
     }
 
     public void CursorLeft(InputAction.CallbackContext ctx)
@@ -78,7 +101,7 @@ public class CharacterPickManager : MonoBehaviour
                 if (cursor[0].pos[X] % ICON_LINEFEED_COUNT > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT)
                     cursor[0].pos[X] = (icon_obj.Count - 1) % ICON_LINEFEED_COUNT;
 
-            cursor_obj[0].transform.position = new(ICON_HORIZONTAL_SPACE * cursor[0].pos[X], ICON_VERTICAL_SPACE * cursor[0].pos[Y]);
+            cursor_obj[0].transform.position = new(pos.x + ICON_HORIZONTAL_SPACE * cursor[0].pos[X], pos.y - ICON_VERTICAL_SPACE * cursor[0].pos[Y]);
         }
     }
 
@@ -93,7 +116,7 @@ public class CharacterPickManager : MonoBehaviour
                 if (cursor[0].pos[X] % ICON_LINEFEED_COUNT > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT)
                     cursor[0].pos[X] = 0;
 
-            cursor_obj[0].transform.position = new(ICON_HORIZONTAL_SPACE * cursor[0].pos[X], ICON_VERTICAL_SPACE * cursor[0].pos[Y]);
+            cursor_obj[0].transform.position = new(pos.x + ICON_HORIZONTAL_SPACE * cursor[0].pos[X], pos.y - ICON_VERTICAL_SPACE * cursor[0].pos[Y]);
         }
     }
 }
