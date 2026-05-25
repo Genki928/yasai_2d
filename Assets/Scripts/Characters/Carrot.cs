@@ -22,7 +22,7 @@ public class Carrot : CharBase
     //ヘドバン関連
     [SerializeField] private float headBangAngle = 60f;
     [SerializeField] private float rotateSpeed = 350f;
-    [SerializeField] private int headBangDamage = 5;
+    [SerializeField] private int headBangDamage = 25;
     private List<CharBase> hitList = new List<CharBase>();
     [SerializeField] private CapsuleCollider2D headBangCol;
 
@@ -117,6 +117,22 @@ public class Carrot : CharBase
 
         float currentAngle = 0;
 
+        // ===== 当たり判定生成 =====
+
+        Vector2 spawnPos =
+            (Vector2)transform.position +
+            direction.normalized * 1.5f;
+
+        GameObject obj =
+            Instantiate(collision, spawnPos, Quaternion.identity);
+
+        HitDamageArea hit =
+            obj.GetComponent<HitDamageArea>();
+
+        hit.Init(id, headBangDamage, Vector2.zero);
+
+        // =========================
+
         // 倒す
         while (currentAngle < headBangAngle)
         {
@@ -143,13 +159,11 @@ public class Carrot : CharBase
         transform.rotation =
             Quaternion.Euler(0, 0, startZ);
 
-        // コライダーを戻す
         headBangCol.size = defaultSize;
 
         can_control = true;
         isHeadBanging = false;
     }
-
 
 
     void OnTriggerEnter2D(Collider2D col)

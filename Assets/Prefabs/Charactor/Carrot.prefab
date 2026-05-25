@@ -126,9 +126,10 @@ MonoBehaviour:
   tackleTime: 0.4
   tackleDamage: 20
   dust: {fileID: 1560168367213963595, guid: 31c763f52fdaf2d45885cba010fc705b, type: 3}
-  headBangAngle: 60
-  rotateSpeed: 350
-  headBangDamage: 5
+  collision: {fileID: 9138792514576026239, guid: 5a4d1edade8353449bbdfabf13041c1a, type: 3}
+  headBangAngle: 90
+  rotateSpeed: 500
+  headBangDamage: 20
   headBangCol: {fileID: 9051219605256865004}
 --- !u!114 &2387769583341587097
 MonoBehaviour:
