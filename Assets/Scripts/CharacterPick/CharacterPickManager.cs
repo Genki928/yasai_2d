@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CharacterPickManager : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class CharacterPickManager : MonoBehaviour
 
     [Header("ÅûÉÇÉfÉã")]
     [SerializeField] GameObject[] model = new GameObject[2];
+    [SerializeField] List<PickData> pick_data = new();
+    [SerializeField] StateIndicater[] state = new StateIndicater[2];
 
     const float ICON_HORIZONTAL_SPACE = 1.5f;
     const float ICON_VERTICAL_SPACE = 1.4f;
@@ -56,13 +59,24 @@ public class CharacterPickManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (cursor[0].interact && cursor[1].interact)
+        {
+            SceneManager.LoadScene("BattleScene");
+        }
     }
 
     public void Interact(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
-            SceneManager.LoadScene("BattleScene");
+        {
+            // éØï 
+            int n = -1;
+            if (Gamepad.all[0] == ctx.control.device) n = 0;
+            else n = 1;
+
+            // åàíË
+            cursor[n].interact = true;
+        }
     }
 
     public void CursorUP(InputAction.CallbackContext ctx)
@@ -144,9 +158,10 @@ public class CharacterPickManager : MonoBehaviour
     void Draw(int n)
     {
         // ï`âÊ
-        Debug.Log(cursor[n].pos[Y] / ICON_LINEFEED_COUNT + cursor[n].pos[X]);
         cursor_obj[n].transform.position = new(pos.x + ICON_HORIZONTAL_SPACE * cursor[n].pos[X], pos.y - ICON_VERTICAL_SPACE * cursor[n].pos[Y]);
         model[n].GetComponent<SpriteRenderer>().sprite = icon_img[cursor[n].pos[Y] * ICON_LINEFEED_COUNT + cursor[n].pos[X]];
+        state[n].name.text = pick_data[cursor[n].pos[Y] * ICON_LINEFEED_COUNT + cursor[n].pos[X]].name;
+        state[n].lore.text = pick_data[cursor[n].pos[Y] * ICON_LINEFEED_COUNT + cursor[n].pos[X]].lore;
     }
 }
 
@@ -154,11 +169,20 @@ public class CharacterPickManager : MonoBehaviour
 public class Cursor
 {
     public Sprite img;
-    public int[] pos = new int[2] { 0, 0 };
+    [NonSerialized] public int[] pos = new int[2] { 0, 0 };
+    public bool interact = false;
+}
+
+[Serializable]
+public class StateIndicater
+{
+    public Text name;
+    public Text lore;
 }
 
 [CreateAssetMenu(menuName = "Character/PickData")]
 public class PickData : ScriptableObject
 {
-    
+    public new string name;
+    public string lore;
 }
