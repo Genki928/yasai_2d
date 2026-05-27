@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 public class BattleManager : MonoBehaviour
 {
     [Header("ƒLƒƒƒ‰¶¬")]
@@ -117,6 +118,7 @@ public class BattleManager : MonoBehaviour
     void Finish(int id)
     {
         Debug.Log("Player " + id + " won!");
+        SceneManager.LoadScene("ResultScene");
     }
 }
 
