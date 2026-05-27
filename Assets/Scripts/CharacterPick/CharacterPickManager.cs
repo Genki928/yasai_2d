@@ -15,8 +15,8 @@ public class CharacterPickManager : MonoBehaviour
 
     [Header("◇カーソル")]
     [SerializeField] GameObject cursor_pf;
-    [SerializeField] Cursor[] cursor = new Cursor[2];
     [SerializeField] Sprite mix_cursor;
+    [SerializeField] Cursor[] cursor = new Cursor[2];
     GameObject[] cursor_obj = new GameObject[2];
 
     [Header("◇モデル")]
@@ -166,7 +166,7 @@ public class CharacterPickManager : MonoBehaviour
         // 描画
         cursor_obj[n].transform.position = new(pos.x + ICON_HORIZONTAL_SPACE * cursor[n].pos[X], pos.y - ICON_VERTICAL_SPACE * cursor[n].pos[Y]);
         model[n].GetComponent<SpriteRenderer>().sprite = icon_img[cursor[n].pos[Y] * ICON_LINEFEED_COUNT + cursor[n].pos[X]];
-        state[n].name.text = pick_data[cursor[n].pos[Y] * ICON_LINEFEED_COUNT + cursor[n].pos[X]].name;
+        state[n].name.text = pick_data[cursor[n].pos[Y] * ICON_LINEFEED_COUNT + cursor[n].pos[X]].char_name;
         state[n].lore.text = pick_data[cursor[n].pos[Y] * ICON_LINEFEED_COUNT + cursor[n].pos[X]].lore;
     }
 }
@@ -186,14 +186,7 @@ public class StateIndicater
     public Text lore;
 }
 
-[CreateAssetMenu(menuName = "Character/PickData")]
-public class PickData : ScriptableObject
-{
-    public new string name;
-    public string lore;
-}
-
 public static class PlayerPick
 {
-    public static int[] pick = new int[2] { 0, 0 };
+    public static int[] pick = new int[2] { 0, 1 };
 }

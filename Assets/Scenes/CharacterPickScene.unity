@@ -1191,8 +1191,8 @@ MonoBehaviour:
   - {fileID: 439808938}
   - {fileID: 1826974913}
   pick_data:
-  - {fileID: 11400000, guid: adbdfbdd216046541b331098aa1a6774, type: 2}
-  - {fileID: 11400000, guid: 712bc46aa26ba1944999a0d6151ad79e, type: 2}
+  - {fileID: 11400000, guid: e0a4e5a217c35c24db57476c17ca19b8, type: 2}
+  - {fileID: 11400000, guid: 4327477bd08fbe24dbf496c27405b74b, type: 2}
   state:
   - name: {fileID: 1394810176}
     lore: {fileID: 977860077}

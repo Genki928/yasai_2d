@@ -60,6 +60,7 @@ public class BattleManager : MonoBehaviour
 
             pick_nums[i] = PlayerPick.pick[i];
             GameObject prefab = characters[pick_nums[i]].chars;
+            Debug.Log(PlayerPick.pick);
 
             PlayerInput pi;
 
@@ -68,7 +69,7 @@ public class BattleManager : MonoBehaviour
                 pi = PlayerInput.Instantiate(
                     prefab,
                     playerIndex: i,
-                    controlScheme: "Controller1",
+                    controlScheme: "Controller2",
                     pairWithDevice: Gamepad.all[0]
                 );
             }
@@ -77,7 +78,7 @@ public class BattleManager : MonoBehaviour
                 pi = PlayerInput.Instantiate(
                     prefab,
                     playerIndex: i,
-                    controlScheme: "Controller2",
+                    controlScheme: "Controller1",
                     pairWithDevice: Gamepad.all[1]
                 );
             }

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: red_pepper
+  m_Name: carrot 1
   m_EditorClassIdentifier: Assembly-CSharp::PickData
-  name: pepper
-  lore: eeeeeeeeeeeeeeeeee
+  char_name: CARROT
+  lore: carrot test
