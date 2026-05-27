@@ -16,6 +16,7 @@ public class CharacterPickManager : MonoBehaviour
     [Header("ƒJ[ƒ\ƒ‹")]
     [SerializeField] GameObject cursor_pf;
     [SerializeField] Sprite mix_cursor;
+    [SerializeField] GameObject[] button;
     [SerializeField] Cursor[] cursor = new Cursor[2];
     GameObject[] cursor_obj = new GameObject[2];
 
@@ -82,6 +83,22 @@ public class CharacterPickManager : MonoBehaviour
 
             // Œˆ’è
             cursor[n].interact = true;
+            button[n].SetActive(true);
+        }
+    }
+
+    public void Cancel(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            // ¯•Ê
+            int n = -1;
+            if (Gamepad.all[0] == ctx.control.device) n = 0;
+            else n = 1;
+
+            // Œˆ’è
+            cursor[n].interact = false;
+            button[n].SetActive(false);
         }
     }
 
