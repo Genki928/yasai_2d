@@ -1,6 +1,7 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 
 public class CharBase : MonoBehaviour
@@ -30,9 +31,13 @@ public class CharBase : MonoBehaviour
     protected Vector2 direction;
     protected Rigidbody2D rb;
 
+    //オーディオソース用
+    public AudioSource audioSource;
+
     virtual protected void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         cursor_obj = Instantiate(cursor_pf, transform.position, Quaternion.identity).GetComponent<Arrow>();
         cursor_obj.Set(this);
     }

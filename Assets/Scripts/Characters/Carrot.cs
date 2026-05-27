@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 
 public class Carrot : CharBase
@@ -18,13 +19,15 @@ public class Carrot : CharBase
     [SerializeField] private int tackleDamage = 20;
     [SerializeField] GameObject dust;
     [SerializeField] GameObject collision;
+    [SerializeField] AudioClip se1;
 
     //ヘドバン関連
     [SerializeField] private float headBangAngle = 60f;
     [SerializeField] private float rotateSpeed = 350f;
-    [SerializeField] private int headBangDamage = 25;
+    [SerializeField] private int headBangDamage = 15;
     private List<CharBase> hitList = new List<CharBase>();
     [SerializeField] private CapsuleCollider2D headBangCol;
+    [SerializeField] AudioClip se2;
 
     private Vector2 defaultSize;
     private bool isHeadBanging = false;
@@ -55,6 +58,7 @@ public class Carrot : CharBase
             if (skill_1_cooltime != 0) return;
 
             // タックル開始
+            audioSource.PlayOneShot(se2);
             StartCoroutine(Tackle());
             Debug.Log("tackle");
 
@@ -97,7 +101,7 @@ public class Carrot : CharBase
         {
             // クールタイム中なら終了
             if (skill_2_cooltime != 0) return;
-
+            audioSource.PlayOneShot(se1);
             StartCoroutine(HeadBang());
 
             rb.linearVelocity = Vector2.zero;
@@ -109,7 +113,6 @@ public class Carrot : CharBase
     {
         hitList.Clear();
         isHeadBanging = true;
-        can_control = false;
 
         float startZ = transform.eulerAngles.z;
 
@@ -160,8 +163,6 @@ public class Carrot : CharBase
             Quaternion.Euler(0, 0, startZ);
 
         headBangCol.size = defaultSize;
-
-        can_control = true;
         isHeadBanging = false;
     }
 

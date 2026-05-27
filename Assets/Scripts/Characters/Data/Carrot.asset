@@ -17,7 +17,7 @@ MonoBehaviour:
   max_burst: 100
   skill_1_rigid: 10
   skill_1_cooltime: 100
-  skill_2_rigid: 10
+  skill_2_rigid: 5
   skill_2_cooltime: 15
   skill_3_rigid: 0
   skill_3_cooltime: 0

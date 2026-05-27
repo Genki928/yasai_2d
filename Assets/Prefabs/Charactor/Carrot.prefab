@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8785239974707632202}
   - component: {fileID: -523274106162449980}
   - component: {fileID: 9051219605256865004}
+  - component: {fileID: 2437189327592500065}
   m_Layer: 3
   m_Name: Carrot
   m_TagString: Player
@@ -119,6 +120,7 @@ MonoBehaviour:
   cooltimer:
   - {fileID: 0}
   - {fileID: 0}
+  audioSource: {fileID: 0}
   sprite: {fileID: 0}
   carrot_default: {fileID: 2950869812727453837, guid: 3dcda9a40728eef4ca8ee47555100ab1, type: 3}
   tackle: {fileID: 1824413040164408261, guid: b205cf7e6d820bf45bb4267f2ea3f8c1, type: 3}
@@ -127,10 +129,12 @@ MonoBehaviour:
   tackleDamage: 20
   dust: {fileID: 1560168367213963595, guid: 31c763f52fdaf2d45885cba010fc705b, type: 3}
   collision: {fileID: 9138792514576026239, guid: 5a4d1edade8353449bbdfabf13041c1a, type: 3}
+  se1: {fileID: 8300000, guid: 448a5754cbe316f4097b31c33ad2b5ed, type: 3}
   headBangAngle: 90
   rotateSpeed: 500
-  headBangDamage: 20
+  headBangDamage: 15
   headBangCol: {fileID: 9051219605256865004}
+  se2: {fileID: 8300000, guid: 6b86bf8af024f7d4a9894b59048fc879, type: 3}
 --- !u!114 &2387769583341587097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,3 +330,100 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.22, y: 0.33}
   m_Direction: 0
+--- !u!82 &2437189327592500065
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3071852468601324621}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
