@@ -65,8 +65,8 @@ public class CharacterPickManager : MonoBehaviour
         if (cursor[0].interact && cursor[1].interact)
         {
             PlayerPick.pick = new int[2] {
-            cursor[1].pos[Y] * ICON_LINEFEED_COUNT + cursor[1].pos[X],
-            cursor[0].pos[Y] * ICON_LINEFEED_COUNT + cursor[0].pos[X]
+            cursor[0].pos[Y] * ICON_LINEFEED_COUNT + cursor[0].pos[X],
+            cursor[1].pos[Y] * ICON_LINEFEED_COUNT + cursor[1].pos[X]
             };
             SceneManager.LoadScene("BattleScene");
         }

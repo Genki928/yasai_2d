@@ -516,7 +516,7 @@ Transform:
   m_GameObject: {fileID: 439808938}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1871.36, y: 234.36002, z: -9720}
+  m_LocalPosition: {x: 635, y: 241, z: -9720}
   m_LocalScale: {x: 1080, y: 1080, z: 108}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -689,7 +689,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 617.53, y: -53.732}
+  m_AnchoredPosition: {x: 1849, y: -56}
   m_SizeDelta: {x: 684.94, y: 107.47}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &788732302
@@ -817,7 +817,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 617.53, y: -262.1}
+  m_AnchoredPosition: {x: 1849, y: -264.368}
   m_SizeDelta: {x: 684.94, y: 309.28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &827913504
@@ -896,7 +896,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 617.53, y: -262.1}
+  m_AnchoredPosition: {x: -593, y: -266}
   m_SizeDelta: {x: 684.94, y: 309.28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &977860076
@@ -1156,7 +1156,19 @@ MonoBehaviour:
     m_ActionId: 6a581e20-d127-4195-b34e-ab9504219541
     m_ActionName: 'Picker/Interact[/Keyboard/z]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1224603756}
+        m_TargetAssemblyTypeName: CharacterPickManager, Assembly-CSharp
+        m_MethodName: Cancel
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 45170d16-605e-477a-a912-cc7e807133b5
     m_ActionName: 'Picker/Cancel[/XInputControllerWindows1/buttonEast,/XInputControllerWindows/buttonEast]'
   m_NeverAutoSwitchControlSchemes: 0
@@ -1183,8 +1195,8 @@ MonoBehaviour:
   cursor_pf: {fileID: 1833491355377103544, guid: 5a4424b64cb2ae240a3a53a8f0033486, type: 3}
   mix_cursor: {fileID: -7208024073301661153, guid: 2352e652b8d494642a46d15628950891, type: 3}
   button:
-  - {fileID: 1688771324}
   - {fileID: 2067280563}
+  - {fileID: 1688771324}
   cursor:
   - img: {fileID: -1645374030688051754, guid: 9694b69fe91b91b40a36a9b0d5ece5de, type: 3}
     interact: 0
@@ -1250,7 +1262,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 617.53, y: -53.732}
+  m_AnchoredPosition: {x: -593, y: -57.631973}
   m_SizeDelta: {x: 684.94, y: 107.47}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1394810175
@@ -1380,7 +1392,7 @@ Transform:
   m_GameObject: {fileID: 1688771324}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.78, y: -3.28, z: 0}
+  m_LocalPosition: {x: 5.95, y: -2.53, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1471,7 +1483,7 @@ Transform:
   m_GameObject: {fileID: 1826974913}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -605.88, y: 234.36002, z: -9720}
+  m_LocalPosition: {x: 635, y: 245, z: -9720}
   m_LocalScale: {x: 1080, y: 1080, z: 108}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1919,7 +1931,7 @@ Transform:
   m_GameObject: {fileID: 2067280563}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.67, y: -3.21, z: 0}
+  m_LocalPosition: {x: -6.03, y: -2.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
