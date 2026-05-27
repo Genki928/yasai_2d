@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: carrot
   m_EditorClassIdentifier: Assembly-CSharp::PickData
-  name: 
-  lore: 
+  name: carrot
+  lore: test
