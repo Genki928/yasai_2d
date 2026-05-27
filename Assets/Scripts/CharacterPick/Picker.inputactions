@@ -66,8 +66,30 @@
                 },
                 {
                     "name": "",
+                    "id": "ccc30953-2d98-4f37-9ed0-0d3de0eb9f12",
+                    "path": "<XInputController>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "fd5d3791-eab5-47a2-af2f-4cfaf8603e4a",
                     "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Down",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4422919c-77e4-4385-95b6-f3ff7abecb5c",
+                    "path": "<XInputController>/leftStick/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -88,6 +110,17 @@
                 },
                 {
                     "name": "",
+                    "id": "c57535b7-0b54-499c-8343-b6241f6bad3d",
+                    "path": "<XInputController>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "fa4bb086-0df6-4c24-9bc5-83036165d57d",
                     "path": "<Keyboard>/a",
                     "interactions": "",
@@ -99,8 +132,30 @@
                 },
                 {
                     "name": "",
+                    "id": "0178974a-ad26-45bb-99a9-3a801126ebdb",
+                    "path": "<XInputController>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "cd1aeca6-10b9-4bf1-91e0-8b7f13e0ebc7",
                     "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7e205530-4a28-4f40-a1d5-1de7643eb9ae",
+                    "path": "<XInputController>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
