@@ -221,7 +221,7 @@ MonoBehaviour:
     m_ActionId: dea649c5-98ea-43cc-a587-0c7ff317da3b
     m_ActionName: 'Player/Skill3[/Keyboard/3]'
   m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Controller2
+  m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
