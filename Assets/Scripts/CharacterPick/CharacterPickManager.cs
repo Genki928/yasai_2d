@@ -49,10 +49,12 @@ public class CharacterPickManager : MonoBehaviour
             // アイコンの変更
             icon_obj[i].GetComponent<PickIcon>().SetIcon(icon_img[i]);
         }
-        cursor_obj.Add(Instantiate(cursor_pf));
-        cursor_obj[0].GetComponent<SpriteRenderer>().sprite = cursor[0].img;
-        cursor_obj.Add(Instantiate(cursor_pf));
-        cursor_obj[1].GetComponent<SpriteRenderer>().sprite = cursor[1].img;
+        for (int i = 0; i < 2; i++)
+        {
+            cursor_obj.Add(Instantiate(cursor_pf));
+            cursor_obj[i].GetComponent<SpriteRenderer>().sprite = cursor[i].img;
+            Draw(i);
+        }
         //cursor[0].pos = icon_obj[0].transform.position;
     }
 
