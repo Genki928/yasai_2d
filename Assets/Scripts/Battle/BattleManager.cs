@@ -58,6 +58,7 @@ public class BattleManager : MonoBehaviour
             // ポインター
             p_obj[i]=Instantiate(player_obj[i]);
 
+            pick_nums[i] = PlayerPick.pick[i];
             GameObject prefab = characters[pick_nums[i]].chars;
 
             PlayerInput pi;

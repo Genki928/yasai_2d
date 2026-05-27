@@ -63,6 +63,10 @@ public class CharacterPickManager : MonoBehaviour
     {
         if (cursor[0].interact && cursor[1].interact)
         {
+            PlayerPick.pick = new int[2] {
+            cursor[1].pos[Y] * ICON_LINEFEED_COUNT + cursor[1].pos[X],
+            cursor[0].pos[Y] * ICON_LINEFEED_COUNT + cursor[0].pos[X]
+            };
             SceneManager.LoadScene("BattleScene");
         }
     }
@@ -187,4 +191,9 @@ public class PickData : ScriptableObject
 {
     public new string name;
     public string lore;
+}
+
+public static class PlayerPick
+{
+    public static int[] pick = new int[2] { 0, 0 };
 }
