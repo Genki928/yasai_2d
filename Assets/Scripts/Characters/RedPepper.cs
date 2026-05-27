@@ -6,10 +6,11 @@ using static UnityEditor.PlayerSettings;
 
 public class RedPepper : CharBase
 {
+    [SerializeField] AudioClip se1;
     [SerializeField] GameObject breath;
     SpriteRenderer sr;
     [SerializeField] List<Sprite> img = new();
-
+    //炎SE
     override protected void Start()
     {
         base.Start();
@@ -32,7 +33,7 @@ public class RedPepper : CharBase
         {
             // 中断処理
             if (skill_1_cooltime > 0) return;
-
+            audioSource.PlayOneShot(se1);
             // 座標・ベクトルの算出
             Vector2 pos = new Vector2(transform.position.x, transform.position.y) + direction * 1.5f;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -56,7 +57,7 @@ public class RedPepper : CharBase
         {
             // 中断処理
             if (skill_2_cooltime > 0) return;
-
+            audioSource.PlayOneShot(se1);
             // 処理
             rb.linearVelocity = -direction * 30.0f;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;

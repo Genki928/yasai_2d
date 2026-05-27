@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RedPepper
   m_EditorClassIdentifier: Assembly-CSharp::CharData
   char_name: "\u30C8\u30A6\u30AC\u30E9\u30B7"
-  speed: 5
+  speed: 4
   max_burst: 100
   skill_1_rigid: 10
   skill_1_cooltime: 100
