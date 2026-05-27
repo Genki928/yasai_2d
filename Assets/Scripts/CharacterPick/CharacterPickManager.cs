@@ -17,7 +17,7 @@ public class CharacterPickManager : MonoBehaviour
     [SerializeField] GameObject cursor_pf;
     [SerializeField] Cursor[] cursor = new Cursor[2];
     [SerializeField] Sprite mix_cursor;
-    List<GameObject> cursor_obj = new();
+    GameObject[] cursor_obj = new GameObject[2];
 
     [Header("ÅûÉÇÉfÉã")]
     [SerializeField] GameObject[] model = new GameObject[2];
@@ -51,7 +51,7 @@ public class CharacterPickManager : MonoBehaviour
         }
         for (int i = 0; i < 2; i++)
         {
-            cursor_obj.Add(Instantiate(cursor_pf));
+            cursor_obj[i] = Instantiate(cursor_pf);
             cursor_obj[i].GetComponent<SpriteRenderer>().sprite = cursor[i].img;
             Draw(i);
         }
