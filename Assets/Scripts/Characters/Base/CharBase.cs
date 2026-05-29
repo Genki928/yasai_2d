@@ -20,7 +20,7 @@ public class CharBase : MonoBehaviour
 
     [Header("ÅûÉJÅ[É\Éã")]
     [SerializeField] protected GameObject cursor_pf;
-    [NonSerialized] public Arrow cursor_obj;
+    protected Arrow cursor_obj;
 
     [Header("ÅûGUI")]
     [NonSerialized] public BurstBar burst_bar;
@@ -39,6 +39,7 @@ public class CharBase : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
         cursor_obj = Instantiate(cursor_pf, transform.position, Quaternion.identity).GetComponent<Arrow>();
+        cursor_obj.Refresh(direction);
         cursor_obj.Set(this);
     }
 

@@ -95,7 +95,6 @@ public class BattleManager : MonoBehaviour
             datas[i].id = i;
 
             datas[i].direction = SetDirect(spawn_point[i].direct);
-            //datas[i].cursor_obj.Set(datas[i]);
 
             // バーストバーとの紐づけ
             gui[i].bar.Init(player[i]);
