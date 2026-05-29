@@ -143,6 +143,9 @@ public class CharacterPickManager : MonoBehaviour
             if (Gamepad.all[0] == ctx.control.device) n = 0;
             else n = 1;
 
+            // Œˆ’èÏ‚İ‚È‚çˆÚ“®•s‰Â
+            if (cursor[n].interact) return;
+
             // ˆÚ“®
             if (--cursor[n].pos[X] < 0) cursor[n].pos[X] = ICON_LINEFEED_COUNT - 1;
 
@@ -164,6 +167,9 @@ public class CharacterPickManager : MonoBehaviour
             int n = -1;
             if (Gamepad.all[0] == ctx.control.device) n = 0;
             else n = 1;
+
+            // Œˆ’èÏ‚İ‚È‚çˆÚ“®•s‰Â
+            if (cursor[n].interact) return;
 
             // ˆÚ“®
             if (++cursor[n].pos[X] > ICON_LINEFEED_COUNT - 1) cursor[n].pos[X] = 0;

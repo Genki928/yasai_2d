@@ -20,15 +20,15 @@ public class CharBase : MonoBehaviour
 
     [Header("◇カーソル")]
     [SerializeField] protected GameObject cursor_pf;
-    protected Arrow cursor_obj;
+    [NonSerialized] public Arrow cursor_obj;
 
     [Header("◇GUI")]
-    public BurstBar burst_bar;
-    public SkillCooltimer[] cooltimer = new SkillCooltimer[2];
+    [NonSerialized] public BurstBar burst_bar;
+    [NonSerialized] public SkillCooltimer[] cooltimer = new SkillCooltimer[2];
 
     [Header("◇物理")]
     protected Vector2 vec;
-    protected Vector2 direction;
+    [NonSerialized] public Vector2 direction;
     protected Rigidbody2D rb;
 
     //オーディオソース用
@@ -93,7 +93,7 @@ public class CharBase : MonoBehaviour
         if (vec != new Vector2(0, 0))
         {
             direction = vec;
-            cursor_obj.GetComponent<Arrow>().Refresh(vec);
+            cursor_obj.Refresh(vec);
         }
     }
 

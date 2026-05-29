@@ -4,21 +4,24 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+
 public class BattleManager : MonoBehaviour
 {
+    const int PLAYER_CNT = 2;
+
     [Header("◇キャラ生成")]
     [SerializeField] List<Character> characters = new(); 
-    public GameObject[] spawn_point = new GameObject[2];
-    GameObject[] player = new GameObject[2];
-    CharBase[] datas = new CharBase[2];
+    public Spawner[] spawn_point = new Spawner[PLAYER_CNT];
+    GameObject[] player = new GameObject[PLAYER_CNT];
+    CharBase[] datas = new CharBase[PLAYER_CNT];
     int[] pick_nums = { 1, 0 };
 
     [Header("◇GUI")]
-    public GUI[] gui = new GUI[2];
+    public GUI[] gui = new GUI[PLAYER_CNT];
 
     //Px用
-    public GameObject[] player_obj = new GameObject[2];
-    GameObject[] p_obj = new GameObject[2];
+    public GameObject[] player_obj = new GameObject[PLAYER_CNT];
+    GameObject[] p_obj = new GameObject[PLAYER_CNT];
 
     void Awake()
     {
@@ -54,21 +57,19 @@ public class BattleManager : MonoBehaviour
     void Start()
     {
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < PLAYER_CNT; i++)
         {
             // ポインター
             p_obj[i]=Instantiate(player_obj[i]);
 
+            // プレイヤー生成
             pick_nums[i] = PlayerPick.pick[i];
-            GameObject prefab = characters[pick_nums[i]].chars;
-            Debug.Log(PlayerPick.pick);
-
             PlayerInput pi;
 
             if (i == 0)
             {
                 pi = PlayerInput.Instantiate(
-                    prefab,
+                     characters[pick_nums[i]].chars,
                     playerIndex: i,
                     controlScheme: "Controller2",
                     pairWithDevice: Gamepad.all[0]
@@ -77,7 +78,7 @@ public class BattleManager : MonoBehaviour
             else
             {
                 pi = PlayerInput.Instantiate(
-                    prefab,
+                     characters[pick_nums[i]].chars,
                     playerIndex: i,
                     controlScheme: "Controller1",
                     pairWithDevice: Gamepad.all[1]
@@ -85,22 +86,28 @@ public class BattleManager : MonoBehaviour
             }
 
             // ★ここが正解
-            pi.transform.position = spawn_point[i].transform.position;
+            pi.transform.position = spawn_point[i].point.transform.position;
             pi.transform.rotation = Quaternion.identity;
 
+            // 識別IDを設定
             player[i] = pi.gameObject;
             datas[i] = player[i].GetComponent<CharBase>();
             datas[i].id = i;
 
+            datas[i].direction = SetDirect(spawn_point[i].direct);
+            //datas[i].cursor_obj.Set(datas[i]);
+
+            // バーストバーとの紐づけ
             gui[i].bar.Init(player[i]);
 
+            // 各種UIとの紐づけ
             if (player[i].TryGetComponent<CharBase>(out var p))
             {
-                p.burst_bar = gui[i].bar;
-                gui[i].name.text = p.data.char_name;
-                p.cooltimer[0] = gui[i].skill1_cooltimer;
-                p.cooltimer[1] = gui[i].skill2_cooltimer;
-                gui[i].icon.sprite = characters[pick_nums[i]].icon;
+                p.burst_bar = gui[i].bar;   // バースト
+                gui[i].name.text = p.data.char_name;    // キャラ名
+                p.cooltimer[0] = gui[i].skill1_cooltimer;   // スキル1のクールタイムを表示
+                p.cooltimer[1] = gui[i].skill2_cooltimer;   // スキル2のクールタイムを表示
+                gui[i].icon.sprite = characters[pick_nums[i]].icon; // アイコン
             }
         }
     }
@@ -120,6 +127,15 @@ public class BattleManager : MonoBehaviour
         Debug.Log("Player " + id + " won!");
         SceneManager.LoadScene("ResultScene");
     }
+
+    Vector2 SetDirect(DIRECT direct)
+    {
+        if (direct == DIRECT.RIGHT) return new(1.0f, 0.0f);
+        if (direct == DIRECT.LEFT) return new(-1.0f, 0.0f);
+        if (direct == DIRECT.UP) return new(0.0f, 1.0f);
+        if (direct == DIRECT.DOWN) return new(0.0f, -1.0f);
+        return Vector2.zero;
+    }
 }
 
 [Serializable]
@@ -137,4 +153,19 @@ public class Character
 {
     public GameObject chars;
     public Sprite icon;
+}
+
+[Serializable]
+public class Spawner
+{
+    public GameObject point;
+    public DIRECT direct;
+}
+
+public enum DIRECT
+{
+    RIGHT,
+    LEFT,
+    UP,
+    DOWN
 }
