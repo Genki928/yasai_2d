@@ -23,12 +23,12 @@ public class CharBase : MonoBehaviour
     protected Arrow cursor_obj;
 
     [Header("◇GUI")]
-    public BurstBar burst_bar;
-    public SkillCooltimer[] cooltimer = new SkillCooltimer[2];
+    [NonSerialized] public BurstBar burst_bar;
+    [NonSerialized] public SkillCooltimer[] cooltimer = new SkillCooltimer[2];
 
     [Header("◇物理")]
     protected Vector2 vec;
-    protected Vector2 direction;
+    [NonSerialized] public Vector2 direction;
     protected Rigidbody2D rb;
 
     //オーディオソース用
@@ -39,6 +39,7 @@ public class CharBase : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
         cursor_obj = Instantiate(cursor_pf, transform.position, Quaternion.identity).GetComponent<Arrow>();
+        cursor_obj.Refresh(direction);
         cursor_obj.Set(this);
     }
 
@@ -93,7 +94,7 @@ public class CharBase : MonoBehaviour
         if (vec != new Vector2(0, 0))
         {
             direction = vec;
-            cursor_obj.GetComponent<Arrow>().Refresh(vec);
+            cursor_obj.Refresh(vec);
         }
     }
 
