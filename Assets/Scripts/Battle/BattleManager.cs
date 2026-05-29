@@ -5,6 +5,12 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
+static class Winner
+{
+    static public string w_name;
+    static public int w_id;
+    static public Sprite sprite;
+}
 public class BattleManager : MonoBehaviour
 {
     const int PLAYER_CNT = 2;
@@ -28,32 +34,6 @@ public class BattleManager : MonoBehaviour
         Application.targetFrameRate = 30;
         CharBase.OnPlayerDies += Finish;
     }
-
-    //void Start()
-    //{
-    //    for (int i = 0; i < 2; i++)
-    //    {
-    //        // キャラクターを生成
-    //        player[i] = Instantiate(characters[pick_nums[i]].chars, spawn_point[i].transform.position, Quaternion.identity);
-    //        datas[i] = player[i].GetComponent<CharBase>();
-    //        datas[i].id = i;
-
-    //        // ポインター
-    //        p_obj[i]=Instantiate(player_obj[i]);
-
-    //        // GUI
-    //        gui[i].bar.Init(player[i]);
-    //        if (player[i].TryGetComponent<CharBase>(out var p))
-    //        {
-    //            p.burst_bar = gui[i].bar;   // バーストゲージの表示
-    //            gui[i].name.text = p.data.char_name;    // 名前の表示
-    //            p.cooltimer[0] = gui[i].skill1_cooltimer;   // スキル1のクールタイム表示
-    //            p.cooltimer[1] = gui[i].skill2_cooltimer;   // スキル2のクールタイム表示
-    //            gui[i].icon.sprite = characters[pick_nums[i]].icon; // アイコン表示
-    //        }
-    //    }
-    //}
-
     void Start()
     {
 
@@ -124,6 +104,11 @@ public class BattleManager : MonoBehaviour
     void Finish(int id)
     {
         Debug.Log("Player " + id + " won!");
+
+        Winner.w_id = id;
+        Winner.w_name=datas[id].name;
+        Winner.sprite = player[id].GetComponent<SpriteRenderer>().sprite;
+
         SceneManager.LoadScene("ResultScene");
     }
 
