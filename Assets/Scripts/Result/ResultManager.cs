@@ -1,22 +1,27 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class ResultManager : MonoBehaviour
 {
     [SerializeField] int arrow_max=1;
     [SerializeField] int arrow_min = 0;
 
-
+    [NonSerialized] public string winner = Winner.w_name;
+    [NonSerialized] public int id = Winner.w_id;
+    [SerializeField] GameObject winner_name;
 
     // Start is called once before the first execution ofUpdate after the MonoBehaviour is created
     void Start() 
-    { 
-
+    {
+        //winner = "ƒjƒ“ƒWƒ“";
+      
     } 
     // Update is called once per frame
     void Update() 
     {
-
+        winner_name.GetComponent<Text>().text = winner;
     } 
     public void SceneChange_CharacterPickScene(InputAction.CallbackContext ctx) 
     {
