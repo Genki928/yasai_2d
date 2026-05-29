@@ -2966,8 +2966,10 @@ MonoBehaviour:
   - chars: {fileID: 3071852468601324621, guid: 64283c1ffb5f301459530948e200146d, type: 3}
     icon: {fileID: 768890679745972150, guid: 75c74399fea79714f8d239d20bfe2443, type: 3}
   spawn_point:
-  - {fileID: 666596767}
-  - {fileID: 1661029962}
+  - point: {fileID: 666596767}
+    direct: 0
+  - point: {fileID: 1661029962}
+    direct: 1
   gui:
   - bar: {fileID: 1848879500}
     name: {fileID: 2132095580}
