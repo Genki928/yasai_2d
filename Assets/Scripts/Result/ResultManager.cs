@@ -25,7 +25,12 @@ public class ResultManager : MonoBehaviour
     } 
     public void SceneChange_CharacterPickScene(InputAction.CallbackContext ctx) 
     {
-        if (ctx.performed && TextArrow.instance.arrow_pos == 0) SceneManager.LoadScene("CharacterPickScene");
+        if (ctx.performed && TextArrow.instance.arrow_pos == 0)
+        {
+            Debug.Log(Winner.sprite);
+            SceneManager.LoadScene("CharacterPickScene");
+            Winner.sprite = null;
+        }
         else if (ctx.performed && TextArrow.instance.arrow_pos == 1)
         {
             Debug.Log("titleÇ…çsÇ≠ÅAÇÊ");

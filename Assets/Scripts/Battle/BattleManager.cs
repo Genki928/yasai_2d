@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 static class Winner
 {
-    static public string w_name;
+    static public string w_name = "";
     static public int w_id;
     static public Sprite sprite;
 }
@@ -106,8 +106,9 @@ public class BattleManager : MonoBehaviour
         Debug.Log("Player " + id + " won!");
 
         Winner.w_id = id;
-        Winner.w_name=datas[id].name;
+        Winner.w_name = datas[id].data.char_name;
         Winner.sprite = player[id].GetComponent<SpriteRenderer>().sprite;
+        Debug.Log(Winner.sprite);
 
         SceneManager.LoadScene("ResultScene");
     }
