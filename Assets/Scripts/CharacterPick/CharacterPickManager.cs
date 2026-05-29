@@ -25,6 +25,9 @@ public class CharacterPickManager : MonoBehaviour
     [SerializeField] List<PickData> pick_data = new();
     [SerializeField] StateIndicater[] state = new StateIndicater[2];
 
+    [Header("◇Ready")]
+    [SerializeField] GameObject[] ready = new GameObject[2];
+
     const float ICON_HORIZONTAL_SPACE = 1.5f;
     const float ICON_VERTICAL_SPACE = 1.4f;
     const int ICON_LINEFEED_COUNT = 3;
@@ -62,20 +65,23 @@ public class CharacterPickManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (cursor[0].interact && cursor[1].interact)
-        {
-            PlayerPick.pick = new int[2] {
-            cursor[0].pos[Y] * ICON_LINEFEED_COUNT + cursor[0].pos[X],
-            cursor[1].pos[Y] * ICON_LINEFEED_COUNT + cursor[1].pos[X]
-            };
-            SceneManager.LoadScene("BattleScene");
-        }
+        ;
     }
 
     public void Interact(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
         {
+            // すべてのプレイヤーがキャラクターを決定していたら、シーンを遷移
+            if (cursor[0].interact && cursor[1].interact)
+            {
+                PlayerPick.pick = new int[2] {
+                    cursor[0].pos[Y] * ICON_LINEFEED_COUNT + cursor[0].pos[X],
+                    cursor[1].pos[Y] * ICON_LINEFEED_COUNT + cursor[1].pos[X]
+                };
+                SceneManager.LoadScene("BattleScene");
+            }
+
             // 識別
             int n = -1;
             if (Gamepad.all[0] == ctx.control.device) n = 0;
@@ -84,6 +90,11 @@ public class CharacterPickManager : MonoBehaviour
             // 決定
             cursor[n].interact = true;
             button[n].SetActive(true);
+            if (cursor[0].interact && cursor[1].interact)
+            {
+                ready[0].SetActive(true);
+                ready[1].SetActive(true);
+            }
         }
     }
 
@@ -95,6 +106,13 @@ public class CharacterPickManager : MonoBehaviour
             int n = -1;
             if (Gamepad.all[0] == ctx.control.device) n = 0;
             else n = 1;
+
+            //
+            if (cursor[0].interact && cursor[1].interact)
+            {
+                ready[0].SetActive(false);
+                ready[1].SetActive(false);
+            }
 
             // 決定
             cursor[n].interact = false;

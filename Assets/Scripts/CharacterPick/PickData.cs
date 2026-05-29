@@ -4,5 +4,6 @@ using UnityEngine;
 public class PickData : ScriptableObject
 {
     public string char_name;
+    [TextArea(4,10)]
     public string lore;
 }
