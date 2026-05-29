@@ -20,6 +20,7 @@ public class Carrot : CharBase
     [SerializeField] GameObject dust;
     [SerializeField] GameObject collision;
     [SerializeField] AudioClip se1;
+    private List<CharBase> tackleHitList = new List<CharBase>();
 
     //ヘドバン関連
     [SerializeField] private float headBangAngle = 60f;
@@ -72,27 +73,24 @@ public class Carrot : CharBase
     }
     private IEnumerator Tackle()
     {
-
+        tackleHitList.Clear();
 
         sprite.sprite = tackle;
-       
+
         can_control = false;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
 
-        // 突進
         rb.linearVelocity = direction * tackleSpeed;
 
-        // 指定時間だけ突進
         yield return new WaitForSeconds(tackleTime);
 
-        // 停止
         rb.linearVelocity = Vector2.zero;
 
         can_control = true;
         sprite.sprite = carrot_default;
-        transform.rotation=Quaternion.Euler(0, 0, 0);
+        transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     public override void Skill1(InputAction.CallbackContext ctx)
@@ -171,19 +169,24 @@ public class Carrot : CharBase
     {
         if (col.TryGetComponent<CharBase>(out var cb))
         {
-            //タックル
-            if (cb.id != id&&!can_control)
+            // タックル
+            if (cb.id != id && !can_control)
             {
-                // 被弾処理
+                // 既に当たっていたら無効
+                if (tackleHitList.Contains(cb)) return;
+
+                tackleHitList.Add(cb);
+
                 cb.Damage(tackleDamage);
 
-                Vector2 knockbackDir = (cb.transform.position - transform.position).normalized;
+                Vector2 knockbackDir =
+                    (cb.transform.position - transform.position).normalized;
 
                 cb.KnockBack(10, knockbackDir);
             }
         }
     }
-   
+
 }
 
 
