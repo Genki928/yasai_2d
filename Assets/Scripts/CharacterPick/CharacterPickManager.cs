@@ -16,12 +16,12 @@ public class CharacterPickManager : MonoBehaviour
     [Header("◇カーソル")]
     [SerializeField] GameObject cursor_pf;
     [SerializeField] Sprite mix_cursor;
-    [SerializeField] GameObject[] button;
+    //[SerializeField] GameObject[] button;
     [SerializeField] Cursor[] cursor = new Cursor[2];
     GameObject[] cursor_obj = new GameObject[2];
 
     [Header("◇モデル")]
-    [SerializeField] GameObject[] model = new GameObject[2];
+    //[SerializeField] GameObject[] model = new GameObject[2];
     [SerializeField] List<PickData> pick_data = new();
     [SerializeField] StateIndicater[] state = new StateIndicater[2];
 
@@ -89,7 +89,7 @@ public class CharacterPickManager : MonoBehaviour
 
             // 決定
             cursor[n].interact = true;
-            button[n].SetActive(true);
+            state[n].button.SetActive(true);
             if (cursor[0].interact && cursor[1].interact)
             {
                 ready[0].SetActive(true);
@@ -116,7 +116,7 @@ public class CharacterPickManager : MonoBehaviour
 
             // 決定
             cursor[n].interact = false;
-            button[n].SetActive(false);
+            state[n].button.SetActive(false);
         }
     }
 
@@ -206,7 +206,7 @@ public class CharacterPickManager : MonoBehaviour
     {
         // 描画
         cursor_obj[n].transform.position = new(pos.x + ICON_HORIZONTAL_SPACE * cursor[n].pos[X], pos.y - ICON_VERTICAL_SPACE * cursor[n].pos[Y]);
-        model[n].GetComponent<SpriteRenderer>().sprite = icon_img[cursor[n].pos[Y] * ICON_LINEFEED_COUNT + cursor[n].pos[X]];
+        state[n].model.GetComponent<SpriteRenderer>().sprite = icon_img[cursor[n].pos[Y] * ICON_LINEFEED_COUNT + cursor[n].pos[X]];
         state[n].name.text = pick_data[cursor[n].pos[Y] * ICON_LINEFEED_COUNT + cursor[n].pos[X]].char_name;
         state[n].lore.text = pick_data[cursor[n].pos[Y] * ICON_LINEFEED_COUNT + cursor[n].pos[X]].lore;
     }
@@ -225,6 +225,8 @@ public class StateIndicater
 {
     public Text name;
     public Text lore;
+    public GameObject model;
+    public GameObject button;
 }
 
 public static class PlayerPick

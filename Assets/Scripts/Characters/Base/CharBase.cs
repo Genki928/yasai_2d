@@ -17,6 +17,7 @@ public class CharBase : MonoBehaviour
     public int skill_1_cooltime = 0;
     public int skill_2_cooltime = 0;
     protected bool can_control = true;
+    protected int regen_burst_timer = 0;
 
     [Header("žƒJ[ƒ\ƒ‹")]
     [SerializeField] protected GameObject cursor_pf;
@@ -48,6 +49,13 @@ public class CharBase : MonoBehaviour
         if (rigid > 0) --rigid;
         if (skill_1_cooltime > 0) cooltimer[0].RefreshCooltimer(--skill_1_cooltime, data.skill_1_cooltime);
         if (skill_2_cooltime > 0) cooltimer[1].RefreshCooltimer(--skill_2_cooltime, data.skill_2_cooltime);
+        if (regen_burst_timer < data.regen_burst_cooltime)
+        {
+            if (++regen_burst_timer >= data.regen_burst_cooltime)
+            {
+                ;
+            }
+        }
     }
 
     virtual protected void FixedUpdate()
