@@ -10,6 +10,13 @@ static class Winner
     static public string w_name = "";
     static public int w_id;
     static public Sprite sprite;
+
+    public static void Reset()
+    {
+        w_name = "";
+        w_id = 0;
+        sprite = null;
+    }
 }
 public class BattleManager : MonoBehaviour
 {
@@ -31,6 +38,8 @@ public class BattleManager : MonoBehaviour
 
     void Awake()
     {
+
+        Winner.Reset();
         Application.targetFrameRate = 30;
         CharBase.OnPlayerDies += Finish;
     }
@@ -112,6 +121,9 @@ public class BattleManager : MonoBehaviour
 
         Winner.w_id = id;
         Winner.w_name = datas[id].data.char_name;
+        Debug.Log($"id = {id}");
+        Debug.Log(player[id]);
+        Debug.Log(datas[id]);
         Winner.sprite = player[id].GetComponent<SpriteRenderer>().sprite;
         Debug.Log(Winner.sprite);
 
