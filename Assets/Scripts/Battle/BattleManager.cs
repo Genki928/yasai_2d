@@ -124,7 +124,7 @@ public class BattleManager : MonoBehaviour
         Debug.Log($"id = {id}");
         Debug.Log(player[id]);
         Debug.Log(datas[id]);
-        Winner.sprite = player[id].GetComponent<SpriteRenderer>().sprite;
+        Winner.sprite = datas[id].GetDefaultImage();
         Debug.Log(Winner.sprite);
 
         SceneManager.LoadScene("ResultScene");
