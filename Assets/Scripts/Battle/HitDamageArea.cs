@@ -28,7 +28,7 @@ public class HitDamageArea : MonoBehaviour
             // 自分以外ならダメージ
             if (cb.id != id)
             {
-                cb.Damage(damage);
+                cb.Damage(damage, id);
 
                 // 当たったら消す
                 Destroy(gameObject);

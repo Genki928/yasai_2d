@@ -177,7 +177,7 @@ public class Carrot : CharBase
 
                 tackleHitList.Add(cb);
 
-                cb.Damage(tackleDamage);
+                cb.Damage(tackleDamage,id);
 
                 Vector2 knockbackDir =
                     (cb.transform.position - transform.position).normalized;

@@ -20,7 +20,7 @@ public class DamageArea : MonoBehaviour
             if(cb.id != id)
             {
                 // ”í’eˆ—
-                cb.Damage(damage);
+                cb.Damage(damage,id);
             }
         }
         //Destroy(gameObject);

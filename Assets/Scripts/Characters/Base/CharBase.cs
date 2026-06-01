@@ -65,7 +65,7 @@ public class CharBase : MonoBehaviour
 
     /// <summary> プレイヤーにダメージを与える </summary>
     /// <param name="value"> 与えるダメージ量 </param>
-    public void Damage(int value)
+    public void Damage(int value, int id)
     {
         // バースト値が最大なら中断
         if (burst >= data.max_burst) return;
