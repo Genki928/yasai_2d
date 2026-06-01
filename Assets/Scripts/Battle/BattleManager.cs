@@ -99,6 +99,11 @@ public class BattleManager : MonoBehaviour
 
     }
 
+    void OnDestroy()
+    {
+        CharBase.OnPlayerDies -= Finish;
+    }
+
     /// <summary> バトルを終了させる </summary>
     /// <param name="id"> プレイヤーの識別id </param>
     void Finish(int id)
