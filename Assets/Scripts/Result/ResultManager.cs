@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -11,12 +13,14 @@ public class ResultManager : MonoBehaviour
     [NonSerialized] public string winner = Winner.w_name;
     [NonSerialized] public int id = Winner.w_id;
     [SerializeField] GameObject winner_name;
+    [NonSerialized] public bool canInput=false;
+
 
     // Start is called once before the first execution ofUpdate after the MonoBehaviour is created
-    void Start() 
+    public IEnumerator Start() 
     {
-        //winner = "ニンジン";
-      
+        yield return new WaitForSeconds(1f);
+        canInput = true;
     } 
     // Update is called once per frame
     void Update() 
@@ -25,16 +29,19 @@ public class ResultManager : MonoBehaviour
     } 
     public void SceneChange_CharacterPickScene(InputAction.CallbackContext ctx) 
     {
-        if (ctx.performed && TextArrow.instance.arrow_pos == 0)
+        if (canInput)
         {
-            Debug.Log(Winner.sprite);
-            SceneManager.LoadScene("CharacterPickScene");
-            Winner.sprite = null;
-        }
-        else if (ctx.performed && TextArrow.instance.arrow_pos == 1)
-        {
-            Debug.Log("titleに行く、よ");
-            SceneManager.LoadScene("TitleScene");
+            if (ctx.performed && TextArrow.instance.arrow_pos == 0)
+            {
+                Debug.Log(Winner.sprite);
+                SceneManager.LoadScene("CharacterPickScene");
+                Winner.sprite = null;
+            }
+            else if (ctx.performed && TextArrow.instance.arrow_pos == 1)
+            {
+                Debug.Log("titleに行く、よ");
+                SceneManager.LoadScene("TitleScene");
+            }
         }
     }
     
@@ -58,3 +65,4 @@ public class ResultManager : MonoBehaviour
     }
 
 }
+
