@@ -85,4 +85,9 @@ public class RedPepper : CharBase
         can_control = true;
         sr.sprite = img[0];
     }
+
+    public override Sprite GetDefaultImage()
+    {
+        return img[0];
+    }
 }

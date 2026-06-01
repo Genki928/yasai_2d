@@ -187,6 +187,10 @@ public class Carrot : CharBase
         }
     }
 
+    public override Sprite GetDefaultImage()
+    {
+        return carrot_default;
+    }
 }
 
 

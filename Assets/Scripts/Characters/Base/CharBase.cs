@@ -17,7 +17,7 @@ public class CharBase : MonoBehaviour
     public int skill_1_cooltime = 0;
     public int skill_2_cooltime = 0;
     protected bool can_control = true;
-    protected int regen_burst_timer = 0;
+    public int regen_burst_timer = 0;
 
     [Header("◇カーソル")]
     [SerializeField] protected GameObject cursor_pf;
@@ -49,12 +49,13 @@ public class CharBase : MonoBehaviour
         if (rigid > 0) --rigid;
         if (skill_1_cooltime > 0) cooltimer[0].RefreshCooltimer(--skill_1_cooltime, data.skill_1_cooltime);
         if (skill_2_cooltime > 0) cooltimer[1].RefreshCooltimer(--skill_2_cooltime, data.skill_2_cooltime);
-        if (regen_burst_timer < data.regen_burst_cooltime)
+
+        if (regen_burst_timer < data.regen_burst_cooltime && burst < data.max_burst)
         {
-            if (++regen_burst_timer >= data.regen_burst_cooltime)
+            if (++regen_burst_timer == data.regen_burst_cooltime)
             {
                 regen_burst_timer = data.restart_regen_burst_value;
-                --burst;
+                burst -= 5;
                 burst_bar.Draw(burst, data.max_burst);
             }
         }
@@ -79,6 +80,7 @@ public class CharBase : MonoBehaviour
     {
         // バースト値が最大なら中断
         if (burst >= data.max_burst) return;
+        regen_burst_timer = 0;
 
         // 受けるダメージが過剰ならセーブする
         burst = burst + value > data.max_burst ?
@@ -130,5 +132,10 @@ public class CharBase : MonoBehaviour
         Debug.Log("knockback");
         rb.linearVelocity = Vector2.zero;
         rb.AddForce(hitDirection.normalized * knockbackPower, ForceMode2D.Impulse);
+    }
+
+    virtual public Sprite GetDefaultImage()
+    {
+        return null;
     }
 }
