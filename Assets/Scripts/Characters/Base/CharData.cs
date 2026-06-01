@@ -7,6 +7,10 @@ public class CharData : ScriptableObject
     public int speed = 0;
     public int max_burst = 100;
 
+    [Header("©“®‰ñ•œ")]
+    public int regen_burst_cooltime = 120;
+    public int restart_regen_burst_value = 60;
+
     [Header("Skill 1")]
     public int skill_1_rigid = 0;
     public int skill_1_cooltime = 0;
