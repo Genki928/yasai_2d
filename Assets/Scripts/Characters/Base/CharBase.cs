@@ -53,7 +53,9 @@ public class CharBase : MonoBehaviour
         {
             if (++regen_burst_timer >= data.regen_burst_cooltime)
             {
-                ;
+                regen_burst_timer = data.restart_regen_burst_value;
+                --burst;
+                burst_bar.Draw(burst, data.max_burst);
             }
         }
     }
