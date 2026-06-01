@@ -34,7 +34,7 @@ public class CharacterPickManager : MonoBehaviour
     const int X = 0;
     const int Y = 1;
 
-    void Start()
+    void  Start()
     {
         // ƒAƒCƒRƒ“¶¬
         for (int i = 0; i < icon_img.Count; i++)
