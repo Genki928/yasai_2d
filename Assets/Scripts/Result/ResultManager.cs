@@ -34,7 +34,7 @@ public class ResultManager : MonoBehaviour
             if (ctx.performed && TextArrow.instance.arrow_pos == 0)
             {
                 Debug.Log(Winner.sprite);
-                SceneManager.LoadScene("CharacterPickScene");
+                SceneManager.LoadScene("CharacterPickScene-battle");
                 Winner.sprite = null;
             }
             else if (ctx.performed && TextArrow.instance.arrow_pos == 1)
