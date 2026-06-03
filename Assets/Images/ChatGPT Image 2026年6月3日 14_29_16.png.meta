@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2fc0658362f84d64597f5cdf47963d7c
+guid: 1cf2591f9d2a85f4dbba0028e2dc8425
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1543399413334565356
-    second: pngtree-cubic-rocks-stock-png-image_13598864_0
+      213: 3419015015691137521
+    second: "ChatGPT Image 2026\u5E746\u67083\u65E5 14_29_16_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pngtree-cubic-rocks-stock-png-image_13598864_0
+      name: "ChatGPT Image 2026\u5E746\u67083\u65E5 14_29_16_0"
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 640
-        height: 640
+        width: 1774
+        height: 887
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ce16a52d6914b6510800000000000000
-      internalID: 1543399413334565356
+      spriteID: 1f13ff3ca08c27f20800000000000000
+      internalID: 3419015015691137521
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      pngtree-cubic-rocks-stock-png-image_13598864_0: 1543399413334565356
+      "ChatGPT Image 2026\u5E746\u67083\u65E5 14_29_16_0": 3419015015691137521
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
