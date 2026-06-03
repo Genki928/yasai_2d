@@ -1,11 +1,10 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
 
-public class CharacterPickManager : MonoBehaviour
+public class SoloPickManager : MonoBehaviour
 {
     [Header("◇アイコン")]
     [SerializeField] GameObject icon_pf;
@@ -15,15 +14,11 @@ public class CharacterPickManager : MonoBehaviour
 
     [Header("◇カーソル")]
     [SerializeField] GameObject cursor_pf;
-    [SerializeField] Sprite mix_cursor;
-    //[SerializeField] GameObject[] button;
-    [SerializeField] Cursor[] cursor = new Cursor[2];
-    GameObject[] cursor_obj = new GameObject[2];
+    [SerializeField] Cursor cursor;
+    GameObject cursor_obj;
 
-    [Header("◇モデル")]
-    //[SerializeField] GameObject[] model = new GameObject[2];
     [SerializeField] List<PickData> pick_data = new();
-    [SerializeField] StateIndicater[] state = new StateIndicater[2];
+    [SerializeField] StateIndicater state;
 
     [Header("◇Ready")]
     [SerializeField] GameObject[] ready = new GameObject[2];
@@ -34,7 +29,7 @@ public class CharacterPickManager : MonoBehaviour
     const int X = 0;
     const int Y = 1;
 
-    void  Start()
+    void Start()
     {
         // アイコン生成
         for (int i = 0; i < icon_img.Count; i++)
@@ -53,19 +48,15 @@ public class CharacterPickManager : MonoBehaviour
             // アイコンの変更
             icon_obj[i].GetComponent<PickIcon>().SetIcon(icon_img[i]);
         }
-        for (int i = 0; i < 2; i++)
-        {
-            cursor_obj[i] = Instantiate(cursor_pf);
-            cursor_obj[i].GetComponent<SpriteRenderer>().sprite = cursor[i].img;
-            Draw(i);
-        }
-        //cursor[0].pos = icon_obj[0].transform.position;
+        cursor_obj = Instantiate(cursor_pf);
+        cursor_obj.GetComponent<SpriteRenderer>().sprite = cursor.img;
+        Draw();
     }
 
     // Update is called once per frame
     void Update()
     {
-        ;
+
     }
 
     public void Interact(InputAction.CallbackContext ctx)
@@ -73,24 +64,19 @@ public class CharacterPickManager : MonoBehaviour
         if (ctx.performed)
         {
             // すべてのプレイヤーがキャラクターを決定していたら、シーンを遷移
-            if (cursor[0].interact && cursor[1].interact)
+            if (cursor.interact)
             {
-                PlayerPick.pick = new int[2] {
-                    cursor[0].pos[Y] * ICON_LINEFEED_COUNT + cursor[0].pos[X],
-                    cursor[1].pos[Y] * ICON_LINEFEED_COUNT + cursor[1].pos[X]
-                };
+                //PlayerPick.pick = new int[2] {
+                //    cursor[0].pos[Y] * ICON_LINEFEED_COUNT + cursor[0].pos[X],
+                //    cursor[1].pos[Y] * ICON_LINEFEED_COUNT + cursor[1].pos[X]
+                //};
                 SceneManager.LoadScene("BattleScene");
             }
 
-            // 識別
-            int n = -1;
-            if (Gamepad.all[0] == ctx.control.device) n = 0;
-            else n = 1;
-
             // 決定
-            cursor[n].interact = true;
-            state[n].button.SetActive(true);
-            if (cursor[0].interact && cursor[1].interact)
+            cursor.interact = true;
+            state.button.SetActive(true);
+            if (cursor.interact && cursor.interact)
             {
                 ready[0].SetActive(true);
                 ready[1].SetActive(true);
@@ -102,21 +88,15 @@ public class CharacterPickManager : MonoBehaviour
     {
         if (ctx.performed)
         {
-            // 識別
-            int n = -1;
-            if (Gamepad.all[0] == ctx.control.device) n = 0;
-            else n = 1;
-
-            //
-            if (cursor[0].interact && cursor[1].interact)
+            if (cursor.interact && cursor.interact)
             {
                 ready[0].SetActive(false);
                 ready[1].SetActive(false);
             }
 
             // 決定
-            cursor[n].interact = false;
-            state[n].button.SetActive(false);
+            cursor.interact = false;
+            state.button.SetActive(false);
         }
     }
 
@@ -156,24 +136,19 @@ public class CharacterPickManager : MonoBehaviour
     {
         if (ctx.performed)
         {
-            // 識別
-            int n = -1;
-            if (Gamepad.all[0] == ctx.control.device) n = 0;
-            else n = 1;
-
             // 決定済みなら移動不可
-            if (cursor[n].interact) return;
+            if (cursor.interact) return;
 
             // 移動
-            if (--cursor[n].pos[X] < 0) cursor[n].pos[X] = ICON_LINEFEED_COUNT - 1;
+            if (--cursor.pos[X] < 0) cursor.pos[X] = ICON_LINEFEED_COUNT - 1;
 
             // もしカーソルのX座標がアイコンのある位置から外れていたら、座標を右端に整える
-            if (cursor[n].pos[Y] == icon_obj.Count / ICON_LINEFEED_COUNT)
-                if (cursor[n].pos[X] % ICON_LINEFEED_COUNT > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT)
-                    cursor[n].pos[X] = (icon_obj.Count - 1) % ICON_LINEFEED_COUNT;
+            if (cursor.pos[Y] == icon_obj.Count / ICON_LINEFEED_COUNT)
+                if (cursor.pos[X] % ICON_LINEFEED_COUNT > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT)
+                    cursor.pos[X] = (icon_obj.Count - 1) % ICON_LINEFEED_COUNT;
 
             // 描画
-            Draw(n);
+            Draw();
         }
     }
 
@@ -181,55 +156,28 @@ public class CharacterPickManager : MonoBehaviour
     {
         if (ctx.performed)
         {
-            // 識別
-            int n = -1;
-            if (Gamepad.all[0] == ctx.control.device) n = 0;
-            else n = 1;
-
             // 決定済みなら移動不可
-            if (cursor[n].interact) return;
+            if (cursor.interact) return;
 
             // 移動
-            if (++cursor[n].pos[X] > ICON_LINEFEED_COUNT - 1) cursor[n].pos[X] = 0;
+            if (++cursor.pos[X] > ICON_LINEFEED_COUNT - 1) cursor.pos[X] = 0;
 
             // もしカーソルのX座標がアイコンのある位置から外れていたら、座標を左端に整える
-            if (cursor[n].pos[Y] == icon_obj.Count / ICON_LINEFEED_COUNT)
-                if (cursor[n].pos[X] % ICON_LINEFEED_COUNT > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT)
-                    cursor[n].pos[X] = 0;
+            if (cursor.pos[Y] == icon_obj.Count / ICON_LINEFEED_COUNT)
+                if (cursor.pos[X] % ICON_LINEFEED_COUNT > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT)
+                    cursor.pos[X] = 0;
 
             // 描画
-            Draw(n);
+            Draw();
         }
     }
 
-    void Draw(int n)
+    void Draw()
     {
         // 描画
-        cursor_obj[n].transform.position = new(pos.x + ICON_HORIZONTAL_SPACE * cursor[n].pos[X], pos.y - ICON_VERTICAL_SPACE * cursor[n].pos[Y]);
-        state[n].model.GetComponent<SpriteRenderer>().sprite = icon_img[cursor[n].pos[Y] * ICON_LINEFEED_COUNT + cursor[n].pos[X]];
-        state[n].name.text = pick_data[cursor[n].pos[Y] * ICON_LINEFEED_COUNT + cursor[n].pos[X]].char_name;
-        state[n].lore.text = pick_data[cursor[n].pos[Y] * ICON_LINEFEED_COUNT + cursor[n].pos[X]].lore;
+        cursor_obj.transform.position = new(pos.x + ICON_HORIZONTAL_SPACE * cursor.pos[X], pos.y - ICON_VERTICAL_SPACE * cursor.pos[Y]);
+        state.model.GetComponent<SpriteRenderer>().sprite = icon_img[cursor.pos[Y] * ICON_LINEFEED_COUNT + cursor.pos[X]];
+        state.name.text = pick_data[cursor.pos[Y] * ICON_LINEFEED_COUNT + cursor.pos[X]].char_name;
+        state.lore.text = pick_data[cursor.pos[Y] * ICON_LINEFEED_COUNT + cursor.pos[X]].lore;
     }
-}
-
-[Serializable]
-public class Cursor
-{
-    public Sprite img;
-    public int[] pos = new int[2] { 0, 0 };
-    public bool interact = false;
-}
-
-[Serializable]
-public class StateIndicater
-{
-    public Text name;
-    public Text lore;
-    public GameObject model;
-    public GameObject button;
-}
-
-public static class PlayerPick
-{
-    public static int[] pick = new int[2] { 0, 1 };
 }
