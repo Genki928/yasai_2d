@@ -23,7 +23,7 @@ public class HitDamageArea : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
         // CharBaseを持っているか
-        if (col.TryGetComponent<CharBase>(out var cb))
+        if (col.TryGetComponent<IBurst>(out var cb))
         {
             // 自分以外ならダメージ
             if (cb.id != id)

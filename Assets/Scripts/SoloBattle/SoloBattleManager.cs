@@ -50,7 +50,7 @@ public class SoloBattleManager : MonoBehaviour
         p_obj[0] = Instantiate(player_obj[0]);
 
         // ƒvƒŒƒCƒ„[¶¬
-        player[0] = Instantiate(characters[1].chars, spawn_point[0].point.transform.position, Quaternion.identity);
+        player[0] = Instantiate(characters[0].chars, spawn_point[0].point.transform.position, Quaternion.identity);
 
         // ¯•ÊID‚ğİ’è
         datas[0] = player[0].GetComponent<CharBase>();

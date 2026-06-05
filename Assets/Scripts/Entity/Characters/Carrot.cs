@@ -6,9 +6,10 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 
-public class Carrot : CharBase
+public class Carrot : CharBase, IBurst
 {
     [SerializeField] SpriteRenderer sprite;
+    public int id { get; set; } = 0;
 
     public Sprite carrot_default;
     public Sprite tackle;
@@ -167,22 +168,22 @@ public class Carrot : CharBase
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.TryGetComponent<CharBase>(out var cb))
+        if (col.TryGetComponent<IBurst>(out var cb))
         {
             // ƒ^ƒbƒNƒ‹
             if (cb.id != id && !can_control)
             {
-                // Šù‚É“–‚½‚Á‚Ä‚¢‚½‚ç–³Œø
-                if (tackleHitList.Contains(cb)) return;
+                //// Šù‚É“–‚½‚Á‚Ä‚¢‚½‚ç–³Œø
+                //if (tackleHitList.Contains(cb)) return;
 
-                tackleHitList.Add(cb);
+                //tackleHitList.Add(cb);
 
                 cb.Damage(tackleDamage,id);
 
-                Vector2 knockbackDir =
-                    (cb.transform.position - transform.position).normalized;
+                //Vector2 knockbackDir =
+                //    (cb.transform.position - transform.position).normalized;
 
-                cb.KnockBack(10, knockbackDir);
+                //cb.KnockBack(10, knockbackDir);
             }
         }
     }
