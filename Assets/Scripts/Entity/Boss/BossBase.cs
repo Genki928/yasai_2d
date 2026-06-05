@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class BossBase : MonoBehaviour, burst
+public class BossBase : MonoBehaviour, IBurst
 {
 
     [Header("◇キャラクターデータ")]
     public int burst = 0;
-    public int id { get; } = 100;
+    public int id { get; set; } = 100;
 
     void Start()
     {
@@ -24,8 +24,8 @@ public class BossBase : MonoBehaviour, burst
     }
 }
 
-public interface burst
+public interface IBurst
 {
-    public int id { get; }
+    public int id { get; set; }
     public void Damage(int value, int id);
 }

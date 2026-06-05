@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEditor.PlayerSettings;
 
-public class RedPepper : CharBase
+public class RedPepper : CharBase, IBurst
 {
+    public int id { get; set; } = 0;
     [SerializeField] AudioClip se1;
     [SerializeField] GameObject breath;
     SpriteRenderer sr;

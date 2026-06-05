@@ -43,51 +43,40 @@ public class SoloBattleManager : MonoBehaviour
         Application.targetFrameRate = 30;
         CharBase.OnPlayerDies += Finish;
     }
+
     void Start()
     {
-            // ポインター
-            p_obj[0]=Instantiate(player_obj[0]);
+        // ポインター
+        p_obj[0] = Instantiate(player_obj[0]);
 
-            // プレイヤー生成
-            pick_nums[0] = PlayerPick.pick[0];
-            PlayerInput pi;
-                pi = PlayerInput.Instantiate(
-                     characters[pick_nums[0]].chars,
-                    playerIndex: 0,
-                    controlScheme: "Controller2",
-                    pairWithDevice: Gamepad.all[0]
-                );
-            
+        // プレイヤー生成
+        player[0] = Instantiate(characters[1].chars, spawn_point[0].point.transform.position, Quaternion.identity);
 
-            pi.transform.position = spawn_point[0].point.transform.position;
-            pi.transform.rotation = Quaternion.identity;
+        // 識別IDを設定
+        datas[0] = player[0].GetComponent<CharBase>();
+        datas[0].id = 0;
 
-            // 識別IDを設定
-            player[0] = pi.gameObject;
-            datas[0] = player[0].GetComponent<CharBase>();
-            datas[0].id = 0;
+        datas[0].direction = SetDirect(spawn_point[0].direct);
 
-            datas[0].direction = SetDirect(spawn_point[0].direct);
+        // バーストバーとの紐づけ
+        gui[0].bar.Init(player[0]);
 
-            // バーストバーとの紐づけ
-            gui[0].bar.Init(player[0]);
-
-            // 各種UIとの紐づけ
-            if (player[0].TryGetComponent<CharBase>(out var p))
-            {
-                p.burst_bar = gui[0].bar;   // バースト
-                gui[0].name.text = p.data.char_name;    // キャラ名
-                p.cooltimer[0] = gui[0].skill1_cooltimer;   // スキル1のクールタイムを表示
-                p.cooltimer[1] = gui[0].skill2_cooltimer;   // スキル2のクールタイムを表示
-                gui[0].icon.sprite = characters[pick_nums[0]].icon; // アイコン
-            }
+        // 各種UIとの紐づけ
+        if (player[0].TryGetComponent<CharBase>(out var p))
+        {
+            p.burst_bar = gui[0].bar;   // バースト
+            gui[0].name.text = p.data.char_name;    // キャラ名
+            p.cooltimer[0] = gui[0].skill1_cooltimer;   // スキル1のクールタイムを表示
+            p.cooltimer[1] = gui[0].skill2_cooltimer;   // スキル2のクールタイムを表示
+            gui[0].icon.sprite = characters[pick_nums[0]].icon; // アイコン
         }
+    }
     
 
     void Update()
     {
         // ポインター
-        p_obj[0].transform.position = new(player[0].transform.position.x, player[0].transform.position.y+2.0f);
+        p_obj[0].transform.position = new(player[0].transform.position.x, player[0].transform.position.y + 2.0f);
     }
 
     void OnDestroy()
