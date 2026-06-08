@@ -114,7 +114,23 @@ MonoBehaviour:
   rigid: 0
   skill_1_cooltime: 0
   skill_2_cooltime: 0
-  cursor_pf: {fileID: 0}
+  regen_burst_timer: 0
+  cursor_pf: {fileID: 5826391187326269229, guid: 50c4b14c6dc55f04f924db6a0c75f818, type: 3}
+  audioSource: {fileID: 0}
+  sprite: {fileID: 0}
+  leek_default: {fileID: 7332616297026234698, guid: d10a89a93760c8748a7eea9368b287d5, type: 3}
+  tackle: {fileID: 7332616297026234698, guid: d10a89a93760c8748a7eea9368b287d5, type: 3}
+  tackleSpeed: 20
+  tackleTime: 0.5
+  tackleDamage: 20
+  dust: {fileID: 1560168367213963595, guid: 31c763f52fdaf2d45885cba010fc705b, type: 3}
+  collision: {fileID: 9138792514576026239, guid: 5a4d1edade8353449bbdfabf13041c1a, type: 3}
+  se1: {fileID: 8300000, guid: 448a5754cbe316f4097b31c33ad2b5ed, type: 3}
+  headBangAngle: 60
+  rotateSpeed: 350
+  headBangDamage: 15
+  headBangCol: {fileID: -523274106162449980}
+  se2: {fileID: 8300000, guid: 448a5754cbe316f4097b31c33ad2b5ed, type: 3}
 --- !u!114 &2387769583341587097
 MonoBehaviour:
   m_ObjectHideFlags: 0
