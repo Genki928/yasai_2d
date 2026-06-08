@@ -7,20 +7,37 @@ public class BossBase : MonoBehaviour, IBurst
     public int id { get; set; } = 100;
     public int burst { get; set; } = 0;
     public int max_burst { get; set; } = 100;
+    Rigidbody2D rb;
+    public Collider2D hit_box;
 
     void Start()
     {
-        ;
+        rb = GetComponent<Rigidbody2D>();
+        Freeze(true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        ;
+        rb.linearVelocity = Vector2.zero;
     }
 
     public void Damage(int value, int id)
     {
         Debug.Log("mi");
+    }
+
+    public void Freeze(bool freeze)
+    {
+        if(freeze)
+        {
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            hit_box.enabled = true;
+        }
+        else
+        {
+            rb.constraints = RigidbodyConstraints2D.None;
+            hit_box.enabled = false;
+        }
     }
 }
