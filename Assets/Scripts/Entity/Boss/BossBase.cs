@@ -4,8 +4,9 @@ public class BossBase : MonoBehaviour, IBurst
 {
 
     [Header("◇キャラクターデータ")]
-    public int burst = 0;
     public int id { get; set; } = 100;
+    public int burst { get; set; } = 0;
+    public int max_burst { get; set; } = 100;
 
     void Start()
     {

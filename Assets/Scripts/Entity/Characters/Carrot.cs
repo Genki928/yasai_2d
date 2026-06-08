@@ -6,10 +6,9 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 
-public class Carrot : CharBase, IBurst
+public class Carrot : CharBase
 {
     [SerializeField] SpriteRenderer sprite;
-    public int id { get; set; } = 0;
 
     public Sprite carrot_default;
     public Sprite tackle;
@@ -191,6 +190,11 @@ public class Carrot : CharBase, IBurst
     public override Sprite GetDefaultImage()
     {
         return carrot_default;
+    }
+
+    public override void Damage(int value, int id)
+    {
+        base.Damage(value, id);
     }
 }
 

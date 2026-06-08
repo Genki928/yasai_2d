@@ -4,15 +4,16 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 
-public class CharBase : MonoBehaviour
+public class CharBase : MonoBehaviour, IBurst
 {
     /// <summary> プレイヤーが死亡した際に起動するイベント </summary>
     public static event Action<int> OnPlayerDies;
 
     [Header("◇キャラクターデータ")]
     public CharData data;
-    public int burst = 0;
-    public int id;
+    public int burst { get; set; } = 0;
+    public int id { get; set; } = 0;
+    public int max_burst { get; set; } = 100;
     public int rigid;
     public int skill_1_cooltime = 0;
     public int skill_2_cooltime = 0;
@@ -42,6 +43,7 @@ public class CharBase : MonoBehaviour
         cursor_obj = Instantiate(cursor_pf, transform.position, Quaternion.identity).GetComponent<Arrow>();
         cursor_obj.Refresh(direction);
         cursor_obj.Set(this);
+        max_burst = data.max_burst;
     }
 
     virtual protected void Update()
@@ -50,13 +52,13 @@ public class CharBase : MonoBehaviour
         if (skill_1_cooltime > 0) cooltimer[0].RefreshCooltimer(--skill_1_cooltime, data.skill_1_cooltime);
         if (skill_2_cooltime > 0) cooltimer[1].RefreshCooltimer(--skill_2_cooltime, data.skill_2_cooltime);
 
-        if (regen_burst_timer < data.regen_burst_cooltime && burst < data.max_burst)
+        if (regen_burst_timer < data.regen_burst_cooltime && burst < max_burst)
         {
             if (++regen_burst_timer == data.regen_burst_cooltime)
             {
                 regen_burst_timer = data.restart_regen_burst_value;
                 burst -= 5;
-                burst_bar.Draw(burst, data.max_burst);
+                burst_bar.Draw(burst, max_burst);
             }
         }
     }
@@ -76,21 +78,21 @@ public class CharBase : MonoBehaviour
 
     /// <summary> プレイヤーにダメージを与える </summary>
     /// <param name="value"> 与えるダメージ量 </param>
-    public void Damage(int value, int id)
+    virtual public void Damage(int value, int id)
     {
         // バースト値が最大なら中断
-        if (burst >= data.max_burst) return;
+        if (burst >= max_burst) return;
         regen_burst_timer = 0;
 
         // 受けるダメージが過剰ならセーブする
-        burst = burst + value > data.max_burst ?
-                     data.max_burst : burst + value;
+        burst = burst + value > max_burst ?
+                     max_burst : burst + value;
 
         // 描画
-        burst_bar.Draw(burst, data.max_burst);
+        burst_bar.Draw(burst, max_burst);
 
         // バースト値が最大なら、死亡
-        if (burst == data.max_burst)
+        if (burst == max_burst)
         {
             OnPlayerDies?.Invoke(id);
         }
