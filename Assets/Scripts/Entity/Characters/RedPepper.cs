@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEditor.PlayerSettings;
 
-public class RedPepper : CharBase, IBurst
+public class RedPepper : CharBase
 {
-    public int id { get; set; } = 0;
     [SerializeField] AudioClip se1;
     [SerializeField] GameObject breath;
     SpriteRenderer sr;
@@ -90,5 +89,10 @@ public class RedPepper : CharBase, IBurst
     public override Sprite GetDefaultImage()
     {
         return img[0];
+    }
+
+    public override void Damage(int value, int id)
+    {
+        base.Damage(value, id);
     }
 }

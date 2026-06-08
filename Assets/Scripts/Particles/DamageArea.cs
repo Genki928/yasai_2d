@@ -11,17 +11,17 @@ public class DamageArea : MonoBehaviour
         transform.position += (Vector3)vec;
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerStay2D(Collider2D col)
     {
-        Debug.Log(col.name);
         // 接触したオブジェクトが、CharBaseを持っている（継承している）なら、
         if (col.TryGetComponent<IBurst>(out var cb))
         {
             // オブジェクトが持つ識別idが、攻撃主（自分が持つid）と異なれば、
-            if(cb.id != id)
+            if (cb.id != id)
             {
                 // 被弾処理
                 cb.Damage(damage,id);
+                if (cb.burst >= cb.max_burst) Destroy(this);
             }
         }
     }
