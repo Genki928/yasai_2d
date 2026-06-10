@@ -6,12 +6,12 @@ public class HitDamageArea : MonoBehaviour
     int damage = 0;
     Vector2 vec;
 
-    // 生存時間
+    private bool hit = false;
+
     [SerializeField] float lifeTime = 0.1f;
 
     void Start()
     {
-        // 一定時間後に自動削除
         Destroy(gameObject, lifeTime);
     }
 
@@ -22,21 +22,21 @@ public class HitDamageArea : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        // CharBaseを持っているか
+        if (hit) return;
+
         if (col.TryGetComponent<IBurst>(out var cb))
         {
-            // 自分以外ならダメージ
             if (cb.id != id)
             {
+                hit = true;
+
                 cb.Damage(damage, id);
 
-                // 当たったら消す
                 Destroy(gameObject);
             }
         }
     }
 
-    // 初期化
     public void Init(int id, int damage, Vector2 vec)
     {
         this.id = id;

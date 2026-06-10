@@ -16,6 +16,8 @@ public class PlayerCharacter : MonoBehaviour
     void Update()
     {
         spriteRenderer.sprite = Winner.sprite;
+
+        Debug.Log("ƒLƒƒƒ‰"+sprites);
         //spriteRenderer.sprite = sprites[1];
 
     }

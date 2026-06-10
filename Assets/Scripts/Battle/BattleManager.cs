@@ -73,8 +73,6 @@ public class BattleManager : MonoBehaviour
                     pairWithDevice: Gamepad.all[1]
                 );
             }
-
-            // š‚±‚±‚ª³‰ğ
             pi.transform.position = spawn_point[i].point.transform.position;
             pi.transform.rotation = Quaternion.identity;
 

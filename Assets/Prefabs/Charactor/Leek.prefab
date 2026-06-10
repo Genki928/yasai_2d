@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 2387769583341587097}
   - component: {fileID: 8785239974707632202}
   - component: {fileID: -523274106162449980}
-  - component: {fileID: 5249704002262717674}
   m_Layer: 3
   m_Name: Leek
   m_TagString: Untagged
@@ -32,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.07458, y: -0.07458, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -108,29 +107,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672a0d9cd451948ae1e9cbd2915fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Leek
-  data: {fileID: 0}
-  burst: 0
-  id: 0
+  data: {fileID: 11400000, guid: 9fa27673ee8206b4eb693d4808c6099d, type: 2}
   rigid: 0
   skill_1_cooltime: 0
   skill_2_cooltime: 0
   regen_burst_timer: 0
   cursor_pf: {fileID: 5826391187326269229, guid: 50c4b14c6dc55f04f924db6a0c75f818, type: 3}
   audioSource: {fileID: 0}
+  collision: {fileID: 9138792514576026239, guid: 5a4d1edade8353449bbdfabf13041c1a, type: 3}
+  skill1Damage: 20
+  counterTime: 1
+  counterDamage: 30
   sprite: {fileID: 0}
   leek_default: {fileID: 7332616297026234698, guid: d10a89a93760c8748a7eea9368b287d5, type: 3}
-  tackle: {fileID: 7332616297026234698, guid: d10a89a93760c8748a7eea9368b287d5, type: 3}
-  tackleSpeed: 20
-  tackleTime: 0.5
-  tackleDamage: 20
-  dust: {fileID: 1560168367213963595, guid: 31c763f52fdaf2d45885cba010fc705b, type: 3}
-  collision: {fileID: 9138792514576026239, guid: 5a4d1edade8353449bbdfabf13041c1a, type: 3}
-  se1: {fileID: 8300000, guid: 448a5754cbe316f4097b31c33ad2b5ed, type: 3}
-  headBangAngle: 60
-  rotateSpeed: 350
-  headBangDamage: 15
-  headBangCol: {fileID: -523274106162449980}
-  se2: {fileID: 8300000, guid: 448a5754cbe316f4097b31c33ad2b5ed, type: 3}
 --- !u!114 &2387769583341587097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,8 +147,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Carrot, Assembly-CSharp
+      - m_Target: {fileID: -7318983176012519884}
+        m_TargetAssemblyTypeName: Leek, Assembly-CSharp
         m_MethodName: Move
         m_Mode: 0
         m_Arguments:
@@ -174,8 +163,8 @@ MonoBehaviour:
     m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Carrot, Assembly-CSharp
+      - m_Target: {fileID: -7318983176012519884}
+        m_TargetAssemblyTypeName: Leek, Assembly-CSharp
         m_MethodName: Skill1
         m_Mode: 0
         m_Arguments:
@@ -190,8 +179,8 @@ MonoBehaviour:
     m_ActionName: Player/interact
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Carrot, Assembly-CSharp
+      - m_Target: {fileID: -7318983176012519884}
+        m_TargetAssemblyTypeName: Leek, Assembly-CSharp
         m_MethodName: Skill2
         m_Mode: 0
         m_Arguments:
@@ -289,39 +278,3 @@ CapsuleCollider2D:
   m_Offset: {x: -0.015, y: 0.08}
   m_Size: {x: 0.03, y: 0.18}
   m_Direction: 0
---- !u!58 &5249704002262717674
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3071852468601324621}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0.05, y: 0.08}
-  m_Radius: 0.07

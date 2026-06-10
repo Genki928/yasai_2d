@@ -1,47 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 
-
-public class Leek : CharBase, IBurst
+public class Leek : CharBase
 {
-    //斬撃用
-    [SerializeField] GameObject collision;
-    [SerializeField] int skill1Damage = 20;
+    // 斬撃用
+    [SerializeField] private GameObject collision;
+    [SerializeField] private int skill1Damage = 20;
 
-    //カウンター用
-    [SerializeField] float counterTime = 1.0f;
-    [SerializeField] int counterDamage = 30;
+    // カウンター用
+    [SerializeField] private float counterTime = 1.0f;
+    [SerializeField] private int counterDamage = 30;
 
     private bool isCounter = false;
 
+    [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private Sprite leek_default;
 
-
-    [SerializeField] SpriteRenderer sprite;
-    public int id { get; set; } = 0;
-
-
-    private Vector2 defaultSize;
-    private bool isHeadBanging = false;
-
-    override protected void Start()
+    protected override void Start()
     {
         base.Start();
         sprite = GetComponent<SpriteRenderer>();
     }
 
-    override protected void Update()
+    protected override void Update()
     {
+        base.Update();
     }
 
     protected override void FixedUpdate()
     {
+        base.FixedUpdate();
     }
 
+    // 通常攻撃
     public override void Skill1(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed) return;
@@ -59,15 +52,53 @@ public class Leek : CharBase, IBurst
         hit.Init(id, skill1Damage, Vector2.zero);
     }
 
-    override public void Skill2(InputAction.CallbackContext ctx)
+    // カウンター構え
+    public override void Skill2(InputAction.CallbackContext ctx)
     {
+        if (!ctx.performed) return;
 
+        StartCoroutine(Counter());
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    private IEnumerator Counter()
     {
+        isCounter = true;
 
+        yield return new WaitForSeconds(counterTime);
+
+        isCounter = false;
+    }
+
+    // カウンター攻撃
+    private void CounterAttack()
+    {
+        Vector2 spawnPos =
+            (Vector2)transform.position +
+            direction.normalized * 1.5f;
+
+        GameObject obj =
+            Instantiate(collision, spawnPos, Quaternion.identity);
+
+        HitDamageArea hit =
+            obj.GetComponent<HitDamageArea>();
+
+        hit.Init(id, counterDamage, Vector2.zero);
+    }
+
+    public override void Damage(int damage, int attackerId)
+    {
+        if (isCounter)
+        {
+            CounterAttack();
+            isCounter = false;
+            return;
+        }
+
+        base.Damage(damage, attackerId);
+    }
+
+    public override Sprite GetDefaultImage()
+    {
+        return leek_default;
     }
 }
-
-
