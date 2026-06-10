@@ -32,7 +32,7 @@ public class HitDamageArea : MonoBehaviour
 
                 cb.Damage(damage, id);
 
-                Destroy(gameObject);
+                Destroy(this);
             }
         }
     }
