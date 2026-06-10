@@ -521,7 +521,7 @@ Transform:
   m_GameObject: {fileID: 439808938}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 635, y: 241, z: -9720}
+  m_LocalPosition: {x: 1876.6, y: 241, z: -9720}
   m_LocalScale: {x: 1080, y: 1080, z: 108}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1197,16 +1197,20 @@ MonoBehaviour:
   icon_img:
   - {fileID: -4152130810300491462, guid: dfe8e125370c3594a813383ad4b81e55, type: 3}
   - {fileID: 768890679745972150, guid: 75c74399fea79714f8d239d20bfe2443, type: 3}
+  - {fileID: 768890679745972150, guid: 75c74399fea79714f8d239d20bfe2443, type: 3}
   cursor_pf: {fileID: 1833491355377103544, guid: 5a4424b64cb2ae240a3a53a8f0033486, type: 3}
   mix_cursor: {fileID: -7208024073301661153, guid: 2352e652b8d494642a46d15628950891, type: 3}
   cursor:
   - img: {fileID: -1645374030688051754, guid: 9694b69fe91b91b40a36a9b0d5ece5de, type: 3}
+    pos: 0000000000000000
     interact: 0
   - img: {fileID: 8533349016902187879, guid: 15996b4a8a2720d48815dae4879714c3, type: 3}
+    pos: 0000000000000000
     interact: 0
   pick_data:
   - {fileID: 11400000, guid: 65998f818eb32ed46b5eb9a71ca036f3, type: 2}
   - {fileID: 11400000, guid: 4327477bd08fbe24dbf496c27405b74b, type: 2}
+  - {fileID: 11400000, guid: 260d7d8599947824a85fc13eeaf365a9, type: 2}
   state:
   - name: {fileID: 1394810176}
     lore: {fileID: 977860077}
@@ -1568,7 +1572,7 @@ Transform:
   m_GameObject: {fileID: 1826974913}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 635, y: 245, z: -9720}
+  m_LocalPosition: {x: -635, y: 245, z: -9720}
   m_LocalScale: {x: 1080, y: 1080, z: 108}
   m_ConstrainProportionsScale: 0
   m_Children: []
