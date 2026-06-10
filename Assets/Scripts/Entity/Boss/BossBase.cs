@@ -9,6 +9,7 @@ public class BossBase : MonoBehaviour, IBurst
     public int max_burst { get; set; } = 100;
     Rigidbody2D rb;
     public Collider2D hit_box;
+    BossState state;
 
     void Start()
     {
@@ -27,6 +28,8 @@ public class BossBase : MonoBehaviour, IBurst
         Debug.Log("mi");
     }
 
+    /// <summary> 硬直させる </summary>
+    /// <param name="freeze"> 有効なら当たり判定を有効化、座標を固定 </param>
     public void Freeze(bool freeze)
     {
         if(freeze)
