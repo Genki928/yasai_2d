@@ -9,18 +9,7 @@ public abstract class BossState
     //    this.stateMachine = stateMachine;
     //}
 
-    public virtual void Enter()
-    {
-
-    }
-
-    public virtual void Update()
-    {
-
-    }
-
-    public virtual void Exit()
-    {
-
-    }
+    public abstract void Enter(BossBase bb);
+    public abstract void Update(BossBase bb);
+    public abstract void Exit(BossBase bb);
 }
