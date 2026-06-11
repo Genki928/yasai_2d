@@ -30,6 +30,8 @@ public class Leek : CharBase
     protected override void Update()
     {
         base.Update();
+        if(isCounter==true) speed = 3;
+        else speed = 5;
     }
 
     protected override void FixedUpdate()
@@ -71,7 +73,7 @@ public class Leek : CharBase
     // カウンター構え
     public override void Skill2(InputAction.CallbackContext ctx)
     {
-        speed = 3; 
+      
         if (!ctx.performed) return;
 
         // 中断処理
@@ -96,7 +98,6 @@ public class Leek : CharBase
         yield return new WaitForSeconds(counterTime);
 
         isCounter = false;
-        speed = 5;
     }
 
     // カウンター攻撃
