@@ -20,6 +20,10 @@ public class CharBase : MonoBehaviour, IBurst
     protected bool can_control = true;
     public int regen_burst_timer = 0;
 
+    //速度
+    protected int speed;
+
+
     [Header("◇カーソル")]
     [SerializeField] protected GameObject cursor_pf;
     protected Arrow cursor_obj;
@@ -44,6 +48,7 @@ public class CharBase : MonoBehaviour, IBurst
         cursor_obj.Refresh(direction);
         cursor_obj.Set(this);
         max_burst = data.max_burst;
+        speed = data.speed;
     }
 
     virtual protected void Update()
@@ -69,7 +74,7 @@ public class CharBase : MonoBehaviour, IBurst
         {
             // 硬直が無ければ移動
             if (rigid == 0)
-                rb.linearVelocity = vec * data.speed;
+                rb.linearVelocity = vec * speed;
             // 硬直があれば移動不可
             else
                 rb.linearVelocity = Vector2.zero;

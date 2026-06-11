@@ -116,6 +116,8 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   collision: {fileID: 4175897494506351822, guid: 4ba9f983ad34b8b4ca91e7f135e10d36, type: 3}
   skill1Damage: 20
+  isSrash: 0
+  countercircle: {fileID: 7072312434174299672, guid: eb08d284ce84b3d43acf9b6517c6004c, type: 3}
   counterTime: 1
   counterDamage: 30
   sprite: {fileID: 0}
