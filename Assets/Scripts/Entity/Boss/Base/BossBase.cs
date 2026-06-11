@@ -13,6 +13,7 @@ public class BossBase : MonoBehaviour, IBurst
     [SerializeField] protected Collider2D hit_box;
 
     [Header("◇フェーズ")]
+    protected int state_cnt = 0;
     protected BossState state;
     protected List<BossState> state_list = new();
 
@@ -22,7 +23,7 @@ public class BossBase : MonoBehaviour, IBurst
         Freeze(true);
 
         // フェーズ
-        state = new BossCarrotPhase1();
+        state = state_list[0];
         state?.Enter(this);
     }
 
@@ -35,6 +36,7 @@ public class BossBase : MonoBehaviour, IBurst
     public void Damage(int value, int id)
     {
         Debug.Log("mi");
+        EnterNextPhase();
     }
 
     /// <summary> 硬直させる </summary>
@@ -51,5 +53,12 @@ public class BossBase : MonoBehaviour, IBurst
             rb.constraints = RigidbodyConstraints2D.None;
             hit_box.enabled = false;
         }
+    }
+
+    protected void EnterNextPhase()
+    {
+        state?.Exit(this);
+        state = state_list[++state_cnt];
+        state?.Enter(this);
     }
 }

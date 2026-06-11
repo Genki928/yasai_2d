@@ -2,9 +2,12 @@ using UnityEngine;
 
 public class BossCarrot : BossBase
 {
-    
     override protected void Start()
     {
+        // フェーズ設定
+        state_list.Add(new BossCarrotPhase1());
+
+        // 基底クラス
         base.Start();
     }
 
