@@ -29,10 +29,6 @@ public class SoloBattleManager : MonoBehaviour
     [Header("◇GUI")]
     public GUI gui;
 
-    //Px用
-    public GameObject player_obj;
-    GameObject p_obj;
-
     void Awake()
     {
 
@@ -43,11 +39,8 @@ public class SoloBattleManager : MonoBehaviour
 
     void Start()
     {
-        // ポインター
-        p_obj = Instantiate(player_obj);
-
         // プレイヤー生成
-        player = Instantiate(characters[3].chars, spawn_point.point.transform.position, Quaternion.identity);
+        player = Instantiate(characters[0].chars, spawn_point.point.transform.position, Quaternion.identity);
 
         // 識別IDを設定
         datas = player.GetComponent<CharBase>();
@@ -72,8 +65,7 @@ public class SoloBattleManager : MonoBehaviour
 
     void Update()
     {
-        // ポインター
-        p_obj.transform.position = new(player.transform.position.x, player.transform.position.y + 2.0f);
+        ;
     }
 
     void OnDestroy()

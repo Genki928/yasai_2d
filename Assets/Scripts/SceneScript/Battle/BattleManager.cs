@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEditor.U2D.Animation;
 
 static class Winner
 {
@@ -29,13 +30,11 @@ public class BattleManager : MonoBehaviour
     GameObject[] player = new GameObject[PLAYER_CNT];
     CharBase[] datas = new CharBase[PLAYER_CNT];
     int[] pick_nums = { 0, 1 };
+    [SerializeField] Sprite[] pointer = new Sprite[PLAYER_CNT];
 
     [Header("◇GUI")]
     public GUI[] gui = new GUI[PLAYER_CNT];
 
-    //Px用
-    public GameObject[] player_obj = new GameObject[PLAYER_CNT];
-    GameObject[] p_obj = new GameObject[PLAYER_CNT];
 
     void Awake()
     {
@@ -49,9 +48,6 @@ public class BattleManager : MonoBehaviour
 
         for (int i = 0; i < PLAYER_CNT; i++)
         {
-            // ポインター
-            p_obj[i]=Instantiate(player_obj[i]);
-
             // プレイヤー生成
             pick_nums[i] = PlayerPick.pick[i];
             PlayerInput pi;
@@ -81,6 +77,7 @@ public class BattleManager : MonoBehaviour
             player[i] = pi.gameObject;
             datas[i] = player[i].GetComponent<CharBase>();
             datas[i].id = i;
+            datas[i].pointer.GetComponent<SpriteRenderer>().sprite = pointer[i];
 
             datas[i].direction = SetDirect(spawn_point[i].direct);
 
@@ -101,10 +98,7 @@ public class BattleManager : MonoBehaviour
 
     void Update()
     {
-        // ポインター
-        p_obj[0].transform.position = new(player[0].transform.position.x, player[0].transform.position.y+2.0f);
-        p_obj[1].transform.position = new(player[1].transform.position.x, player[1].transform.position.y+2.0f);
-
+        ;
     }
 
     void OnDestroy()

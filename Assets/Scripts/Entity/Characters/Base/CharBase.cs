@@ -29,6 +29,7 @@ public class CharBase : MonoBehaviour, IBurst
     [Header("GUI")]
     [NonSerialized] public BurstBar burst_bar;
     [NonSerialized] public SkillCooltimer[] cooltimer = new SkillCooltimer[2];
+    public GameObject pointer;
 
     [Header("•¨—")]
     protected Vector2 vec;
