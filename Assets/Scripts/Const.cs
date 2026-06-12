@@ -1,7 +1,14 @@
+using System.Numerics;
+
 namespace Const
 {
     public static class SceneName
     {
-        const string Title = "TitleScene";
+        public const string TITLE = "TitleScene";
+        public const string CHARACTER_PICK_PVP = "CharacterPickScene-pvp";
+        public const string CHARACTER_PICK_PVE = "CharacterPickScene-pve";
+        public const string BATTLE_PVP = "BattleScene-pvp";
+        public const string BATTLE_PVE = "BattleScene-pve";
+        public const string RESULT = "ResultScene";
     }
 }

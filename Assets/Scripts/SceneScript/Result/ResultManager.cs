@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Const;
 public class ResultManager : MonoBehaviour
 {
     [SerializeField] int arrow_max=1;
@@ -34,13 +35,13 @@ public class ResultManager : MonoBehaviour
             if (ctx.performed && TextArrow.instance.arrow_pos == 0)
             {
                 Debug.Log(Winner.sprite);
-                SceneManager.LoadScene("CharacterPickScene-battle");
+                SceneManager.LoadScene(SceneName.BATTLE_PVP);
                 Winner.sprite = null;
             }
             else if (ctx.performed && TextArrow.instance.arrow_pos == 1)
             {
                 Debug.Log("titleÇ…çsÇ≠ÅAÇÊ");
-                SceneManager.LoadScene("TitleScene");
+                SceneManager.LoadScene(SceneName.TITLE);
             }
         }
     }

@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using Const;
+
 public class TitleManager : MonoBehaviour
 {
     [SerializeField] int arrow_max=1;
@@ -20,8 +22,8 @@ public class TitleManager : MonoBehaviour
     } 
     public void SceneChange_CharacterPickScene(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && TextArrow.instance.arrow_pos == 0) SceneManager.LoadScene("CharacterPickScene-battle");
-        if (ctx.performed && TextArrow.instance.arrow_pos == 1) SceneManager.LoadScene("CharacterPickScene-solo");
+        if (ctx.performed && TextArrow.instance.arrow_pos == 0) SceneManager.LoadScene(SceneName.CHARACTER_PICK_PVP);
+        if (ctx.performed && TextArrow.instance.arrow_pos == 1) SceneManager.LoadScene(SceneName.CHARACTER_PICK_PVE);
     }
     
     public void Up(InputAction.CallbackContext ctx)

@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using Const;
 
 //static class Winner
 //{
@@ -86,7 +85,7 @@ public class SoloBattleManager : MonoBehaviour
     /// <param name="id"> ƒvƒŒƒCƒ„[‚Ì¯•Êid </param>
     void Finish(int id)
     {
-        SceneManager.LoadScene("ResultScene");
+        SceneManager.LoadScene(SceneName.RESULT);
     }
 
     Vector2 SetDirect(DIRECT direct)
