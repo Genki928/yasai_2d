@@ -8,7 +8,7 @@ public class HitDamageArea : MonoBehaviour
 
     private bool hit = false;
 
-    [SerializeField] float lifeTime = 0.1f;
+    [SerializeField] float lifeTime = 0.3f;
 
     void Start()
     {
@@ -20,7 +20,7 @@ public class HitDamageArea : MonoBehaviour
         transform.position += (Vector3)vec * Time.deltaTime;
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerStay2D(Collider2D col)
     {
         if (hit) return;
 

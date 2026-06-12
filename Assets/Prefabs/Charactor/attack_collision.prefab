@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 869c7010d36f6a7499a87f34204f3cf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitDamageArea
-  lifeTime: 1
+  lifeTime: 0.3
 --- !u!58 &-8334533400414322612
 CircleCollider2D:
   m_ObjectHideFlags: 0

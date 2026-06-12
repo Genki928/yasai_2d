@@ -2,18 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Audio;
 
 public class Leek : CharBase
 {
     // 斬撃用
     [SerializeField] private GameObject collision;
     [SerializeField] private int skill1Damage = 20;
+    [SerializeField] AudioClip se1;
     public bool isSrash=false;
 
     // カウンター用
     [SerializeField] private GameObject countercircle;
     [SerializeField] private float counterTime = 1.0f;
     [SerializeField] private int counterDamage = 50;
+    [SerializeField] private float counterDashPower = 10f;
+    [SerializeField] AudioClip se2;
+    [SerializeField] AudioClip se3;
 
     private bool isCounter = false;
 
@@ -47,6 +52,8 @@ public class Leek : CharBase
         // 中断処理
         if (skill_1_cooltime != 0 || !can_control) return;
 
+        //SE
+        audioSource.PlayOneShot(se1);
         // 生成位置
         Vector2 spawnPos =
             (Vector2)transform.position +
@@ -77,7 +84,10 @@ public class Leek : CharBase
         if (!ctx.performed) return;
 
         // 中断処理
-        if (skill_1_cooltime != 0 || !can_control) return;
+        if (skill_2_cooltime != 0 || !can_control) return;
+
+        //SE
+        audioSource.PlayOneShot(se2);
 
         GameObject obj = Instantiate(countercircle);
 
@@ -103,10 +113,14 @@ public class Leek : CharBase
     // カウンター攻撃
     private void CounterAttack()
     {
+        //SE
+        audioSource.PlayOneShot(se3);
+        //成功時前方移動
+        StartCoroutine(CounterDash());
         // 生成位置
         Vector2 spawnPos =
             (Vector2)transform.position +
-            direction.normalized * 1.5f;
+            direction.normalized * 1.0f;
 
         // direction の角度を取得
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -134,6 +148,14 @@ public class Leek : CharBase
         }
 
         base.Damage(damage, attackerId);
+    }
+
+    private IEnumerator CounterDash()
+    {
+        transform.position += (Vector3)(direction.normalized * 1.0f);
+
+        yield return new WaitForSeconds(0.1f);
+
     }
 
     public override Sprite GetDefaultImage()

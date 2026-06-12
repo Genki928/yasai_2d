@@ -20,8 +20,6 @@ public class Carrot : CharBase
     [SerializeField] GameObject dust;
     [SerializeField] GameObject collision;
     [SerializeField] AudioClip se1;
-    private List<CharBase> tackleHitList = new List<CharBase>();
-
     //ƒwƒhƒoƒ“ŠÖ˜A
     [SerializeField] private float headBangAngle = 60f;
     [SerializeField] private float rotateSpeed = 350f;
@@ -73,7 +71,6 @@ public class Carrot : CharBase
     }
     private IEnumerator Tackle()
     {
-        tackleHitList.Clear();
 
         sprite.sprite = tackle;
 
