@@ -35,8 +35,7 @@ public class BossBase : MonoBehaviour, IBurst
 
     public void Damage(int value, int id)
     {
-        Debug.Log("mi");
-        EnterNextPhase();
+        Debug.Log("damaged");
     }
 
     /// <summary> çdíºÇ≥ÇπÇÈ </summary>

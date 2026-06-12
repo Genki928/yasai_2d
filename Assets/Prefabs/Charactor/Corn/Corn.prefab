@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a5a8a2da8cc1464e9720633782fd4c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Corn
-  data: {fileID: 11400000, guid: dfe8ba9db7b4ea24a9cf331aaad322ef, type: 2}
+  data: {fileID: 11400000, guid: d44e300ed80f194448d673ddee1474ce, type: 2}
   rigid: 0
   skill_1_cooltime: 0
   skill_2_cooltime: 0
@@ -117,7 +117,7 @@ MonoBehaviour:
   cursor_pf: {fileID: 5826391187326269229, guid: 50c4b14c6dc55f04f924db6a0c75f818, type: 3}
   audioSource: {fileID: 0}
   se1: {fileID: 8300000, guid: 6b86bf8af024f7d4a9894b59048fc879, type: 3}
-  bullet: {fileID: 3303797620011567552, guid: 13cdeee2f059e9c4b8213bf5721f9dea, type: 3}
+  bullet: {fileID: 5890270591182050869, guid: 563e2ae8d4c7bdb4486807d061f74089, type: 3}
   img:
   - {fileID: 612600066695323494, guid: 9708a9172e4d4274792f0b16cf04ede2, type: 3}
   - {fileID: -8424772587211142023, guid: 4927850162a06b141bc196dee4ddd8ba, type: 3}

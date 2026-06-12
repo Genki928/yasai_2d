@@ -62,8 +62,7 @@ public class CharBase : MonoBehaviour, IBurst
             if (++regen_burst_timer == data.regen_burst_cooltime)
             {
                 regen_burst_timer = data.restart_regen_burst_value;
-                burst -= 5;
-                burst_bar.Draw(burst, max_burst);
+                Heal(5);
             }
         }
     }
@@ -101,6 +100,22 @@ public class CharBase : MonoBehaviour, IBurst
         {
             OnPlayerDies?.Invoke(id);
         }
+    }
+
+    /// <summary> プレイヤーにダメージを与える </summary>
+    /// <param name="value"> 与えるダメージ量 </param>
+    virtual public void Heal(int value)
+    {
+        // バースト値が最低なら中断
+        if (burst <= 0) return;
+        regen_burst_timer = 0;
+
+        // 回復が過剰ならセーブする
+        burst = burst - value < 0 ?
+                     0 : burst - value;
+
+        // 描画
+        burst_bar.Draw(burst, max_burst);
     }
 
     /// <summary> 移動関数 </summary>

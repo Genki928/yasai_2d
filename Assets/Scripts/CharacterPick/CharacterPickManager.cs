@@ -124,16 +124,22 @@ public class CharacterPickManager : MonoBehaviour
     {
         if (ctx.performed)
         {
-            //if (--cursor[0].pos[Y] < 0) cursor[0].pos[Y] = icon_obj.Count / ICON_LINEFEED_COUNT;
-            //if (cursor[0].pos[Y] == icon_obj.Count / ICON_LINEFEED_COUNT)
-            //{
-            //    if (cursor[0].pos[X] > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT)
-            //    {
-            //        cursor[0].pos[X] = (icon_obj.Count - 1) % ICON_LINEFEED_COUNT;
-            //    }
-            //}
+            // Ž¯•Ê
+            int n = -1;
+            if (Gamepad.all[0] == ctx.control.device) n = 0;
+            else n = 1;
 
-            //cursor_obj[0].transform.position = new(pos.x + ICON_HORIZONTAL_SPACE * cursor[0].pos[X], pos.y - ICON_VERTICAL_SPACE * cursor[0].pos[Y]);
+            if (--cursor[n].pos[Y] < 0) cursor[n].pos[Y] = icon_obj.Count / ICON_LINEFEED_COUNT;
+            if (cursor[n].pos[Y] == icon_obj.Count / ICON_LINEFEED_COUNT)
+            {
+                if (cursor[n].pos[X] > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT)
+                {
+                    cursor[n].pos[X] = (icon_obj.Count - 1) % ICON_LINEFEED_COUNT;
+                }
+            }
+
+            // •`‰æ
+            Draw(n);
         }
     }
 
@@ -141,14 +147,19 @@ public class CharacterPickManager : MonoBehaviour
     {
         if (ctx.performed)
         {
-            //if (++cursor[0].pos[Y] > (icon_obj.Count - 1) / ICON_LINEFEED_COUNT) cursor[0].pos[Y] = 0;
-            //if (icon_obj.Count % ICON_LINEFEED_COUNT != 0)
-            //{
-            //    if (cursor[0].pos[X] > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT) cursor[0].pos[Y] = 0;
-            //}
+            // Ž¯•Ê
+            int n = -1;
+            if (Gamepad.all[0] == ctx.control.device) n = 0;
+            else n = 1;
 
+            if (++cursor[n].pos[Y] > (icon_obj.Count - 1) / ICON_LINEFEED_COUNT) cursor[n].pos[Y] = 0;
+            if (icon_obj.Count % ICON_LINEFEED_COUNT != 0)
+            {
+                if (cursor[n].pos[X] > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT) cursor[n].pos[Y] = 0;
+            }
 
-            //cursor_obj[0].transform.position = new(pos.x + ICON_HORIZONTAL_SPACE * cursor[0].pos[X], pos.y - ICON_VERTICAL_SPACE * cursor[0].pos[Y]);
+            // •`‰æ
+            Draw(n);
         }
     }
 

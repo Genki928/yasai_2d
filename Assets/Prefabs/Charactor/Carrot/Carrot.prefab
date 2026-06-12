@@ -110,8 +110,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Carrot
   data: {fileID: 11400000, guid: dfe8ba9db7b4ea24a9cf331aaad322ef, type: 2}
-  burst: 0
-  id: 0
   rigid: 0
   skill_1_cooltime: 0
   skill_2_cooltime: 0
