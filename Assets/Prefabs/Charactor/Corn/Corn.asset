@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Corn
   m_EditorClassIdentifier: Assembly-CSharp::CharData
   char_name: "\u30E2\u30ED\u30B3\u30B7"
-  speed: 2
+  speed: 4
   max_burst: 100
   regen_burst_cooltime: 120
   restart_regen_burst_value: 60

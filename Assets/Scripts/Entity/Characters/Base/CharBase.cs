@@ -1,7 +1,6 @@
 using System;
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 
 public class CharBase : MonoBehaviour, IBurst
@@ -22,6 +21,7 @@ public class CharBase : MonoBehaviour, IBurst
 
     //速度
     protected int speed;
+    Effect effect = new();
 
 
     [Header("◇カーソル")]
@@ -65,6 +65,13 @@ public class CharBase : MonoBehaviour, IBurst
                 Heal(5);
             }
         }
+        //if (effect.type == EffectType.Speed)
+        //{
+        //    if (effect.time > speed_.time)
+        //    {
+        //        speed_.time = effect.time;
+        //    }
+        //}
     }
 
     virtual protected void FixedUpdate()
@@ -160,4 +167,26 @@ public class CharBase : MonoBehaviour, IBurst
     {
         return null;
     }
+
+    public void GiveEffect(EffectState effect)
+    {
+        this.effect.speed.Add(effect);
+    }
+}
+
+public class Effect
+{
+    public List<EffectState> speed = new();
+}
+
+public class EffectState
+{
+    //public EffectType type;
+    public int time = 0;
+    public int value = 0;
+}
+
+public enum EffectType
+{
+    Speed
 }

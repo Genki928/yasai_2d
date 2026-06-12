@@ -118,6 +118,7 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   se1: {fileID: 8300000, guid: 6b86bf8af024f7d4a9894b59048fc879, type: 3}
   bullet: {fileID: 5890270591182050869, guid: 563e2ae8d4c7bdb4486807d061f74089, type: 3}
+  bomb: {fileID: 4871254515045110137, guid: e4e66b7bcec66374d80d5cc23e78fe63, type: 3}
   img:
   - {fileID: 612600066695323494, guid: 9708a9172e4d4274792f0b16cf04ede2, type: 3}
   - {fileID: -8424772587211142023, guid: 4927850162a06b141bc196dee4ddd8ba, type: 3}

@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.PlayerSettings;
 
 public class Corn : CharBase
 {
     [SerializeField] AudioClip se1;
     [SerializeField] GameObject bullet;
+    [SerializeField] GameObject bomb;
     SpriteRenderer sr;
     [SerializeField] List<Sprite> img = new();
     //炎SE
@@ -43,7 +43,7 @@ public class Corn : CharBase
             GameObject go = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
             go.GetComponent<DamageArea>().Init(id, 10, direction * 0.5f, true);
             sr.sprite = img[1];
-            Damage(5, id == 0 ? 1 : 0);
+            Damage(2, id == 0 ? 1 : 0);
 
             // 硬直・クールタイム
             skill_1_cooltime = data.skill_1_cooltime;
@@ -59,14 +59,15 @@ public class Corn : CharBase
         {
             // 中断処理
             if (skill_2_cooltime > 0 || !can_control) return;
-            audioSource.PlayOneShot(se1);
+            //audioSource.PlayOneShot(se1);
 
             //    // 処理
             //    rb.linearVelocity = -direction * 30.0f;
             //    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             //    GameObject go = Instantiate(breath, transform.position, Quaternion.Euler(0, 0, angle - 90));
             //    go.GetComponent<DamageArea>().Init(id, 1, direction * 0.05f);
-            Heal(10);
+            GameObject go = Instantiate(bomb, transform.position, Quaternion.identity);
+            go.GetComponent<Bomb>().Init(id);
 
             // 硬直・クールタイム
             skill_2_cooltime = data.skill_2_cooltime;
