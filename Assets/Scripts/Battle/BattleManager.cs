@@ -20,6 +20,7 @@ static class Winner
 }
 public class BattleManager : MonoBehaviour
 {
+    bool isdeath = false;
     const int PLAYER_CNT = 2;
 
     [Header("ƒLƒƒƒ‰¶¬")]
@@ -125,6 +126,7 @@ public class BattleManager : MonoBehaviour
         Winner.sprite = datas[id].GetDefaultImage();
         Debug.Log(Winner.sprite);
 
+        if (isdeath) return;
         SceneManager.LoadScene("ResultScene");
     }
 
