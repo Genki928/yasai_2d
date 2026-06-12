@@ -120,7 +120,7 @@ MonoBehaviour:
   carrot_default: {fileID: 2950869812727453837, guid: 3dcda9a40728eef4ca8ee47555100ab1, type: 3}
   tackle: {fileID: 1824413040164408261, guid: b205cf7e6d820bf45bb4267f2ea3f8c1, type: 3}
   tackleSpeed: 20
-  tackleTime: 0.4
+  tackleTime: 0.2
   tackleDamage: 20
   dust: {fileID: 1560168367213963595, guid: 31c763f52fdaf2d45885cba010fc705b, type: 3}
   collision: {fileID: 9138792514576026239, guid: 5a4d1edade8353449bbdfabf13041c1a, type: 3}

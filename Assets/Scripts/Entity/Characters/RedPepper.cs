@@ -10,10 +10,12 @@ public class RedPepper : CharBase
     [SerializeField] GameObject breath;
     SpriteRenderer sr;
     [SerializeField] List<Sprite> img = new();
+
     //炎SE
     override protected void Start()
     {
         base.Start();
+    
         sr = GetComponent<SpriteRenderer>();
     }
 
@@ -34,13 +36,14 @@ public class RedPepper : CharBase
             // 中断処理
             if (skill_1_cooltime > 0 || !can_control) return;
             audioSource.PlayOneShot(se1);
+           
             // 座標・ベクトルの算出
-            Vector2 pos = new Vector2(transform.position.x, transform.position.y) + direction * 1.5f;
+            Vector2 pos = new Vector2(transform.position.x, transform.position.y+0.7f) + direction * 2.0f;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             sr.sprite = img[1];
 
             // 炎を生成 -> idの紐づけ
-            GameObject go = Instantiate(breath, pos, Quaternion.Euler(0, 0, angle - 90));
+            GameObject go = Instantiate(breath, pos , Quaternion.Euler(0, 0, angle - 90));
             go.GetComponent<DamageArea>().Init(id, 1, new Vector2(0, 0));
 
             // 硬直・クールタイム
@@ -59,9 +62,11 @@ public class RedPepper : CharBase
             if (skill_2_cooltime > 0 || !can_control) return;
             audioSource.PlayOneShot(se1);
             // 処理
-            rb.linearVelocity = -direction * 30.0f;
+            rb.linearVelocity = -direction * 50.0f;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            GameObject go = Instantiate(breath, transform.position, Quaternion.Euler(0, 0, angle - 90));
+            // 座標・ベクトルの算出
+            Vector2 pos = new Vector2(transform.position.x, transform.position.y + 0.7f) + direction * 2.0f;
+            GameObject go = Instantiate(breath, pos, Quaternion.Euler(0, 0, angle - 90));
             go.GetComponent<DamageArea>().Init(id, 1, direction * 0.05f);
 
             // 硬直・クールタイム
@@ -85,6 +90,7 @@ public class RedPepper : CharBase
         can_control = true;
         sr.sprite = img[0];
     }
+
 
     public override Sprite GetDefaultImage()
     {

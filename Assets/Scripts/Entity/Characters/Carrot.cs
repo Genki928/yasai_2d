@@ -161,29 +161,6 @@ public class Carrot : CharBase
         isHeadBanging = false;
     }
 
-
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.TryGetComponent<IBurst>(out var cb))
-        {
-            // ƒ^ƒbƒNƒ‹
-            if (cb.id != id && !can_control)
-            {
-                //// Šù‚É“–‚½‚Á‚Ä‚¢‚½‚ç–³Œø
-                //if (tackleHitList.Contains(cb)) return;
-
-                //tackleHitList.Add(cb);
-
-                cb.Damage(tackleDamage,id);
-
-                //Vector2 knockbackDir =
-                //    (cb.transform.position - transform.position).normalized;
-
-                //cb.KnockBack(10, knockbackDir);
-            }
-        }
-    }
-
     public override Sprite GetDefaultImage()
     {
         return carrot_default;
