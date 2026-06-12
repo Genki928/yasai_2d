@@ -5,6 +5,7 @@ public class DamageArea : MonoBehaviour
     int id = 0;
     int damage = 0;
     Vector2 vec;
+    bool delete = false;
 
     void Update()
     {
@@ -21,16 +22,36 @@ public class DamageArea : MonoBehaviour
             {
                 // ”í’eˆ—
                 cb.Damage(damage,id);
+
+                // íœˆ—
+                if (delete)
+                {
+                    Destroy(gameObject);
+                    return;
+                }
                 if (cb.burst >= cb.max_burst) Destroy(this);
             }
         }
     }
 
-    // ¯•Êid‚Ì•R‚Ã‚¯
-    public void Init(int id, int damage, Vector2 vec)
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.CompareTag("Wall"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    /// <summary> ¯•Êid‚Ì•R‚Ã‚¯ </summary>
+    /// <param name="id"> UŒ‚id</param>
+    /// <param name="damage"> ƒ_ƒ[ƒW—Ê </param>
+    /// <param name="vec"> •ûŒü </param>
+    /// <param name="delete"> ƒqƒbƒgŒã‚Ìíœ </param>
+    public void Init(int id, int damage, Vector2 vec, bool delete = false)
     {
         this.id = id;
         this.damage = damage;
         this.vec = vec;
+        this.delete = delete;
     }
 }
