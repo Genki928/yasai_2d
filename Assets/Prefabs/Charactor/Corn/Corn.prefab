@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a5a8a2da8cc1464e9720633782fd4c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Corn
-  data: {fileID: 11400000, guid: dfe8ba9db7b4ea24a9cf331aaad322ef, type: 2}
+  data: {fileID: 11400000, guid: d44e300ed80f194448d673ddee1474ce, type: 2}
   rigid: 0
   skill_1_cooltime: 0
   skill_2_cooltime: 0

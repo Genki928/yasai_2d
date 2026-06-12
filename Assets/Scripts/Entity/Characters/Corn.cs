@@ -20,6 +20,7 @@ public class Corn : CharBase
     override protected void Update()
     {
         base.Update();
+        speed = data.speed + burst / 25;
     }
 
     protected override void FixedUpdate()
@@ -38,16 +39,13 @@ public class Corn : CharBase
             // 座標・ベクトルの算出
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-            //// 弾を生成 -> idの紐づけ
+            // 弾を生成 -> idの紐づけ
             GameObject go = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
-            go.GetComponent<DamageArea>().Init(id, 1, direction * 0.5f, true);
-            Damage(5, id);
+            go.GetComponent<DamageArea>().Init(id, 5, direction * 0.5f, true);
             sr.sprite = img[1];
+            Damage(5, id == 0 ? 1 : 0);
 
-            //GameObject go = Instantiate(breath, pos, Quaternion.Euler(0, 0, angle - 90));
-            //go.GetComponent<DamageArea>().Init(id, 1, new Vector2(0, 0));
-
-            //// 硬直・クールタイム
+            // 硬直・クールタイム
             skill_1_cooltime = data.skill_1_cooltime;
             rb.linearVelocity = Vector2.zero;
             can_control = false;
@@ -67,12 +65,11 @@ public class Corn : CharBase
             //    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             //    GameObject go = Instantiate(breath, transform.position, Quaternion.Euler(0, 0, angle - 90));
             //    go.GetComponent<DamageArea>().Init(id, 1, direction * 0.05f);
-
-            //    // 硬直・クールタイム
-            //    can_control = false;
-            //    skill_2_cooltime = data.skill_2_cooltime;
-            //    StartCoroutine(BackShot());
             Heal(10);
+
+            // 硬直・クールタイム
+            skill_2_cooltime = data.skill_2_cooltime;
+            rigid += data.skill_2_rigid;
         }
     }
 
