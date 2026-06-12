@@ -27,7 +27,7 @@ public class BattleManager : MonoBehaviour
     public Spawner[] spawn_point = new Spawner[PLAYER_CNT];
     GameObject[] player = new GameObject[PLAYER_CNT];
     CharBase[] datas = new CharBase[PLAYER_CNT];
-    int[] pick_nums = { 0, 3 };
+    int[] pick_nums = { 0, 1 };
 
     [Header("ÅûGUI")]
     public GUI[] gui = new GUI[PLAYER_CNT];

@@ -3100,11 +3100,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BattleManager
   characters:
   - chars: {fileID: 3071852468601324621, guid: 15f81c7a85b9c6842bb9efb0feae10dc, type: 3}
-    icon: {fileID: -4152130810300491462, guid: dfe8e125370c3594a813383ad4b81e55, type: 3}
+    icon: {fileID: -794748231820803858, guid: eb580877a79cbbd49bd5258b417de533, type: 3}
   - chars: {fileID: 3071852468601324621, guid: 64283c1ffb5f301459530948e200146d, type: 3}
-    icon: {fileID: 768890679745972150, guid: 75c74399fea79714f8d239d20bfe2443, type: 3}
+    icon: {fileID: 3939098522201311849, guid: e87972cb61c228f4cbe16ff9f0bf0ba2, type: 3}
   - chars: {fileID: 3071852468601324621, guid: be06a8b80b548ad48aa49fd23d1c60d8, type: 3}
-    icon: {fileID: -5781510077721585989, guid: e157ec7ae1ed4be49b0cd580ca121e4e, type: 3}
+    icon: {fileID: 1512596204089908798, guid: f84ff9abed0a2df4b95da44ec226f970, type: 3}
+  - chars: {fileID: 1883792544255973313, guid: dabd934fb20d82240adcd909b0f44b54, type: 3}
+    icon: {fileID: -7035740149812634158, guid: b1bc5c426c3953f4d9662f88862c6dd6, type: 3}
   spawn_point:
   - point: {fileID: 666596767}
     direct: 0
