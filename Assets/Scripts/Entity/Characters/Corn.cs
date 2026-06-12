@@ -20,7 +20,7 @@ public class Corn : CharBase
     override protected void Update()
     {
         base.Update();
-        speed = data.speed + burst / 25;
+        speed = data.speed + burst / 20;
     }
 
     protected override void FixedUpdate()
@@ -41,7 +41,7 @@ public class Corn : CharBase
 
             // ’e‚ğ¶¬ -> id‚Ì•R‚Ã‚¯
             GameObject go = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
-            go.GetComponent<DamageArea>().Init(id, 5, direction * 0.5f, true);
+            go.GetComponent<DamageArea>().Init(id, 10, direction * 0.5f, true);
             sr.sprite = img[1];
             Damage(5, id == 0 ? 1 : 0);
 
@@ -57,9 +57,10 @@ public class Corn : CharBase
     {
         if (ctx.performed)
         {
-            //    // ’†’fˆ—
-            //    if (skill_2_cooltime > 0 || !can_control) return;
-            //    audioSource.PlayOneShot(se1);
+            // ’†’fˆ—
+            if (skill_2_cooltime > 0 || !can_control) return;
+            audioSource.PlayOneShot(se1);
+
             //    // ˆ—
             //    rb.linearVelocity = -direction * 30.0f;
             //    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -69,7 +70,7 @@ public class Corn : CharBase
 
             // d’¼EƒN[ƒ‹ƒ^ƒCƒ€
             skill_2_cooltime = data.skill_2_cooltime;
-            rigid += data.skill_2_rigid;
+            //rigid += data.skill_2_rigid;
         }
     }
 
