@@ -7,6 +7,8 @@ public class BossBase : MonoBehaviour, IBurst
     public int id { get; set; } = 100;
     public int burst { get; set; } = 0;
     public int max_burst { get; set; } = 100;
+    public List<int> damaged = new();
+    public int damage = 0;
 
     [Header("•¨—")]
     protected Rigidbody2D rb;

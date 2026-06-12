@@ -16,6 +16,18 @@ public class BossCarrot : BossBase
     {
         base.Update();
     }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.TryGetComponent<CharBase>(out var cb))
+        {
+            if (!damaged.Contains(cb.id))
+            {
+                cb.Damage(damage, id);
+                damaged.Add(cb.id);
+            }
+        }
+    }
 }
 
 public class BossCarrotTackle : BossState
@@ -25,24 +37,28 @@ public class BossCarrotTackle : BossState
 
     override public void Enter(BossBase bb)
     {
-        Debug.Log("phae 1 enter");
+        bb.Freeze(false);
+        bb.damage = 20;
     }
     override public void Update(BossBase bb)
     {
         switch(phase)
         {
             case 0:
-                bb.Freeze(false);
                 bb.transform.rotation = Quaternion.Euler(0, 0, rotate += 10);
                 if (rotate >= 90) phase = 1;
                 break;
 
             case 1:
+                bb.transform.rotation = Quaternion.Euler(0, 0, rotate -= 10);
+                if (rotate <= 0) phase = 0;
                 break;
         }
     }
     override public void Exit(BossBase bb)
     {
-        Debug.Log("phae 1 exit");
+        bb.Freeze(true);
+        bb.damage = 0;
+        bb.damaged.Clear();
     }
 }

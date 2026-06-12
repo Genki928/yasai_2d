@@ -3112,6 +3112,9 @@ MonoBehaviour:
     direct: 0
   - point: {fileID: 1661029962}
     direct: 1
+  pointer:
+  - {fileID: 1322821052197086858, guid: e88b330f912f3dd4da56b89f055a6d5e, type: 3}
+  - {fileID: -4563798465293866004, guid: 8e39e6592fe782c41a64c010530d3f2e, type: 3}
   gui:
   - bar: {fileID: 1848879500}
     name: {fileID: 2132095580}
@@ -3123,9 +3126,6 @@ MonoBehaviour:
     icon: {fileID: 559062713}
     skill1_cooltimer: {fileID: 1225425201}
     skill2_cooltimer: {fileID: 1584968705}
-  player_obj:
-  - {fileID: 4178201437919755446, guid: c6e495c33560abc4a80b03db369bd4f9, type: 3}
-  - {fileID: 7493455991842142285, guid: 69cc6b67633600840b2c059ba36d90ed, type: 3}
 --- !u!4 &1873271267
 Transform:
   m_ObjectHideFlags: 0

@@ -4,19 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Const;
 
-//static class Winner
-//{
-//    static public string w_name = "";
-//    static public int w_id;
-//    static public Sprite sprite;
-
-//    public static void Reset()
-//    {
-//        w_name = "";
-//        w_id = 0;
-//        sprite = null;
-//    }
-//}
 public class SoloBattleManager : MonoBehaviour
 {
     [Header("◇キャラ生成")]
@@ -42,18 +29,14 @@ public class SoloBattleManager : MonoBehaviour
         // プレイヤー生成
         player = Instantiate(characters[0].chars, spawn_point.point.transform.position, Quaternion.identity);
 
-        // 識別IDを設定
-        datas = player.GetComponent<CharBase>();
-        datas.id = 0;
-
-        datas.direction = SetDirect(spawn_point.direct);
-
         // バーストバーとの紐づけ
         gui.bar.Init(player);
 
         // 各種UIとの紐づけ
         if (player.TryGetComponent<CharBase>(out var p))
         {
+            p.id = 0;   // id
+            p.direction = SetDirect(spawn_point.direct);    // 方向
             p.burst_bar = gui.bar;   // バースト
             gui.name.text = p.data.char_name;    // キャラ名
             p.cooltimer[0] = gui.skill1_cooltimer;   // スキル1のクールタイムを表示
@@ -89,4 +72,3 @@ public class SoloBattleManager : MonoBehaviour
         return Vector2.zero;
     }
 }
-
