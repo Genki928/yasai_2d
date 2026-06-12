@@ -20,21 +20,19 @@ using UnityEngine.SceneManagement;
 //}
 public class SoloBattleManager : MonoBehaviour
 {
-    const int PLAYER_CNT = 2;
-
     [Header("◇キャラ生成")]
     [SerializeField] List<Character> characters = new(); 
-    public Spawner[] spawn_point = new Spawner[PLAYER_CNT];
-    GameObject[] player = new GameObject[PLAYER_CNT];
-    CharBase[] datas = new CharBase[PLAYER_CNT];
-    int[] pick_nums = { 0, 0 };
+    public Spawner spawn_point;
+    GameObject player;
+    CharBase datas;
+    int pick_nums = 0;
 
     [Header("◇GUI")]
-    public GUI[] gui = new GUI[PLAYER_CNT];
+    public GUI gui;
 
     //Px用
-    public GameObject[] player_obj = new GameObject[PLAYER_CNT];
-    GameObject[] p_obj = new GameObject[PLAYER_CNT];
+    public GameObject player_obj;
+    GameObject p_obj;
 
     void Awake()
     {
@@ -47,28 +45,28 @@ public class SoloBattleManager : MonoBehaviour
     void Start()
     {
         // ポインター
-        p_obj[0] = Instantiate(player_obj[0]);
+        p_obj = Instantiate(player_obj);
 
         // プレイヤー生成
-        player[0] = Instantiate(characters[3].chars, spawn_point[0].point.transform.position, Quaternion.identity);
+        player = Instantiate(characters[3].chars, spawn_point.point.transform.position, Quaternion.identity);
 
         // 識別IDを設定
-        datas[0] = player[0].GetComponent<CharBase>();
-        datas[0].id = 0;
+        datas = player.GetComponent<CharBase>();
+        datas.id = 0;
 
-        datas[0].direction = SetDirect(spawn_point[0].direct);
+        datas.direction = SetDirect(spawn_point.direct);
 
         // バーストバーとの紐づけ
-        gui[0].bar.Init(player[0]);
+        gui.bar.Init(player);
 
         // 各種UIとの紐づけ
-        if (player[0].TryGetComponent<CharBase>(out var p))
+        if (player.TryGetComponent<CharBase>(out var p))
         {
-            p.burst_bar = gui[0].bar;   // バースト
-            gui[0].name.text = p.data.char_name;    // キャラ名
-            p.cooltimer[0] = gui[0].skill1_cooltimer;   // スキル1のクールタイムを表示
-            p.cooltimer[1] = gui[0].skill2_cooltimer;   // スキル2のクールタイムを表示
-            gui[0].icon.sprite = characters[pick_nums[0]].icon; // アイコン
+            p.burst_bar = gui.bar;   // バースト
+            gui.name.text = p.data.char_name;    // キャラ名
+            p.cooltimer[0] = gui.skill1_cooltimer;   // スキル1のクールタイムを表示
+            p.cooltimer[1] = gui.skill2_cooltimer;   // スキル2のクールタイムを表示
+            gui.icon.sprite = characters[pick_nums].icon; // アイコン
         }
     }
     
@@ -76,7 +74,7 @@ public class SoloBattleManager : MonoBehaviour
     void Update()
     {
         // ポインター
-        p_obj[0].transform.position = new(player[0].transform.position.x, player[0].transform.position.y + 2.0f);
+        p_obj.transform.position = new(player.transform.position.x, player.transform.position.y + 2.0f);
     }
 
     void OnDestroy()
@@ -88,16 +86,6 @@ public class SoloBattleManager : MonoBehaviour
     /// <param name="id"> プレイヤーの識別id </param>
     void Finish(int id)
     {
-        Debug.Log("Player " + id + " won!");
-
-        Winner.w_id = id;
-        Winner.w_name = datas[id].data.char_name;
-        Debug.Log($"id = {id}");
-        Debug.Log(player[id]);
-        Debug.Log(datas[id]);
-        Winner.sprite = datas[id].GetDefaultImage();
-        Debug.Log(Winner.sprite);
-
         SceneManager.LoadScene("ResultScene");
     }
 

@@ -10,18 +10,16 @@ public class CharBase : MonoBehaviour, IBurst
 
     [Header("◇キャラクターデータ")]
     public CharData data;
-    public int burst { get; set; } = 0;
     public int id { get; set; } = 0;
     public int max_burst { get; set; } = 100;
+    public int burst { get; set; } = 0;
     public int rigid;
     public int skill_1_cooltime = 0;
     public int skill_2_cooltime = 0;
     protected bool can_control = true;
     public int regen_burst_timer = 0;
-
-    //速度
-    protected int speed;
-    Effect effect = new();
+    protected State speed = new() { generic = 0, buff = 0, debuff = 0 };
+    public Effect state = new();
 
 
     [Header("◇カーソル")]
@@ -48,7 +46,7 @@ public class CharBase : MonoBehaviour, IBurst
         cursor_obj.Refresh(direction);
         cursor_obj.Set(this);
         max_burst = data.max_burst;
-        speed = data.speed;
+        speed.generic = data.speed;
     }
 
     virtual protected void Update()
@@ -65,13 +63,25 @@ public class CharBase : MonoBehaviour, IBurst
                 Heal(5);
             }
         }
-        //if (effect.type == EffectType.Speed)
-        //{
-        //    if (effect.time > speed_.time)
-        //    {
-        //        speed_.time = effect.time;
-        //    }
-        //}
+
+        // スピードリセット
+        speed.buff = speed.debuff = 0;
+
+        for (int i = state.speed.Count - 1; i >= 0; i--)
+        {
+            // スピードのバフ処理
+            if (state.speed[i].value > 0)
+                // 値が強いバフがあるなら取得
+                if (speed.buff < state.speed[i].value) speed.buff = state.speed[i].value;
+
+            // スピードのデバフ処理
+            if (state.speed[i].value < 0)
+                // 値が強いデバフがあるなら取得
+                if (speed.debuff < state.speed[i].value) speed.debuff = state.speed[i].value;
+
+            // 時間が無くなったエフェクトを削除
+            if (--state.speed[i].time <= 0) state.speed.RemoveAt(i);
+        }
     }
 
     virtual protected void FixedUpdate()
@@ -80,7 +90,7 @@ public class CharBase : MonoBehaviour, IBurst
         {
             // 硬直が無ければ移動
             if (rigid == 0)
-                rb.linearVelocity = vec * speed;
+                rb.linearVelocity = vec * SetState(speed);
             // 硬直があれば移動不可
             else
                 rb.linearVelocity = Vector2.zero;
@@ -109,8 +119,8 @@ public class CharBase : MonoBehaviour, IBurst
         }
     }
 
-    /// <summary> プレイヤーにダメージを与える </summary>
-    /// <param name="value"> 与えるダメージ量 </param>
+    /// <summary> プレイヤーを回復する </summary>
+    /// <param name="value"> 回復する量 </param>
     virtual public void Heal(int value)
     {
         // バースト値が最低なら中断
@@ -163,30 +173,47 @@ public class CharBase : MonoBehaviour, IBurst
         rb.AddForce(hitDirection.normalized * knockbackPower, ForceMode2D.Impulse);
     }
 
+    /// <summary> リザルトに画像を渡す関数の雛型 </summary>
+    /// <returns> 渡す画像 </returns>
     virtual public Sprite GetDefaultImage()
     {
         return null;
     }
 
-    public void GiveEffect(EffectState effect)
+    /// <summary> エフェクトの数値の整理 </summary>
+    /// <param name="state"> 整理するエフェクト </param>
+    /// <returns> 合算後のエフェクトの数値（0 <= n）を返す </returns>
+    protected int SetState(State state)
     {
-        this.effect.speed.Add(effect);
+        int tmp = state.generic + state.buff - state.debuff;
+        return tmp < 0 ? 0 : tmp;
     }
 }
 
+[Serializable]
 public class Effect
 {
     public List<EffectState> speed = new();
 }
 
+[Serializable]
 public class EffectState
 {
-    //public EffectType type;
+    /// <summary> エフェクトの制限時間 </summary>
     public int time = 0;
+
+    /// <summary> エフェクトの強度 </summary>
     public int value = 0;
 }
 
-public enum EffectType
+public class State
 {
-    Speed
+    /// <summary> 元になる値 </summary>
+    public int generic = 0;
+
+    /// <summary> 増加させる値 </summary>
+    public int buff = 0;
+
+    /// <summary> 減少させる値 </summary>
+    public int debuff = 0;
 }
