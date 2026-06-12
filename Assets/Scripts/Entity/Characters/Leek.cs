@@ -15,7 +15,7 @@ public class Leek : CharBase
     // カウンター用
     [SerializeField] private GameObject countercircle;
     [SerializeField] private float counterTime = 1.0f;
-    [SerializeField] private int counterDamage = 50;
+    [SerializeField] private int counterDamage = 30;
     [SerializeField] private float counterDashPower = 10f;
     [SerializeField] AudioClip se2;
     [SerializeField] AudioClip se3;
@@ -50,7 +50,7 @@ public class Leek : CharBase
         if (!ctx.performed) return;
 
         // 中断処理
-        if (skill_1_cooltime != 0 || !can_control) return;
+        if (skill_1_cooltime != 0 || !can_control||isCounter) return;
 
         //SE
         audioSource.PlayOneShot(se1);
@@ -80,7 +80,7 @@ public class Leek : CharBase
     // カウンター構え
     public override void Skill2(InputAction.CallbackContext ctx)
     {
-      
+        speed = 1;
         if (!ctx.performed) return;
 
         // 中断処理
@@ -108,6 +108,7 @@ public class Leek : CharBase
         yield return new WaitForSeconds(counterTime);
 
         isCounter = false;
+        speed = 4;
     }
 
     // カウンター攻撃

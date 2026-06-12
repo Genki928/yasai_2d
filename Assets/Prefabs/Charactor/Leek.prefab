@@ -116,12 +116,13 @@ MonoBehaviour:
   cursor_pf: {fileID: 5826391187326269229, guid: 50c4b14c6dc55f04f924db6a0c75f818, type: 3}
   audioSource: {fileID: 0}
   collision: {fileID: 4175897494506351822, guid: 4ba9f983ad34b8b4ca91e7f135e10d36, type: 3}
-  skill1Damage: 20
+  skill1Damage: 15
   se1: {fileID: 8300000, guid: fb765604af2755b429293b35df950426, type: 3}
   isSrash: 0
   countercircle: {fileID: 7072312434174299672, guid: eb08d284ce84b3d43acf9b6517c6004c, type: 3}
   counterTime: 1
   counterDamage: 30
+  counterDashPower: 10
   se2: {fileID: 8300000, guid: 489a91f4c1f04884aac6a4912018e955, type: 3}
   se3: {fileID: 8300000, guid: fe6aa65115709e242a7ea893adf08b40, type: 3}
   sprite: {fileID: 0}
