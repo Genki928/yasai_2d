@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEditor.U2D.Animation;
+using Const;
 
 static class Winner
 {
@@ -121,7 +121,7 @@ public class BattleManager : MonoBehaviour
         Debug.Log(Winner.sprite);
 
         if (isdeath) return;
-        SceneManager.LoadScene("ResultScene");
+        SceneManager.LoadScene(SceneName.RESULT);
     }
 
     Vector2 SetDirect(DIRECT direct)
