@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.U2D.Animation;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -42,17 +43,20 @@ public class BattleManager : MonoBehaviour
 
     //演出
     [SerializeField] GameObject deathEffect;
+    [SerializeField] private AudioClip se;
     protected bool sceneLoad = false;
+    //オーディオソース用
+    public AudioSource audioSource;
 
     void Awake()
-    {
-
+    { 
         Winner.Reset();
         Application.targetFrameRate = 30;
         CharBase.OnPlayerDies += Finish;
     }
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
 
         for (int i = 0; i < PLAYER_CNT; i++)
         {
@@ -148,10 +152,13 @@ public class BattleManager : MonoBehaviour
         Vector3 originalPos = cam.transform.position;
         float originalSize = cam.orthographicSize;
 
-        Vector3 zoomPos = loser.transform.position;
+        Vector3 zoomPos = new(loser.transform.position.x, loser.transform.position.y + 0.5f, loser.transform.position.z);
         zoomPos.z = originalPos.z;
 
-        // ===== 一気にズーム =====
+        //ズーム
+        //SE
+        audioSource.PlayOneShot(se);
+
         float targetSize = 2.2f;
         float t = 0;
 
@@ -168,7 +175,7 @@ public class BattleManager : MonoBehaviour
             yield return null;
         }
 
-        //ス〇ブラ風
+        //ス〇ブラ風シェイク
         float shakeTime = 1.0f;
 
         while (shakeTime > 0)
@@ -184,24 +191,21 @@ public class BattleManager : MonoBehaviour
             yield return null;
         }
 
-        // ===== カメラを戻す =====
-        t = 0;
+        ////カメラを戻す
+        //t = 0;
 
-        while (t < 0.2f)
-        {
-            t += Time.deltaTime;
+        //while (t < 0.2f)
+        //{
+        //    t += Time.deltaTime;
 
-            cam.transform.position =
-                Vector3.Lerp(zoomPos, originalPos, t / 0.2f);
+        //    cam.transform.position =
+        //        Vector3.Lerp(zoomPos, originalPos, t / 0.2f);
 
-            cam.orthographicSize =
-                Mathf.Lerp(targetSize, originalSize, t / 0.2f);
+        //    cam.orthographicSize =
+        //        Mathf.Lerp(targetSize, originalSize, t / 0.2f);
 
-            yield return null;
-        }
-
-        // ===== 撃墜アニメーション =====
-
+        //    yield return null;
+        //}
         // エフェクト生成
         Instantiate(
             deathEffect,
@@ -209,19 +213,13 @@ public class BattleManager : MonoBehaviour
             Quaternion.identity);
 
         // プレイヤーを画面外へ
-        loser.transform.position = new Vector3(1000, 1000, 0);
+        loser.transform.position = new Vector3(1000, 1000, 0);//座標移動で物理的に見えなくしてる
 
         // 1秒待つ
         yield return new WaitForSeconds(1.0f);
 
         // シーン切り替え
         SceneManager.LoadScene("ResultScene");
-    }
-
-    private IEnumerator Wait()
-    {
-        yield return new WaitForSeconds(1.0f);
-        sceneLoad = true;
     }
 
     Vector2 SetDirect(DIRECT direct)

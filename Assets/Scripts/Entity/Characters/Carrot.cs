@@ -41,6 +41,7 @@ public class Carrot : CharBase
     override protected void Update()
     {
         base.Update();
+        if(!can_control) sprite.flipX = false;
     }
 
     protected override void FixedUpdate()
@@ -58,6 +59,7 @@ public class Carrot : CharBase
 
             // タックル開始
             audioSource.PlayOneShot(se2);
+          
             StartCoroutine(Tackle());
             Debug.Log("tackle");
 
