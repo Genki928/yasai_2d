@@ -3404,6 +3404,7 @@ MonoBehaviour:
   - {fileID: 4178201437919755446, guid: c6e495c33560abc4a80b03db369bd4f9, type: 3}
   - {fileID: 7493455991842142285, guid: 69cc6b67633600840b2c059ba36d90ed, type: 3}
   deathEffect: {fileID: 2733761082984051111, guid: c7ac236a659c68945a984f2f44c3d884, type: 3}
+  burstEffect: {fileID: 6424322297321785565, guid: b7c1ef9858bcffd44a75d647ee5fd2e1, type: 3}
   se: {fileID: 8300000, guid: 76ed563bda374854f9f31902f46ca644, type: 3}
   audioSource: {fileID: 0}
 --- !u!4 &1873271267

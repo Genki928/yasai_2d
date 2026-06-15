@@ -43,7 +43,9 @@ public class BattleManager : MonoBehaviour
 
     //演出
     [SerializeField] GameObject deathEffect;
+    [SerializeField] GameObject burstEffect;
     [SerializeField] private AudioClip se;
+    [SerializeField] private AudioClip se1;
     protected bool sceneLoad = false;
     //オーディオソース用
     public AudioSource audioSource;
@@ -176,7 +178,7 @@ public class BattleManager : MonoBehaviour
         }
 
         //ス〇ブラ風シェイク
-        float shakeTime = 1.0f;
+        float shakeTime = 2.0f;
 
         while (shakeTime > 0)
         {
@@ -206,17 +208,25 @@ public class BattleManager : MonoBehaviour
 
         //    yield return null;
         //}
+        audioSource.PlayOneShot(se1);
         // エフェクト生成
         Instantiate(
             deathEffect,
             loser.transform.position,
             Quaternion.identity);
 
+        Instantiate(
+         burstEffect,
+         new Vector3(
+             Camera.main.transform.position.x,
+             Camera.main.transform.position.y,
+             0),
+         Quaternion.identity);
+
         // プレイヤーを画面外へ
         loser.transform.position = new Vector3(1000, 1000, 0);//座標移動で物理的に見えなくしてる
 
-        // 1秒待つ
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(4.5f);
 
         // シーン切り替え
         SceneManager.LoadScene("ResultScene");
