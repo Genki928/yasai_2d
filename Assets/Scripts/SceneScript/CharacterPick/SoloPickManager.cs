@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using Const;
+using static UnityEditor.PlayerSettings;
 
 public class SoloPickManager : MonoBehaviour
 {
@@ -70,7 +70,7 @@ public class SoloPickManager : MonoBehaviour
                 //    cursor[0].pos[Y] * ICON_LINEFEED_COUNT + cursor[0].pos[X],
                 //    cursor[1].pos[Y] * ICON_LINEFEED_COUNT + cursor[1].pos[X]
                 //};
-                SceneManager.LoadScene(SceneName.BATTLE_PVE);
+                SceneManager.LoadScene("BattleScene 1");
             }
 
             // Œˆ’è

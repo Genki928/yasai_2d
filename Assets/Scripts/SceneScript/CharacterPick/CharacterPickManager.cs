@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Const;
 
 public class CharacterPickManager : MonoBehaviour
 {
@@ -80,7 +79,7 @@ public class CharacterPickManager : MonoBehaviour
                     cursor[0].pos[Y] * ICON_LINEFEED_COUNT + cursor[0].pos[X],
                     cursor[1].pos[Y] * ICON_LINEFEED_COUNT + cursor[1].pos[X]
                 };
-                SceneManager.LoadScene(SceneName.BATTLE_PVP);
+                SceneManager.LoadScene("BattleScene");
             }
 
             // Ž¯•Ê
