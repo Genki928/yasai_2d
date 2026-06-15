@@ -3126,6 +3126,9 @@ MonoBehaviour:
     icon: {fileID: 559062713}
     skill1_cooltimer: {fileID: 1225425201}
     skill2_cooltimer: {fileID: 1584968705}
+  player_obj:
+  - {fileID: 4178201437919755446, guid: c6e495c33560abc4a80b03db369bd4f9, type: 3}
+  - {fileID: 7493455991842142285, guid: 69cc6b67633600840b2c059ba36d90ed, type: 3}
 --- !u!4 &1873271267
 Transform:
   m_ObjectHideFlags: 0

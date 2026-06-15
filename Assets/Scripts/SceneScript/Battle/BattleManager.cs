@@ -35,6 +35,9 @@ public class BattleManager : MonoBehaviour
     [Header("ÅûGUI")]
     public GUI[] gui = new GUI[PLAYER_CNT];
 
+    public GameObject[] player_obj = new GameObject[PLAYER_CNT];
+    GameObject[] p_obj = new GameObject[PLAYER_CNT];
+
 
     void Awake()
     {
@@ -48,6 +51,8 @@ public class BattleManager : MonoBehaviour
 
         for (int i = 0; i < PLAYER_CNT; i++)
         {
+            p_obj[i] = Instantiate(player_obj[i]);
+
             // ÉvÉåÉCÉÑÅ[ê∂ê¨
             pick_nums[i] = PlayerPick.pick[i];
             PlayerInput pi;
@@ -77,7 +82,6 @@ public class BattleManager : MonoBehaviour
             player[i] = pi.gameObject;
             datas[i] = player[i].GetComponent<CharBase>();
             datas[i].id = i;
-            datas[i].pointer.GetComponent<SpriteRenderer>().sprite = pointer[i];
 
             datas[i].direction = SetDirect(spawn_point[i].direct);
 
@@ -98,7 +102,8 @@ public class BattleManager : MonoBehaviour
 
     void Update()
     {
-        ;
+        p_obj[0].transform.position = new(player[0].transform.position.x, player[0].transform.position.y + 2.0f);
+        p_obj[1].transform.position = new(player[1].transform.position.x, player[1].transform.position.y + 2.0f);
     }
 
     void OnDestroy()
