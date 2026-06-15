@@ -103,9 +103,9 @@ TextureImporter:
       name: newleek_0
       rect:
         serializedVersion: 2
-        x: 5
+        x: 3
         y: 0
-        width: 21
+        width: 27
         height: 32
       alignment: 7
       pivot: {x: 0.5, y: 0}

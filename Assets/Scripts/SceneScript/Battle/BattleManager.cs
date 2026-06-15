@@ -1,10 +1,11 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.U2D.Animation;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEditor.U2D.Animation;
+using UnityEngine.UI;
 
 static class Winner
 {
@@ -38,6 +39,10 @@ public class BattleManager : MonoBehaviour
     public GameObject[] player_obj = new GameObject[PLAYER_CNT];
     GameObject[] p_obj = new GameObject[PLAYER_CNT];
 
+
+    //演出
+    [SerializeField] GameObject deathEffect;
+    protected bool sceneLoad = false;
 
     void Awake()
     {
@@ -115,18 +120,108 @@ public class BattleManager : MonoBehaviour
     /// <param name="id"> プレイヤーの識別id </param>
     void Finish(int id)
     {
-        Debug.Log("Player " + id + " won!");
+        if (isdeath) return;
+
+        isdeath = true;
 
         Winner.w_id = id;
         Winner.w_name = datas[id].data.char_name;
-        Debug.Log($"id = {id}");
-        Debug.Log(player[id]);
-        Debug.Log(datas[id]);
         Winner.sprite = datas[id].GetDefaultImage();
-        Debug.Log(Winner.sprite);
 
-        if (isdeath) return;
+        int loseId = id == 0 ? 1 : 0;
+
+        StartCoroutine(GameOverEffect(loseId));
+    }
+    /// <summary>
+    /// 演出用コルーチン
+    /// </summary>
+    /// <param name="direct"></param>
+    /// <returns></returns>
+    IEnumerator GameOverEffect(int loseId)
+    {
+    
+        Camera cam = Camera.main;
+
+        GameObject loser = player[loseId];
+        Rigidbody2D rb = loser.GetComponent<Rigidbody2D>();
+
+        Vector3 originalPos = cam.transform.position;
+        float originalSize = cam.orthographicSize;
+
+        Vector3 zoomPos = loser.transform.position;
+        zoomPos.z = originalPos.z;
+
+        // ===== 一気にズーム =====
+        float targetSize = 2.2f;
+        float t = 0;
+
+        while (t < 0.1f)
+        {
+            t += Time.deltaTime;
+
+            cam.transform.position =
+                Vector3.Lerp(originalPos, zoomPos, t / 0.1f);
+
+            cam.orthographicSize =
+                Mathf.Lerp(originalSize, targetSize, t / 0.1f);
+
+            yield return null;
+        }
+
+        //ス〇ブラ風
+        float shakeTime = 1.0f;
+
+        while (shakeTime > 0)
+        {
+            shakeTime -= Time.deltaTime;
+
+            Vector2 shake =
+                UnityEngine.Random.insideUnitCircle * 0.25f;
+
+            cam.transform.position =
+                zoomPos + new Vector3(shake.x, shake.y, 0);
+
+            yield return null;
+        }
+
+        // ===== カメラを戻す =====
+        t = 0;
+
+        while (t < 0.2f)
+        {
+            t += Time.deltaTime;
+
+            cam.transform.position =
+                Vector3.Lerp(zoomPos, originalPos, t / 0.2f);
+
+            cam.orthographicSize =
+                Mathf.Lerp(targetSize, originalSize, t / 0.2f);
+
+            yield return null;
+        }
+
+        // ===== 撃墜アニメーション =====
+
+        // エフェクト生成
+        Instantiate(
+            deathEffect,
+            loser.transform.position,
+            Quaternion.identity);
+
+        // プレイヤーを画面外へ
+        loser.transform.position = new Vector3(1000, 1000, 0);
+
+        // 1秒待つ
+        yield return new WaitForSeconds(1.0f);
+
+        // シーン切り替え
         SceneManager.LoadScene("ResultScene");
+    }
+
+    private IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(1.0f);
+        sceneLoad = true;
     }
 
     Vector2 SetDirect(DIRECT direct)

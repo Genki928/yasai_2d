@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.U2D;
 
 public class CharBase : MonoBehaviour, IBurst
 {
@@ -16,7 +17,7 @@ public class CharBase : MonoBehaviour, IBurst
     public int rigid;
     public int skill_1_cooltime = 0;
     public int skill_2_cooltime = 0;
-    protected bool can_control = true;
+    public bool can_control = true;
     public int regen_burst_timer = 0;
     protected State speed = new() { generic = 0, buff = 0, debuff = 0 };
     public Effect state = new();
@@ -39,10 +40,14 @@ public class CharBase : MonoBehaviour, IBurst
     //オーディオソース用
     public AudioSource audioSource;
 
+    //スプライト
+    [SerializeField] private SpriteRenderer sprite;
+
     virtual protected void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
+        sprite = GetComponent<SpriteRenderer>();
         cursor_obj = Instantiate(cursor_pf, transform.position, Quaternion.identity).GetComponent<Arrow>();
         cursor_obj.Refresh(direction);
         cursor_obj.Set(this);
@@ -82,6 +87,16 @@ public class CharBase : MonoBehaviour, IBurst
 
             // 時間が無くなったエフェクトを削除
             if (--state.speed[i].time <= 0) state.speed.RemoveAt(i);
+        }
+
+        //向き
+        if (direction.x > 0)
+        {
+            sprite.flipX = false; // 右向き
+        }
+        else if (direction.x < 0)
+        {
+            sprite.flipX = true;  // 左向き
         }
     }
 

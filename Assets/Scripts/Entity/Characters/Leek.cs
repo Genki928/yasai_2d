@@ -21,14 +21,11 @@ public class Leek : CharBase
     [SerializeField] AudioClip se3;
 
     private bool isCounter = false;
-
-    [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private Sprite leek_default;
 
     protected override void Start()
     {
         base.Start();
-        sprite = GetComponent<SpriteRenderer>();
     }
 
     protected override void Update()
