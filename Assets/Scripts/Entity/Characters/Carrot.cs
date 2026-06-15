@@ -48,62 +48,18 @@ public class Carrot : CharBase
     {
         base.FixedUpdate();
     }
-
-
-    override public void Skill2(InputAction.CallbackContext ctx)
-    {
-        if (ctx.performed)
-        {
-            // 中断処理
-            if (skill_1_cooltime != 0 || !can_control) return;
-
-            // タックル開始
-            audioSource.PlayOneShot(se2);
-          
-            StartCoroutine(Tackle());
-            Debug.Log("tackle");
-
-            // 硬直・クールタイム
-            rigid += data.skill_1_rigid;
-            skill_1_cooltime = data.skill_1_cooltime;
-            Vector2 pos = new(transform.position.x, transform.position.y);
-            GameObject obj = Instantiate(dust, pos, Quaternion.identity);
-            if (direction.x > 0) obj.GetComponent<SpriteRenderer>().flipX = true;
-        }
-    }
-    private IEnumerator Tackle()
-    {
-
-        sprite.sprite = tackle;
-
-        can_control = false;
-
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
-
-        rb.linearVelocity = direction * tackleSpeed;
-
-        yield return new WaitForSeconds(tackleTime);
-
-        rb.linearVelocity = Vector2.zero;
-
-        can_control = true;
-        sprite.sprite = carrot_default;
-        transform.rotation = Quaternion.Euler(0, 0, 0);
-    }
-
     public override void Skill1(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
         {
             // クールタイム中なら終了
-            if (skill_2_cooltime != 0 || !can_control) return;
+            if (skill_1_cooltime != 0 || !can_control) return;
             audioSource.PlayOneShot(se1);
             StartCoroutine(HeadBang());
 
             rb.linearVelocity = Vector2.zero;
-            rigid += data.skill_2_rigid;
-            skill_2_cooltime = data.skill_2_cooltime;
+            rigid += data.skill_1_rigid;
+            skill_1_cooltime = data.skill_1_cooltime;
         }
     }
     private IEnumerator HeadBang()
@@ -161,6 +117,48 @@ public class Carrot : CharBase
 
         headBangCol.size = defaultSize;
         isHeadBanging = false;
+    }
+
+    override public void Skill2(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            // 中断処理
+            if (skill_2_cooltime != 0 || !can_control) return;
+
+            // タックル開始
+            audioSource.PlayOneShot(se2);
+
+            StartCoroutine(Tackle());
+            Debug.Log("tackle");
+
+            // 硬直・クールタイム
+            rigid += data.skill_2_rigid;
+            skill_2_cooltime = data.skill_2_cooltime;
+            Vector2 pos = new(transform.position.x, transform.position.y);
+            GameObject obj = Instantiate(dust, pos, Quaternion.identity);
+            if (direction.x > 0) obj.GetComponent<SpriteRenderer>().flipX = true;
+        }
+    }
+    private IEnumerator Tackle()
+    {
+
+        sprite.sprite = tackle;
+
+        can_control = false;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
+
+        rb.linearVelocity = direction * tackleSpeed;
+
+        yield return new WaitForSeconds(tackleTime);
+
+        rb.linearVelocity = Vector2.zero;
+
+        can_control = true;
+        sprite.sprite = carrot_default;
+        transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     public override Sprite GetDefaultImage()
