@@ -145,7 +145,7 @@ public class BattleManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator GameOverEffect(int loseId)
     {
-    
+     
         Camera cam = Camera.main;
 
         GameObject loser = player[loseId];
@@ -156,6 +156,9 @@ public class BattleManager : MonoBehaviour
 
         Vector3 zoomPos = new(loser.transform.position.x, loser.transform.position.y + 0.5f, loser.transform.position.z);
         zoomPos.z = originalPos.z;
+
+        loser.GetComponent<CharBase>().can_control = false;
+        rb.linearVelocity = Vector2.zero;
 
         //ÉYÅ[ÉÄ
         //SE
