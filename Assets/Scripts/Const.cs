@@ -11,4 +11,9 @@ namespace Const
         public const string BATTLE_PVE = "BattleScene-pve";
         public const string RESULT = "ResultScene";
     }
+
+    public static class BossCarrotConst
+    {
+        public const float TACKLE_SPEED = 25.0f;
+    }
 }
