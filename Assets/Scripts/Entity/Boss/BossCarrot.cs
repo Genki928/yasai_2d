@@ -49,7 +49,7 @@ public class BossCarrotTackle : BossState
     }
     override public void Update(BossBase bb)
     {
-        bb.StartCoroutine(Tackle());
+        //bb.StartCoroutine(Tackle());
     }
     override public void Exit(BossBase bb)
     {

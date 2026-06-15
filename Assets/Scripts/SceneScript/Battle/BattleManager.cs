@@ -216,7 +216,7 @@ public class BattleManager : MonoBehaviour
         loser.transform.position = new Vector3(1000, 1000, 0);//座標移動で物理的に見えなくしてる
 
         // 1秒待つ
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(5.0f);
 
         // シーン切り替え
         SceneManager.LoadScene("ResultScene");
