@@ -16,6 +16,7 @@ public class BossCarrot : BossBase
         states.Add("Headbang", new BossCarrotHeadbang());
         states.Add("Chill", new BossChill());
         ChangeState("Headbang");
+        right = false;
     }
 
     override protected void Update()
@@ -70,17 +71,39 @@ public class BossCarrotHeadbang : BossState
 
             // 頭下げ
             case 1:
-                me.transform.rotation = Quaternion.Euler(0, 0, rotate += 10);
-                if (rotate >= 90) phase = 2;
+                if (me.right) me.transform.rotation = Quaternion.Euler(0, 0, rotate -= 10);
+                else me.transform.rotation = Quaternion.Euler(0,0, rotate += 10);
+
+                if (me.right)
+                {
+                    if (rotate <= -90) phase = 2;
+                }
+                else
+                {
+                    if (rotate >= 90) phase = 2;
+                }
                 break;
 
             // 頭上げ
             case 2:
-                me.transform.rotation = Quaternion.Euler(0, 0, rotate -= 10);
-                if (rotate <= -180)
+                if (me.right) me.transform.rotation = Quaternion.Euler(0, 0, rotate += 10);
+                else me.transform.rotation = Quaternion.Euler(0, 0, rotate -= 10);
+
+                if (!me.right)
                 {
-                    me.RemoveDamageArea(circle);
-                    me.ChangeState("Tackle");
+                    if (rotate <= -180)
+                    {
+                        me.RemoveDamageArea(circle);
+                        me.ChangeState("Tackle");
+                    }
+                }
+                else
+                {
+                    if (rotate >= 180)
+                    {
+                        me.RemoveDamageArea(circle);
+                        me.ChangeState("Tackle");
+                    }
                 }
                 break;
         }
@@ -90,6 +113,9 @@ public class BossCarrotHeadbang : BossState
     {
         me.Freeze(true);
         me.damage = 0;
+        phase = 0;
+        rotate = 0;
+        timer = 0;
         me.damaged.Clear();
     }
 }
@@ -109,42 +135,66 @@ public class BossCarrotTackle : BossState
         bb.Freeze(false);       // 判定を消す
         bb.damage = 20;         // ダメージを設定
         line = me.DisplayDamageArea(LINE_DAMAGE_AREA, me.transform.position);
-        me.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -90.0f);
+        
+        if (me.right) me.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 90.0f);
+        else me.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -90.0f);
     }
     override public bool Update()
     {
         switch (phase)
         {
-            // ロックオン
+            // -----ロックオン----- //
             case 0:
+                // 線の追従
                 line.transform.position = new(0.0f, me.transform.position.y);
-                me.transform.position = new(10.0f, me.player.transform.position.y);
+                
+                // 本体の追従
+                if (me.right) me.transform.position = new(-10.0f, me.player.transform.position.y);
+                else me.transform.position = new(10.0f, me.player.transform.position.y);
+                
+                // 一定時間経過で突進開始
                 if (++timer >= 60)
                 {
                     phase = 1;
+                    timer = 0;
                 }
                 break;
 
-            // 突進
+            // ----- 突進 ----- //
             case 1:
-                me.rb.linearVelocity = new(-BossCarrotConst.TACKLE_SPEED, 0.0f);
-                if (me.transform.position.x <= -20.0f) phase = 2;
+                // ベクトル設定
+                if (me.right) me.rb.linearVelocity = new(BossCarrotConst.TACKLE_SPEED, 0.0f);
+                else me.rb.linearVelocity = new(-BossCarrotConst.TACKLE_SPEED, 0.0f);
+
+                if (me.right)
+                {
+                    if (me.transform.position.x >= 20.0f) phase = 2;
+                }
+                else
+                {
+                    if (me.transform.position.x <= -20.0f) phase = 2;
+                }
                 break;
 
             // 終了
             case 2:
-                me.RemoveDamageArea(line);
-                me.transform.position = new(6.0f, -5);
-                me.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                if (++timer >= 30) me.ChangeState("Headbang");
                 break;
         }
         return false;
     }
     override public void Exit()
     {
+        me.RemoveDamageArea(line);
+        if (me.right) me.transform.position = new(6.0f, -5);
+        else me.transform.position = new(-6.0f, -5);
+        me.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
         me.Freeze(true);
         me.damage = 0;
         me.damaged.Clear();
+        me.right = !me.right;
+        phase = 0;
+        timer = 0;
     }
 }
 
