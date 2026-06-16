@@ -42,6 +42,9 @@ TagManager:
   - name: back
     uniqueID: 2244673905
     locked: 0
+  - name: damage_area
+    uniqueID: 3640240533
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

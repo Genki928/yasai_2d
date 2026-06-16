@@ -32,7 +32,6 @@ public class BattleManager : MonoBehaviour
     GameObject[] player = new GameObject[PLAYER_CNT];
     CharBase[] datas = new CharBase[PLAYER_CNT];
     int[] pick_nums = { 0, 1 };
-    [SerializeField] Sprite[] pointer = new Sprite[PLAYER_CNT];
 
     [Header("ÅûGUI")]
     public GUI[] gui = new GUI[PLAYER_CNT];

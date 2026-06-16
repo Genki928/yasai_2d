@@ -1,10 +1,11 @@
 using UnityEngine;
 using Const;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BossCarrot : BossBase
 {
-
+    int pattern = 0;
     override protected void Start()
     {
         // 基底クラス
@@ -12,12 +13,17 @@ public class BossCarrot : BossBase
 
         // フェーズ設定
         states.Add("Tackle", new BossCarrotTackle());
-        ChangeState("Tackle");
+        states.Add("Headbang", new BossCarrotHeadbang());
+        states.Add("Chill", new BossChill());
+        ChangeState("Headbang");
     }
 
     override protected void Update()
     {
-        base.Update();
+        if (pattern == 0)
+        {
+            if (state.Update()) ChangeState("Chill");
+        }
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -37,51 +43,108 @@ public class BossCarrot : BossBase
 }
 
 /// <summary> ボスニンジンの、ヘドバン攻撃パターン </summary>
-public class BossCarrotTackle : BossState
+public class BossCarrotHeadbang : BossState
 {
+    const int CIRCLE_DAMAGE_AREA = 0;
+    BossCarrot me;
     int phase = 0;
     int rotate = 0;
+    int timer = 0;
+    GameObject circle;
 
     override public void Enter(BossBase bb)
     {
-        bb.Freeze(false);
-        bb.damage = 20;
+        me = (BossCarrot)bb;    // 型を渡す
+        bb.Freeze(false);       // 判定を消す
+        bb.damage = 20;         // ダメージを設定
+        circle = me.DisplayDamageArea(CIRCLE_DAMAGE_AREA, me.transform.position);
     }
-    override public void Update(BossBase bb)
-    {
-        //bb.StartCoroutine(Tackle());
-    }
-    override public void Exit(BossBase bb)
-    {
-        bb.Freeze(true);
-        bb.damage = 0;
-        bb.damaged.Clear();
-    }
-    private IEnumerator Tackle(BossBase bb)
+    override public bool Update()
     {
         switch (phase)
         {
-            // 頭下げ
+            // エリア表示
             case 0:
-                bb.transform.rotation = Quaternion.Euler(0, 0, rotate += 10);
-                if (rotate >= 90) phase = 1;
+                if (++timer >= 30) phase = 1;
+                break;
+
+            // 頭下げ
+            case 1:
+                me.transform.rotation = Quaternion.Euler(0, 0, rotate += 10);
+                if (rotate >= 90) phase = 2;
                 break;
 
             // 頭上げ
-            case 1:
-                bb.transform.rotation = Quaternion.Euler(0, 0, rotate -= 10);
-                if (rotate <= -90)
+            case 2:
+                me.transform.rotation = Quaternion.Euler(0, 0, rotate -= 10);
+                if (rotate <= -180)
                 {
-                    phase = 2;
-                    bb.rb.linearVelocity = new(0.0f, -BossCarrotConst.TACKLE_SPEED);
+                    me.RemoveDamageArea(circle);
+                    me.ChangeState("Tackle");
+                }
+                break;
+        }
+        return false;
+    }
+    override public void Exit()
+    {
+        me.Freeze(true);
+        me.damage = 0;
+        me.damaged.Clear();
+    }
+}
+
+/// <summary> ボスニンジンの、タックル攻撃パターン </summary>
+public class BossCarrotTackle : BossState
+{
+    const int LINE_DAMAGE_AREA = 1;
+    BossCarrot me;
+    int phase = 0;
+    int timer = 0;
+    GameObject line;
+
+    override public void Enter(BossBase bb)
+    {
+        me = (BossCarrot)bb;    // 型を渡す
+        bb.Freeze(false);       // 判定を消す
+        bb.damage = 20;         // ダメージを設定
+        line = me.DisplayDamageArea(LINE_DAMAGE_AREA, me.transform.position);
+        me.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -90.0f);
+    }
+    override public bool Update()
+    {
+        switch (phase)
+        {
+            // ロックオン
+            case 0:
+                line.transform.position = new(0.0f, me.transform.position.y);
+                me.transform.position = new(10.0f, me.player.transform.position.y);
+                if (++timer >= 60)
+                {
+                    phase = 1;
                 }
                 break;
 
-            // ロックオン
+            // 突進
+            case 1:
+                me.rb.linearVelocity = new(-BossCarrotConst.TACKLE_SPEED, 0.0f);
+                if (me.transform.position.x <= -20.0f) phase = 2;
+                break;
+
+            // 終了
             case 2:
+                me.RemoveDamageArea(line);
+                me.transform.position = new(6.0f, -5);
+                me.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
                 break;
         }
-        yield return null;
+        return false;
+    }
+    override public void Exit()
+    {
+        me.Freeze(true);
+        me.damage = 0;
+        me.damaged.Clear();
     }
 }
 

@@ -10,7 +10,8 @@ public class SoloBattleManager : MonoBehaviour
     [SerializeField] List<Character> characters = new(); 
     public Spawner spawn_point;
     GameObject player;
-    CharBase datas;
+    [SerializeField] List<BossBase> bosses = new();
+    BossBase boss;
     int pick_nums = 0;
 
     [Header("◇GUI")]
@@ -43,6 +44,9 @@ public class SoloBattleManager : MonoBehaviour
             p.cooltimer[1] = gui.skill2_cooltimer;   // スキル2のクールタイムを表示
             gui.icon.sprite = characters[pick_nums].icon; // アイコン
         }
+
+        boss = Instantiate(bosses[0], new(6.0f, -5.0f), Quaternion.identity);
+        boss.player = player;
     }
     
 

@@ -10,6 +10,6 @@ public abstract class BossState
     //}
 
     public abstract void Enter(BossBase bb);
-    public abstract void Update(BossBase bb);
-    public abstract void Exit(BossBase bb);
+    public abstract bool Update();
+    public abstract void Exit();
 }

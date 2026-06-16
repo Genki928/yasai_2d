@@ -1,5 +1,7 @@
+using Const;
 using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class BossBase : MonoBehaviour, IBurst
@@ -22,19 +24,27 @@ public class BossBase : MonoBehaviour, IBurst
 
 
     public bool right = true;
-    [SerializeField] public SpriteRenderer sr;
+    public List<GameObject> area_list = new();
+    public Dictionary<string, GameObject> area_obj = new();
+    public GameObject player;
 
     virtual protected void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer>();
         Freeze(true);
     }
 
     // Update is called once per frame
     virtual protected void Update()
     {
-        state?.Update(this);
+        state?.Update();
+    }
+
+    public void ChangeState(string phase_name)
+    {
+        state?.Exit();
+        state = states[phase_name];
+        state?.Enter(this);
     }
 
     public void Damage(int value, int id)
@@ -58,10 +68,32 @@ public class BossBase : MonoBehaviour, IBurst
         }
     }
 
-    public void ChangeState(string phase_name)
+    public GameObject DisplayDamageArea(int list, Vector2 pos)
     {
-        state?.Exit(this);
-        state = states[phase_name];
-        state?.Enter(this);
+        return Instantiate(area_list[list], pos, Quaternion.identity);
+        
+    }
+
+    public void RemoveDamageArea(GameObject go)
+    {
+        Destroy(go);
+    }
+}
+
+/// <summary> ボスニンジンの、タックル攻撃パターン </summary>
+public class BossChill : BossState
+{
+
+    override public void Enter(BossBase bb)
+    {
+        ;
+    }
+    override public bool Update()
+    {
+        return false;
+    }
+    override public void Exit()
+    {
+        ;
     }
 }
