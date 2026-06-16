@@ -70,7 +70,7 @@ public class SoloPickManager : MonoBehaviour
                 //    cursor[0].pos[Y] * ICON_LINEFEED_COUNT + cursor[0].pos[X],
                 //    cursor[1].pos[Y] * ICON_LINEFEED_COUNT + cursor[1].pos[X]
                 //};
-                SceneManager.LoadScene("BattleScene-pve");
+                SceneManager.LoadScene(SceneName.BATTLE_PVE);
             }
 
             // Œˆ’è
