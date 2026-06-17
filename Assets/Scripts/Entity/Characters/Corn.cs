@@ -50,7 +50,6 @@ public class Corn : CharBase
                 bullet_obj = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
                 bullet_obj.GetComponent<DamageArea>().Init(id, 10, direction * 0.5f, true);
                 sr.sprite = img[1];
-                Damage(2, id == 0 ? 1 : 0);
 
                 // 硬直・クールタイム
                 skill_1_cooltime = data.skill_1_cooltime;
@@ -60,10 +59,16 @@ public class Corn : CharBase
             }
             else
             {
-                GameObject particle = Instantiate(bomb, bullet_obj.transform.position, Quaternion.identity);
-                Instantiate(bomb_obj, bullet_obj.transform.position, Quaternion.identity);
-                particle.GetComponent<SpriteRenderer>().sprite = popcorn;
-                Destroy(bullet_obj);
+                // 爆発生成
+                GameObject particle = Instantiate(bomb_obj, bullet_obj.transform.position, Quaternion.identity);
+                particle.GetComponent<DamageArea>().Init(id, 10, new(0, 0), false);
+
+                // ポップコーン生成
+                bullet_obj.GetComponent<SpriteRenderer>().sprite = popcorn;
+                bullet_obj.GetComponent<DamageArea>().Init(id, 0, new(0, 0), false);
+                Rigidbody2D rb_c = bullet_obj.GetComponent<Rigidbody2D>();
+                rb_c.gravityScale = 5.0f;
+                rb_c.linearVelocity = new(direction.x, 15.0f);
                 bullet_obj = null;
             }
         }

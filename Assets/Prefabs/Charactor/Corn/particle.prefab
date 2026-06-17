@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6788958711764571066}
   - component: {fileID: 4502223276564447830}
+  - component: {fileID: 8346773140277200642}
   - component: {fileID: 4359933205649425551}
   - component: {fileID: 7626331368627439783}
   - component: {fileID: 2258133201265935395}
@@ -94,6 +95,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &8346773140277200642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2733761082984051111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18af939f2915ae041829f4fa833e9a9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageArea
 --- !u!114 &4359933205649425551
 MonoBehaviour:
   m_ObjectHideFlags: 0
