@@ -48,7 +48,7 @@ public class Corn : CharBase
 
                 // 弾を生成 -> idの紐づけ
                 bullet_obj = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
-                bullet_obj.GetComponent<DamageArea>().Init(id, 10, direction * 0.5f, true);
+                bullet_obj.GetComponent<DamageArea>().Init(id, 0, direction * 0.5f, false);
                 sr.sprite = img[1];
 
                 // 硬直・クールタイム
