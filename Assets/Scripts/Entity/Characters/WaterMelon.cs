@@ -15,16 +15,17 @@ public class WaterMelon : CharBase
 
     public Sprite WaterMelon_default;
     public Sprite WaterMelon_skill;
-
+    private bool isShoot;
 
 
     //skill1
     [SerializeField] GameObject bullet;
-    [SerializeField]static int bullet_damage = 7;
+    [SerializeField]static int bullet_damage = 10;
 
     //skill2
     [SerializeField] GameObject cutter;
-    [SerializeField] static int cutter_damage = 30;
+    [SerializeField] static int cutter_damage = 60;
+    private bool isCutter;
 
 
 
@@ -51,7 +52,7 @@ public class WaterMelon : CharBase
         if (ctx.performed)
         {
             // クールタイム中なら終了
-            if (skill_1_cooltime != 0 || !can_control) return;
+            if (skill_1_cooltime != 0 || !can_control||isCutter) return;
 
             StartCoroutine(WaterMelonShoot());
       
@@ -64,6 +65,7 @@ public class WaterMelon : CharBase
 
     private IEnumerator WaterMelonShoot()
     {
+        isShoot = true;
         sprite.sprite = WaterMelon_skill;
         speed.generic = 2;
         // 座標・ベクトルの算出
@@ -86,6 +88,7 @@ public class WaterMelon : CharBase
         yield return new WaitForSeconds(0.1f);
         sprite.sprite = WaterMelon_default;
         speed.generic = 4;
+        isShoot = false;
     }
    
     override public void Skill2(InputAction.CallbackContext ctx)
@@ -93,7 +96,7 @@ public class WaterMelon : CharBase
         if (ctx.performed)
         {
             // 中断処理
-            if (skill_2_cooltime != 0 || !can_control) return;
+            if (skill_2_cooltime != 0 || !can_control||isShoot) return;
 
             StartCoroutine(WaterMelonCutter());
 
@@ -106,15 +109,18 @@ public class WaterMelon : CharBase
 
     private IEnumerator WaterMelonCutter()
     {
+        isCutter = true;
         sprite.sprite = WaterMelon_skill;
         speed.generic = 1;
+        yield return new WaitForSeconds(1.0f);
         // 座標・ベクトルの算出
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         // 弾を生成 -> idの紐づけ
         GameObject go = Instantiate(cutter, transform.position, Quaternion.Euler(0, 0, angle - 270f));
-        go.GetComponent<DamageArea>().Init(id, cutter_damage, direction * 0.3f, true);
-        yield return new WaitForSeconds(1.0f);
+        go.GetComponent<DamageArea>().Init(id, cutter_damage, direction * 0.7f, true);
+        yield return new WaitForSeconds(0.2f);
         sprite.sprite = WaterMelon_default;
+        isCutter = false;
         speed.generic = 4;
     }
 

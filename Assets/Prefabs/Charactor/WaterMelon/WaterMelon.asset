@@ -20,6 +20,6 @@ MonoBehaviour:
   skill_1_rigid: 0
   skill_1_cooltime: 25
   skill_2_rigid: 5
-  skill_2_cooltime: 100
+  skill_2_cooltime: 250
   skill_3_rigid: 0
   skill_3_cooltime: 0

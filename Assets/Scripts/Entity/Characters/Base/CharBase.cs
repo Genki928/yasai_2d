@@ -43,6 +43,7 @@ public class CharBase : MonoBehaviour, IBurst
     //スプライト
     [SerializeField] private SpriteRenderer sprite;
 
+
     virtual protected void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -54,6 +55,12 @@ public class CharBase : MonoBehaviour, IBurst
         max_burst = data.max_burst;
         speed.generic = data.speed;
     }
+    //描画順番
+    void LateUpdate()
+    {
+        sprite.sortingOrder = Mathf.RoundToInt(-transform.position.y * 100);
+    }
+
 
     virtual protected void Update()
     {
