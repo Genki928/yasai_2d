@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afc16182e4a68c5409c51166b32c7bf7, type: 3}
-  m_Name: corn
+  m_Name: watermelon
   m_EditorClassIdentifier: Assembly-CSharp::PickData
-  char_name: CORN
-  lore: "\u547D\u3092\u524A\u308B\u305C\uFF01\n\n\u4E08\u592B\u3055\uFF1A\u25A1\u25A1\u25A1\n\u51F6\u66B4\u3055\uFF1A\u25A0\u25A1\u25A1\n\u7D20\u65E9\u3055\uFF1A\u25A0\u25A0\u25A0"
+  char_name: WATER MELON
+  lore: "\u3042\u3075\u308C\u51FA\u308B\u30B5\u30DE\u30FC\u30D1\u30EF\u30FC!\n\n\u4E08\u592B\u3055\uFF1A\u25A1\u25A1\u25A1\n\u51F6\u66B4\u3055\uFF1A\u25A0\u25A0\u25A1\n\u7D20\u65E9\u3055\uFF1A\u25A1\u25A1\u25A1"

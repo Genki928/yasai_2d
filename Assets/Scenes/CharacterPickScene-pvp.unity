@@ -1199,6 +1199,7 @@ MonoBehaviour:
   - {fileID: 3939098522201311849, guid: e87972cb61c228f4cbe16ff9f0bf0ba2, type: 3}
   - {fileID: 1512596204089908798, guid: f84ff9abed0a2df4b95da44ec226f970, type: 3}
   - {fileID: -7035740149812634158, guid: b1bc5c426c3953f4d9662f88862c6dd6, type: 3}
+  - {fileID: -7035740149812634158, guid: b1bc5c426c3953f4d9662f88862c6dd6, type: 3}
   cursor_pf: {fileID: 1833491355377103544, guid: 5a4424b64cb2ae240a3a53a8f0033486, type: 3}
   mix_cursor: {fileID: -7208024073301661153, guid: 2352e652b8d494642a46d15628950891, type: 3}
   cursor:
@@ -1213,6 +1214,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4327477bd08fbe24dbf496c27405b74b, type: 2}
   - {fileID: 11400000, guid: 260d7d8599947824a85fc13eeaf365a9, type: 2}
   - {fileID: 11400000, guid: 8721d4226a7c5c94ca1765d2cbe12e95, type: 2}
+  - {fileID: 11400000, guid: aef5c7cead79777489e4e2ac09cce03b, type: 2}
   state:
   - name: {fileID: 1394810176}
     lore: {fileID: 977860077}

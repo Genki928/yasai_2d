@@ -21,11 +21,14 @@ public class WaterMelon : CharBase
     //skill1
     [SerializeField] GameObject bullet;
     [SerializeField]static int bullet_damage = 10;
+    [SerializeField] AudioClip bullet_sound;
 
     //skill2
     [SerializeField] GameObject cutter;
     [SerializeField] static int cutter_damage = 60;
     private bool isCutter;
+    [SerializeField] AudioClip cutter_sound;
+    [SerializeField] AudioClip charge_sound;
 
 
 
@@ -73,18 +76,21 @@ public class WaterMelon : CharBase
         // ’e‚ð¶¬ -> id‚Ì•R‚Ã‚¯
         GameObject go = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
         go.GetComponent<DamageArea>().Init(id, bullet_damage, direction * 0.5f, true);
+        audioSource.PlayOneShot(bullet_sound);
         yield return new WaitForSeconds(0.1f);
         // À•WEƒxƒNƒgƒ‹‚ÌŽZo
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         // ’e‚ð¶¬ -> id‚Ì•R‚Ã‚¯
         go = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
         go.GetComponent<DamageArea>().Init(id, bullet_damage, direction * 0.5f, true);
+        audioSource.PlayOneShot(bullet_sound);
         yield return new WaitForSeconds(0.1f);
         // À•WEƒxƒNƒgƒ‹‚ÌŽZo
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         // ’e‚ð¶¬ -> id‚Ì•R‚Ã‚¯
         go = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
         go.GetComponent<DamageArea>().Init(id, bullet_damage, direction * 0.5f, true);
+        audioSource.PlayOneShot(bullet_sound);
         yield return new WaitForSeconds(0.1f);
         sprite.sprite = WaterMelon_default;
         speed.generic = 4;
@@ -109,15 +115,17 @@ public class WaterMelon : CharBase
 
     private IEnumerator WaterMelonCutter()
     {
+        audioSource.PlayOneShot(charge_sound);
         isCutter = true;
         sprite.sprite = WaterMelon_skill;
         speed.generic = 1;
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.7f);
         // À•WEƒxƒNƒgƒ‹‚ÌŽZo
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         // ’e‚ð¶¬ -> id‚Ì•R‚Ã‚¯
         GameObject go = Instantiate(cutter, transform.position, Quaternion.Euler(0, 0, angle - 270f));
         go.GetComponent<DamageArea>().Init(id, cutter_damage, direction * 0.7f, true);
+        audioSource.PlayOneShot(cutter_sound);
         yield return new WaitForSeconds(0.2f);
         sprite.sprite = WaterMelon_default;
         isCutter = false;
