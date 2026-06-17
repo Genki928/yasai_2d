@@ -104,16 +104,19 @@ public class SoloPickManager : MonoBehaviour
     {
         if (ctx.performed)
         {
-            //if (--cursor[0].pos[Y] < 0) cursor[0].pos[Y] = icon_obj.Count / ICON_LINEFEED_COUNT;
-            //if (cursor[0].pos[Y] == icon_obj.Count / ICON_LINEFEED_COUNT)
-            //{
-            //    if (cursor[0].pos[X] > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT)
-            //    {
-            //        cursor[0].pos[X] = (icon_obj.Count - 1) % ICON_LINEFEED_COUNT;
-            //    }
-            //}
+            // åàíËçœÇ›Ç»ÇÁà⁄ìÆïsâ¬
+            if (cursor.interact) return;
 
-            //cursor_obj[0].transform.position = new(pos.x + ICON_HORIZONTAL_SPACE * cursor[0].pos[X], pos.y - ICON_VERTICAL_SPACE * cursor[0].pos[Y]);
+            if (--cursor.pos[Y] < 0) cursor.pos[Y] = icon_obj.Count / ICON_LINEFEED_COUNT;
+            if (cursor.pos[Y] == icon_obj.Count / ICON_LINEFEED_COUNT)
+            {
+                if (cursor.pos[X] > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT)
+                {
+                    cursor.pos[X] = (icon_obj.Count - 1) % ICON_LINEFEED_COUNT;
+                }
+            }
+
+            Draw();
         }
     }
 
@@ -121,14 +124,17 @@ public class SoloPickManager : MonoBehaviour
     {
         if (ctx.performed)
         {
-            //if (++cursor[0].pos[Y] > (icon_obj.Count - 1) / ICON_LINEFEED_COUNT) cursor[0].pos[Y] = 0;
-            //if (icon_obj.Count % ICON_LINEFEED_COUNT != 0)
-            //{
-            //    if (cursor[0].pos[X] > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT) cursor[0].pos[Y] = 0;
-            //}
+            // åàíËçœÇ›Ç»ÇÁà⁄ìÆïsâ¬
+            if (cursor.interact) return;
+
+            if (++cursor.pos[Y] > (icon_obj.Count - 1) / ICON_LINEFEED_COUNT) cursor.pos[Y] = 0;
+            if (icon_obj.Count % ICON_LINEFEED_COUNT != 0)
+            {
+                if (cursor.pos[X] > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT) cursor.pos[Y] = 0;
+            }
 
 
-            //cursor_obj[0].transform.position = new(pos.x + ICON_HORIZONTAL_SPACE * cursor[0].pos[X], pos.y - ICON_VERTICAL_SPACE * cursor[0].pos[Y]);
+            Draw();
         }
     }
 

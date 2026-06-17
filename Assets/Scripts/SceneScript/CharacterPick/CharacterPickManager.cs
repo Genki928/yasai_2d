@@ -12,7 +12,7 @@ public class CharacterPickManager : MonoBehaviour
     [SerializeField] GameObject icon_pf;
     [SerializeField] List<Sprite> icon_img = new();
     List<GameObject> icon_obj = new();
-    Vector2 pos = new(0, 0);
+    Vector2 pos = new(0, 5);
 
     [Header("◇カーソル")]
     [SerializeField] GameObject cursor_pf;
@@ -46,7 +46,7 @@ public class CharacterPickManager : MonoBehaviour
         // 移動
         for (int i = 0; i < icon_obj.Count; i++)
         {
-            pos = new(-ICON_HORIZONTAL_SPACE, 0);
+            pos = new(-ICON_HORIZONTAL_SPACE, 3);
             // 座標決定
             icon_obj[i].transform.position = new(pos.x + ICON_HORIZONTAL_SPACE * (i % ICON_LINEFEED_COUNT),
                                                  pos.y + -ICON_VERTICAL_SPACE * (i / ICON_LINEFEED_COUNT));
@@ -130,6 +130,9 @@ public class CharacterPickManager : MonoBehaviour
             if (Gamepad.all[0] == ctx.control.device) n = 0;
             else n = 1;
 
+            // 決定済みなら移動不可
+            if (cursor[n].interact) return;
+
             if (--cursor[n].pos[Y] < 0) cursor[n].pos[Y] = icon_obj.Count / ICON_LINEFEED_COUNT;
             if (cursor[n].pos[Y] == icon_obj.Count / ICON_LINEFEED_COUNT)
             {
@@ -152,6 +155,9 @@ public class CharacterPickManager : MonoBehaviour
             int n = -1;
             if (Gamepad.all[0] == ctx.control.device) n = 0;
             else n = 1;
+
+            // 決定済みなら移動不可
+            if (cursor[n].interact) return;
 
             if (++cursor[n].pos[Y] > (icon_obj.Count - 1) / ICON_LINEFEED_COUNT) cursor[n].pos[Y] = 0;
             if (icon_obj.Count % ICON_LINEFEED_COUNT != 0)
@@ -221,6 +227,11 @@ public class CharacterPickManager : MonoBehaviour
         state[n].model.GetComponent<SpriteRenderer>().sprite = icon_img[cursor[n].pos[Y] * ICON_LINEFEED_COUNT + cursor[n].pos[X]];
         state[n].name.text = pick_data[cursor[n].pos[Y] * ICON_LINEFEED_COUNT + cursor[n].pos[X]].char_name;
         state[n].lore.text = pick_data[cursor[n].pos[Y] * ICON_LINEFEED_COUNT + cursor[n].pos[X]].lore;
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(new(0,3), 0.2f);
     }
 }
 

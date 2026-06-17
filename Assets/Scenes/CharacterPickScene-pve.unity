@@ -1089,8 +1089,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SoloPickManager
   icon_pf: {fileID: 8811776988194076664, guid: eb76eef5f6da1a84ab135a04bc225858, type: 3}
   icon_img:
-  - {fileID: -4152130810300491462, guid: dfe8e125370c3594a813383ad4b81e55, type: 3}
-  - {fileID: 768890679745972150, guid: 75c74399fea79714f8d239d20bfe2443, type: 3}
+  - {fileID: -794748231820803858, guid: eb580877a79cbbd49bd5258b417de533, type: 3}
+  - {fileID: 3939098522201311849, guid: e87972cb61c228f4cbe16ff9f0bf0ba2, type: 3}
+  - {fileID: 1512596204089908798, guid: f84ff9abed0a2df4b95da44ec226f970, type: 3}
+  - {fileID: -7035740149812634158, guid: b1bc5c426c3953f4d9662f88862c6dd6, type: 3}
+  - {fileID: 8237331089931671458, guid: c123102f84019df47988b54ad73ee2c3, type: 3}
   cursor_pf: {fileID: 1833491355377103544, guid: 5a4424b64cb2ae240a3a53a8f0033486, type: 3}
   cursor:
     img: {fileID: -1645374030688051754, guid: 9694b69fe91b91b40a36a9b0d5ece5de, type: 3}
@@ -1099,6 +1102,9 @@ MonoBehaviour:
   pick_data:
   - {fileID: 11400000, guid: 65998f818eb32ed46b5eb9a71ca036f3, type: 2}
   - {fileID: 11400000, guid: 4327477bd08fbe24dbf496c27405b74b, type: 2}
+  - {fileID: 11400000, guid: 260d7d8599947824a85fc13eeaf365a9, type: 2}
+  - {fileID: 11400000, guid: 8721d4226a7c5c94ca1765d2cbe12e95, type: 2}
+  - {fileID: 11400000, guid: aef5c7cead79777489e4e2ac09cce03b, type: 2}
   state:
     name: {fileID: 761300059}
     lore: {fileID: 827913505}
