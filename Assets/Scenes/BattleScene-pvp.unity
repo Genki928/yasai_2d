@@ -3511,7 +3511,7 @@ MonoBehaviour:
   - chars: {fileID: 1883792544255973313, guid: dabd934fb20d82240adcd909b0f44b54, type: 3}
     icon: {fileID: -7035740149812634158, guid: b1bc5c426c3953f4d9662f88862c6dd6, type: 3}
   - chars: {fileID: 3071852468601324621, guid: 25092e6005529774c906adbbf5de825e, type: 3}
-    icon: {fileID: -7035740149812634158, guid: b1bc5c426c3953f4d9662f88862c6dd6, type: 3}
+    icon: {fileID: 8237331089931671458, guid: c123102f84019df47988b54ad73ee2c3, type: 3}
   spawn_point:
   - point: {fileID: 666596767}
     direct: 0
