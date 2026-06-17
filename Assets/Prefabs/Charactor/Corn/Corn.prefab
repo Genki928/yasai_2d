@@ -113,12 +113,14 @@ MonoBehaviour:
   rigid: 0
   skill_1_cooltime: 0
   skill_2_cooltime: 0
+  can_control: 1
   regen_burst_timer: 0
   state:
     speed: []
   cursor_pf: {fileID: 5826391187326269229, guid: 50c4b14c6dc55f04f924db6a0c75f818, type: 3}
   pointer: {fileID: 0}
   audioSource: {fileID: 0}
+  sprite: {fileID: 0}
   se1: {fileID: 8300000, guid: 6b86bf8af024f7d4a9894b59048fc879, type: 3}
   bullet: {fileID: 5890270591182050869, guid: 563e2ae8d4c7bdb4486807d061f74089, type: 3}
   bomb: {fileID: 4871254515045110137, guid: e4e66b7bcec66374d80d5cc23e78fe63, type: 3}
@@ -280,8 +282,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.2, y: 0.31}
+  m_Offset: {x: 0, y: 0.08}
+  m_Size: {x: 0.14, y: 0.04}
   m_Direction: 0
 --- !u!70 &2095121823101045874
 CapsuleCollider2D:
@@ -317,8 +319,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.22, y: 0.33}
+  m_Offset: {x: 0, y: 0.08}
+  m_Size: {x: 0.16, y: 0.05}
   m_Direction: 0
 --- !u!82 &6591737440377766395
 AudioSource:

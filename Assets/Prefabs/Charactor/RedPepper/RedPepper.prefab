@@ -112,12 +112,14 @@ MonoBehaviour:
   rigid: 0
   skill_1_cooltime: 0
   skill_2_cooltime: 0
+  can_control: 1
   regen_burst_timer: 0
   state:
     speed: []
   cursor_pf: {fileID: 5826391187326269229, guid: 50c4b14c6dc55f04f924db6a0c75f818, type: 3}
   pointer: {fileID: 0}
   audioSource: {fileID: 0}
+  sprite: {fileID: 0}
   se1: {fileID: 8300000, guid: 1bae908069a213b4b869babe9e455ef8, type: 3}
   breath: {fileID: 3303797620011567552, guid: 13cdeee2f059e9c4b8213bf5721f9dea, type: 3}
   img:
@@ -278,8 +280,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.14, y: 0.3}
+  m_Offset: {x: 0, y: 0.07}
+  m_Size: {x: 0.07, y: 0.14}
   m_Direction: 0
 --- !u!82 &4876585430553863086
 AudioSource:
