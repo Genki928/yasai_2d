@@ -11,7 +11,7 @@ public class Corn : CharBase
     [SerializeField] GameObject bomb;
     SpriteRenderer sr;
     [SerializeField] List<Sprite> img = new();
-    [NonSerialized] public DamageArea bullet_obj;
+    [NonSerialized] public GameObject bullet_obj;
     public GameObject bomb_obj;
     [SerializeField] Sprite popcorn;
     
@@ -47,8 +47,8 @@ public class Corn : CharBase
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
                 // ’e‚ð¶¬ -> id‚Ì•R‚Ã‚¯
-                bullet_obj = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle)).GetComponent<DamageArea>();
-                bullet_obj.Init(id, 10, direction * 0.5f, true);
+                bullet_obj = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
+                bullet_obj.GetComponent<DamageArea>().Init(id, 10, direction * 0.5f, true);
                 sr.sprite = img[1];
                 Damage(2, id == 0 ? 1 : 0);
 
@@ -60,11 +60,11 @@ public class Corn : CharBase
             }
             else
             {
-                GameObject particle = Instantiate(bomb_obj, bullet_obj.transform.position, Quaternion.identity);
-                particle.transform.localScale = new(1, 1);
-                bullet_obj.GetComponent<SpriteRenderer>().sprite = popcorn;
+                GameObject particle = Instantiate(bomb, bullet_obj.transform.position, Quaternion.identity);
+                Instantiate(bomb_obj, bullet_obj.transform.position, Quaternion.identity);
+                particle.GetComponent<SpriteRenderer>().sprite = popcorn;
+                Destroy(bullet_obj);
                 bullet_obj = null;
-                //Destroy(bullet_obj);
             }
         }
     }
