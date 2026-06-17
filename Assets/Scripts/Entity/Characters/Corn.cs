@@ -61,7 +61,7 @@ public class Corn : CharBase
             {
                 // 爆発生成
                 GameObject particle = Instantiate(bomb_obj, bullet_obj.transform.position, Quaternion.identity);
-                particle.GetComponent<DamageArea>().Init(id, 10, new(0, 0), true);
+                particle.GetComponent<DamageArea>().Init(id, 10, new(0, 0), true, true);
                 
                 // ポップコーン生成
                 bullet_obj.GetComponent<SpriteRenderer>().sprite = popcorn;

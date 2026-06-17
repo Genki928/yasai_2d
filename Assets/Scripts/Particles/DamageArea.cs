@@ -6,6 +6,7 @@ public class DamageArea : MonoBehaviour
     int damage = 0;
     Vector2 vec;
     bool delete = false;
+    bool delete_script = false;
 
     void Update()
     {
@@ -29,7 +30,7 @@ public class DamageArea : MonoBehaviour
                     Destroy(gameObject);
                     return;
                 }
-                if (cb.burst >= cb.max_burst) Destroy(this);
+                if (cb.burst >= cb.max_burst || delete_script) Destroy(this);
             }
         }
     }
@@ -47,11 +48,12 @@ public class DamageArea : MonoBehaviour
     /// <param name="damage"> ダメージ量 </param>
     /// <param name="vec"> 方向 </param>
     /// <param name="delete"> ヒット後の削除 </param>
-    public void Init(int id, int damage, Vector2 vec, bool delete = false)
+    public void Init(int id, int damage, Vector2 vec, bool delete = false, bool script = false)
     {
         this.id = id;
         this.damage = damage;
         this.vec = vec;
         this.delete = delete;
+        this.delete_script = script;
     }
 }
