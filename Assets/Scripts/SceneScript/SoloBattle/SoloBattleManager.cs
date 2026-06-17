@@ -28,7 +28,7 @@ public class SoloBattleManager : MonoBehaviour
     void Start()
     {
         // プレイヤー生成
-        player = Instantiate(characters[0].chars, spawn_point.point.transform.position, Quaternion.identity);
+        player = Instantiate(characters[3].chars, spawn_point.point.transform.position, Quaternion.identity);
 
         // バーストバーとの紐づけ
         gui.bar.Init(player);
