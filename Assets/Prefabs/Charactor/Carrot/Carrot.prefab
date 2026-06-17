@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 2387769583341587097}
   - component: {fileID: 8785239974707632202}
   - component: {fileID: -523274106162449980}
-  - component: {fileID: 9051219605256865004}
   - component: {fileID: 2437189327592500065}
   m_Layer: 3
   m_Name: Carrot
@@ -133,7 +132,7 @@ MonoBehaviour:
   headBangAngle: 90
   rotateSpeed: 500
   headBangDamage: 15
-  headBangCol: {fileID: 9051219605256865004}
+  headBangCol: {fileID: 0}
   se2: {fileID: 8300000, guid: 6b86bf8af024f7d4a9894b59048fc879, type: 3}
 --- !u!114 &2387769583341587097
 MonoBehaviour:
@@ -292,43 +291,6 @@ CapsuleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0.07}
   m_Size: {x: 0.13, y: 0.13}
-  m_Direction: 0
---- !u!70 &9051219605256865004
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3071852468601324621}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.07}
-  m_Size: {x: 0.15, y: 0.15}
   m_Direction: 0
 --- !u!82 &2437189327592500065
 AudioSource:

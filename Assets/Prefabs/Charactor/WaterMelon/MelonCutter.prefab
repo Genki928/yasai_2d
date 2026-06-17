@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 150385600754290465}
   - component: {fileID: 4129832111255996944}
   - component: {fileID: -5446446191158391087}
+  - component: {fileID: -5280378580605319629}
   - component: {fileID: 8178554706918018616}
-  - component: {fileID: 8908365103356745}
+  - component: {fileID: 9198625841178338883}
   m_Layer: 3
   m_Name: MelonCutter
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.593, y: -0.87713, z: 0}
-  m_LocalScale: {x: 6, y: 4, z: 1}
+  m_LocalScale: {x: 7, y: 7, z: 0.8851}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -119,6 +120,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba602167c268c7a4d9365c14fe933b53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Delete
+--- !u!114 &-5280378580605319629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5890270591182050869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 161c67caaf1c5c94da669c2c2cab5210, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AfterImage
+  interval: 0.02
+  lifeTime: 0.3
 --- !u!50 &8178554706918018616
 Rigidbody2D:
   serializedVersion: 5
@@ -146,7 +161,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &8908365103356745
+--- !u!61 &9198625841178338883
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,5 +205,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.15, y: 0.16}
+  m_Size: {x: 0.26, y: 0.13}
   m_EdgeRadius: 0

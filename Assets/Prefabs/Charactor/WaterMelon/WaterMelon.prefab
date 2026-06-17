@@ -125,8 +125,7 @@ MonoBehaviour:
   WaterMelon_default: {fileID: 8237331089931671458, guid: 43594a20325ca844fa75bef2d9fc9e8d, type: 3}
   WaterMelon_skill: {fileID: -6690924200026214091, guid: 291467a680ede294fab8d317d093025b, type: 3}
   bullet: {fileID: 5890270591182050869, guid: 1d6accef285da9f4c92c40d450da4332, type: 3}
-  cutter: {fileID: 5890270591182050869, guid: 29da2462145dd394698a96a0e0c7cb06, type: 3}
-  dust: {fileID: 1560168367213963595, guid: 31c763f52fdaf2d45885cba010fc705b, type: 3}
+  cutter: {fileID: 5890270591182050869, guid: 2cab72ce24dddaa4ba86c4814e55259a, type: 3}
 --- !u!114 &2387769583341587097
 MonoBehaviour:
   m_ObjectHideFlags: 0
