@@ -76,9 +76,18 @@ public class CharacterPickManager : MonoBehaviour
             // すべてのプレイヤーがキャラクターを決定していたら、シーンを遷移
             if (cursor[0].interact && cursor[1].interact)
             {
-                PlayerPick.pick = new int[2] {
+                int[] num = new int[2]
+                {
                     cursor[0].pos[Y] * ICON_LINEFEED_COUNT + cursor[0].pos[X],
                     cursor[1].pos[Y] * ICON_LINEFEED_COUNT + cursor[1].pos[X]
+                };
+                for(int i = 0; i < 2; i ++)
+                {
+                    if (num[i] == icon_img.Count) UnityEngine.Random.Range(0, icon_img.Count);
+                }
+                PlayerPick.pick = new int[2] {
+                    num[0],
+                    num[1]
                 };
                 SceneManager.LoadScene(SceneName.BATTLE_PVP);
             }
