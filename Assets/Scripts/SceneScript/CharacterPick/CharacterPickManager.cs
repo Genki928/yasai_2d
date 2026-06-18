@@ -83,7 +83,7 @@ public class CharacterPickManager : MonoBehaviour
                 };
                 for(int i = 0; i < 2; i ++)
                 {
-                    if (num[i] == icon_img.Count) UnityEngine.Random.Range(0, icon_img.Count);
+                    if (num[i] == icon_img.Count) num[i] = UnityEngine.Random.Range(0, icon_img.Count);
                 }
                 PlayerPick.pick = new int[2] {
                     num[0],
