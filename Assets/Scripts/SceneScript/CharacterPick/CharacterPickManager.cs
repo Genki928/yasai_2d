@@ -83,12 +83,13 @@ public class CharacterPickManager : MonoBehaviour
                 };
                 for(int i = 0; i < 2; i ++)
                 {
-                    if (num[i] == icon_img.Count) num[i] = UnityEngine.Random.Range(0, icon_img.Count);
+                    if (num[i] == icon_img.Count - 1) num[i] = UnityEngine.Random.Range(0, icon_img.Count - 1);
                 }
                 PlayerPick.pick = new int[2] {
                     num[0],
                     num[1]
                 };
+                Debug.Log(num[0] + " , " + num[1]);
                 SceneManager.LoadScene(SceneName.BATTLE_PVP);
             }
 

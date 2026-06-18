@@ -23,8 +23,8 @@ public class Bomb : MonoBehaviour
             // オブジェクトが持つ識別idが、攻撃主（自分が持つid）と異なれば、
             if (cb.id != id)
             {
-                cb.Damage(20, id);
-                cb.rigid += 20;
+                cb.Damage(10, id);
+                cb.rigid += 25;
                 Destroy(gameObject);
                 Instantiate(go, transform.position, Quaternion.identity);
             }

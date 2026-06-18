@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7008835825970788948}
   - component: {fileID: 150385600754290465}
+  - component: {fileID: 2500090067074407675}
   - component: {fileID: 4129832111255996944}
   - component: {fileID: -5446446191158391087}
   - component: {fileID: 8178554706918018616}
@@ -95,6 +96,20 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &2500090067074407675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5890270591182050869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd340352c24ef684399eeea5e447b478, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CornBullet
+  popcorn: {fileID: 2138976915490336560, guid: 41c2e5a3714861745bec22c22530586d, type: 3}
+  bomb_obj: {fileID: 2733761082984051111, guid: c7ac236a659c68945a984f2f44c3d884, type: 3}
 --- !u!114 &4129832111255996944
 MonoBehaviour:
   m_ObjectHideFlags: 0
