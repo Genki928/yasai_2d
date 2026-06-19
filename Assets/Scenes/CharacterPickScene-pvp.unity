@@ -855,7 +855,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: a443139b15d4357469b396fc45979f80, type: 3}
-    m_FontSize: 30
+    m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -934,7 +934,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: a443139b15d4357469b396fc45979f80, type: 3}
-    m_FontSize: 30
+    m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -1216,7 +1216,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8142dcd90fcf4f94d836004bcb008180, type: 2}
   - {fileID: 11400000, guid: 77ab89fc544a00c43841551ffaff41eb, type: 2}
   - {fileID: 11400000, guid: bc398cef82aebeb47b803c62d5a0cf95, type: 2}
-  - {fileID: 11400000, guid: bc398cef82aebeb47b803c62d5a0cf95, type: 2}
+  - {fileID: 11400000, guid: de6d822c134e69d40aa9c73829eaaf4c, type: 2}
   state:
   - name: {fileID: 1394810176}
     lore: {fileID: 977860077}

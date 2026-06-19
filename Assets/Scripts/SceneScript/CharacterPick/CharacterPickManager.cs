@@ -143,7 +143,9 @@ public class CharacterPickManager : MonoBehaviour
             // Œˆ’èÏ‚İ‚È‚çˆÚ“®•s‰Â
             if (cursor[n].interact) return;
 
-            if (--cursor[n].pos[Y] < 0) cursor[n].pos[Y] = icon_obj.Count / ICON_LINEFEED_COUNT;
+            if (--cursor[n].pos[Y] < 0) cursor[n].pos[Y] = icon_obj.Count / (ICON_LINEFEED_COUNT);
+            if (icon_obj.Count % 3 == 0)
+                --cursor[n].pos[Y];
             if (cursor[n].pos[Y] == icon_obj.Count / ICON_LINEFEED_COUNT)
             {
                 if (cursor[n].pos[X] > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT)
