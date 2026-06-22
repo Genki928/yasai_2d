@@ -12,11 +12,11 @@ public class BossCarrot : BossBase
         base.Start();
 
         // フェーズ設定
+        right = true;
         states.Add("Tackle", new BossCarrotTackle());
         states.Add("Headbang", new BossCarrotHeadbang());
         states.Add("Chill", new BossChill());
-        ChangeState("Headbang");
-        right = false;
+        ChangeState("Tackle");
     }
 
     override protected void Update()

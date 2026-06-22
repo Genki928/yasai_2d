@@ -10,9 +10,9 @@ public class SoloBattleManager : MonoBehaviour
     [SerializeField] List<Character> characters = new(); 
     public Spawner spawn_point;
     GameObject player;
-    [SerializeField] List<BossBase> bosses = new();
-    BossBase boss;
+    [SerializeField] List<TargetBase> targets = new();
     int pick_nums = 0;
+    int score;
 
     [Header("◇GUI")]
     public GUI gui;
@@ -45,8 +45,11 @@ public class SoloBattleManager : MonoBehaviour
             gui.icon.sprite = characters[pick_nums].icon; // アイコン
         }
 
-        boss = Instantiate(bosses[0], new(6.0f, -5.0f), Quaternion.identity);
-        boss.player = player;
+        //boss = Instantiate(bosses[0], new(-10.0f, -5.0f), Quaternion.identity);
+        //boss.player = player;
+        var target = Instantiate(targets[0]);
+        target.sbm = this;
+
     }
     
 
@@ -74,5 +77,11 @@ public class SoloBattleManager : MonoBehaviour
         if (direct == DIRECT.UP) return new(0.0f, 1.0f);
         if (direct == DIRECT.DOWN) return new(0.0f, -1.0f);
         return Vector2.zero;
+    }
+
+    public void CalculateScore(int value)
+    {
+        // 計算（0未満になるなら調整）
+        score += score + value < 0 ? -score : value;
     }
 }
