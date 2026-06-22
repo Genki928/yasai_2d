@@ -2042,6 +2042,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1873271267}
   - component: {fileID: 1873271268}
+  - component: {fileID: 1873271269}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -2091,12 +2092,26 @@ MonoBehaviour:
     direct: 0
   targets:
   - {fileID: 7686047600830137332, guid: 32bd83d52640b0d49a3d2de5d7824c6d, type: 3}
+  timer: {fileID: 1873271269}
   gui:
     bar: {fileID: 1848879500}
     name: {fileID: 2132095580}
     icon: {fileID: 1466704667}
     skill1_cooltimer: {fileID: 2127422657}
     skill2_cooltimer: {fileID: 1699338273}
+--- !u!114 &1873271269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1873271265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdd0ea7a1e6f3f54487bb4e5e7b78be2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Timer
+  text: {fileID: 132608374}
 --- !u!1 &1907355412
 GameObject:
   m_ObjectHideFlags: 0

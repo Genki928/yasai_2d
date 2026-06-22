@@ -12,6 +12,7 @@ public class SoloBattleManager : MonoBehaviour
     GameObject player;
     [SerializeField] List<TargetBase> targets = new();
     int pick_nums = 0;
+    public Timer timer;
     int score;
 
     [Header("◇GUI")]
@@ -22,7 +23,6 @@ public class SoloBattleManager : MonoBehaviour
 
         Winner.Reset();
         Application.targetFrameRate = 30;
-        CharBase.OnPlayerDies += Finish;
     }
 
     void Start()
@@ -49,7 +49,8 @@ public class SoloBattleManager : MonoBehaviour
         //boss.player = player;
         var target = Instantiate(targets[0]);
         target.sbm = this;
-
+        timer.Init(5);
+        timer.OnFinish += Finish;
     }
     
 
@@ -60,14 +61,14 @@ public class SoloBattleManager : MonoBehaviour
 
     void OnDestroy()
     {
-        CharBase.OnPlayerDies -= Finish;
+        ;
     }
 
     /// <summary> バトルを終了させる </summary>
     /// <param name="id"> プレイヤーの識別id </param>
-    void Finish(int id)
+    public void Finish()
     {
-        SceneManager.LoadScene(SceneName.RESULT);
+        SceneManager.LoadScene(SceneName.RESULT_PVE);
     }
 
     Vector2 SetDirect(DIRECT direct)
