@@ -1,0 +1,46 @@
+{
+    "version": 1,
+    "name": "prologueinput",
+    "maps": [
+        {
+            "name": "InteractCheck",
+            "id": "06f23944-1d20-4c37-9cca-96f3b4722eb4",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "faa72e51-0e72-4184-9d67-b01973c025e8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ee07799d-de88-4b7d-b56d-1694d536d3f2",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b04b1756-d59f-4a15-89eb-0a0a2bb5d56c",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
