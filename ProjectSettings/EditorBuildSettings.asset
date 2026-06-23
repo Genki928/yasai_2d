@@ -23,5 +23,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BattleScene-pvp.unity
     guid: 35de0051cc3fa8749917140073fbee8d
+  - enabled: 1
+    path: Assets/Scenes/ResultScene-pve.unity
+    guid: 41caa75427ac9d244bc4b664bf78208b
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

@@ -10,6 +10,7 @@ namespace Const
         public const string BATTLE_PVP = "BattleScene-pvp";
         public const string BATTLE_PVE = "BattleScene-pve";
         public const string RESULT = "ResultScene";
+        public const string RESULT_PVE = "ResultScene-pve";
     }
 
     public static class BossCarrotConst
