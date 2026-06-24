@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -37,6 +38,7 @@ public class BattleManager : MonoBehaviour
     public GameObject[] player_obj = new GameObject[PLAYER_CNT];
     GameObject[] p_obj = new GameObject[PLAYER_CNT];
 
+    public TextMeshProUGUI fpsText; private float updateInterval = 0.5f; private float accum = 0.0f; private int frames = 0; private float timeLeft;
 
     //ââèo
     [SerializeField] GameObject deathEffect;
@@ -111,7 +113,17 @@ public class BattleManager : MonoBehaviour
     void Update()
     {
         p_obj[0].transform.position = new(player[0].transform.position.x, player[0].transform.position.y + 2.0f);
-        p_obj[1].transform.position = new(player[1].transform.position.x, player[1].transform.position.y + 2.0f);
+        p_obj[1].transform.position = new(player[1].transform.position.x, player[1].transform.position.y + 2.0f); timeLeft = updateInterval;
+
+        timeLeft -= Time.deltaTime;
+        accum += Time.timeScale / Time.deltaTime;
+        ++frames;
+        if (timeLeft <= 0.0f)
+        {
+            float fps = accum / frames;
+            fpsText.text = string.Format("{0:F2} FPS", fps); timeLeft = updateInterval;
+            accum = 0.0f; frames = 0;
+        }
     }
 
     void OnDestroy()
