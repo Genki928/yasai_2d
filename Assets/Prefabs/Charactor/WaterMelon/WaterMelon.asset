@@ -18,8 +18,8 @@ MonoBehaviour:
   regen_burst_cooltime: 120
   restart_regen_burst_value: 90
   skill_1_rigid: 0
-  skill_1_cooltime: 25
-  skill_2_rigid: 5
-  skill_2_cooltime: 250
+  skill_1_cooltime: 50
+  skill_2_rigid: 10
+  skill_2_cooltime: 500
   skill_3_rigid: 0
   skill_3_cooltime: 0

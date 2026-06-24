@@ -52,7 +52,7 @@ public class BattleManager : MonoBehaviour
     void Awake()
     { 
         Winner.Reset();
-        Application.targetFrameRate = 30;
+        Application.targetFrameRate = 60;
         CharBase.OnPlayerDies += Finish;
     }
     void Start()

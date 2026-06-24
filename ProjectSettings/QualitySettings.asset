@@ -58,8 +58,12 @@ QualitySettings:
     terrainBillboardStart: 50
     terrainFadeLength: 5
     terrainMaxTrees: 50
+<<<<<<< HEAD
     excludedTargetPlatforms:
     - Standalone
+=======
+    excludedTargetPlatforms: []
+>>>>>>> 3367f306d9190c030fa2b005bb9ecde5b0472854
   - serializedVersion: 5
     name: Low
     pixelLightCount: 0
@@ -112,8 +116,12 @@ QualitySettings:
     terrainBillboardStart: 50
     terrainFadeLength: 5
     terrainMaxTrees: 50
+<<<<<<< HEAD
     excludedTargetPlatforms:
     - Standalone
+=======
+    excludedTargetPlatforms: []
+>>>>>>> 3367f306d9190c030fa2b005bb9ecde5b0472854
   - serializedVersion: 5
     name: Medium
     pixelLightCount: 1
@@ -219,8 +227,12 @@ QualitySettings:
     terrainBillboardStart: 50
     terrainFadeLength: 5
     terrainMaxTrees: 50
+<<<<<<< HEAD
     excludedTargetPlatforms:
     - Standalone
+=======
+    excludedTargetPlatforms: []
+>>>>>>> 3367f306d9190c030fa2b005bb9ecde5b0472854
   - serializedVersion: 5
     name: Very High
     pixelLightCount: 3
@@ -273,8 +285,12 @@ QualitySettings:
     terrainBillboardStart: 50
     terrainFadeLength: 5
     terrainMaxTrees: 50
+<<<<<<< HEAD
     excludedTargetPlatforms:
     - Standalone
+=======
+    excludedTargetPlatforms: []
+>>>>>>> 3367f306d9190c030fa2b005bb9ecde5b0472854
   - serializedVersion: 5
     name: Ultra
     pixelLightCount: 4
