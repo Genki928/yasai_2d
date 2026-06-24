@@ -12,6 +12,11 @@ public class prologue : MonoBehaviour
 
     RectTransform rect;
 
+    private void Awake()
+    {
+        Application.targetFrameRate = 30;
+    }
+
     void Start()
     {
         rect = GetComponent<RectTransform>();
