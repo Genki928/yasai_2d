@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.U2D;
 
 public class CharBase : MonoBehaviour, IBurst
 {

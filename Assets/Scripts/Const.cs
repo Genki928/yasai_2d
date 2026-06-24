@@ -1,5 +1,3 @@
-using System.Numerics;
-
 namespace Const
 {
     public static class SceneName
