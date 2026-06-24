@@ -46,7 +46,7 @@ public class Corn : CharBase
 
             // ’e‚ð¶¬ -> id‚Ì•R‚Ã‚¯
             bullet_obj = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
-            bullet_obj.GetComponent<DamageArea>().Init(id, 20, direction * 0.5f, true);
+            bullet_obj.GetComponent<DamageArea>().Init(id, 20, direction * 0.5f / 2, true);
             bullet_obj.GetComponent<CornBullet>().Init(id, direction, bullet_obj);
             sr.sprite = img[1];
 
