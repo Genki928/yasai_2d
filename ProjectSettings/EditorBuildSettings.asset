@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Prologue.unity
+    guid: e3d8b67319be6d64c8a0ceb4be36c328
+  - enabled: 1
     path: Assets/Scenes/TitleScene.unity
     guid: e037d95e8c2c8f741b45f2b53c9b1740
   - enabled: 1
@@ -26,8 +29,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ResultScene-pve.unity
     guid: 41caa75427ac9d244bc4b664bf78208b
-  - enabled: 1
-    path: Assets/Scenes/Prologue.unity
-    guid: e3d8b67319be6d64c8a0ceb4be36c328
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
