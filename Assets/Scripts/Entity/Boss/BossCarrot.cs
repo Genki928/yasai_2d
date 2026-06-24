@@ -1,7 +1,5 @@
 using UnityEngine;
 using Const;
-using System.Collections;
-using System.Collections.Generic;
 
 public class BossCarrot : BossBase
 {

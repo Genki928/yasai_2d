@@ -1,7 +1,5 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Audio;
 
 public class SkillCooltimer : MonoBehaviour
 {
