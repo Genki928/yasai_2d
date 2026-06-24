@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7686047600830137332}
   - component: {fileID: 2613799644594245069}
   - component: {fileID: 1917386508335655578}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,4 +169,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4

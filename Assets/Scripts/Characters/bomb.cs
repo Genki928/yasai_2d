@@ -18,7 +18,7 @@ public class Bomb : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.TryGetComponent<CharBase>(out var cb))
+        if (col.TryGetComponent<IBurst>(out var cb))
         {
             // オブジェクトが持つ識別idが、攻撃主（自分が持つid）と異なれば、
             if (cb.id != id)

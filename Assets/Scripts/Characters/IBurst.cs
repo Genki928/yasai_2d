@@ -3,6 +3,7 @@ public interface IBurst
     public int id { get; set; }
     public int burst { get; set; }
     public int max_burst { get; set; }
+    public int rigid { get; set; }
 
     /// <summary> ダメージを与える </summary>
     /// <param name="value"> ダメージ量 </param>

@@ -559,7 +559,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4229906503165532813, guid: edd4ded8905ebff4db236f2139ad64e5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.01
+      value: 11.74
       objectReference: {fileID: 0}
     - target: {fileID: 4229906503165532813, guid: edd4ded8905ebff4db236f2139ad64e5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -673,11 +673,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4229906503165532813, guid: edd4ded8905ebff4db236f2139ad64e5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.96
+      value: -11.93
       objectReference: {fileID: 0}
     - target: {fileID: 4229906503165532813, guid: edd4ded8905ebff4db236f2139ad64e5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.03
+      value: -5.01
       objectReference: {fileID: 0}
     - target: {fileID: 4229906503165532813, guid: edd4ded8905ebff4db236f2139ad64e5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1699,11 +1699,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4229906503165532813, guid: edd4ded8905ebff4db236f2139ad64e5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.07
+      value: 10.93
       objectReference: {fileID: 0}
     - target: {fileID: 4229906503165532813, guid: edd4ded8905ebff4db236f2139ad64e5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.04
+      value: -4.7
       objectReference: {fileID: 0}
     - target: {fileID: 4229906503165532813, guid: edd4ded8905ebff4db236f2139ad64e5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2124,7 +2124,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4229906503165532813, guid: edd4ded8905ebff4db236f2139ad64e5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.98
+      value: -10.74
       objectReference: {fileID: 0}
     - target: {fileID: 4229906503165532813, guid: edd4ded8905ebff4db236f2139ad64e5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2540,6 +2540,8 @@ MonoBehaviour:
     icon: {fileID: 1512596204089908798, guid: f84ff9abed0a2df4b95da44ec226f970, type: 3}
   - chars: {fileID: 1883792544255973313, guid: dabd934fb20d82240adcd909b0f44b54, type: 3}
     icon: {fileID: -7035740149812634158, guid: b1bc5c426c3953f4d9662f88862c6dd6, type: 3}
+  - chars: {fileID: 3071852468601324621, guid: 25092e6005529774c906adbbf5de825e, type: 3}
+    icon: {fileID: 8237331089931671458, guid: c123102f84019df47988b54ad73ee2c3, type: 3}
   player_spawn_point:
     point: {fileID: 2108366194}
     direct: 0

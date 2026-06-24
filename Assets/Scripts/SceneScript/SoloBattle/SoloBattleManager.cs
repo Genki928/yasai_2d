@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Const;
+using Unity.VisualScripting;
 
 public class SoloBattleManager : MonoBehaviour
 {
@@ -32,13 +33,13 @@ public class SoloBattleManager : MonoBehaviour
     {
 
         Winner.Reset();
-        Application.targetFrameRate = 30;
+        Application.targetFrameRate = 60;
     }
 
     void Start()
     {
         // プレイヤー生成
-        player = Instantiate(characters[3].chars, player_spawn_point.point.transform.position, Quaternion.identity);
+        player = Instantiate(characters[4].chars, player_spawn_point.point.transform.position, Quaternion.identity);
 
         // バーストバーとの紐づけ
         gui.bar.Init(player);
@@ -57,9 +58,7 @@ public class SoloBattleManager : MonoBehaviour
 
         //boss = Instantiate(bosses[0], new(-10.0f, -5.0f), Quaternion.identity);
         //boss.player = player;
-        var target = Instantiate(targets[0]);
-        target.sbm = this;
-        timer.Init(5);
+        timer.Init(60);
         timer.OnFinish += Finish;
     }
     
@@ -68,8 +67,9 @@ public class SoloBattleManager : MonoBehaviour
     {
         if (++spawn_cooltime > 60)
         {
-            int spawn = UnityEngine.Random.Range(0, spawn_cooltime);
-            Instantiate(targets[0], target_spawn_point[spawn].point.transform.position, Quaternion.identity);
+            int spawn = UnityEngine.Random.Range(0, target_spawn_point.Count);
+            TargetBase tb = Instantiate(targets[0], target_spawn_point[spawn].point.transform.position, Quaternion.identity);
+            tb.Init(this, player.GetComponent<CharBase>());
             spawn_cooltime = 0;
         }
     }

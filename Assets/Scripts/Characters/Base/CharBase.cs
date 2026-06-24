@@ -13,7 +13,7 @@ public class CharBase : MonoBehaviour, IBurst
     public int id { get; set; } = 0;
     public int max_burst { get; set; } = 100;
     public int burst { get; set; } = 0;
-    public int rigid;
+    public int rigid {  get; set; } = 0;
     public int skill_1_cooltime = 0;
     public int skill_2_cooltime = 0;
     public bool can_control = true;
