@@ -68,21 +68,21 @@ public class WaterMelon : CharBase
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         // ’e‚ð¶¬ -> id‚Ì•R‚Ã‚¯
         GameObject go = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
-        go.GetComponent<DamageArea>().Init(id, bullet_damage, direction * 0.5f, true);
+        go.GetComponent<DamageArea>().Init(id, bullet_damage, direction * 0.5f / 2, true);
         audioSource.PlayOneShot(bullet_sound);
         yield return new WaitForSeconds(0.1f);
         // À•WEƒxƒNƒgƒ‹‚ÌŽZo
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         // ’e‚ð¶¬ -> id‚Ì•R‚Ã‚¯
         go = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
-        go.GetComponent<DamageArea>().Init(id, bullet_damage, direction * 0.5f, true);
+        go.GetComponent<DamageArea>().Init(id, bullet_damage, direction * 0.5f / 2, true);
         audioSource.PlayOneShot(bullet_sound);
         yield return new WaitForSeconds(0.1f);
         // À•WEƒxƒNƒgƒ‹‚ÌŽZo
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         // ’e‚ð¶¬ -> id‚Ì•R‚Ã‚¯
         go = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
-        go.GetComponent<DamageArea>().Init(id, bullet_damage, direction * 0.5f, true);
+        go.GetComponent<DamageArea>().Init(id, bullet_damage, direction * 0.5f / 2, true);
         audioSource.PlayOneShot(bullet_sound);
         yield return new WaitForSeconds(0.1f);
         sprite.sprite = WaterMelon_default;
@@ -117,7 +117,7 @@ public class WaterMelon : CharBase
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         // ’e‚ð¶¬ -> id‚Ì•R‚Ã‚¯
         GameObject go = Instantiate(cutter, transform.position, Quaternion.Euler(0, 0, angle - 270f));
-        go.GetComponent<DamageArea>().Init(id, cutter_damage, direction * 0.7f, true);
+        go.GetComponent<DamageArea>().Init(id, cutter_damage, direction * 0.7f / 2, true);
         audioSource.PlayOneShot(cutter_sound);
         yield return new WaitForSeconds(0.2f);
         sprite.sprite = WaterMelon_default;
