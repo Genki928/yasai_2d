@@ -19,7 +19,7 @@ public class CornBullet : MonoBehaviour
         bullet_obj.GetComponent<DamageArea>().Init(id, 0, new(0, 0), false);
         Rigidbody2D rb_c = bullet_obj.GetComponent<Rigidbody2D>();
         rb_c.gravityScale = 5.0f;
-        rb_c.linearVelocity = new(direction.x, 15.0f/2);
+        rb_c.linearVelocity = new(direction.x, 15.0f);
         bullet_obj = null;
     }
 
