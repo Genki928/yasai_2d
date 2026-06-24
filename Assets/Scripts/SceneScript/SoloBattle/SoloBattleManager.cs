@@ -6,12 +6,23 @@ using Const;
 
 public class SoloBattleManager : MonoBehaviour
 {
+    // ----- 定数 -----
+    const int SPAWN_COOLTIME = 60;
+
+    // ----- 変数 -----
+
     [Header("◇キャラ生成")]
     [SerializeField] List<Character> characters = new(); 
-    public Spawner spawn_point;
+    public Spawner player_spawn_point;
     GameObject player;
-    [SerializeField] List<TargetBase> targets = new();
     int pick_nums = 0;
+
+    [Header("◇的生成")]
+    [SerializeField] List<TargetBase> targets = new();
+    [SerializeField] List<Spawner> target_spawn_point = new();
+    public int spawn_cooltime = 0;
+
+    // -----
     public Timer timer;
     int score;
 
@@ -28,7 +39,7 @@ public class SoloBattleManager : MonoBehaviour
     void Start()
     {
         // プレイヤー生成
-        player = Instantiate(characters[3].chars, spawn_point.point.transform.position, Quaternion.identity);
+        player = Instantiate(characters[3].chars, player_spawn_point.point.transform.position, Quaternion.identity);
 
         // バーストバーとの紐づけ
         gui.bar.Init(player);
@@ -37,7 +48,7 @@ public class SoloBattleManager : MonoBehaviour
         if (player.TryGetComponent<CharBase>(out var p))
         {
             p.id = 0;   // id
-            p.direction = SetDirect(spawn_point.direct);    // 方向
+            p.direction = SetDirect(player_spawn_point.direct);    // 方向
             p.burst_bar = gui.bar;   // バースト
             gui.name.text = p.data.char_name;    // キャラ名
             p.cooltimer[0] = gui.skill1_cooltimer;   // スキル1のクールタイムを表示
@@ -56,7 +67,12 @@ public class SoloBattleManager : MonoBehaviour
 
     void Update()
     {
-        ;
+        if (++spawn_cooltime > 60)
+        {
+            int spawn = UnityEngine.Random.Range(0, spawn_cooltime);
+            Instantiate(targets[0], target_spawn_point[spawn].point.transform.position, Quaternion.identity);
+            spawn_cooltime = 0;
+        }
     }
 
     void OnDestroy()
