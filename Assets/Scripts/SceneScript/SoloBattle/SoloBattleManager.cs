@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Const;
 using Unity.VisualScripting;
+using UnityEngine.UI;
 
 public class SoloBattleManager : MonoBehaviour
 {
@@ -15,11 +16,13 @@ public class SoloBattleManager : MonoBehaviour
     [SerializeField] List<Character> characters = new(); 
     public Spawner player_spawn_point;
     GameObject player;
-    int pick_nums = 0;
+    int pick_nums = 4;
 
     [Header("◇的生成")]
     [SerializeField] List<TargetBase> targets = new();
     [SerializeField] List<Spawner> target_spawn_point = new();
+    [SerializeField] List<Sprite> target_sprites = new();
+    [SerializeField] BombTarget bomb;
     public int spawn_cooltime = 0;
 
     // -----
@@ -27,7 +30,14 @@ public class SoloBattleManager : MonoBehaviour
     int score;
 
     [Header("◇GUI")]
-    public GUI gui;
+    [SerializeField] GUI gui;
+    [SerializeField] Text score_text;
+    [SerializeField] Text score_bonus;
+    [SerializeField] Image score_circle;
+    float default_score_bonus = 1.0f;
+    float now_score_bonus = 1.0f;
+    int bonus_timer = 0;
+
 
     void Awake()
     {
@@ -40,7 +50,7 @@ public class SoloBattleManager : MonoBehaviour
     {
         // プレイヤー生成
         player = Instantiate(characters[4].chars, player_spawn_point.point.transform.position, Quaternion.identity);
-
+        //player.GetComponent<CharBase>().state.speed.Add(new() { value = 100, time = 100 });
         // バーストバーとの紐づけ
         gui.bar.Init(player);
 
@@ -65,11 +75,42 @@ public class SoloBattleManager : MonoBehaviour
 
     void Update()
     {
-        if (++spawn_cooltime > 60)
+
+        if (now_score_bonus != 1.0f)
         {
-            int spawn = UnityEngine.Random.Range(0, target_spawn_point.Count);
+            score_circle.fillAmount = 1 - (float)++bonus_timer / 400;
+            if (score_circle.fillAmount == 0)
+            {
+                score_circle.fillAmount = 1;
+                now_score_bonus = 1.0f;
+                score_bonus.text = "x " + now_score_bonus.ToString("N1");
+            }
+        }
+        if (++spawn_cooltime > SPAWN_COOLTIME)
+        {
+            // ランダムな場所からスポーン
+            int spawn = Random.Range(0, target_spawn_point.Count);
             TargetBase tb = Instantiate(targets[0], target_spawn_point[spawn].point.transform.position, Quaternion.identity);
+
+            // Spriteを調整
             tb.Init(this, player.GetComponent<CharBase>());
+            int img = pick_nums;
+            do
+            {
+                img = Random.Range(0, target_sprites.Count);
+            } while (img == pick_nums);
+            tb.GetComponent<SpriteRenderer>().sprite = target_sprites[img];
+            tb.GetComponent<SpriteRenderer>().color = new Color32(128, 128, 128, 255);
+
+            // 低確率で爆弾を持たせる
+            if (Random.Range(0, 10) == 0)
+            {
+                BombTarget bt = Instantiate(bomb, target_spawn_point[spawn].point.transform.position, Quaternion.identity);
+                bt.Init(tb.gameObject);
+                tb.GetComponent<SpriteRenderer>().sortingOrder = -1;
+            }
+
+            // タイマーをリセット
             spawn_cooltime = 0;
         }
     }
@@ -98,6 +139,11 @@ public class SoloBattleManager : MonoBehaviour
     public void CalculateScore(int value)
     {
         // 計算（0未満になるなら調整）
-        score += score + value < 0 ? -score : value;
+        score += score + value < 0 ? -score : Mathf.RoundToInt(value * now_score_bonus);
+        score_text.text = score.ToString();
+        score_circle.fillAmount = 1;
+        now_score_bonus += 0.1f;
+        score_bonus.text = "x " + now_score_bonus.ToString("N1");
+        bonus_timer = 0;
     }
 }

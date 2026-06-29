@@ -4,10 +4,10 @@ public class TargetBase : MonoBehaviour, IBurst
 {
     public int id { get; set; } = 100;
     public int burst { get; set; } = 0;
-    public int max_burst { get; set; } = 10;
+    public int max_burst { get; set; } = 20;
     public int rigid { get; set; } = 0;
     Rigidbody2D rb;
-    int score;
+    int score = 100;
     public SoloBattleManager sbm;
     public CharBase player;
 
