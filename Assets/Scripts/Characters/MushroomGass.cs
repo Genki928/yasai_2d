@@ -12,12 +12,17 @@ public class MushroomGass : MonoBehaviour
 
     [SerializeField] private GameObject gasPrefab;
 
+    [SerializeField] AudioClip gasAudioClip;
+    [SerializeField] GameObject gasExplode;
     private int ownerId;
     private int damage;
     private Vector2 moveVec;
 
     private float timer;
     private Vector3 defaultScale;
+
+    //オーディオソース用
+    public AudioSource audioSource;
 
     public void Init(int id, int damage, Vector2 dir)
     {
@@ -33,8 +38,10 @@ public class MushroomGass : MonoBehaviour
         Destroy(gameObject, lifeTime);
     }
 
+  
     private void Update()
     {
+        transform.Rotate(0, 0, 180 * Time.deltaTime);
         timer += Time.deltaTime;
 
         // 重力
@@ -55,6 +62,9 @@ public class MushroomGass : MonoBehaviour
         if (gasPrefab == null) return;
 
         GameObject obj = Instantiate(gasPrefab, transform.position, Quaternion.identity);
+        //GameObject exp = Instantiate(gasExplode, transform.position, Quaternion.identity);
+        //SE
+        //audioSource.PlayOneShot(gasAudioClip);
 
         obj.GetComponent<MushroomDamageArea>().Init(
             ownerId,
