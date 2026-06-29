@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afc16182e4a68c5409c51166b32c7bf7, type: 3}
-  m_Name: Watermelon_lore
+  m_Name: Watermelon_lore 1
   m_EditorClassIdentifier: Assembly-CSharp::PickData
   char_name: "\u30B9\u30A4\u30AB"
   lore: "\uFF21\u30DC\u30BF\u30F3\uFF1A\u30D0\u30FC\u30B9\u30C8\u5C04\u6483\n\uFF083\u56DE\u3001\u7A2E\u3092\u767A\u5C04\u3059\u308B\uFF09\n\n\uFF22\u30DC\u30BF\u30F3\uFF1A\u5207\u308A\u8EAB\u30B9\u30C8\u30E9\u30A4\u30AF\n\uFF08\u65AC\u6483\u3092\u6B8B\u3059\u5207\u308A\u8EAB\u3092\u98DB\u3070\u3059\uFF09"

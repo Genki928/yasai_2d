@@ -266,5 +266,5 @@ public class StateIndicater
 
 public static class PlayerPick
 {
-    public static int[] pick = new int[2] { 0, 4 };
+    public static int[] pick = new int[2] { 0, 5 };
 }
