@@ -120,8 +120,10 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   sprite: {fileID: 0}
   sprite: {fileID: 0}
-  mushroom_default: {fileID: 357749872346554099, guid: 417097bc21ad2b14285fe45a8de8cda5, type: 3}
   tackle: {fileID: -6936863397466563725, guid: 8ae7cdb6c74e9bc4e90a099a526ccffa, type: 3}
+  img:
+  - {fileID: 357749872346554099, guid: 417097bc21ad2b14285fe45a8de8cda5, type: 3}
+  - {fileID: -6936863397466563725, guid: 8ae7cdb6c74e9bc4e90a099a526ccffa, type: 3}
   collision: {fileID: 9138792514576026239, guid: 5a4d1edade8353449bbdfabf13041c1a, type: 3}
   headBangAngle: 60
   rotateSpeed: 500

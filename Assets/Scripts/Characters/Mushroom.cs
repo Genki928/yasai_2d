@@ -8,8 +8,7 @@ public class Mushroom : CharBase
 {
     [SerializeField] SpriteRenderer sprite;
 
-    public Sprite mushroom_default;
-    public Sprite tackle;
+    [SerializeField] List<Sprite> img = new();
 
     //skill1
     [SerializeField] GameObject collision;
@@ -123,7 +122,7 @@ public class Mushroom : CharBase
             audioSource.PlayOneShot(se1);
 
             //画像差し替え
-
+            sprite.sprite = img[1];
             // 座標・ベクトルの算出
             Vector2 pos = new Vector2(transform.position.x, transform.position.y + 0.7f) + direction * 2.0f;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -153,12 +152,12 @@ public class Mushroom : CharBase
         yield return new WaitForSeconds(0.2f);
         can_control = true;
         //画像差し替え
-
+        sprite.sprite = img[0];
     }
 
     public override Sprite GetDefaultImage()
     {
-        return mushroom_default;
+        return img[0];
     }
 
     public override void Damage(int value, int id)
