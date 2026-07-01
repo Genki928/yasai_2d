@@ -48,4 +48,13 @@ public class TargetBase : MonoBehaviour, IBurst
         this.sbm = sbm;
         this.player = player;
     }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.TryGetComponent<CharBase>(out var b))
+        {
+            //b.rigid += 60;
+            //b.KnockBack(10, (col.transform.position - transform.position).normalized);
+        }
+    }
 }

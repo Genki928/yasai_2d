@@ -2,20 +2,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Const;
-using Unity.VisualScripting;
 using UnityEngine.UI;
 
 public class SoloBattleManager : MonoBehaviour
 {
     // ----- 定数 -----
     const int SPAWN_COOLTIME = 60;
+    const int BONUS_TIMELIMIT_FRAMERATE = 400;
 
     // ----- 変数 -----
 
     [Header("◇キャラ生成")]
     [SerializeField] List<Character> characters = new(); 
     public Spawner player_spawn_point;
-    GameObject player;
+    CharBase player;
     int pick_nums = 4;
 
     [Header("◇的生成")]
@@ -41,18 +41,16 @@ public class SoloBattleManager : MonoBehaviour
 
     void Awake()
     {
-
-        Winner.Reset();
         Application.targetFrameRate = 60;
     }
 
     void Start()
     {
         // プレイヤー生成
-        player = Instantiate(characters[4].chars, player_spawn_point.point.transform.position, Quaternion.identity);
+        player = Instantiate(characters[4].chars, player_spawn_point.point.transform.position, Quaternion.identity).GetComponent<CharBase>();
         //player.GetComponent<CharBase>().state.speed.Add(new() { value = 100, time = 100 });
         // バーストバーとの紐づけ
-        gui.bar.Init(player);
+        gui.bar.Init(player.gameObject);
 
         // 各種UIとの紐づけ
         if (player.TryGetComponent<CharBase>(out var p))
@@ -75,14 +73,20 @@ public class SoloBattleManager : MonoBehaviour
 
     void Update()
     {
-
+        // スコアボーナスが初期状態じゃない（ボーナスが付与されている）なら、
         if (now_score_bonus != 1.0f)
         {
-            score_circle.fillAmount = 1 - (float)++bonus_timer / 400;
+            // 時間制限の更新
+            score_circle.fillAmount = 1 - (float)++bonus_timer / BONUS_TIMELIMIT_FRAMERATE;
+            
+            // 時間制限が終わったなら、
             if (score_circle.fillAmount == 0)
             {
+                // タイマー変数や時間制限の初期化
                 score_circle.fillAmount = 1;
                 now_score_bonus = 1.0f;
+
+                // UIの更新
                 score_bonus.text = "x " + now_score_bonus.ToString("N1");
             }
         }
@@ -94,12 +98,16 @@ public class SoloBattleManager : MonoBehaviour
 
             // Spriteを調整
             tb.Init(this, player.GetComponent<CharBase>());
+
+            // 操作キャラクターと画像が被らないよう調整
             int img = pick_nums;
             do
             {
                 img = Random.Range(0, target_sprites.Count);
             } while (img == pick_nums);
             tb.GetComponent<SpriteRenderer>().sprite = target_sprites[img];
+
+            // 見やすく（黒く）する
             tb.GetComponent<SpriteRenderer>().color = new Color32(128, 128, 128, 255);
 
             // 低確率で爆弾を持たせる
@@ -124,6 +132,8 @@ public class SoloBattleManager : MonoBehaviour
     /// <param name="id"> プレイヤーの識別id </param>
     public void Finish()
     {
+        SoloBattleResult.socre = score;
+        SoloBattleResult.img = player.GetDefaultImage();
         SceneManager.LoadScene(SceneName.RESULT_PVE);
     }
 
@@ -146,4 +156,10 @@ public class SoloBattleManager : MonoBehaviour
         score_bonus.text = "x " + now_score_bonus.ToString("N1");
         bonus_timer = 0;
     }
+}
+
+static public class SoloBattleResult
+{
+    static public int socre = 0;
+    static public Sprite img;
 }
