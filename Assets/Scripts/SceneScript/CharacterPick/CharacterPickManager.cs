@@ -30,7 +30,7 @@ public class CharacterPickManager : MonoBehaviour
     [SerializeField] GameObject[] ready = new GameObject[2];
 
     const float ICON_HORIZONTAL_SPACE = 1.5f;
-    const float ICON_VERTICAL_SPACE = 1.4f;
+    const float ICON_VERTICAL_SPACE = 2.0f;
     const int ICON_LINEFEED_COUNT = 3;
     const int X = 0;
     const int Y = 1;
@@ -113,6 +113,12 @@ public class CharacterPickManager : MonoBehaviour
     {
         if (ctx.performed)
         {
+            if (!cursor[0].interact && !cursor[1].interact)
+            {
+                SceneManager.LoadScene("TitleScene"); 
+                return;
+            }
+
             // Ž¯•Ê
             int n = -1;
             if (Gamepad.all[0] == ctx.control.device) n = 0;

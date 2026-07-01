@@ -224,6 +224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 36789657}
   - component: {fileID: 36789656}
+  - component: {fileID: 36789658}
   m_Layer: 0
   m_Name: 397130179adf0d9a9765693493f4ebc9_0
   m_TagString: Untagged
@@ -305,6 +306,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &36789658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36789655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8dbe954ab1fedc4493fb98069834de3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerId
+  sprites:
+  - {fileID: -7164230721693831358, guid: 943d42b8eeca0fd4cbd1e28b6616ccef, type: 3}
+  - {fileID: -9119325056845649334, guid: 55dde7e7bae2eb949b7f448e27669d90, type: 3}
 --- !u!1 &90776097
 GameObject:
   m_ObjectHideFlags: 0
