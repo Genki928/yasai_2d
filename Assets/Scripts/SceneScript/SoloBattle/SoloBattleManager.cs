@@ -132,6 +132,7 @@ public class SoloBattleManager : MonoBehaviour
     /// <param name="id"> プレイヤーの識別id </param>
     public void Finish()
     {
+        SoloBattleResult.name = player.data.char_name;
         SoloBattleResult.socre = score;
         SoloBattleResult.img = player.GetDefaultImage();
         SceneManager.LoadScene(SceneName.RESULT_PVE);
@@ -160,6 +161,7 @@ public class SoloBattleManager : MonoBehaviour
 
 static public class SoloBattleResult
 {
-    static public int socre = 0;
+    static public string name = "オレ";
+    static public int socre = 2000;
     static public Sprite img;
 }
