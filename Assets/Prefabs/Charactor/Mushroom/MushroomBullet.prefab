@@ -108,9 +108,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MushroomGass
   speed: 4
-  lifeTime: 1.4
-  gravity: 10
-  upPower: 7
+  lifeTime: 1
+  gravity: 20
+  upPower: 10
   maxScale: 2
   gasPrefab: {fileID: 1904419012480044280, guid: 287b67315b3e59f47a0034983dba933e, type: 3}
   gasAudioClip: {fileID: 8300000, guid: 914c6befc740afb42bfeba82cd1f6ccd, type: 3}

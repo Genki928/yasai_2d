@@ -149,7 +149,7 @@ public class Mushroom : CharBase
 
     IEnumerator Gass()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.4f);
         can_control = true;
         //‰æ‘œ·‚µ‘Ö‚¦
         sprite.sprite = img[0];

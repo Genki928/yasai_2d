@@ -41,7 +41,7 @@ public class MushroomGass : MonoBehaviour
   
     private void Update()
     {
-        transform.Rotate(0, 0, 180 * Time.deltaTime);
+        transform.Rotate(0, 0, 260 * Time.deltaTime);
         timer += Time.deltaTime;
 
         // èdóÕ
