@@ -9,6 +9,7 @@ namespace Const
         public const string BATTLE_PVE = "BattleScene-pve";
         public const string RESULT = "ResultScene";
         public const string RESULT_PVE = "ResultScene-pve";
+        public const string PROLOGUE = "Prologue";
     }
 
     public static class BossCarrotConst

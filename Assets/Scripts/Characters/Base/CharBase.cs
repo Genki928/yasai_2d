@@ -117,6 +117,7 @@ public class CharBase : MonoBehaviour, IBurst
             else
                 rb.linearVelocity = Vector2.zero;
         }
+        else if(burst>=max_burst)rb.linearVelocity = Vector2.zero;
     }
 
     /// <summary> プレイヤーにダメージを与える </summary>

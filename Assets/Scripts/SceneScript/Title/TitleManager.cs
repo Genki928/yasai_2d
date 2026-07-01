@@ -8,7 +8,7 @@ public class TitleManager : MonoBehaviour
     [SerializeField] int arrow_max=1;
     [SerializeField] int arrow_min = 0;
 
-
+    [SerializeField] int timer = 0;
 
     // Start is called once before the first execution ofUpdate after the MonoBehaviour is created
     void Start() 
@@ -18,7 +18,8 @@ public class TitleManager : MonoBehaviour
     // Update is called once per frame
     void Update() 
     {
-
+        timer++;
+        if (timer / 60 == 10) SceneManager.LoadScene(SceneName.PROLOGUE);
     } 
     public void SceneChange_CharacterPickScene(InputAction.CallbackContext ctx)
     {
@@ -33,6 +34,7 @@ public class TitleManager : MonoBehaviour
             TextArrow.instance.arrow_pos++;
             if (TextArrow.instance.arrow_pos > arrow_max)
                 TextArrow.instance.arrow_pos = arrow_min;
+            timer = 0;
         }
     }
     public void Down(InputAction.CallbackContext ctx)
@@ -42,6 +44,7 @@ public class TitleManager : MonoBehaviour
             TextArrow.instance.arrow_pos--;
             if (TextArrow.instance.arrow_pos < arrow_min)
                 TextArrow.instance.arrow_pos = arrow_max;
+            timer =0;
         }
     }
 

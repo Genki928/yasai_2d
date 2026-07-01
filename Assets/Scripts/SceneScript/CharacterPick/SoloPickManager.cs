@@ -88,6 +88,11 @@ public class SoloPickManager : MonoBehaviour
     {
         if (ctx.performed)
         {
+            if (!cursor.interact)
+            {
+                SceneManager.LoadScene("TitleScene");
+                return;
+            }
             if (cursor.interact && cursor.interact)
             {
                 ready[0].SetActive(false);
