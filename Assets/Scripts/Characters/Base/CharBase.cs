@@ -72,7 +72,7 @@ public class CharBase : MonoBehaviour, IBurst
             if (++regen_burst_timer == data.regen_burst_cooltime)
             {
                 regen_burst_timer = data.restart_regen_burst_value;
-                Heal(5);
+                Heal(15);
             }
         }
 
@@ -159,37 +159,33 @@ public class CharBase : MonoBehaviour, IBurst
     }
 
     /// <summary>
-    /// ラウンド開始時の初期化
-    /// </summary>
-    public virtual void ResetRound()
-    {
-        // バースト値リセット
-        burst = 0;
-        burst_bar.Draw(burst, max_burst);
+/// ラウンド開始時の初期化
+/// </summary>
+public virtual void ResetRound()
+{
+    // バースト値リセット
+    burst = 0;
+    burst_bar.Draw(burst, max_burst);
 
-        // クールタイムリセット
-        skill_1_cooltime = 0;
-        skill_2_cooltime = 0;
+    // クールタイムリセット
+    skill_1_cooltime = 0;
+    skill_2_cooltime = 0;
 
-        // バースト回復タイマー
-        regen_burst_timer = 0;
+    // バースト回復タイマー
+    regen_burst_timer = 0;
 
-        // 硬直解除
-        rigid = 0;
+    // 硬直解除
+    rigid = 0;
 
-        // エフェクト解除
-        state.speed.Clear();
+    // エフェクト解除
+    state.speed.Clear();
 
-        // 停止
-        rb.linearVelocity = Vector2.zero;
-        rb.angularVelocity = 0;
+    // 停止
+    rb.linearVelocity = Vector2.zero;
 
-        // 操作禁止
-        can_control = false;
-
-        // カーソルの向きを更新
-        cursor_obj.Refresh(direction);
-    }
+    // 操作禁止（READY→GO後にtrueになる）
+    can_control = false;
+}
 
     /// <summary> 移動関数 </summary>
     public void Move(InputAction.CallbackContext ctx)

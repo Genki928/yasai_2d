@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MushroomDamageArea
   lifeTime: 7
-  hitInterval: 1
+  hitInterval: 0.5
 --- !u!212 &4020653800329992473
 SpriteRenderer:
   serializedVersion: 2

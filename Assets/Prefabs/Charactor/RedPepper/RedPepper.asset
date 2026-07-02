@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharData
   char_name: "\u30C8\u30A6\u30AC\u30E9\u30B7"
   speed: 4
-  max_burst: 220
-  regen_burst_cooltime: 120
+  max_burst: 150
+  regen_burst_cooltime: 180
   restart_regen_burst_value: 60
   skill_1_rigid: 10
-  skill_1_cooltime: 160
+  skill_1_cooltime: 120
   skill_2_rigid: 20
-  skill_2_cooltime: 200
+  skill_2_cooltime: 180
   skill_3_rigid: 0
   skill_3_cooltime: 0
