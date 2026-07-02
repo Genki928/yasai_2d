@@ -25,6 +25,7 @@ public class BattleManagerBase : MonoBehaviour
     [Header("ƒTƒEƒ“ƒh")]
     protected AudioSource audioSource;
     [SerializeField] protected AudioClip start_se;
+    public Timer timer;
 
     protected virtual void Start()
     {
@@ -225,5 +226,6 @@ public class BattleManagerBase : MonoBehaviour
 
         goText.gameObject.SetActive(false);
         datas[0].can_control = true;
+        timer.Init(60);
     }
 }

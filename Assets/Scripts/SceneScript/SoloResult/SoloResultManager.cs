@@ -22,16 +22,25 @@ public class SoloResultManager : MonoBehaviour
     int arrow_max = 1;
     int arrow_min = 0;
     bool canInput = false;
+    int displayCnt = 0;
+    [SerializeField] Transform canvas;
+    float sSpace = 1.0f;
+    List<GameObject> rankObj = new();
+    [SerializeField] SpriteRenderer skin;
+    [SerializeField] Text yasaiName;
+    [SerializeField] Text winText;
 
     void Start()
     {
         yourScoreIs.gameObject.SetActive(false);
         scoreUI.gameObject.SetActive(false);
         yourRankIs.gameObject.SetActive(false);
-        rankUI.gameObject.SetActive(false);
         made.gameObject.SetActive(false);
         cursor.SetActive(false);
         StartCoroutine(Result());
+        skin.sprite = SoloBattleResult.img;
+        yasaiName.text = SoloBattleResult.name;
+        if (!SoloBattleResult.win) winText.text = "頑張りました";
     }
 
     // Update is called once per frame
@@ -49,28 +58,44 @@ public class SoloResultManager : MonoBehaviour
         // 「○○点！」
         yield return new WaitForSeconds(1.0f);
         scoreUI.gameObject.SetActive(true);
-        scoreUI.text = $"{SoloBattleResult.socre}";
+        scoreUI.text = $"{SoloBattleResult.score}";
 
         // 「あなたの野菜ランクは...」
         yield return new WaitForSeconds(1.0f);
         yourRankIs.gameObject.SetActive(true);
 
         // 「○○ランク！」
-        yield return new WaitForSeconds(1.0f);
+        for (int i = 0; i < ranks.Count; i++)
+        {
+            if (ranks[i].needScore < SoloBattleResult.score)
+            {
+                displayCnt = ranks[i].sCount;
+            }
+        }
         StartCoroutine(DisplayRank());
-
-        // 製作者
-        yield return new WaitForSeconds(1.0f);
-        made.gameObject.SetActive(true);
-        nameUI.text = SoloBattleResult.name;
-        canInput = true;
-        cursor.SetActive(true);
     }
 
-    IEnumerator DisplayRank()
+    IEnumerator DisplayRank(int n = 0)
     {
-        StartCoroutine(DisplayRank());
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
+        if (n++ < displayCnt)
+        {
+            rankObj.Add(Instantiate(rankUI).gameObject);
+            GameObject go = rankObj[rankObj.Count - 1].gameObject;
+            go.transform.SetParent(canvas, false);
+            go.transform.position = new(transform.position.x + sSpace, transform.position.y);
+            sSpace += 0.5f;
+            StartCoroutine(DisplayRank(n));
+        }
+        else
+        {
+
+            // 製作者
+            made.gameObject.SetActive(true);
+            nameUI.text = SoloBattleResult.name;
+            canInput = true;
+            cursor.SetActive(true);
+        }
     }
 
     public void SceneChange_CharacterPickScene(InputAction.CallbackContext ctx)

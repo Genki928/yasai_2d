@@ -19,7 +19,6 @@ public class SoloBattleManager : BattleManagerBase
     public int spawn_cooltime = 0;
 
     // -----
-    public Timer timer;
     int score;
 
     [Header("◇GUI")]
@@ -31,11 +30,16 @@ public class SoloBattleManager : BattleManagerBase
     float now_score_bonus = 1.0f;
     int bonus_timer = 0;
 
+    [SerializeField] AudioClip se;
+    [SerializeField] AudioClip se1;
+    [SerializeField] GameObject deathEffect;
+    [SerializeField] Text koText;
 
     void Awake()
     {
         Application.targetFrameRate = 60;
         timer.OnFinish += Finish;
+        CharBase.OnPlayerDies += Death;
     }
 
     protected override void Start()
@@ -64,7 +68,6 @@ public class SoloBattleManager : BattleManagerBase
 
         //boss = Instantiate(bosses[0], new(-10.0f, -5.0f), Quaternion.identity);
         //boss.player = player;
-        timer.Init(60);
         StartCoroutine(StartBattleEffect());
     }
     
@@ -113,6 +116,133 @@ public class SoloBattleManager : BattleManagerBase
         }
     }
 
+    void Death(int i = 0)
+    {
+        timer.Stop();
+        StartCoroutine(DeathC());
+    }
+
+
+    IEnumerator DeathC()
+    {
+        Camera cam = Camera.main;
+
+        Rigidbody2D rb = player[0].GetComponent<Rigidbody2D>();
+
+        Vector3 originalPos = cam.transform.position;
+        float originalSize = cam.orthographicSize;
+
+        Vector3 zoomPos = new(player[0].transform.position.x, player[0].transform.position.y + 0.5f, player[0].transform.position.z);
+        zoomPos.z = originalPos.z;
+
+        player[0].GetComponent<CharBase>().can_control = false;
+        rb.linearVelocity = Vector2.zero;
+
+        //ズーム
+        //SE
+        audioSource.PlayOneShot(se);
+
+        float targetSize = 2.2f;
+        float t = 0;
+
+        while (t < 0.1f)
+        {
+            t += Time.deltaTime;
+
+            cam.transform.position =
+                Vector3.Lerp(originalPos, zoomPos, t / 0.1f);
+
+            cam.orthographicSize =
+                Mathf.Lerp(originalSize, targetSize, t / 0.1f);
+
+            yield return null;
+        }
+
+        //ス〇ブラ風シェイク
+        float shakeTime = 2.0f;
+
+        while (shakeTime > 0)
+        {
+            shakeTime -= Time.deltaTime;
+
+            Vector2 shake =
+                UnityEngine.Random.insideUnitCircle * 0.25f;
+
+            cam.transform.position =
+                zoomPos + new Vector3(shake.x, shake.y, 0);
+
+            yield return null;
+        }
+        audioSource.PlayOneShot(se1);
+
+        // エフェクト生成
+        Instantiate(
+            deathEffect,
+            player[0].transform.position,
+            Quaternion.identity);
+
+        // プレイヤーを消す
+        player[0].transform.position = new Vector3(1000, 1000, 0);
+        // または
+        // loser.SetActive(false);
+
+        // KO表示
+        yield return ShowKO();
+
+        yield return new WaitForSeconds(4.5f);
+
+        // シーン切り替え
+        SoloBattleResult.name = datas[0].data.char_name;
+        SoloBattleResult.score = score;
+        SoloBattleResult.img = datas[0].GetDefaultImage();
+        SoloBattleResult.win = false;
+        SceneManager.LoadScene("ResultScene-pve");
+    }
+
+    IEnumerator ShowKO()
+    {
+        koText.gameObject.SetActive(true);
+
+        Color c = koText.color;
+        c.a = 0;
+        koText.color = c;
+
+        koText.transform.localScale = Vector3.one * 4f;
+
+        float t = 0;
+
+        while (t < 0.2f)
+        {
+            t += Time.deltaTime;
+
+            float p = t / 0.2f;
+
+            koText.transform.localScale =
+                Vector3.Lerp(Vector3.one * 4f, Vector3.one, p);
+
+            c.a = p;
+            koText.color = c;
+
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(1.0f);
+
+        t = 0;
+
+        while (t < 0.3f)
+        {
+            t += Time.deltaTime;
+
+            c.a = 1 - t / 0.3f;
+            koText.color = c;
+
+            yield return null;
+        }
+
+        koText.gameObject.SetActive(false);
+    }
+
     protected override IEnumerator StartBattleEffect()
     {
         Camera cam = Camera.main;
@@ -153,7 +283,8 @@ public class SoloBattleManager : BattleManagerBase
 
     void OnDestroy()
     {
-        ;
+        timer.OnFinish -= Finish;
+        CharBase.OnPlayerDies -= Death;
     }
 
     /// <summary> バトルを終了させる </summary>
@@ -161,8 +292,9 @@ public class SoloBattleManager : BattleManagerBase
     public void Finish()
     {
         SoloBattleResult.name = datas[0].data.char_name;
-        SoloBattleResult.socre = score;
+        SoloBattleResult.score = score;
         SoloBattleResult.img = datas[0].GetDefaultImage();
+        SoloBattleResult.win = true;
         SceneManager.LoadScene(SceneName.RESULT_PVE);
     }
 
@@ -190,6 +322,7 @@ public class SoloBattleManager : BattleManagerBase
 static public class SoloBattleResult
 {
     static public string name = "オレ";
-    static public int socre = 2000;
+    static public int score = 2000;
     static public Sprite img;
+    static public bool win = false;
 }

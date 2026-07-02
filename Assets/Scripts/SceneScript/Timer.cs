@@ -42,4 +42,9 @@ public class Timer : MonoBehaviour
     {
         text.text = $"{limit}";
     }
+
+    public void Stop()
+    {
+        is_start = true;
+    }
 }
