@@ -10,16 +10,17 @@ using UnityEngine.UI;
 
 public class SoloResultManager : MonoBehaviour
 {
+    [Header("UI")]
     public Text yourScoreIs;
     public Text scoreUI;
     public Text yourRankIs;
     public Text rankUI;
     public GameObject made;
     public Text nameUI;
+    [SerializeField] List<SoloResultRank> ranks = new();
     public GameObject cursor;
-    [SerializeField] List<int> ranks = new();
-    [SerializeField] int arrow_max = 1;
-    [SerializeField] int arrow_min = 0;
+    int arrow_max = 1;
+    int arrow_min = 0;
     bool canInput = false;
 
     void Start()
@@ -56,15 +57,7 @@ public class SoloResultManager : MonoBehaviour
 
         // 「○○ランク！」
         yield return new WaitForSeconds(1.0f);
-        //for (int i = 0; i < ranks.Count; i++)
-        //{
-        //    if (SoloBattleResult.socre < ranks[i].score)
-        //    {
-        //        rankUI.text = ranks[1].rank;
-        //        break;
-        //    }
-        ////}
-        rankUI.gameObject.SetActive(true);
+        StartCoroutine(DisplayRank());
 
         // 製作者
         yield return new WaitForSeconds(1.0f);
@@ -72,6 +65,12 @@ public class SoloResultManager : MonoBehaviour
         nameUI.text = SoloBattleResult.name;
         canInput = true;
         cursor.SetActive(true);
+    }
+
+    IEnumerator DisplayRank()
+    {
+        StartCoroutine(DisplayRank());
+        yield return new WaitForSeconds(1.0f);
     }
 
     public void SceneChange_CharacterPickScene(InputAction.CallbackContext ctx)
@@ -110,4 +109,11 @@ public class SoloResultManager : MonoBehaviour
                 TextArrow.instance.arrow_pos = arrow_max;
         }
     }
+}
+
+[Serializable]
+public class SoloResultRank
+{
+    public int needScore = 0;
+    public int sCount = 0;
 }

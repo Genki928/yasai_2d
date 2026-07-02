@@ -11,7 +11,7 @@ public class CharacterPickManager : MonoBehaviour
     [Header("◇アイコン")]
     [SerializeField] GameObject icon_pf;
     [SerializeField] List<Sprite> icon_img = new();
-    List<GameObject> icon_obj = new();
+    public List<GameObject> icon_obj = new();
     Vector2 pos = new(0, 5);
 
     [Header("◇カーソル")]
@@ -177,11 +177,17 @@ public class CharacterPickManager : MonoBehaviour
             // 決定済みなら移動不可
             if (cursor[n].interact) return;
 
-            if (++cursor[n].pos[Y] > (icon_obj.Count - 1) / ICON_LINEFEED_COUNT) cursor[n].pos[Y] = 0;
-            if (icon_obj.Count % ICON_LINEFEED_COUNT != 0)
+            if (++cursor[n].pos[Y] > (icon_obj.Count - 1) / ICON_LINEFEED_COUNT)
             {
-                if (cursor[n].pos[X] > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT) cursor[n].pos[Y] = 0;
+                cursor[n].pos[Y] = 0;
             }
+            if (cursor[n].pos[X] > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT
+                && cursor[n].pos[Y] == (icon_obj.Count - 1) / ICON_LINEFEED_COUNT)
+            {
+                cursor[n].pos[Y] = 0;
+            }
+            //if (icon_obj.Count % ICON_LINEFEED_COUNT != 0)
+            //    if (cursor[n].pos[X] > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT) cursor[n].pos[Y] = 0;
 
             // 描画
             Draw(n);
