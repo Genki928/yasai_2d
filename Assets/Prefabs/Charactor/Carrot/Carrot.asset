@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharData
   char_name: "\u30CB\u30F3\u30B8\u30F3"
   speed: 5
-  max_burst: 150
-  regen_burst_cooltime: 300
-  restart_regen_burst_value: 90
+  max_burst: 250
+  regen_burst_cooltime: 180
+  restart_regen_burst_value: 60
   skill_1_rigid: 0
   skill_1_cooltime: 30
   skill_2_rigid: 10

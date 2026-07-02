@@ -47,10 +47,12 @@ public class BattleManager : MonoBehaviour
     [SerializeField] Text goText;
     private Vector3 defaultCameraPos;
     private float defaultCameraSize;
+    [SerializeField] private AudioClip start_se;
 
     //終了
     [SerializeField] GameObject deathEffect;
     [SerializeField] GameObject burstEffect;
+    [SerializeField] Text koText;
     [SerializeField] private AudioClip se;
     [SerializeField] private AudioClip se1;
     protected bool sceneLoad = false;
@@ -242,22 +244,20 @@ public class BattleManager : MonoBehaviour
         //    yield return null;
         //}
         audioSource.PlayOneShot(se1);
+
         // エフェクト生成
         Instantiate(
             deathEffect,
             loser.transform.position,
             Quaternion.identity);
 
-        Instantiate(
-         burstEffect,
-         new Vector3(
-             Camera.main.transform.position.x,
-             Camera.main.transform.position.y,
-             0),
-         Quaternion.identity);
+        // プレイヤーを消す
+        loser.transform.position = new Vector3(1000, 1000, 0);
+        // または
+        // loser.SetActive(false);
 
-        // プレイヤーを画面外へ
-        loser.transform.position = new Vector3(1000, 1000, 0);//座標移動で物理的に見えなくしてる
+        // KO表示
+        yield return ShowKO();
 
         yield return new WaitForSeconds(4.5f);
 
@@ -265,6 +265,49 @@ public class BattleManager : MonoBehaviour
         SceneManager.LoadScene("ResultScene");
     }
 
+    IEnumerator ShowKO()
+    {
+        koText.gameObject.SetActive(true);
+
+        Color c = koText.color;
+        c.a = 0;
+        koText.color = c;
+
+        koText.transform.localScale = Vector3.one * 4f;
+
+        float t = 0;
+
+        while (t < 0.2f)
+        {
+            t += Time.deltaTime;
+
+            float p = t / 0.2f;
+
+            koText.transform.localScale =
+                Vector3.Lerp(Vector3.one * 4f, Vector3.one, p);
+
+            c.a = p;
+            koText.color = c;
+
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(1.0f);
+
+        t = 0;
+
+        while (t < 0.3f)
+        {
+            t += Time.deltaTime;
+
+            c.a = 1 - t / 0.3f;
+            koText.color = c;
+
+            yield return null;
+        }
+
+        koText.gameObject.SetActive(false);
+    }
     Vector2 SetDirect(DIRECT direct)
     {
         if (direct == DIRECT.RIGHT) return new(1.0f, 0.0f);
@@ -447,6 +490,7 @@ public class BattleManager : MonoBehaviour
 
             yield return null;
         }
+        audioSource.PlayOneShot(start_se);
 
         yield return new WaitForSeconds(0.5f);
 

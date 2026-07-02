@@ -13,7 +13,7 @@ public class Leek : CharBase
     // カウンター用
     [SerializeField] private GameObject countercircle;
     [SerializeField] private float counterTime = 1.0f;
-    [SerializeField] private int counterDamage = 30;
+    [SerializeField] private int counterDamage = 50;
     [SerializeField] private float counterDashPower = 10f;
     [SerializeField] AudioClip se2;
     [SerializeField] AudioClip se3;
