@@ -18,7 +18,7 @@ public class WaterMelon : CharBase
 
     //skill2
     [SerializeField] GameObject cutter;
-    [SerializeField] static int cutter_damage = 60;
+    [SerializeField] static int cutter_damage = 100;
     private bool isCutter;
     [SerializeField] AudioClip cutter_sound;
     [SerializeField] AudioClip charge_sound;
