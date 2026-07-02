@@ -1,23 +1,17 @@
+using Const;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Const;
 using UnityEngine.UI;
 
-public class SoloBattleManager : MonoBehaviour
+public class SoloBattleManager : BattleManagerBase
 {
     // ----- 定数 -----
     const int SPAWN_COOLTIME = 40;
     const int BONUS_TIMELIMIT_FRAMERATE = 400;
 
     // ----- 変数 -----
-
-    [Header("◇キャラ生成")]
-    [SerializeField] List<Character> characters = new(); 
-    public Spawner player_spawn_point;
-    CharBase player;
-    int pick_nums = 4;
-
     [Header("◇的生成")]
     [SerializeField] List<TargetBase> targets = new();
     [SerializeField] List<Spawner> target_spawn_point = new();
@@ -41,32 +35,37 @@ public class SoloBattleManager : MonoBehaviour
     void Awake()
     {
         Application.targetFrameRate = 60;
+        timer.OnFinish += Finish;
     }
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+
         // プレイヤー生成
-        player = Instantiate(characters[CharPickData.id].chars, player_spawn_point.point.transform.position, Quaternion.identity).GetComponent<CharBase>();
-        //player.GetComponent<CharBase>().state.speed.Add(new() { value = 100, time = 100 });
+        Debug.Log(CharPickData.id);
+        player[0] = Instantiate(characters[CharPickData.id].chars, spawn_point[0].point.transform.position, Quaternion.identity);
+        datas[0] = player[0].GetComponent<CharBase>();
+
         // バーストバーとの紐づけ
-        gui.bar.Init(player.gameObject);
+        gui.bar.Init(player[0]);
 
         // 各種UIとの紐づけ
-        if (player.TryGetComponent<CharBase>(out var p))
+        if (player[0].TryGetComponent<CharBase>(out var p))
         {
-            p.id = 0;   // id
-            p.direction = SetDirect(player_spawn_point.direct);    // 方向
-            p.burst_bar = gui.bar;   // バースト
-            gui.name.text = p.data.char_name;    // キャラ名
-            p.cooltimer[0] = gui.skill1_cooltimer;   // スキル1のクールタイムを表示
-            p.cooltimer[1] = gui.skill2_cooltimer;   // スキル2のクールタイムを表示
-            gui.icon.sprite = characters[pick_nums].icon; // アイコン
+            datas[0].id = 0;   // id
+            datas[0].direction = SetDirect(spawn_point[0].direct);    // 方向
+            datas[0].burst_bar = gui.bar;   // バースト
+            gui.name.text = datas[0].data.char_name;    // キャラ名
+            datas[0].cooltimer[0] = gui.skill1_cooltimer;   // スキル1のクールタイムを表示
+            datas[0].cooltimer[1] = gui.skill2_cooltimer;   // スキル2のクールタイムを表示
+            gui.icon.sprite = characters[CharPickData.id].icon; // アイコン
         }
 
         //boss = Instantiate(bosses[0], new(-10.0f, -5.0f), Quaternion.identity);
         //boss.player = player;
         timer.Init(60);
-        timer.OnFinish += Finish;
+        StartCoroutine(StartBattleEffect());
     }
     
 
@@ -83,7 +82,7 @@ public class SoloBattleManager : MonoBehaviour
             {
                 // タイマー変数や時間制限の初期化
                 score_circle.fillAmount = 1;
-                now_score_bonus = 1.0f;
+                now_score_bonus = default_score_bonus;
 
                 // UIの更新
                 score_bonus.text = "x " + now_score_bonus.ToString("N1");
@@ -96,14 +95,14 @@ public class SoloBattleManager : MonoBehaviour
             TargetBase tb = Instantiate(targets[0], target_spawn_point[spawn].point.transform.position, Quaternion.identity);
 
             // Spriteを調整
-            tb.Init(this, player.GetComponent<CharBase>(), transform.position.x > tb.transform.position.x ? true : false);
+            tb.Init(this, player[0].GetComponent<CharBase>(), transform.position.x > tb.transform.position.x ? true : false);
 
             // 操作キャラクターと画像が被らないよう調整
-            int img = pick_nums;
+            int img = CharPickData.id;
             do
             {
                 img = Random.Range(0, target_sprites.Count);
-            } while (img == pick_nums);
+            } while (img == CharPickData.id);
             tb.GetComponent<SpriteRenderer>().sprite = target_sprites[img];
 
             // 見やすく（黒く）する
@@ -112,6 +111,44 @@ public class SoloBattleManager : MonoBehaviour
             // タイマーをリセット
             spawn_cooltime = 0;
         }
+    }
+
+    protected override IEnumerator StartBattleEffect()
+    {
+        Camera cam = Camera.main;
+        datas[0].can_control = false;
+
+        Vector3 originalPos = defaultCameraPos;
+        float originalSize = defaultCameraSize;
+
+        float zoomSize = 2.5f;
+
+        // Player1
+        yield return ZoomToPlayer(
+            player[0].transform.position,
+            zoomSize,
+            0.5f);
+
+        yield return new WaitForSeconds(0.4f);
+
+        // Player2
+        yield return ZoomToPlayer(
+            player[0].transform.position,
+            zoomSize,
+            0.5f);
+
+        yield return new WaitForSeconds(0.4f);
+
+        yield return MoveCamera(
+       defaultCameraPos,
+       defaultCameraSize,
+       0.6f);
+
+        yield return ShowReady();
+
+        yield return ShowGo();
+        datas[0].can_control = true;
+        
     }
 
     void OnDestroy()
@@ -123,9 +160,9 @@ public class SoloBattleManager : MonoBehaviour
     /// <param name="id"> プレイヤーの識別id </param>
     public void Finish()
     {
-        SoloBattleResult.name = player.data.char_name;
+        SoloBattleResult.name = datas[0].data.char_name;
         SoloBattleResult.socre = score;
-        SoloBattleResult.img = player.GetDefaultImage();
+        SoloBattleResult.img = datas[0].GetDefaultImage();
         SceneManager.LoadScene(SceneName.RESULT_PVE);
     }
 

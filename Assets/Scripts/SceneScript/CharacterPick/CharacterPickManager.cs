@@ -186,8 +186,6 @@ public class CharacterPickManager : MonoBehaviour
             {
                 cursor[n].pos[Y] = 0;
             }
-            //if (icon_obj.Count % ICON_LINEFEED_COUNT != 0)
-            //    if (cursor[n].pos[X] > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT) cursor[n].pos[Y] = 0;
 
             // •`‰æ
             Draw(n);

@@ -67,6 +67,7 @@ public class SoloPickManager : MonoBehaviour
             if (cursor.interact)
             {
                 CharPickData.id = cursor.pos[Y] * ICON_LINEFEED_COUNT + cursor.pos[X];
+                if (CharPickData.id == icon_img.Count - 1) CharPickData.id = UnityEngine.Random.Range(0, icon_img.Count - 1);
                 SceneManager.LoadScene(SceneName.BATTLE_PVE);
             }
 
@@ -129,12 +130,15 @@ public class SoloPickManager : MonoBehaviour
             // Œˆ’èÏ‚Ý‚È‚çˆÚ“®•s‰Â
             if (cursor.interact) return;
 
-            if (++cursor.pos[Y] > (icon_obj.Count - 1) / ICON_LINEFEED_COUNT) cursor.pos[Y] = 0;
-            if (icon_obj.Count % ICON_LINEFEED_COUNT != 0)
+            if (++cursor.pos[Y] > (icon_obj.Count - 1) / ICON_LINEFEED_COUNT)
             {
-                if (cursor.pos[X] > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT) cursor.pos[Y] = 0;
+                cursor.pos[Y] = 0;
             }
-
+            if (cursor.pos[X] > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT
+                && cursor.pos[Y] == (icon_obj.Count - 1) / ICON_LINEFEED_COUNT)
+            {
+                cursor.pos[Y] = 0;
+            }
 
             Draw();
         }

@@ -109,7 +109,6 @@ public class BattleManager : MonoBehaviour
             player[i] = pi.gameObject;
             datas[i] = player[i].GetComponent<CharBase>();
             datas[i].id = i;
-
             datas[i].direction = SetDirect(spawn_point[i].direct);
 
             // バーストバーとの紐づけ
