@@ -41,6 +41,14 @@ public class BattleManager : MonoBehaviour
     public TextMeshProUGUI fpsText; private float updateInterval = 0.5f; private float accum = 0.0f; private int frames = 0; private float timeLeft;
 
     //演出
+    //開始
+    //public Text fpsText;
+    [SerializeField] Text readyText;
+    [SerializeField] Text goText;
+    private Vector3 defaultCameraPos;
+    private float defaultCameraSize;
+
+    //終了
     [SerializeField] GameObject deathEffect;
     [SerializeField] GameObject burstEffect;
     [SerializeField] private AudioClip se;
@@ -57,6 +65,13 @@ public class BattleManager : MonoBehaviour
     }
     void Start()
     {
+        //カメラ取得
+        Camera cam = Camera.main;
+
+        defaultCameraPos = cam.transform.position;
+        defaultCameraSize = cam.orthographicSize;
+
+
         audioSource = GetComponent<AudioSource>();
 
         for (int i = 0; i < PLAYER_CNT; i++)
@@ -108,6 +123,12 @@ public class BattleManager : MonoBehaviour
                 gui[i].icon.sprite = characters[pick_nums[i]].icon; // アイコン
             }
         }
+        for (int i = 0; i < PLAYER_CNT; i++)
+        {
+            datas[i].can_control = false;
+        }
+
+        StartCoroutine(StartBattleEffect());
     }
 
     void Update()
@@ -251,6 +272,197 @@ public class BattleManager : MonoBehaviour
         if (direct == DIRECT.UP) return new(0.0f, 1.0f);
         if (direct == DIRECT.DOWN) return new(0.0f, -1.0f);
         return Vector2.zero;
+    }
+
+    IEnumerator StartBattleEffect()
+    {
+        Camera cam = Camera.main;
+
+        Vector3 originalPos = defaultCameraPos;
+        float originalSize = defaultCameraSize;
+
+        float zoomSize = 2.5f;
+
+        // Player1
+        yield return ZoomToPlayer(
+            player[0].transform.position,
+            zoomSize,
+            0.5f);
+
+        yield return new WaitForSeconds(0.4f);
+
+        // Player2
+        yield return ZoomToPlayer(
+            player[1].transform.position,
+            zoomSize,
+            0.5f);
+
+        yield return new WaitForSeconds(0.4f);
+
+        yield return MoveCamera(
+       defaultCameraPos,
+       defaultCameraSize,
+       0.6f);
+
+        yield return ShowReady();
+
+        yield return ShowGo();
+
+        // 操作開始
+        for (int i = 0; i < PLAYER_CNT; i++)
+        {
+            datas[i].can_control = true;
+        }
+    }
+    IEnumerator ZoomToPlayer(Vector3 pos, float size, float time)
+    {
+        Camera cam = Camera.main;
+
+        Vector3 startPos = cam.transform.position;
+        float startSize = cam.orthographicSize;
+
+        Vector3 target =
+            new Vector3(
+                pos.x,
+                pos.y + 0.5f,
+                startPos.z);
+
+        float t = 0;
+
+        while (t < time)
+        {
+            t += Time.deltaTime;
+
+            cam.transform.position =
+                Vector3.Lerp(
+                    startPos,
+                    target,
+                    t / time);
+
+            cam.orthographicSize =
+                Mathf.Lerp(
+                    startSize,
+                    size,
+                    t / time);
+
+            yield return null;
+        }
+    }
+    IEnumerator MoveCamera(Vector3 pos, float size, float time)
+    {
+        Camera cam = Camera.main;
+
+        Vector3 startPos = cam.transform.position;
+        float startSize = cam.orthographicSize;
+
+        float t = 0;
+
+        while (t < time)
+        {
+            t += Time.deltaTime;
+
+            cam.transform.position =
+                Vector3.Lerp(
+                    startPos,
+                    pos,
+                    t / time);
+
+            cam.orthographicSize =
+                Mathf.Lerp(
+                    startSize,
+                    size,
+                    t / time);
+
+            yield return null;
+        }
+    }
+
+    IEnumerator ShowReady()
+    {
+        readyText.gameObject.SetActive(true);
+
+        Color c = Color.white;
+        c.a = 1;
+        readyText.color = c;
+
+        readyText.transform.localScale = Vector3.one * 2f;
+
+        float t = 0;
+
+        while (t < 0.5f)
+        {
+            t += Time.deltaTime;
+
+            float p = t / 0.5f;
+
+            readyText.transform.localScale =
+                Vector3.Lerp(Vector3.one * 2f, Vector3.one, p);
+
+            c.a = p;
+            readyText.color = c;
+
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.7f);
+
+        t = 0;
+
+        while (t < 0.3f)
+        {
+            t += Time.deltaTime;
+
+            c.a = 1 - t / 0.3f;
+            readyText.color = c;
+
+            yield return null;
+        }
+
+        readyText.gameObject.SetActive(false);
+    }
+
+    IEnumerator ShowGo()
+    {
+        goText.gameObject.SetActive(true);
+
+        Color c = goText.color;
+        c.a = 0;
+        goText.color = c;
+
+        goText.transform.localScale = Vector3.one * 3f;
+
+        float t = 0;
+
+        while (t < 0.2f)
+        {
+            t += Time.deltaTime;
+
+            float p = t / 0.2f;
+
+            goText.transform.localScale =
+                Vector3.Lerp(Vector3.one * 3f, Vector3.one, p);
+
+            c.a = p;
+            goText.color = c;
+
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        t = 0;
+
+        while (t < 0.2f)
+        {
+            t += Time.deltaTime;
+
+            c.a = 1 - t / 0.2f;
+            goText.color = c;
+
+            yield return null;
+        }
+
+        goText.gameObject.SetActive(false);
     }
 }
 
