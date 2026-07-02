@@ -67,21 +67,21 @@ public class WaterMelon : CharBase
         // À•WEƒxƒNƒgƒ‹‚ÌŽZo
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         // ’e‚ð¶¬ -> id‚Ì•R‚Ã‚¯
-        GameObject go = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
+        GameObject go = Instantiate(bullet, new(transform.position.x, transform.position.y + 0.5f), Quaternion.Euler(0, 0, angle));
         go.GetComponent<DamageArea>().Init(id, bullet_damage, direction * 0.5f / 2, true);
         audioSource.PlayOneShot(bullet_sound);
         yield return new WaitForSeconds(0.1f);
         // À•WEƒxƒNƒgƒ‹‚ÌŽZo
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         // ’e‚ð¶¬ -> id‚Ì•R‚Ã‚¯
-        go = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
+        go = Instantiate(bullet, new(transform.position.x, transform.position.y + 0.5f), Quaternion.Euler(0, 0, angle));
         go.GetComponent<DamageArea>().Init(id, bullet_damage, direction * 0.5f / 2, true);
         audioSource.PlayOneShot(bullet_sound);
         yield return new WaitForSeconds(0.1f);
         // À•WEƒxƒNƒgƒ‹‚ÌŽZo
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         // ’e‚ð¶¬ -> id‚Ì•R‚Ã‚¯
-        go = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
+        go = Instantiate(bullet, new(transform.position.x, transform.position.y + 0.5f), Quaternion.Euler(0, 0, angle));
         go.GetComponent<DamageArea>().Init(id, bullet_damage, direction * 0.5f / 2, true);
         audioSource.PlayOneShot(bullet_sound);
         yield return new WaitForSeconds(0.1f);

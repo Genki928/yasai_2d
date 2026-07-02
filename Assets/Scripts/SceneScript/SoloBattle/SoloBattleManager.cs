@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class SoloBattleManager : MonoBehaviour
 {
     // ----- 定数 -----
-    const int SPAWN_COOLTIME = 60;
+    const int SPAWN_COOLTIME = 40;
     const int BONUS_TIMELIMIT_FRAMERATE = 400;
 
     // ----- 変数 -----
@@ -37,9 +37,6 @@ public class SoloBattleManager : MonoBehaviour
     float now_score_bonus = 1.0f;
     int bonus_timer = 0;
 
-    [Header("◇BGM")]
-    public AudioSource audioSource;
-
 
     void Awake()
     {
@@ -49,7 +46,7 @@ public class SoloBattleManager : MonoBehaviour
     void Start()
     {
         // プレイヤー生成
-        player = Instantiate(characters[4].chars, player_spawn_point.point.transform.position, Quaternion.identity).GetComponent<CharBase>();
+        player = Instantiate(characters[CharPickData.id].chars, player_spawn_point.point.transform.position, Quaternion.identity).GetComponent<CharBase>();
         //player.GetComponent<CharBase>().state.speed.Add(new() { value = 100, time = 100 });
         // バーストバーとの紐づけ
         gui.bar.Init(player.gameObject);

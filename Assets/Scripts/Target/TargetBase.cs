@@ -5,7 +5,7 @@ public class TargetBase : MonoBehaviour, IBurst
 {
     public int id { get; set; } = 100;
     public int burst { get; set; } = 0;
-    public int max_burst { get; set; } = 20;
+    public int max_burst { get; set; } = 10;
     public int rigid { get; set; } = 0;
     Rigidbody2D rb;
     int score = 100;
@@ -13,9 +13,12 @@ public class TargetBase : MonoBehaviour, IBurst
     public CharBase player;
     bool right = false;
     [SerializeField] BombTarget bomb;
+    [SerializeField] AudioClip damage;
+    AudioSource audioSource;
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
 
         // 低確率で爆弾を持たせる
@@ -35,18 +38,6 @@ public class TargetBase : MonoBehaviour, IBurst
     void FixedUpdate()
     {
         rb.linearVelocity = (player.transform.position - transform.position).normalized * 0.5f;
-        if (burst >= max_burst)
-        {
-            if (right)
-            {
-                rb.linearVelocity = new(-10, 10);
-            }
-            else
-            {
-                rb.linearVelocity = new(10, 10);
-            }
-            transform.Rotate(0, 0, 10);
-        }
     }
 
     public void Damage(int value, int id)
@@ -61,7 +52,18 @@ public class TargetBase : MonoBehaviour, IBurst
         // バースト値が最大なら、死亡
         if (burst == max_burst)
         {
+            if (right)
+            {
+                rb.linearVelocity = new(-10, 10);
+            }
+            else
+            {
+                rb.linearVelocity = new(10, 10);
+            }
             sbm.CalculateScore(score);
+
+            audioSource.PlayOneShot(damage);
+            Destroy(this);
         }
     }
 

@@ -66,10 +66,7 @@ public class SoloPickManager : MonoBehaviour
             // すべてのプレイヤーがキャラクターを決定していたら、シーンを遷移
             if (cursor.interact)
             {
-                //PlayerPick.pick = new int[2] {
-                //    cursor[0].pos[Y] * ICON_LINEFEED_COUNT + cursor[0].pos[X],
-                //    cursor[1].pos[Y] * ICON_LINEFEED_COUNT + cursor[1].pos[X]
-                //};
+                CharPickData.id = cursor.pos[Y] * ICON_LINEFEED_COUNT + cursor.pos[X];
                 SceneManager.LoadScene(SceneName.BATTLE_PVE);
             }
 
@@ -90,7 +87,7 @@ public class SoloPickManager : MonoBehaviour
         {
             if (!cursor.interact)
             {
-                SceneManager.LoadScene("TitleScene");
+                SceneManager.LoadScene(SceneName.TITLE);
                 return;
             }
             if (cursor.interact && cursor.interact)
@@ -191,4 +188,9 @@ public class SoloPickManager : MonoBehaviour
         state.name.text = pick_data[cursor.pos[Y] * ICON_LINEFEED_COUNT + cursor.pos[X]].char_name;
         state.lore.text = pick_data[cursor.pos[Y] * ICON_LINEFEED_COUNT + cursor.pos[X]].lore;
     }
+}
+
+public static class CharPickData
+{
+    public static int id = 0;
 }

@@ -20,7 +20,7 @@ public class BombTarget : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (target.burst != null)
+        if (target != null)
         {
             if (right)
                 transform.position = new(target.transform.position.x + 0.5f, target.transform.position.y + 0.5f);
@@ -30,7 +30,7 @@ public class BombTarget : MonoBehaviour
         else
         {
             GameObject paritcle = Instantiate(bomb, transform.position, Quaternion.identity);
-            paritcle.GetComponent<DamageArea>().Init(1, 50, new(0, 0), false);
+            paritcle.GetComponent<DamageArea>().Init(0, 50, new(0, 0), false);
             Destroy(gameObject);
         }
 

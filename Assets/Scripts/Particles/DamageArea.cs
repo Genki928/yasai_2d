@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class DamageArea : MonoBehaviour
 {
-    int id = 0;
-    int damage = 0;
-    Vector2 vec;
-    bool delete = false;
-    bool delete_script = false;
+    public int id = 0;
+    public int damage = 0;
+    public Vector2 vec;
+    public bool delete = false;
+    public bool delete_script = false;
 
     void Update()
     {
