@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class TargetBase : MonoBehaviour, IBurst
@@ -10,10 +11,20 @@ public class TargetBase : MonoBehaviour, IBurst
     int score = 100;
     public SoloBattleManager sbm;
     public CharBase player;
+    bool right = false;
+    [SerializeField] BombTarget bomb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        // í·ämó¶Ç≈îöíeÇéùÇΩÇπÇÈ
+        if (UnityEngine.Random.Range(0, 10) == 0)
+        {
+            BombTarget bt = Instantiate(bomb, transform.position, Quaternion.identity);
+            bt.Init(this);
+            GetComponent<SpriteRenderer>().sortingOrder = -1;
+        }
     }
     
     void Update()
@@ -24,6 +35,18 @@ public class TargetBase : MonoBehaviour, IBurst
     void FixedUpdate()
     {
         rb.linearVelocity = (player.transform.position - transform.position).normalized * 0.5f;
+        if (burst >= max_burst)
+        {
+            if (right)
+            {
+                rb.linearVelocity = new(-10, 10);
+            }
+            else
+            {
+                rb.linearVelocity = new(10, 10);
+            }
+            transform.Rotate(0, 0, 10);
+        }
     }
 
     public void Damage(int value, int id)
@@ -39,14 +62,14 @@ public class TargetBase : MonoBehaviour, IBurst
         if (burst == max_burst)
         {
             sbm.CalculateScore(score);
-            Destroy(gameObject);
         }
     }
 
-    public void Init(SoloBattleManager sbm, CharBase player)
+    public void Init(SoloBattleManager sbm, CharBase player, bool righrt)
     {
         this.sbm = sbm;
         this.player = player;
+        this.right = righrt;
     }
 
     void OnTriggerEnter2D(Collider2D col)

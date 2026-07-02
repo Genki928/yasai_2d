@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BombTarget : MonoBehaviour
 {
-    GameObject target;
+    TargetBase target;
     [SerializeField] GameObject bomb;
     bool right = true;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -20,7 +20,7 @@ public class BombTarget : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (target != null)
+        if (target.burst != null)
         {
             if (right)
                 transform.position = new(target.transform.position.x + 0.5f, target.transform.position.y + 0.5f);
@@ -36,7 +36,7 @@ public class BombTarget : MonoBehaviour
 
     }
 
-    public void Init(GameObject target)
+    public void Init(TargetBase target)
     {
         this.target = target;
     }

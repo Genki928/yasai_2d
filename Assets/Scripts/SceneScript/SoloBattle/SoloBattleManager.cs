@@ -22,7 +22,6 @@ public class SoloBattleManager : MonoBehaviour
     [SerializeField] List<TargetBase> targets = new();
     [SerializeField] List<Spawner> target_spawn_point = new();
     [SerializeField] List<Sprite> target_sprites = new();
-    [SerializeField] BombTarget bomb;
     public int spawn_cooltime = 0;
 
     // -----
@@ -37,6 +36,9 @@ public class SoloBattleManager : MonoBehaviour
     float default_score_bonus = 1.0f;
     float now_score_bonus = 1.0f;
     int bonus_timer = 0;
+
+    [Header("◇BGM")]
+    public AudioSource audioSource;
 
 
     void Awake()
@@ -97,7 +99,7 @@ public class SoloBattleManager : MonoBehaviour
             TargetBase tb = Instantiate(targets[0], target_spawn_point[spawn].point.transform.position, Quaternion.identity);
 
             // Spriteを調整
-            tb.Init(this, player.GetComponent<CharBase>());
+            tb.Init(this, player.GetComponent<CharBase>(), transform.position.x > tb.transform.position.x ? true : false);
 
             // 操作キャラクターと画像が被らないよう調整
             int img = pick_nums;
@@ -109,14 +111,6 @@ public class SoloBattleManager : MonoBehaviour
 
             // 見やすく（黒く）する
             tb.GetComponent<SpriteRenderer>().color = new Color32(128, 128, 128, 255);
-
-            // 低確率で爆弾を持たせる
-            if (Random.Range(0, 10) == 0)
-            {
-                BombTarget bt = Instantiate(bomb, target_spawn_point[spawn].point.transform.position, Quaternion.identity);
-                bt.Init(tb.gameObject);
-                tb.GetComponent<SpriteRenderer>().sortingOrder = -1;
-            }
 
             // タイマーをリセット
             spawn_cooltime = 0;

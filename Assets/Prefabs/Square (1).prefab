@@ -109,6 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TargetBase
   sbm: {fileID: 0}
   player: {fileID: 0}
+  bomb: {fileID: 2332055813528760168, guid: 272064b7383e71e4fb1a7ad486a9628f, type: 3}
 --- !u!58 &2613799644594245069
 CircleCollider2D:
   m_ObjectHideFlags: 0
