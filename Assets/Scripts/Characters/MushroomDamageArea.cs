@@ -25,7 +25,7 @@ public class MushroomDamageArea : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D col)
     {
-        if (!col.TryGetComponent<CharBase>(out var cb))
+        if (!col.TryGetComponent<IBurst>(out var cb))
             return;
 
         if (cb.id == id)

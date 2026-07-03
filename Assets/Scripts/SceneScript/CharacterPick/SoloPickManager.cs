@@ -10,7 +10,7 @@ public class SoloPickManager : MonoBehaviour
     [SerializeField] GameObject icon_pf;
     [SerializeField] List<Sprite> icon_img = new();
     List<GameObject> icon_obj = new();
-    Vector2 pos = new(0, 0);
+    Vector2 pos = new(0, 5);
 
     [Header("◇カーソル")]
     [SerializeField] GameObject cursor_pf;
@@ -24,7 +24,7 @@ public class SoloPickManager : MonoBehaviour
     [SerializeField] GameObject[] ready = new GameObject[2];
 
     const float ICON_HORIZONTAL_SPACE = 1.5f;
-    const float ICON_VERTICAL_SPACE = 1.4f;
+    const float ICON_VERTICAL_SPACE = 2.0f;
     const int ICON_LINEFEED_COUNT = 3;
     const int X = 0;
     const int Y = 1;
@@ -40,7 +40,7 @@ public class SoloPickManager : MonoBehaviour
         // 移動
         for (int i = 0; i < icon_obj.Count; i++)
         {
-            pos = new(-ICON_HORIZONTAL_SPACE, 0);
+            pos = new(-ICON_HORIZONTAL_SPACE, 3);
             // 座標決定
             icon_obj[i].transform.position = new(pos.x + ICON_HORIZONTAL_SPACE * (i % ICON_LINEFEED_COUNT),
                                                  pos.y + -ICON_VERTICAL_SPACE * (i / ICON_LINEFEED_COUNT));
