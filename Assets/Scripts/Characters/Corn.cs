@@ -25,7 +25,7 @@ public class Corn : CharBase
     override protected void Update()
     {
         base.Update();
-        speed.generic = data.speed + burst / 20;
+        //speed.generic = data.speed + burst / 20;
     }
 
     protected override void FixedUpdate()
