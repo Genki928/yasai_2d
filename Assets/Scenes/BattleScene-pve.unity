@@ -3636,6 +3636,7 @@ MonoBehaviour:
   readyText: {fileID: 1278168805}
   goText: {fileID: 1554100797}
   start_se: {fileID: 8300000, guid: 322fa8efad03a994980427702808b207, type: 3}
+  timer: {fileID: 1873271269}
   targets:
   - {fileID: 7686047600830137332, guid: 32bd83d52640b0d49a3d2de5d7824c6d, type: 3}
   target_spawn_point:
@@ -3658,7 +3659,6 @@ MonoBehaviour:
   - {fileID: 612600066695323494, guid: 9708a9172e4d4274792f0b16cf04ede2, type: 3}
   - {fileID: 8237331089931671458, guid: 43594a20325ca844fa75bef2d9fc9e8d, type: 3}
   spawn_cooltime: 0
-  timer: {fileID: 1873271269}
   gui:
     bar: {fileID: 1848879500}
     name: {fileID: 2132095580}
@@ -3698,7 +3698,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 8c4248fe8bac64e43b500ed9c9411d62, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.35
   m_Pitch: 1
   Loop: 1
   Mute: 0
