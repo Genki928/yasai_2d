@@ -636,7 +636,7 @@ Transform:
   m_GameObject: {fileID: 308996611}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.48, y: 2.85, z: 0}
+  m_LocalPosition: {x: -3.98, y: 1.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -662,7 +662,7 @@ MonoBehaviour:
   nameUI: {fileID: 267204813}
   ranks:
   - needScore: 1000
-    sCount: 2
+    sCount: 1
   - needScore: 2000
     sCount: 2
   - needScore: 3000
@@ -689,6 +689,8 @@ MonoBehaviour:
     sCount: 13
   - needScore: 45000
     sCount: 14
+  - needScore: 50000
+    sCount: 18
   cursor: {fileID: 1100111212}
   canvas: {fileID: 410474534}
   skin: {fileID: 1338705629}

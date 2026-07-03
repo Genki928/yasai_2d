@@ -83,7 +83,7 @@ public class SoloResultManager : MonoBehaviour
             GameObject go = rankObj[rankObj.Count - 1].gameObject;
             go.transform.SetParent(canvas, false);
             go.transform.position = new(transform.position.x + sSpace, transform.position.y);
-            sSpace += 0.5f;
+            sSpace += 1.2f;
             StartCoroutine(DisplayRank(n));
         }
         else

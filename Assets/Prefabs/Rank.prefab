@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9068920759973697312}
+  - component: {fileID: 3357627372212557100}
   - component: {fileID: 7085029883416023573}
   - component: {fileID: 3985051502521983524}
   m_Layer: 5
@@ -34,9 +35,22 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 479.99, y: 308.9}
-  m_SizeDelta: {x: 960.03, y: 228.2}
+  m_AnchoredPosition: {x: 639.88477, y: 211.50003}
+  m_SizeDelta: {x: 1279.8196, y: 423}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3357627372212557100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4427792207410227403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 637976d7f26d515418123ebadf37a21e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RainbowText
+  speed: 1
 --- !u!222 &7085029883416023573
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -67,11 +81,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: a443139b15d4357469b396fc45979f80, type: 3}
-    m_FontSize: 84
+    m_FontSize: 225
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 102
+    m_MinSize: 2
+    m_MaxSize: 225
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
