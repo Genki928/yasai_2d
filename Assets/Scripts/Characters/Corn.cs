@@ -38,7 +38,7 @@ public class Corn : CharBase
         if (ctx.performed)
         {
             // 中断処理
-            if (skill_1_cooltime > 0 || !can_control) return;
+            if (!CanUseSkill1) return;
             audioSource.PlayOneShot(se1);
 
             // 座標・ベクトルの算出
@@ -63,7 +63,7 @@ public class Corn : CharBase
         if (ctx.performed)
         {
             // 中断処理
-            if (skill_2_cooltime > 0 || !can_control) return;
+            if (!CanUseSkill2) return;
             //audioSource.PlayOneShot(se1);
 
             // 処理

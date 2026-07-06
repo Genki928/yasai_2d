@@ -8,6 +8,8 @@ public class CharBase : MonoBehaviour, IBurst
 {
     // ----- プロパティ ----- //
     protected bool CanUseSkill1 => skill_1_cooltime == 0 && can_control;
+    protected bool CanUseSkill2 => skill_2_cooltime == 0 && can_control;
+    protected bool CanUseDash => dash_cooltime == 0 && can_control;
 
     // ----- 定数 ----- //
     const float DASH_POWER = 15.0f;
@@ -225,7 +227,7 @@ public class CharBase : MonoBehaviour, IBurst
     {
         if (ctx.performed)
         {
-            if (dash_cooltime > 0) return;
+            if (!CanUseDash) return;
 
             rb.linearVelocity = direction * DASH_POWER;
             can_control = false;

@@ -48,7 +48,7 @@ public class WaterMelon : CharBase
         if (ctx.performed)
         {
             // クールタイム中なら終了
-            if (skill_1_cooltime != 0 || !can_control||isCutter) return;
+            if (!CanUseSkill1 || isCutter) return;
 
             StartCoroutine(WaterMelonShoot());
       
@@ -95,7 +95,7 @@ public class WaterMelon : CharBase
         if (ctx.performed)
         {
             // 中断処理
-            if (skill_2_cooltime != 0 || !can_control||isShoot) return;
+            if (!CanUseSkill2 || isShoot) return;
 
             StartCoroutine(WaterMelonCutter());
 

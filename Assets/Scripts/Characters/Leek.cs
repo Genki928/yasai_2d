@@ -44,7 +44,7 @@ public class Leek : CharBase
         if (!ctx.performed) return;
 
         // ’†’fˆ—
-        if (skill_1_cooltime != 0 || !can_control||isCounter) return;
+        if (!CanUseSkill1) return;
 
         //SE
         audioSource.PlayOneShot(se1);
@@ -78,7 +78,7 @@ public class Leek : CharBase
         if (!ctx.performed) return;
 
         // ’†’fˆ—
-        if (skill_2_cooltime != 0 || !can_control) return;
+        if (!CanUseSkill2) return;
 
         //SE
         audioSource.PlayOneShot(se2);

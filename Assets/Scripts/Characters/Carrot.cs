@@ -50,7 +50,7 @@ public class Carrot : CharBase
         if (ctx.performed)
         {
             // クールタイム中なら終了
-            if (skill_1_cooltime != 0 || !can_control) return;
+            if (!CanUseSkill1) return;
             audioSource.PlayOneShot(se1);
             StartCoroutine(HeadBang());
 
@@ -121,7 +121,7 @@ public class Carrot : CharBase
         if (ctx.performed)
         {
             // 中断処理
-            if (skill_2_cooltime != 0 || !can_control) return;
+            if (!CanUseSkill2) return;
 
             // タックル開始
             audioSource.PlayOneShot(se2);
