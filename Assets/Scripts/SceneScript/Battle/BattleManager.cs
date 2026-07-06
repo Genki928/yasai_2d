@@ -43,6 +43,7 @@ public class BattleManager : MonoBehaviour
     //演出
     //開始
     //public Text fpsText;
+    [Header("Start")]
     [SerializeField] Text readyText;
     [SerializeField] Text goText;
     private Vector3 defaultCameraPos;
@@ -50,12 +51,31 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private AudioClip start_se;
 
     //終了
+    [Header("End")]
     [SerializeField] GameObject deathEffect;
     [SerializeField] GameObject burstEffect;
     [SerializeField] Text koText;
     [SerializeField] private AudioClip se;
     [SerializeField] private AudioClip se1;
     protected bool sceneLoad = false;
+
+    //バトルカメラ
+    [Header("Battle Camera")]
+    [SerializeField] float followSpeed = 5f;
+    // 画面の余白
+    [SerializeField] float horizontalMargin = 2.0f;
+    // 最小・最大ズーム
+    [SerializeField] float minZoom = 5f;
+    [SerializeField] float maxZoom = 9f;
+    // Y座標固定
+    [SerializeField] float cameraY = 0f;
+    //カメラ座標
+    [SerializeField] float verticalOffset = 1.5f;
+    [SerializeField] float bottomLimit = -1f;
+    [SerializeField] float topLimit = 6f;
+    // 演出中はfalse
+    bool battleCamera = false;
+
     //オーディオソース用
     public AudioSource audioSource;
 
@@ -146,6 +166,10 @@ public class BattleManager : MonoBehaviour
             fpsText.text = string.Format("{0:F2} FPS", fps); timeLeft = updateInterval;
             accum = 0.0f; frames = 0;
         }
+        if (battleCamera && !isdeath)
+        {
+            UpdateBattleCamera();
+        }
     }
 
     void OnDestroy()
@@ -160,6 +184,7 @@ public class BattleManager : MonoBehaviour
         if (isdeath) return;
 
         isdeath = true;
+        battleCamera = false;
 
         Winner.w_id = id;
         Winner.w_name = datas[id].data.char_name;
@@ -227,21 +252,6 @@ public class BattleManager : MonoBehaviour
             yield return null;
         }
 
-        ////カメラを戻す
-        //t = 0;
-
-        //while (t < 0.2f)
-        //{
-        //    t += Time.deltaTime;
-
-        //    cam.transform.position =
-        //        Vector3.Lerp(zoomPos, originalPos, t / 0.2f);
-
-        //    cam.orthographicSize =
-        //        Mathf.Lerp(targetSize, originalSize, t / 0.2f);
-
-        //    yield return null;
-        //}
         audioSource.PlayOneShot(se1);
 
         // エフェクト生成
@@ -355,6 +365,9 @@ public class BattleManager : MonoBehaviour
         {
             datas[i].can_control = true;
         }
+
+        // ダイナミックカメラ開始
+        battleCamera = true;
     }
     IEnumerator ZoomToPlayer(Vector3 pos, float size, float time)
     {
@@ -506,6 +519,59 @@ public class BattleManager : MonoBehaviour
         }
 
         goText.gameObject.SetActive(false);
+    }
+    void UpdateBattleCamera()
+    {
+        Camera cam = Camera.main;
+
+        Vector3 p1 = player[0].transform.position;
+        Vector3 p2 = player[1].transform.position;
+
+        //=========================
+        // カメラ位置
+        //=========================
+
+        float centerX = (p1.x + p2.x) * 0.5f;
+
+        // 縦は中間を少しだけ追う
+        float centerY = (p1.y + p2.y) * 0.5f + verticalOffset;
+
+        centerY = Mathf.Clamp(
+            centerY,
+            bottomLimit,
+            topLimit);
+
+        Vector3 targetPos = new Vector3(
+            centerX,
+            centerY,
+            cam.transform.position.z);
+
+        cam.transform.position = Vector3.Lerp(
+            cam.transform.position,
+            targetPos,
+            followSpeed * Time.deltaTime);
+
+        //=========================
+        // ズーム
+        //=========================
+
+        float width = Mathf.Abs(p1.x - p2.x);
+        float height = Mathf.Abs(p1.y - p2.y);
+
+        float sizeX = width * 0.5f + horizontalMargin;
+        float sizeY = height * 0.8f + 2f;
+
+        float targetSize = Mathf.Max(sizeX, sizeY);
+
+        targetSize = Mathf.Clamp(
+            targetSize,
+            minZoom,
+            maxZoom);
+
+        cam.orthographicSize = Mathf.Lerp(
+            cam.orthographicSize,
+            targetSize,
+            followSpeed * Time.deltaTime);
     }
 }
 
