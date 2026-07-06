@@ -109,7 +109,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Carrot
   data: {fileID: 11400000, guid: dfe8ba9db7b4ea24a9cf331aaad322ef, type: 2}
-  rigid: 0
   skill_1_cooltime: 0
   skill_2_cooltime: 0
   can_control: 1
@@ -211,7 +210,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7386155764327058538}
         m_TargetAssemblyTypeName: Carrot, Assembly-CSharp
-        m_MethodName: Skill3
+        m_MethodName: Dash
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

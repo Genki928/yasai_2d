@@ -1,10 +1,16 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CharBase : MonoBehaviour, IBurst
 {
+    // ----- 定数 ----- //
+    const float DASH_POWER = 15.0f;
+    const float DASHING_SECONDS = 0.3f;
+
+    // ----- 変数 ----- //
     /// <summary> プレイヤーが死亡した際に起動するイベント </summary>
     public static event Action<int> OnPlayerDies;
 
@@ -211,9 +217,14 @@ public class CharBase : MonoBehaviour, IBurst
         Debug.Log("Skill 2");
     }
 
-    virtual public void Skill3(InputAction.CallbackContext ctx)
+    virtual public void Dash(InputAction.CallbackContext ctx)
     {
-        Debug.Log("Skill 3");
+        if (ctx.performed)
+        {
+            rb.linearVelocity = direction * DASH_POWER;
+            can_control = false;
+            StartCoroutine(EDash());
+        }
     }
 
 
@@ -239,6 +250,14 @@ public class CharBase : MonoBehaviour, IBurst
     {
         int tmp = state.generic + state.buff - state.debuff;
         return tmp < 0 ? 0 : tmp;
+    }
+
+    IEnumerator EDash()
+    {
+        Debug.Log("testestse");
+        yield return new WaitForSeconds(DASHING_SECONDS);
+        rb.linearVelocity = Vector2.zero;
+        can_control = true;
     }
 }
 
