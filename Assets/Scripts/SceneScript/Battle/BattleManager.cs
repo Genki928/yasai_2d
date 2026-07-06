@@ -71,6 +71,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] float cameraY = 0f;
     //ƒJƒƒ‰À•W
     [SerializeField] float verticalOffset = 1.5f;
+
     [SerializeField] float bottomLimit = -1f;
     [SerializeField] float topLimit = 6f;
     // ‰‰o’†‚Ífalse
