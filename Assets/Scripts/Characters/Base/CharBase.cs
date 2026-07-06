@@ -6,6 +6,9 @@ using UnityEngine.InputSystem;
 
 public class CharBase : MonoBehaviour, IBurst
 {
+    // ----- プロパティ ----- //
+    protected bool CanUseSkill1 => skill_1_cooltime == 0 && can_control;
+
     // ----- 定数 ----- //
     const float DASH_POWER = 15.0f;
     const float DASHING_SECONDS = 0.3f;
@@ -22,6 +25,7 @@ public class CharBase : MonoBehaviour, IBurst
     public int rigid {  get; set; } = 0;
     public int skill_1_cooltime = 0;
     public int skill_2_cooltime = 0;
+    public int dash_cooltime;
     public bool can_control = true;
     public int regen_burst_timer = 0;
     protected State speed = new() { generic = 0, buff = 0, debuff = 0 };
@@ -221,6 +225,8 @@ public class CharBase : MonoBehaviour, IBurst
     {
         if (ctx.performed)
         {
+            if (dash_cooltime > 0) return;
+
             rb.linearVelocity = direction * DASH_POWER;
             can_control = false;
             StartCoroutine(EDash());

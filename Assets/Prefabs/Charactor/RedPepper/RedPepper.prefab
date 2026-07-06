@@ -109,7 +109,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RedPepper
   data: {fileID: 11400000, guid: e1a0c2180491971498baa9a13552494c, type: 2}
-  rigid: 0
   skill_1_cooltime: 0
   skill_2_cooltime: 0
   can_control: 1
@@ -202,7 +201,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3078198726510559745}
         m_TargetAssemblyTypeName: RedPepper, Assembly-CSharp
-        m_MethodName: Skill3
+        m_MethodName: Dash
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

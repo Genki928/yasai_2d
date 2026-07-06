@@ -109,7 +109,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Corn
   data: {fileID: 11400000, guid: d44e300ed80f194448d673ddee1474ce, type: 2}
-  rigid: 0
   skill_1_cooltime: 0
   skill_2_cooltime: 0
   can_control: 1
@@ -203,9 +202,9 @@ MonoBehaviour:
     m_ActionName: 'Player/Skill2[/Keyboard/2]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1883792544255973313}
-        m_TargetAssemblyTypeName: Carrot, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 3086445473527967629}
+        m_TargetAssemblyTypeName: Corn, Assembly-CSharp
+        m_MethodName: Dash
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
