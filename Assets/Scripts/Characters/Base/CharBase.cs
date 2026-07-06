@@ -78,6 +78,7 @@ public class CharBase : MonoBehaviour, IBurst
         if (rigid > 0) --rigid;
         if (skill_1_cooltime > 0) cooltimer[0].RefreshCooltimer(--skill_1_cooltime, data.skill_1_cooltime);
         if (skill_2_cooltime > 0) cooltimer[1].RefreshCooltimer(--skill_2_cooltime, data.skill_2_cooltime);
+        if (dash_cooltime > 0) --dash_cooltime;
 
         if (regen_burst_timer < data.regen_burst_cooltime && burst < max_burst)
         {
@@ -231,6 +232,7 @@ public class CharBase : MonoBehaviour, IBurst
 
             rb.linearVelocity = direction * DASH_POWER;
             can_control = false;
+            dash_cooltime = data.dash_cooltime;
             StartCoroutine(EDash());
         }
     }

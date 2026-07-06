@@ -20,5 +20,5 @@ public class CharData : ScriptableObject
     public int skill_2_cooltime = 0;
 
     [Header("Skill 2")]
-    public float dash_cooltime = 0;
+    public int dash_cooltime = 0;
 }
