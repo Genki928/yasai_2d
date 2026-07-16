@@ -23,11 +23,6 @@ public class WaterMelon : CharBase
     [SerializeField] AudioClip cutter_sound;
     [SerializeField] AudioClip charge_sound;
 
-
-
-    private Vector2 defaultSize;
-    private bool isHeadBanging = false;
-
     override protected void Start()
     {
         base.Start();
