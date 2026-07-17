@@ -1,111 +1,61 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using Const;
 
-public class CharacterPickManager : MonoBehaviour
+public class CharacterPickManager : PickManagerBase
 {
-    [Header("◇アイコン")]
-    [SerializeField] GameObject icon_pf;
-    [SerializeField] List<Sprite> icon_img = new();
-    public List<GameObject> icon_obj = new();
-    Vector2 pos = new(0, 5);
+    // ----- 定数 ----- //
+    protected const int PLAYER_CNT = 2;
 
-    [Header("◇カーソル")]
-    [SerializeField] GameObject cursor_pf;
-    [SerializeField] Sprite mix_cursor;
-    //[SerializeField] GameObject[] button;
-    [SerializeField] Cursor[] cursor = new Cursor[2];
-    GameObject[] cursor_obj = new GameObject[2];
-
-    [Header("◇モデル")]
-    //[SerializeField] GameObject[] model = new GameObject[2];
-    [SerializeField] List<PickData> pick_data = new();
-    [SerializeField] StateIndicater[] state = new StateIndicater[2];
-
-    [Header("◇Ready")]
-    [SerializeField] GameObject[] ready = new GameObject[2];
-
-    const float ICON_HORIZONTAL_SPACE = 1.5f;
-    const float ICON_VERTICAL_SPACE = 2.0f;
-    const int ICON_LINEFEED_COUNT = 3;
-    const int X = 0;
-    const int Y = 1;
-
-    void  Start()
+    protected override void Start()
     {
-        // アイコン生成
-        for (int i = 0; i < icon_img.Count; i++)
-        {
-            icon_obj.Add(Instantiate(icon_pf));
-        }
+        base.Start();
 
-        // 移動
-        for (int i = 0; i < icon_obj.Count; i++)
-        {
-            pos = new(-ICON_HORIZONTAL_SPACE, 3);
-            // 座標決定
-            icon_obj[i].transform.position = new(pos.x + ICON_HORIZONTAL_SPACE * (i % ICON_LINEFEED_COUNT),
-                                                 pos.y + -ICON_VERTICAL_SPACE * (i / ICON_LINEFEED_COUNT));
-
-            // アイコンの変更
-            icon_obj[i].GetComponent<PickIcon>().SetIcon(icon_img[i]);
-        }
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < PLAYER_CNT; i++)
         {
             cursor_obj[i] = Instantiate(cursor_pf);
             cursor_obj[i].GetComponent<SpriteRenderer>().sprite = cursor[i].img;
-            Draw(i);
+            current_controller = 0;
+            Draw(current_controller);
         }
-        //cursor[0].pos = icon_obj[0].transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        ;
-    }
-
-    public void Interact(InputAction.CallbackContext ctx)
+    public override void Interact(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
         {
+            // 識別
+            if (Gamepad.all[0] == ctx.control.device) current_controller = 0;
+            else current_controller = 1;
+
+            base.Interact(ctx);
+
             // すべてのプレイヤーがキャラクターを決定していたら、シーンを遷移
             if (cursor[0].interact && cursor[1].interact)
             {
-                int[] num = new int[2]
+                // スタティック変数に代入する準備
+                int[] num = new int[PLAYER_CNT]
                 {
                     cursor[0].pos[Y] * ICON_LINEFEED_COUNT + cursor[0].pos[X],
                     cursor[1].pos[Y] * ICON_LINEFEED_COUNT + cursor[1].pos[X]
                 };
-                for(int i = 0; i < 2; i ++)
-                {
+
+                // もし選択キャラクターが、キャラクターリストの最大値と同じ（ランダム）なら、キャラクターをランダムに選択
+                for (int i = 0; i < PLAYER_CNT; i++)
                     if (num[i] == icon_img.Count - 1) num[i] = UnityEngine.Random.Range(0, icon_img.Count - 1);
-                }
-                PlayerPick.pick = new int[2] {
+
+                // スタティック変数に代入
+                PlayerPick.pick = new int[PLAYER_CNT] {
                     num[0],
                     num[1]
                 };
-                Debug.Log(num[0] + " , " + num[1]);
+
+                // シーン移行
                 SceneManager.LoadScene(SceneName.BATTLE_PVP);
             }
 
-            // 識別
-            int n = -1;
-            if (Gamepad.all[0] == ctx.control.device) n = 0;
-            else n = 1;
-
-            // 決定
-            cursor[n].interact = true;
-            state[n].button.SetActive(true);
-            if (cursor[0].interact && cursor[1].interact)
-            {
-                ready[0].SetActive(true);
-                ready[1].SetActive(true);
-            }
+            current_controller = -1;
         }
     }
 
@@ -119,11 +69,6 @@ public class CharacterPickManager : MonoBehaviour
                 return;
             }
 
-            // 識別
-            int n = -1;
-            if (Gamepad.all[0] == ctx.control.device) n = 0;
-            else n = 1;
-
             //
             if (cursor[0].interact && cursor[1].interact)
             {
@@ -131,150 +76,59 @@ public class CharacterPickManager : MonoBehaviour
                 ready[1].SetActive(false);
             }
 
-            // 決定
-            cursor[n].interact = false;
-            state[n].button.SetActive(false);
+            // 識別
+            if (Gamepad.all[0] == ctx.control.device) current_controller = 0;
+            else current_controller = 1;
+
+            base.Cansel(ctx);
         }
     }
 
-    public void CursorUP(InputAction.CallbackContext ctx)
+    public override void CursorUp(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
         {
             // 識別
-            int n = -1;
-            if (Gamepad.all[0] == ctx.control.device) n = 0;
-            else n = 1;
+            if (Gamepad.all[0] == ctx.control.device) current_controller = 0;
+            else current_controller = 1;
 
-            // 決定済みなら移動不可
-            if (cursor[n].interact) return;
-
-            if (--cursor[n].pos[Y] < 0) cursor[n].pos[Y] = icon_obj.Count / (ICON_LINEFEED_COUNT);
-            if (icon_obj.Count % 3 == 0)
-                --cursor[n].pos[Y];
-            if (cursor[n].pos[Y] == icon_obj.Count / ICON_LINEFEED_COUNT)
-            {
-                if (cursor[n].pos[X] > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT)
-                {
-                    cursor[n].pos[X] = (icon_obj.Count - 1) % ICON_LINEFEED_COUNT;
-                }
-            }
-
-            // 描画
-            Draw(n);
+            base.CursorUp(ctx);
         }
     }
 
-    public void CursorDown(InputAction.CallbackContext ctx)
+    public override void CursorDown(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
         {
             // 識別
-            int n = -1;
-            if (Gamepad.all[0] == ctx.control.device) n = 0;
-            else n = 1;
+            if (Gamepad.all[0] == ctx.control.device) current_controller = 0;
+            else current_controller = 1;
 
-            // 決定済みなら移動不可
-            if (cursor[n].interact) return;
-
-            if (++cursor[n].pos[Y] > (icon_obj.Count - 1) / ICON_LINEFEED_COUNT)
-            {
-                cursor[n].pos[Y] = 0;
-            }
-            if (cursor[n].pos[X] > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT
-                && cursor[n].pos[Y] == (icon_obj.Count - 1) / ICON_LINEFEED_COUNT)
-            {
-                cursor[n].pos[Y] = 0;
-            }
-
-            // 描画
-            Draw(n);
+            base.CursorDown(ctx);
         }
     }
 
-    public void CursorLeft(InputAction.CallbackContext ctx)
+    public override void CursorLeft(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
         {
             // 識別
-            int n = -1;
-            if (Gamepad.all[0] == ctx.control.device) n = 0;
-            else n = 1;
+            if (Gamepad.all[0] == ctx.control.device) current_controller = 0;
+            else current_controller = 1;
 
-            // 決定済みなら移動不可
-            if (cursor[n].interact) return;
-
-            // 移動
-            if (--cursor[n].pos[X] < 0) cursor[n].pos[X] = ICON_LINEFEED_COUNT - 1;
-
-            // もしカーソルのX座標がアイコンのある位置から外れていたら、座標を右端に整える
-            if (cursor[n].pos[Y] == icon_obj.Count / ICON_LINEFEED_COUNT)
-                if (cursor[n].pos[X] % ICON_LINEFEED_COUNT > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT)
-                    cursor[n].pos[X] = (icon_obj.Count - 1) % ICON_LINEFEED_COUNT;
-
-            // 描画
-            Draw(n);
+            base.CursorLeft(ctx);
         }
     }
 
-    public void CursorRight(InputAction.CallbackContext ctx)
+    public override void CursorRight(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
         {
             // 識別
-            int n = -1;
-            if (Gamepad.all[0] == ctx.control.device) n = 0;
-            else n = 1;
+            if (Gamepad.all[0] == ctx.control.device) current_controller = 0;
+            else current_controller = 1;
 
-            // 決定済みなら移動不可
-            if (cursor[n].interact) return;
-
-            // 移動
-            if (++cursor[n].pos[X] > ICON_LINEFEED_COUNT - 1) cursor[n].pos[X] = 0;
-
-            // もしカーソルのX座標がアイコンのある位置から外れていたら、座標を左端に整える
-            if (cursor[n].pos[Y] == icon_obj.Count / ICON_LINEFEED_COUNT)
-                if (cursor[n].pos[X] % ICON_LINEFEED_COUNT > (icon_obj.Count - 1) % ICON_LINEFEED_COUNT)
-                    cursor[n].pos[X] = 0;
-
-            // 描画
-            Draw(n);
+            base.CursorRight(ctx);
         }
     }
-
-    void Draw(int n)
-    {
-        // 描画
-        cursor_obj[n].transform.position = new(pos.x + ICON_HORIZONTAL_SPACE * cursor[n].pos[X], pos.y - ICON_VERTICAL_SPACE * cursor[n].pos[Y]);
-        state[n].model.GetComponent<SpriteRenderer>().sprite = icon_img[cursor[n].pos[Y] * ICON_LINEFEED_COUNT + cursor[n].pos[X]];
-        state[n].name.text = pick_data[cursor[n].pos[Y] * ICON_LINEFEED_COUNT + cursor[n].pos[X]].char_name;
-        state[n].lore.text = pick_data[cursor[n].pos[Y] * ICON_LINEFEED_COUNT + cursor[n].pos[X]].lore;
-    }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(new(0,3), 0.2f);
-    }
-}
-
-[Serializable]
-public class Cursor
-{
-    public Sprite img;
-    public int[] pos = new int[2] { 0, 0 };
-    public bool interact = false;
-}
-
-[Serializable]
-public class StateIndicater
-{
-    public Text name;
-    public Text lore;
-    public GameObject model;
-    public GameObject button;
-}
-
-public static class PlayerPick
-{
-    public static int[] pick = new int[2] { 0, 5 };
 }
