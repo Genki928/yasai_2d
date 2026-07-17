@@ -148,7 +148,7 @@ public class CharBase : MonoBehaviour, IBurst
 
         // 描画
         burst_bar.Draw(burst, max_burst);
-        camera.Init(15, 5);
+        camera.Init(15, 10);
 
         // バースト値が最大なら、死亡
         if (burst == max_burst)

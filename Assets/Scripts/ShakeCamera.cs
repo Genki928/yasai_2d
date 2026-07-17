@@ -15,7 +15,7 @@ public class ShakeCamera : MonoBehaviour
             {
                 float w = Random.Range((int)_startPos.x + -_size, (int)_startPos.x + _size + 1) / 100.0f;
                 float h = Random.Range((int)_startPos.x + -_size, (int)_startPos.x + _size + 1) / 100.0f;
-                transform.position = new Vector3(w, h, -10);
+                transform.position = new Vector3(_startPos.x + w, _startPos.y + h, -10);
             }
             else
             {
