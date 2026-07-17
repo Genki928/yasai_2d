@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class WaterMelon : CharBase
 {
-    [SerializeField] SpriteRenderer sprite;
+    //[SerializeField] SpriteRenderer sprite;
 
     public Sprite WaterMelon_default;
     public Sprite WaterMelon_skill;
@@ -22,6 +22,11 @@ public class WaterMelon : CharBase
     private bool isCutter;
     [SerializeField] AudioClip cutter_sound;
     [SerializeField] AudioClip charge_sound;
+
+
+
+    private Vector2 defaultSize;
+    private bool isHeadBanging = false;
 
     override protected void Start()
     {

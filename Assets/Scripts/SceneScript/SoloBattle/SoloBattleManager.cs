@@ -34,7 +34,6 @@ public class SoloBattleManager : BattleManagerBase
     [SerializeField] AudioClip se1;
     [SerializeField] GameObject deathEffect;
     [SerializeField] Text koText;
-    [SerializeField] ShakeCamera shake;
 
     void Awake()
     {
@@ -99,7 +98,7 @@ public class SoloBattleManager : BattleManagerBase
             TargetBase tb = Instantiate(targets[0], target_spawn_point[spawn].point.transform.position, Quaternion.identity);
 
             // Spriteを調整
-            tb.Init(this, player[0].GetComponent<CharBase>(), transform.position.x > tb.transform.position.x ? true : false ,shake);
+            tb.Init(this, player[0].GetComponent<CharBase>(), transform.position.x > tb.transform.position.x ? true : false);
 
             // 操作キャラクターと画像が被らないよう調整
             int img = CharPickData.id;

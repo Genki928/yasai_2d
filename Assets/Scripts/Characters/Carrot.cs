@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Carrot : CharBase
 {
-    [SerializeField] SpriteRenderer sprite;
+    //[SerializeField] SpriteRenderer sprite;
 
     public Sprite carrot_default;
     public Sprite tackle;

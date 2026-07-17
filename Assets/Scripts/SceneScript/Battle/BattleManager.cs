@@ -79,7 +79,6 @@ public class BattleManager : MonoBehaviour
 
     //オーディオソース用
     public AudioSource audioSource;
-    [SerializeField] ShakeCamera shake;
 
     void Awake()
     { 
@@ -145,7 +144,6 @@ public class BattleManager : MonoBehaviour
                 p.cooltimer[1] = gui[i].skill2_cooltimer;   // スキル2のクールタイムを表示
                 gui[i].icon.sprite = characters[pick_nums[i]].icon; // アイコン
             }
-            datas[i].camera = shake;
         }
         for (int i = 0; i < PLAYER_CNT; i++)
         {

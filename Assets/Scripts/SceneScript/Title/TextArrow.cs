@@ -28,6 +28,7 @@ public class TextArrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(arrow_pos);
         if (arrow_pos == 0)
         {
             transform.position = new(texts[0].transform.position.x-4.2f, texts[0].transform.position.y + 0.2f);

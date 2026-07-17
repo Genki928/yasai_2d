@@ -7,14 +7,13 @@ public class TargetBase : MonoBehaviour, IBurst
     public int max_burst { get; set; } = 10;
     public int rigid { get; set; } = 0;
     Rigidbody2D rb;
-    int score = 500;
+    int score = 100;
     public SoloBattleManager sbm;
     public CharBase player;
     bool right = false;
     [SerializeField] BombTarget bomb;
     [SerializeField] AudioClip damage;
     AudioSource audioSource;
-    ShakeCamera camera;
 
     void Start()
     {
@@ -67,12 +66,11 @@ public class TargetBase : MonoBehaviour, IBurst
         }
     }
 
-    public void Init(SoloBattleManager sbm, CharBase player, bool righrt, ShakeCamera camera)
+    public void Init(SoloBattleManager sbm, CharBase player, bool righrt)
     {
         this.sbm = sbm;
         this.player = player;
         this.right = righrt;
-        this.camera = camera;
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -82,10 +80,5 @@ public class TargetBase : MonoBehaviour, IBurst
             //b.rigid += 60;
             //b.KnockBack(10, (col.transform.position - transform.position).normalized);
         }
-    }
-
-    void OnDestroy()
-    {
-        camera.Init(15, 5);
     }
 }

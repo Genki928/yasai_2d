@@ -52,9 +52,8 @@ public class CharBase : MonoBehaviour, IBurst
     public AudioSource audioSource;
 
     //スプライト
-    [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] protected SpriteRenderer sprite;
 
-    public ShakeCamera camera;
 
     virtual protected void Start()
     {
@@ -148,7 +147,6 @@ public class CharBase : MonoBehaviour, IBurst
 
         // 描画
         burst_bar.Draw(burst, max_burst);
-        camera.Init(15, 10);
 
         // バースト値が最大なら、死亡
         if (burst == max_burst)

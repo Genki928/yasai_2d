@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Mushroom : CharBase
 {
-    [SerializeField] SpriteRenderer sprite;
+    //[SerializeField] SpriteRenderer sprite;
 
     [SerializeField] List<Sprite> img = new();
 
