@@ -13,7 +13,7 @@ public class CharBase : MonoBehaviour, IBurst
 
     // ----- 定数 ----- //
     const float DASH_POWER = 15.0f;
-    const float DASHING_SECONDS = 0.3f;
+    const float DASHING_SECONDS = 0.2f;
 
     // ----- 変数 ----- //
     /// <summary> プレイヤーが死亡した際に起動するイベント </summary>
