@@ -35,6 +35,7 @@ public class SoloBattleManager : BattleManagerBase
     [SerializeField] GameObject deathEffect;
     [SerializeField] Text koText;
     [SerializeField] ShakeCamera shake;
+    [SerializeField] Timer timer;
 
     void Awake()
     {
@@ -279,7 +280,7 @@ public class SoloBattleManager : BattleManagerBase
 
         yield return ShowGo();
         datas[0].can_control = true;
-        
+        timer.TimerStart();
     }
 
     void OnDestroy()
