@@ -11,9 +11,9 @@ public class Carrot : CharBase
     public Sprite tackle;
 
     // タックル関連
-    [SerializeField] private float tackleSpeed = 20f;
-    [SerializeField] private float tackleTime = 0.5f;
-    [SerializeField] private int tackleDamage = 20;
+    [SerializeField] private float tackleSpeed = 23.0f;
+    [SerializeField] private float tackleTime = 1.0f;
+    [SerializeField] private int tackleDamage = 50;
     [SerializeField] GameObject dust;
     [SerializeField] GameObject collision;
     [SerializeField] AudioClip se1;
@@ -139,25 +139,41 @@ public class Carrot : CharBase
     }
     private IEnumerator Tackle()
     {
-
         sprite.sprite = tackle;
-
         can_control = false;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
 
-        rb.linearVelocity = direction * tackleSpeed;
+        // 攻撃判定生成
+        GameObject obj = Instantiate(collision);
 
-        yield return new WaitForSeconds(tackleTime);
+        HitDamageArea hit = obj.GetComponent<HitDamageArea>();
+        hit.Init(id, tackleDamage, Vector2.zero);
+
+        Vector2 offset = direction.normalized * 1.0f;
+
+        float timer = 0f;
+
+        while (timer < tackleTime)
+        {
+            rb.linearVelocity = direction * tackleSpeed;
+
+            // プレイヤーの前方に追従
+            obj.transform.position = (Vector2)transform.position + offset;
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        Destroy(obj);
 
         rb.linearVelocity = Vector2.zero;
 
         can_control = true;
         sprite.sprite = carrot_default;
-        transform.rotation = Quaternion.Euler(0, 0, 0);
+        transform.rotation = Quaternion.identity;
     }
-
     public override Sprite GetDefaultImage()
     {
         return carrot_default;
