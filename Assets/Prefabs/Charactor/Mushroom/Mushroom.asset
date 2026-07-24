@@ -21,5 +21,4 @@ MonoBehaviour:
   skill_1_cooltime: 45
   skill_2_rigid: 30
   skill_2_cooltime: 45
-  skill_3_rigid: 0
-  skill_3_cooltime: 0
+  dash_cooltime: 60

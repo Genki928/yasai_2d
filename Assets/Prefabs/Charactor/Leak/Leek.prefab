@@ -111,6 +111,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 9fa27673ee8206b4eb693d4808c6099d, type: 2}
   skill_1_cooltime: 0
   skill_2_cooltime: 0
+  dash_cooltime: 0
   can_control: 1
   regen_burst_timer: 0
   state:
@@ -205,9 +206,9 @@ MonoBehaviour:
     m_ActionName: 'Player/Skill2[/Keyboard/2]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Carrot, Assembly-CSharp
-        m_MethodName: Skill3
+      - m_Target: {fileID: -7318983176012519884}
+        m_TargetAssemblyTypeName: Leek, Assembly-CSharp
+        m_MethodName: Dash
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
