@@ -16,7 +16,7 @@ public class CharacterPickManager : PickManagerBase
         {
             cursor_obj[i] = Instantiate(cursor_pf);
             cursor_obj[i].GetComponent<SpriteRenderer>().sprite = cursor[i].img;
-            current_controller = 0;
+            current_controller = i;
             Draw(current_controller);
         }
     }

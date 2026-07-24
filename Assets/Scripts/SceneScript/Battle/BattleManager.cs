@@ -81,11 +81,17 @@ public class BattleManager : MonoBehaviour
     public AudioSource audioSource;
     [SerializeField] ShakeCamera shake;
 
+    [SerializeField] Timer timer;
+    bool is_suddendeath = false;
+    int suddendeath_timer_limit = 60;
+    int suddendeath_timer_current = 0;
+
     void Awake()
     { 
         Winner.Reset();
         Application.targetFrameRate = 60;
         CharBase.OnPlayerDies += Finish;
+        timer.OnFinish += SuddenDeath;
     }
     void Start()
     {
@@ -151,7 +157,7 @@ public class BattleManager : MonoBehaviour
         {
             datas[i].can_control = false;
         }
-
+        timer.Init(10);
         StartCoroutine(StartBattleEffect());
     }
 
@@ -172,6 +178,19 @@ public class BattleManager : MonoBehaviour
         if (battleCamera && !isdeath)
         {
             UpdateBattleCamera();
+        }
+
+        if (is_suddendeath)
+        {
+            if (++suddendeath_timer_current > suddendeath_timer_current)
+            {
+                for (int i = 0; i < PLAYER_CNT; i++)
+                {
+                    datas[i].Damage(1, i == 0 ? 1 : 0);
+                    Debug.Log("teste");
+                }
+            }
+            
         }
     }
 
@@ -371,6 +390,7 @@ public class BattleManager : MonoBehaviour
 
         // ダイナミックカメラ開始
         battleCamera = true;
+        timer.TimerStart();
     }
     IEnumerator ZoomToPlayer(Vector3 pos, float size, float time)
     {
@@ -575,6 +595,11 @@ public class BattleManager : MonoBehaviour
             cam.orthographicSize,
             targetSize,
             followSpeed * Time.deltaTime);
+    }
+
+    void SuddenDeath()
+    {
+        is_suddendeath = true;
     }
 }
 

@@ -119,7 +119,7 @@ public class SoloBattleManager : BattleManagerBase
 
     void Death(int i = 0)
     {
-        timer.Stop();
+        timer.TimerStop();
         StartCoroutine(DeathC());
     }
 

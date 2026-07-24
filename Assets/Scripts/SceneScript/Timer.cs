@@ -32,16 +32,21 @@ public class Timer : MonoBehaviour
 
     public void Init(int start_time)
     {
-        is_start = true;
         limit = start_time;
+        Draw();
     }
 
-    public void Draw()
+    void Draw()
     {
         text.text = $"{limit}";
     }
 
-    public void Stop()
+    public void TimerStop()
+    {
+        is_start = false;
+    }
+
+    public void TimerStart()
     {
         is_start = true;
     }
