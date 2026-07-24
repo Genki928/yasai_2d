@@ -182,12 +182,12 @@ public class BattleManager : MonoBehaviour
 
         if (is_suddendeath)
         {
-            if (++suddendeath_timer_current > suddendeath_timer_current)
+            if (++suddendeath_timer_current > suddendeath_timer_limit)
             {
                 for (int i = 0; i < PLAYER_CNT; i++)
                 {
-                    datas[i].Damage(1, i == 0 ? 1 : 0);
-                    Debug.Log("teste");
+                    datas[i].Damage(10, i == 0 ? 1 : 0);
+                    suddendeath_timer_current = 0;
                 }
             }
             
