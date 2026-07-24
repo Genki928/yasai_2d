@@ -81,6 +81,7 @@ public class BattleManager : MonoBehaviour
     public AudioSource audioSource;
     [SerializeField] ShakeCamera shake;
 
+    [SerializeField] GameObject sudden;
     [SerializeField] Timer timer;
     bool is_suddendeath = false;
     int suddendeath_timer_limit = 60;
@@ -92,6 +93,7 @@ public class BattleManager : MonoBehaviour
         Application.targetFrameRate = 60;
         CharBase.OnPlayerDies += Finish;
         timer.OnFinish += SuddenDeath;
+        sudden.SetActive(false);
     }
     void Start()
     {
@@ -166,15 +168,6 @@ public class BattleManager : MonoBehaviour
         p_obj[0].transform.position = new(player[0].transform.position.x, player[0].transform.position.y + 2.0f);
         p_obj[1].transform.position = new(player[1].transform.position.x, player[1].transform.position.y + 2.0f); timeLeft = updateInterval;
 
-        timeLeft -= Time.deltaTime;
-        accum += Time.timeScale / Time.deltaTime;
-        ++frames;
-        if (timeLeft <= 0.0f)
-        {
-            float fps = accum / frames;
-            fpsText.text = string.Format("{0:F2} FPS", fps); timeLeft = updateInterval;
-            accum = 0.0f; frames = 0;
-        }
         if (battleCamera && !isdeath)
         {
             UpdateBattleCamera();
@@ -205,6 +198,7 @@ public class BattleManager : MonoBehaviour
     {
         if (isdeath) return;
 
+        timer.TimerStop();
         isdeath = true;
         battleCamera = false;
 
@@ -600,6 +594,7 @@ public class BattleManager : MonoBehaviour
     void SuddenDeath()
     {
         is_suddendeath = true;
+        sudden.SetActive(true);
     }
 }
 
