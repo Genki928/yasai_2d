@@ -5156,6 +5156,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: TRACK_0
       objectReference: {fileID: 0}
+    - target: {fileID: 4366754632466955337, guid: 1f23d9fe0cbac374380a2650442193a8, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4366754632466955337, guid: 1f23d9fe0cbac374380a2650442193a8, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -654726763
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784583616650337566, guid: 1f23d9fe0cbac374380a2650442193a8, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4784583616650337566, guid: 1f23d9fe0cbac374380a2650442193a8, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -654726763
+      objectReference: {fileID: 0}
     - target: {fileID: 5512716509224109968, guid: 1f23d9fe0cbac374380a2650442193a8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 25
@@ -5195,6 +5211,26 @@ PrefabInstance:
     - target: {fileID: 5512716509224109968, guid: 1f23d9fe0cbac374380a2650442193a8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8136905304093029933, guid: 1f23d9fe0cbac374380a2650442193a8, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8136905304093029933, guid: 1f23d9fe0cbac374380a2650442193a8, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8136905304093029933, guid: 1f23d9fe0cbac374380a2650442193a8, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -654726763
+      objectReference: {fileID: 0}
+    - target: {fileID: 9160712673817752077, guid: 1f23d9fe0cbac374380a2650442193a8, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9160712673817752077, guid: 1f23d9fe0cbac374380a2650442193a8, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -654726763
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

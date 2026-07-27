@@ -1941,7 +1941,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -2050293391
   m_SortingLayer: -2
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.6627451, g: 0.27450982, b: 0.027450982, a: 1}
@@ -4274,8 +4274,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -174.3, y: 197.67274}
-  m_SizeDelta: {x: 348.6, y: 31.03}
+  m_AnchoredPosition: {x: -174.3, y: 203.58}
+  m_SizeDelta: {x: 348.6, y: 42.847}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2132095580
 MonoBehaviour:
@@ -4298,7 +4298,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: a443139b15d4357469b396fc45979f80, type: 3}
     m_FontSize: 27
     m_FontStyle: 0
     m_BestFit: 0
