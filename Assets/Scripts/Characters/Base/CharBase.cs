@@ -46,7 +46,7 @@ public class CharBase : MonoBehaviour, IBurst
     [Header("◇物理")]
     protected Vector2 vec;
     [NonSerialized] public Vector2 direction;
-    protected Rigidbody2D rb;
+    public Rigidbody2D rb;
 
     //オーディオソース用
     public AudioSource audioSource;

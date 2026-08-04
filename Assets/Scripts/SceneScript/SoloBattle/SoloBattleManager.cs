@@ -35,7 +35,8 @@ public class SoloBattleManager : BattleManagerBase
     [SerializeField] GameObject deathEffect;
     [SerializeField] Text koText;
     [SerializeField] ShakeCamera shake;
-    [SerializeField] Timer timer;
+    List<TargetBase> tbs = new();
+    GameSetDirection FinishDirection;
 
     void Awake()
     {
@@ -70,6 +71,7 @@ public class SoloBattleManager : BattleManagerBase
 
         //boss = Instantiate(bosses[0], new(-10.0f, -5.0f), Quaternion.identity);
         //boss.player = player;
+        FinishDirection = GetComponent<GameSetDirection>();
         StartCoroutine(StartBattleEffect());
     }
     
@@ -98,6 +100,7 @@ public class SoloBattleManager : BattleManagerBase
             // ランダムな場所からスポーン
             int spawn = Random.Range(0, target_spawn_point.Count);
             TargetBase tb = Instantiate(targets[0], target_spawn_point[spawn].point.transform.position, Quaternion.identity);
+            tbs.Add(tb);
 
             // Spriteを調整
             tb.Init(this, player[0].GetComponent<CharBase>(), transform.position.x > tb.transform.position.x ? true : false ,shake);
@@ -293,11 +296,15 @@ public class SoloBattleManager : BattleManagerBase
     /// <param name="id"> プレイヤーの識別id </param>
     public void Finish()
     {
+        // リザルトにデータを反映
         SoloBattleResult.name = datas[0].data.char_name;
         SoloBattleResult.score = score;
         SoloBattleResult.img = datas[0].GetDefaultImage();
         SoloBattleResult.win = true;
-        SceneManager.LoadScene(SceneName.RESULT_PVE);
+
+        datas[0].can_control = false;
+        datas[0].rb.linearVelocity = Vector2.zero;
+        FinishDirection.Init(tbs);
     }
 
     Vector2 SetDirect(DIRECT direct)

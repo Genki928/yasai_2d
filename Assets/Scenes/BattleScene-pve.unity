@@ -3680,6 +3680,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1873271267}
+  - component: {fileID: 1873271271}
   - component: {fileID: 1873271268}
   - component: {fileID: 1873271269}
   - component: {fileID: 1873271270}
@@ -3775,7 +3776,6 @@ MonoBehaviour:
   deathEffect: {fileID: 2733761082984051111, guid: c7ac236a659c68945a984f2f44c3d884, type: 3}
   koText: {fileID: 1313794051}
   shake: {fileID: 519420033}
-  timer: {fileID: 1873271269}
 --- !u!114 &1873271269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3886,6 +3886,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1873271271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1873271265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bdd3995d20e97845ad5248125807107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameSetDirection
+  wintext: {fileID: 1313794051}
 --- !u!1 &1907355412
 GameObject:
   m_ObjectHideFlags: 0

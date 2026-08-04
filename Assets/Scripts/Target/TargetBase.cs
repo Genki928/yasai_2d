@@ -10,7 +10,8 @@ public class TargetBase : MonoBehaviour, IBurst
     int score = 100;
     public SoloBattleManager sbm;
     public CharBase player;
-    bool right = false;
+    public bool right { get; private set; } = false;
+    public bool escape = false;
     [SerializeField] BombTarget bomb;
     [SerializeField] AudioClip damage;
     AudioSource audioSource;
@@ -37,7 +38,14 @@ public class TargetBase : MonoBehaviour, IBurst
 
     void FixedUpdate()
     {
-        rb.linearVelocity = (player.transform.position - transform.position).normalized * 0.5f;
+        const float MoveSpeed = 3.0f;
+        if (!escape)
+            rb.linearVelocity = (player.transform.position - transform.position).normalized * 0.5f;
+        else
+        {
+            if (right) rb.linearVelocity = new(-MoveSpeed, MoveSpeed);
+            if (!right) rb.linearVelocity = new(MoveSpeed, MoveSpeed);
+        }
     }
 
     public void Damage(int value, int id)
