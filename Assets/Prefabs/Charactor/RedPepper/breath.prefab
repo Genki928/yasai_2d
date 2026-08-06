@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7235738804959752511}
   - component: {fileID: 2562251283018559567}
   - component: {fileID: -6538652259089977183}
-  - component: {fileID: -7851928387105894285}
   - component: {fileID: -3930978692484959935}
+  - component: {fileID: 4095047896084781780}
   - component: {fileID: -7278509432473855036}
   m_Layer: 0
   m_Name: breath
@@ -107,18 +107,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba602167c268c7a4d9365c14fe933b53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RedPepperBreath
---- !u!114 &-7851928387105894285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3303797620011567552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18af939f2915ae041829f4fa833e9a9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DamageArea
 --- !u!95 &-3930978692484959935
 Animator:
   serializedVersion: 7
@@ -141,6 +129,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4095047896084781780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3303797620011567552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 869c7010d36f6a7499a87f34204f3cf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitDamageArea
+  lifeTime: 1
 --- !u!61 &-7278509432473855036
 BoxCollider2D:
   m_ObjectHideFlags: 0

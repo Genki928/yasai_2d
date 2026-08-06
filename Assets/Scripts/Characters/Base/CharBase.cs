@@ -48,6 +48,11 @@ public class CharBase : MonoBehaviour, IBurst
     [NonSerialized] public Vector2 direction;
     public Rigidbody2D rb;
 
+    [Header("◇ダメージSE")]
+    [SerializeField] AudioClip se_low;   //小ダメージ
+    [SerializeField] AudioClip se_high;  //大ダメージ
+
+
     //オーディオソース用
     public AudioSource audioSource;
 
@@ -148,6 +153,9 @@ public class CharBase : MonoBehaviour, IBurst
         // 描画
         burst_bar.Draw(burst, max_burst);
 
+        // ダメージ量に応じたSE再生
+        PlayDamageSE(value);
+
         // バースト値が最大なら、死亡
         if (burst == max_burst)
         {
@@ -155,6 +163,18 @@ public class CharBase : MonoBehaviour, IBurst
         }
     }
 
+    /// <summary> ダメージ量に応じたSEを再生 </summary>
+    void PlayDamageSE(int value)
+    {
+        if (audioSource == null) return;
+
+        AudioClip clip = value > 50 ? se_high : se_low;
+
+        if (clip != null)
+        {
+            audioSource.PlayOneShot(clip);
+        }
+    }
     /// <summary> プレイヤーを回復する </summary>
     /// <param name="value"> 回復する量 </param>
     virtual public void Heal(int value)

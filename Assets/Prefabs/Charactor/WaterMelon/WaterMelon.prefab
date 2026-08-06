@@ -112,14 +112,17 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 8773e9f84b3f46a49929b2fd7600bc85, type: 2}
   skill_1_cooltime: 0
   skill_2_cooltime: 0
+  dash_cooltime: 0
   can_control: 1
   regen_burst_timer: 0
   state:
     speed: []
   cursor_pf: {fileID: 5826391187326269229, guid: 50c4b14c6dc55f04f924db6a0c75f818, type: 3}
   pointer: {fileID: 0}
+  rb: {fileID: 0}
+  se_low: {fileID: 8300000, guid: c3ec62ca64c77e54d931fe4a2b80a0c3, type: 3}
+  se_high: {fileID: 8300000, guid: 9579f2e1a90afa248a5f6ae6609ed277, type: 3}
   audioSource: {fileID: 0}
-  sprite: {fileID: 0}
   sprite: {fileID: 0}
   WaterMelon_default: {fileID: 8237331089931671458, guid: 43594a20325ca844fa75bef2d9fc9e8d, type: 3}
   WaterMelon_skill: {fileID: -6690924200026214091, guid: 291467a680ede294fab8d317d093025b, type: 3}

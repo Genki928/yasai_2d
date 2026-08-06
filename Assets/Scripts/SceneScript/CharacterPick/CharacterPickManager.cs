@@ -2,14 +2,23 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using Const;
+using System.Collections;
+using System.Collections.Generic;
 
 public class CharacterPickManager : PickManagerBase
 {
+    //se用
+    [SerializeField] List<AudioClip> se;
+    public AudioSource audioSource;
+
+    bool isChangingScene = false; // 二重遷移防止
+
     // ----- 定数 ----- //
     protected const int PLAYER_CNT = 2;
 
     protected override void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         base.Start();
 
         for (int i = 0; i < PLAYER_CNT; i++)
@@ -25,6 +34,11 @@ public class CharacterPickManager : PickManagerBase
     {
         if (ctx.performed)
         {
+            if (isChangingScene) return;
+
+            AudioClip clip = se[1];
+            audioSource.PlayOneShot(clip);
+
             // 識別
             if (Gamepad.all[0] == ctx.control.device) current_controller = 0;
             else current_controller = 1;
@@ -51,8 +65,8 @@ public class CharacterPickManager : PickManagerBase
                     num[1]
                 };
 
-                // シーン移行
-                SceneManager.LoadScene(SceneName.BATTLE_PVP);
+                // シーン移行（SEが鳴り終わるまで待つ）
+                StartCoroutine(WaitAndLoadScene(clip, SceneName.BATTLE_PVP));
             }
 
             current_controller = -1;
@@ -63,9 +77,14 @@ public class CharacterPickManager : PickManagerBase
     {
         if (ctx.performed)
         {
+            if (isChangingScene) return;
+
+            AudioClip clip = se[2];
+            audioSource.PlayOneShot(clip);
+
             if (!cursor[0].interact && !cursor[1].interact)
             {
-                SceneManager.LoadScene("TitleScene"); 
+                StartCoroutine(WaitAndLoadScene(clip, "TitleScene"));
                 return;
             }
 
@@ -84,10 +103,24 @@ public class CharacterPickManager : PickManagerBase
         }
     }
 
+    IEnumerator WaitAndLoadScene(AudioClip clip, string sceneName)
+    {
+        isChangingScene = true;
+
+        if (clip != null)
+        {
+            yield return new WaitForSeconds(clip.length);
+        }
+
+        SceneManager.LoadScene(sceneName);
+    }
+
     public override void CursorUp(InputAction.CallbackContext ctx)
     {
+        if (isChangingScene) return;
         if (ctx.performed)
         {
+            audioSource.PlayOneShot(se[0]);
             // 識別
             if (Gamepad.all[0] == ctx.control.device) current_controller = 0;
             else current_controller = 1;
@@ -98,8 +131,11 @@ public class CharacterPickManager : PickManagerBase
 
     public override void CursorDown(InputAction.CallbackContext ctx)
     {
+        if (isChangingScene) return;
         if (ctx.performed)
         {
+            audioSource.PlayOneShot(se[0]);
+
             // 識別
             if (Gamepad.all[0] == ctx.control.device) current_controller = 0;
             else current_controller = 1;
@@ -110,8 +146,10 @@ public class CharacterPickManager : PickManagerBase
 
     public override void CursorLeft(InputAction.CallbackContext ctx)
     {
+        if (isChangingScene) return;
         if (ctx.performed)
         {
+            audioSource.PlayOneShot(se[0]);
             // 識別
             if (Gamepad.all[0] == ctx.control.device) current_controller = 0;
             else current_controller = 1;
@@ -122,8 +160,10 @@ public class CharacterPickManager : PickManagerBase
 
     public override void CursorRight(InputAction.CallbackContext ctx)
     {
+        if (isChangingScene) return;
         if (ctx.performed)
         {
+            audioSource.PlayOneShot(se[0]);
             // 識別
             if (Gamepad.all[0] == ctx.control.device) current_controller = 0;
             else current_controller = 1;

@@ -118,6 +118,9 @@ MonoBehaviour:
     speed: []
   cursor_pf: {fileID: 5826391187326269229, guid: 50c4b14c6dc55f04f924db6a0c75f818, type: 3}
   pointer: {fileID: 0}
+  rb: {fileID: 0}
+  se_low: {fileID: 8300000, guid: c3ec62ca64c77e54d931fe4a2b80a0c3, type: 3}
+  se_high: {fileID: 8300000, guid: 9579f2e1a90afa248a5f6ae6609ed277, type: 3}
   audioSource: {fileID: 0}
   sprite: {fileID: 0}
   collision: {fileID: 4175897494506351822, guid: 4ba9f983ad34b8b4ca91e7f135e10d36, type: 3}
