@@ -20,7 +20,7 @@ public class Carrot : CharBase
     //ƒwƒhƒoƒ“ŠÖ˜A
     [SerializeField] private float headBangAngle = 60f;
     [SerializeField] private float rotateSpeed = 350f;
-    [SerializeField] private int headBangDamage = 15;
+    [SerializeField] private int headBangDamage = 30;
     private List<CharBase> hitList = new List<CharBase>();
     [SerializeField] private CapsuleCollider2D headBangCol;
     [SerializeField] AudioClip se2;
