@@ -159,7 +159,7 @@ public class BattleManager : MonoBehaviour
         {
             datas[i].can_control = false;
         }
-        timer.Init(30);
+        timer.Init(99);
         StartCoroutine(StartBattleEffect());
     }
 

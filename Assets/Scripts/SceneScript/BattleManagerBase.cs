@@ -225,6 +225,6 @@ public class BattleManagerBase : MonoBehaviour
 
         goText.gameObject.SetActive(false);
         datas[0].can_control = true;
-        timer.Init(10);
+        timer.Init(60);
     }
 }
