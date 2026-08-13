@@ -13,7 +13,7 @@ public class TargetBase : MonoBehaviour, IBurst
     public bool right { get; private set; } = false;
     public bool escape = false;
     [SerializeField] BombTarget bomb;
-    [SerializeField] AudioClip damage;
+    [SerializeField] AudioClip _damage;
     AudioSource audioSource;
     ShakeCamera camera;
 
@@ -48,14 +48,14 @@ public class TargetBase : MonoBehaviour, IBurst
         }
     }
 
-    public void Damage(int value, int id)
+    public void Damage(Damage damage, int id)
     {
         // バースト値が最大なら中断
         if (burst >= max_burst) return;
 
         // 受けるダメージが過剰ならセーブする
-        burst = burst + value > max_burst ?
-                     max_burst : burst + value;
+        burst = burst + damage.Value > max_burst ?
+                     max_burst : burst + damage.Value;
 
         // バースト値が最大なら、死亡
         if (burst == max_burst)
@@ -70,7 +70,7 @@ public class TargetBase : MonoBehaviour, IBurst
             }
             sbm.CalculateScore(score);
 
-            audioSource.PlayOneShot(damage);
+            audioSource.PlayOneShot(_damage);
             Destroy(this);
         }
     }

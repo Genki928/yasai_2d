@@ -22,7 +22,7 @@ public class CornBullet : MonoBehaviour
     {
         // 爆発生成
         GameObject particle = Instantiate(bomb_obj, bullet_obj.transform.position, Quaternion.identity);
-        particle.GetComponent<SimpleDamageArea>().Init(id, 15, new(0, 0));
+        particle.GetComponent<SimpleDamageArea>().Init(id, new(15, DamageType.Soundable), new(0, 0));
 
         //// ポップコーン生成
         //bullet_obj.GetComponent<SpriteRenderer>().sprite = popcorn;

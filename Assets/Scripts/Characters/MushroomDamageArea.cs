@@ -39,7 +39,7 @@ public class MushroomDamageArea : MonoBehaviour
         if (Time.time - hitTimer[cb.id] >= hitInterval)
         {
             if (col.TryGetComponent<CharBase>(out var b)) b.State[(int)StateName.Speed].AddState(new Attribute(-2.0f, 1.0f));
-            cb.Damage(damage, id);
+            cb.Damage(new(damage, DamageType.Silentable), id);
             hitTimer[cb.id] = Time.time;
         }
     }

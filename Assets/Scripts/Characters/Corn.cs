@@ -46,7 +46,7 @@ public class Corn : CharBase
 
             // ’e‚ð¶¬ -> id‚Ì•R‚Ã‚¯
             bullet_obj = Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, angle));
-            bullet_obj.GetComponent<SimpleDamageArea>().Init(id, 20, direction * 15.0f, 0.0f, true);
+            bullet_obj.GetComponent<SimpleDamageArea>().Init(id, new(20, DamageType.Soundable), direction * 15.0f, 0.0f, true);
             bullet_obj.GetComponent<CornBullet>().Init(id, direction, bullet_obj);
             sr.sprite = img[1];
 
@@ -96,7 +96,7 @@ public class Corn : CharBase
         return img[0];
     }
 
-    public override void Damage(int value, int id)
+    public override void Damage(Damage value, int id)
     {
         base.Damage(value, id);
     }

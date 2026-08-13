@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -123,22 +124,22 @@ public class CharBase : MonoBehaviour, IBurst
     }
 
     /// <summary> プレイヤーにダメージを与える </summary>
-    /// <param name="value"> 与えるダメージ量 </param>
-    virtual public void Damage(int value, int id)
+    /// <param name="damage"> 与えるダメージ量 </param>
+    virtual public void Damage(Damage damage, int id)
     {
         // バースト値が最大なら中断
         if (burst >= max_burst) return;
         regen_burst_timer = 0;
 
         // 受けるダメージが過剰ならセーブする
-        burst = burst + value > max_burst ?
-                     max_burst : burst + value;
+        burst = burst + damage.Value > max_burst ?
+                     max_burst : burst + damage.Value;
 
         // 描画
         burst_bar.Draw(burst, max_burst);
 
         // ダメージ量に応じたSE再生
-        PlayDamageSE(value);
+        if (damage.Type == DamageType.Soundable) PlayDamageSE(damage.Value);
 
         // バースト値が最大なら、死亡
         if (burst == max_burst)

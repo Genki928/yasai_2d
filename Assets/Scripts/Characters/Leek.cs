@@ -61,7 +61,7 @@ public class Leek : CharBase
 
         // 生成
         Instantiate(collision, spawnPos, rot).GetComponent<SimpleDamageArea>().
-            Init(id, skill1Damage, Vector2.zero, 0.4f);
+            Init(id, new(skill1Damage, DamageType.Soundable), Vector2.zero, 0.4f);
 
         // 硬直・クールタイム
         rigid += data.skill_1_rigid;
@@ -122,10 +122,10 @@ public class Leek : CharBase
 
         // 生成
         Instantiate(collision, spawnPos, rot).GetComponent<SimpleDamageArea>().
-            Init(id, skill1Damage, Vector2.zero, 0.2f);
+            Init(id, new(skill1Damage, DamageType.Soundable), Vector2.zero, 0.2f);
     }
 
-    public override void Damage(int damage, int attackerId)
+    public override void Damage(Damage damage, int attackerId)
     {
         if (isCounter)
         {

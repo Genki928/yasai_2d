@@ -30,7 +30,7 @@ public class HitDamageArea : MonoBehaviour
             {
                 hit = true;
 
-                cb.Damage(damage, id);
+                //cb.Damage(damage, id);
 
                 Destroy(this);
             }

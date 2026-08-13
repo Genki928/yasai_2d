@@ -8,5 +8,5 @@ public interface IBurst
     /// <summary> ダメージを与える </summary>
     /// <param name="value"> ダメージ量 </param>
     /// <param name="id"> ダメージの識別 </param>
-    public void Damage(int value, int id);
+    public void Damage(Damage damage, int id);
 }

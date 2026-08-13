@@ -179,7 +179,7 @@ public class BattleManager : MonoBehaviour
             {
                 for (int i = 0; i < PLAYER_CNT; i++)
                 {
-                    datas[i].Damage(10, i == 0 ? 1 : 0);
+                    datas[i].Damage(new(10, DamageType.Silentable), i == 0 ? 1 : 0);
                     suddendeath_timer_current = 0;
                 }
             }

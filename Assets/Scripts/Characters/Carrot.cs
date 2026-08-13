@@ -77,7 +77,7 @@ public class Carrot : CharBase
             direction.normalized * 1.5f;
 
         Instantiate(collision, spawnPos, Quaternion.identity).GetComponent<SimpleDamageArea>().
-            Init(id, headBangDamage, Vector2.zero, 0.3f);
+            Init(id, new(headBangDamage, DamageType.Soundable), Vector2.zero, 0.3f);
 
         // =========================
 
@@ -144,7 +144,7 @@ public class Carrot : CharBase
         GameObject obj = Instantiate(collision);
 
         obj.GetComponent<SimpleDamageArea>().
-            Init(id, headBangDamage, Vector2.zero, 0.3f);
+            Init(id, new(headBangDamage, DamageType.Soundable), Vector2.zero, 0.3f);
 
         Vector2 offset = direction.normalized * 1.0f;
 
@@ -174,7 +174,7 @@ public class Carrot : CharBase
         return carrot_default;
     }
 
-    public override void Damage(int value, int id)
+    public override void Damage(Damage value, int id)
     {
         base.Damage(value, id);
     }

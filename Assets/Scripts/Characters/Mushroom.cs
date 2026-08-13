@@ -72,13 +72,9 @@ public class Mushroom : CharBase
             (Vector2)transform.position +
             direction.normalized * 1.5f;
 
-        GameObject obj =
-            Instantiate(collision, spawnPos, Quaternion.identity);
-
-        HitDamageArea hit =
-            obj.GetComponent<HitDamageArea>();
-
-        hit.Init(id, headBangDamage, Vector2.zero);
+        
+        Instantiate(collision, spawnPos, Quaternion.identity).GetComponent<SimpleDamageArea>().
+            Init(id, new(headBangDamage, DamageType.Soundable), Vector2.zero);
 
         // =========================
 
@@ -159,7 +155,7 @@ public class Mushroom : CharBase
         return img[0];
     }
 
-    public override void Damage(int value, int id)
+    public override void Damage(Damage value, int id)
     {
         base.Damage(value, id);
     }

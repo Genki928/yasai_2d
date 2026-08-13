@@ -22,7 +22,7 @@ public class DamageArea : MonoBehaviour
             if (cb.id != id)
             {
                 // ”í’eˆ—
-                cb.Damage(damage,id);
+                //cb.Damage(damage,id);
 
                 // íœˆ—
                 if (delete)

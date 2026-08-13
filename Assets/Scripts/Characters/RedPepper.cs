@@ -96,7 +96,7 @@ public class RedPepper : CharBase
         return img[0];
     }
 
-    public override void Damage(int value, int id)
+    public override void Damage(Damage value, int id)
     {
         base.Damage(value, id);
     }

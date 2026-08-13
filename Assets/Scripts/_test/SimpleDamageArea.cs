@@ -27,7 +27,7 @@ public class SimpleDamageArea : DamageAreaBase
     /// <param name="damage"> 与えるダメージ </param>
     /// <param name="vec"> 移動させるベクトル </param>
     /// <param name="lifeTime"> 残留する時間 </param>
-    public void Init(int id, int damage, Vector2 vec, float lifeTime = 0.0f, bool delete = false)
+    public void Init(int id, Damage damage, Vector2 vec, float lifeTime = 0.0f, bool delete = false)
     {
         _id = id;
         _damage = damage;
