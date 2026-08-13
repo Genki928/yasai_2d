@@ -22,11 +22,20 @@ public class SimpleDamageArea : DamageAreaBase
         }
     }
 
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.CompareTag("Wall"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
     /// <summary> 初期化 </summary>
     /// <param name="id"> 攻撃者のID </param>
     /// <param name="damage"> 与えるダメージ </param>
     /// <param name="vec"> 移動させるベクトル </param>
     /// <param name="lifeTime"> 残留する時間 </param>
+    /// <param name="delete"> 削除するかどうか </param>
     public void Init(int id, Damage damage, Vector2 vec, float lifeTime = 0.0f, bool delete = false)
     {
         _id = id;
@@ -37,13 +46,5 @@ public class SimpleDamageArea : DamageAreaBase
         // 物理
         _rigidbody = GetComponent<Rigidbody2D>();
         _rigidbody.linearVelocity = vec;
-    }
-
-    void OnTriggerExit2D(Collider2D col)
-    {
-        if (col.CompareTag("Wall"))
-        {
-            Destroy(gameObject);
-        }
     }
 }
