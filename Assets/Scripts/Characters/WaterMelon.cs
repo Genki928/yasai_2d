@@ -63,30 +63,30 @@ public class WaterMelon : CharBase
     {
         isShoot = true;
         sprite.sprite = WaterMelon_skill;
-        speed.generic = 2;
+        _states[(int)StateName.Speed].AddSpecialContent(new SpecialState(0, -2.0f));
         // À•WEƒxƒNƒgƒ‹‚ÌŽZo
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         // ’e‚ð¶¬ -> id‚Ì•R‚Ã‚¯
         GameObject go = Instantiate(bullet, new(transform.position.x, transform.position.y + 0.5f), Quaternion.Euler(0, 0, angle));
-        go.GetComponent<DamageArea>().Init(id, bullet_damage, direction * 0.5f / 2, true);
+        go.GetComponent<SimpleDamageArea>().Init(id, bullet_damage, direction * 15.0f, 0.0f, true);
         audioSource.PlayOneShot(bullet_sound);
         yield return new WaitForSeconds(0.1f);
         // À•WEƒxƒNƒgƒ‹‚ÌŽZo
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         // ’e‚ð¶¬ -> id‚Ì•R‚Ã‚¯
         go = Instantiate(bullet, new(transform.position.x, transform.position.y + 0.5f), Quaternion.Euler(0, 0, angle));
-        go.GetComponent<DamageArea>().Init(id, bullet_damage, direction * 0.5f / 2, true);
+        go.GetComponent<SimpleDamageArea>().Init(id, bullet_damage, direction * 15.0f, 0.0f, true);
         audioSource.PlayOneShot(bullet_sound);
         yield return new WaitForSeconds(0.1f);
         // À•WEƒxƒNƒgƒ‹‚ÌŽZo
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         // ’e‚ð¶¬ -> id‚Ì•R‚Ã‚¯
         go = Instantiate(bullet, new(transform.position.x, transform.position.y + 0.5f), Quaternion.Euler(0, 0, angle));
-        go.GetComponent<DamageArea>().Init(id, bullet_damage, direction * 0.5f / 2, true);
+        go.GetComponent<SimpleDamageArea>().Init(id, bullet_damage, direction * 15.0f, 0.0f, true);
         audioSource.PlayOneShot(bullet_sound);
         yield return new WaitForSeconds(0.1f);
         sprite.sprite = WaterMelon_default;
-        speed.generic = 4;
+        _states[(int)StateName.Speed].RemoveSpecialContent(0);
         isShoot = false;
     }
    
@@ -111,18 +111,18 @@ public class WaterMelon : CharBase
         audioSource.PlayOneShot(charge_sound);
         isCutter = true;
         sprite.sprite = WaterMelon_skill;
-        speed.generic = 1;
+        _states[(int)StateName.Speed].AddSpecialContent(new SpecialState(0, -2.0f));
         yield return new WaitForSeconds(0.7f);
         // À•WEƒxƒNƒgƒ‹‚ÌŽZo
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         // ’e‚ð¶¬ -> id‚Ì•R‚Ã‚¯
         GameObject go = Instantiate(cutter, transform.position, Quaternion.Euler(0, 0, angle - 270f));
-        go.GetComponent<DamageArea>().Init(id, cutter_damage, direction * 0.7f / 2, true);
+        go.GetComponent<SimpleDamageArea>().Init(id, cutter_damage, direction * 45.0f / 2, 0.0f, true);
         audioSource.PlayOneShot(cutter_sound);
         yield return new WaitForSeconds(0.2f);
         sprite.sprite = WaterMelon_default;
         isCutter = false;
-        speed.generic = 4;
+        _states[(int)StateName.Speed].RemoveSpecialContent(0);
     }
 
     public override Sprite GetDefaultImage()

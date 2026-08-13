@@ -30,7 +30,7 @@ public class BombTarget : MonoBehaviour
         else
         {
             GameObject paritcle = Instantiate(bomb, transform.position, Quaternion.identity);
-            paritcle.GetComponent<DamageArea>().Init(0, 50, new(0, 0), false);
+            paritcle.GetComponent<SimpleDamageArea>().Init(0, 50, new(0, 0));
             Destroy(gameObject);
         }
 

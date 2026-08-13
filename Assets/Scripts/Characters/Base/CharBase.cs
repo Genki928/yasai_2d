@@ -10,6 +10,7 @@ public class CharBase : MonoBehaviour, IBurst
     protected bool CanUseSkill1 => skill_1_cooltime == 0 && can_control;
     protected bool CanUseSkill2 => skill_2_cooltime == 0 && can_control;
     protected bool CanUseDash => dash_cooltime == 0 && can_control;
+    public List<State> State => _states;
 
     // ----- 定数 ----- //
     const float DASH_POWER = 15.0f;
@@ -30,8 +31,7 @@ public class CharBase : MonoBehaviour, IBurst
     public int dash_cooltime;
     public bool can_control = true;
     public int regen_burst_timer = 0;
-    protected State speed = new() { generic = 0, buff = 0, debuff = 0 };
-    public Effect state = new();
+    protected List<State> _states = new();
 
 
     [Header("◇カーソル")]
@@ -69,7 +69,7 @@ public class CharBase : MonoBehaviour, IBurst
         cursor_obj.Refresh(direction);
         cursor_obj.Set(this);
         max_burst = data.max_burst;
-        speed.generic = data.speed;
+        _states.Add(new MoveSpeed(data.speed));
     }
     //描画順番
     void LateUpdate()
@@ -80,6 +80,9 @@ public class CharBase : MonoBehaviour, IBurst
 
     virtual protected void Update()
     {
+        foreach (var state in _states)
+            state.UpdateAttribute(Time.deltaTime);
+
         if (rigid > 0) --rigid;
         if (skill_1_cooltime > 0) cooltimer[0].RefreshCooltimer(--skill_1_cooltime, data.skill_1_cooltime);
         if (skill_2_cooltime > 0) cooltimer[1].RefreshCooltimer(--skill_2_cooltime, data.skill_2_cooltime);
@@ -92,25 +95,6 @@ public class CharBase : MonoBehaviour, IBurst
                 regen_burst_timer = data.restart_regen_burst_value;
                 Heal(15);
             }
-        }
-
-        // スピードリセット
-        speed.buff = speed.debuff = 0;
-
-        for (int i = state.speed.Count - 1; i >= 0; i--)
-        {
-            // スピードのバフ処理
-            if (state.speed[i].value > 0)
-                // 値が強いバフがあるなら取得
-                if (speed.buff < state.speed[i].value) speed.buff = state.speed[i].value;
-
-            // スピードのデバフ処理
-            if (state.speed[i].value < 0)
-                // 値が強いデバフがあるなら取得
-                if (speed.debuff < state.speed[i].value) speed.debuff = state.speed[i].value;
-
-            // 時間が無くなったエフェクトを削除
-            if (--state.speed[i].time <= 0) state.speed.RemoveAt(i);
         }
 
         //向き
@@ -130,7 +114,7 @@ public class CharBase : MonoBehaviour, IBurst
         {
             // 硬直が無ければ移動
             if (rigid == 0)
-                rb.linearVelocity = vec * SetState(speed);
+                rb.linearVelocity = vec * _states[(int)StateName.Speed].CurrentState;
             // 硬直があれば移動不可
             else
                 rb.linearVelocity = Vector2.zero;
@@ -210,9 +194,6 @@ public class CharBase : MonoBehaviour, IBurst
         // 硬直解除
         rigid = 0;
 
-        // エフェクト解除
-        state.speed.Clear();
-
         // 停止
         rb.linearVelocity = Vector2.zero;
 
@@ -273,15 +254,6 @@ public class CharBase : MonoBehaviour, IBurst
         return null;
     }
 
-    /// <summary> エフェクトの数値の整理 </summary>
-    /// <param name="state"> 整理するエフェクト </param>
-    /// <returns> 合算後のエフェクトの数値（0 <= n）を返す </returns>
-    protected int SetState(State state)
-    {
-        int tmp = state.generic + state.buff - state.debuff;
-        return tmp < 0 ? 0 : tmp;
-    }
-
     IEnumerator EDash()
     {
         Debug.Log("testestse");
@@ -289,32 +261,4 @@ public class CharBase : MonoBehaviour, IBurst
         rb.linearVelocity = Vector2.zero;
         can_control = true;
     }
-}
-
-[Serializable]
-public class Effect
-{
-    public List<EffectState> speed = new();
-}
-
-[Serializable]
-public class EffectState
-{
-    /// <summary> エフェクトの制限時間 </summary>
-    public int time = 0;
-
-    /// <summary> エフェクトの強度 </summary>
-    public int value = 0;
-}
-
-public class State
-{
-    /// <summary> 元になる値 </summary>
-    public int generic = 0;
-
-    /// <summary> 増加させる値 </summary>
-    public int buff = 0;
-
-    /// <summary> 減少させる値 </summary>
-    public int debuff = 0;
 }

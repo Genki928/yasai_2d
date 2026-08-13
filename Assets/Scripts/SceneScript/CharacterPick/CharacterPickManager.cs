@@ -43,8 +43,6 @@ public class CharacterPickManager : PickManagerBase
             if (Gamepad.all[0] == ctx.control.device) current_controller = 0;
             else current_controller = 1;
 
-            base.Interact(ctx);
-
             // すべてのプレイヤーがキャラクターを決定していたら、シーンを遷移
             if (cursor[0].interact && cursor[1].interact)
             {
@@ -68,6 +66,8 @@ public class CharacterPickManager : PickManagerBase
                 // シーン移行（SEが鳴り終わるまで待つ）
                 StartCoroutine(WaitAndLoadScene(clip, SceneName.BATTLE_PVP));
             }
+
+            base.Interact(ctx);
 
             current_controller = -1;
         }

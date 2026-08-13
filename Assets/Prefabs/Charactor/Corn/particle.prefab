@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 4359933205649425551}
   - component: {fileID: 7626331368627439783}
   - component: {fileID: 2258133201265935395}
-  - component: {fileID: 4900428531003857737}
+  - component: {fileID: 97301194803623408}
   - component: {fileID: 1135974330165893023}
+  - component: {fileID: -7500695133214904503}
   m_Layer: 0
   m_Name: particle
   m_TagString: Untagged
@@ -227,7 +228,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4900428531003857737
+--- !u!114 &97301194803623408
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -236,10 +237,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2733761082984051111}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 869c7010d36f6a7499a87f34204f3cf8, type: 3}
+  m_Script: {fileID: 11500000, guid: cc875d325d533dc468d430cdc168e724, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HitDamageArea
-  lifeTime: 0.5
+  m_EditorClassIdentifier: Assembly-CSharp::SimpleDamageArea
 --- !u!58 &1135974330165893023
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -276,3 +276,30 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 1.42
+--- !u!50 &-7500695133214904503
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2733761082984051111}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

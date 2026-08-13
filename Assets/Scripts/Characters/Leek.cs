@@ -29,8 +29,8 @@ public class Leek : CharBase
     protected override void Update()
     {
         base.Update();
-        if(isCounter==true) speed.generic = 3;
-        else speed.generic = 5;
+        //if(isCounter==true) speed.generic = 3;
+        //else speed.generic = 5;
     }
 
     protected override void FixedUpdate()
@@ -60,11 +60,8 @@ public class Leek : CharBase
         Quaternion rot = Quaternion.Euler(0, 0, angle + 180f);
 
         // 生成
-        GameObject obj = Instantiate(collision, spawnPos, rot);
-
-        // ダメージ設定
-        HitDamageArea hit = obj.GetComponent<HitDamageArea>();
-        hit.Init(id, skill1Damage, Vector2.zero);
+        Instantiate(collision, spawnPos, rot).GetComponent<SimpleDamageArea>().
+            Init(id, skill1Damage, Vector2.zero, 0.4f);
 
         // 硬直・クールタイム
         rigid += data.skill_1_rigid;
@@ -74,11 +71,11 @@ public class Leek : CharBase
     // カウンター構え
     public override void Skill2(InputAction.CallbackContext ctx)
     {
-        speed.generic = 1;
         if (!ctx.performed) return;
 
         // 中断処理
         if (!CanUseSkill2) return;
+        _states[(int)StateName.Speed].AddSpecialContent(new SpecialState(0, -3));
 
         //SE
         audioSource.PlayOneShot(se2);
@@ -102,7 +99,7 @@ public class Leek : CharBase
         yield return new WaitForSeconds(counterTime);
 
         isCounter = false;
-        speed.generic = 4;
+        _states[(int)StateName.Speed].RemoveSpecialContent(0);
     }
 
     // カウンター攻撃
@@ -124,11 +121,8 @@ public class Leek : CharBase
         Quaternion rot = Quaternion.Euler(0, 0, angle + 180f);
 
         // 生成
-        GameObject obj = Instantiate(collision, spawnPos, rot);
-
-        // ダメージ設定
-        HitDamageArea hit = obj.GetComponent<HitDamageArea>();
-        hit.Init(id, counterDamage, Vector2.zero);
+        Instantiate(collision, spawnPos, rot).GetComponent<SimpleDamageArea>().
+            Init(id, skill1Damage, Vector2.zero, 0.2f);
     }
 
     public override void Damage(int damage, int attackerId)
@@ -139,6 +133,7 @@ public class Leek : CharBase
 
             CounterAttack();
             isCounter = false;
+            _states[(int)StateName.Speed].RemoveSpecialContent(0);
             return;
         }
 

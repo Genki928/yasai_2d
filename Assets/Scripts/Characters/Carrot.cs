@@ -76,13 +76,8 @@ public class Carrot : CharBase
             (Vector2)transform.position +
             direction.normalized * 1.5f;
 
-        GameObject obj =
-            Instantiate(collision, spawnPos, Quaternion.identity);
-
-        HitDamageArea hit =
-            obj.GetComponent<HitDamageArea>();
-
-        hit.Init(id, headBangDamage, Vector2.zero);
+        Instantiate(collision, spawnPos, Quaternion.identity).GetComponent<SimpleDamageArea>().
+            Init(id, headBangDamage, Vector2.zero, 0.3f);
 
         // =========================
 
@@ -148,8 +143,8 @@ public class Carrot : CharBase
         // çUåÇîªíËê∂ê¨
         GameObject obj = Instantiate(collision);
 
-        HitDamageArea hit = obj.GetComponent<HitDamageArea>();
-        hit.Init(id, tackleDamage, Vector2.zero);
+        obj.GetComponent<SimpleDamageArea>().
+            Init(id, headBangDamage, Vector2.zero, 0.3f);
 
         Vector2 offset = direction.normalized * 1.0f;
 

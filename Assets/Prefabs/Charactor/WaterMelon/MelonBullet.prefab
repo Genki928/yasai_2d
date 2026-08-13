@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7008835825970788948}
   - component: {fileID: 150385600754290465}
-  - component: {fileID: 4129832111255996944}
+  - component: {fileID: -5645411136092660985}
   - component: {fileID: -5446446191158391087}
   - component: {fileID: 8178554706918018616}
   - component: {fileID: 8908365103356745}
@@ -95,7 +95,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &4129832111255996944
+--- !u!114 &-5645411136092660985
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,9 +104,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5890270591182050869}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18af939f2915ae041829f4fa833e9a9b, type: 3}
+  m_Script: {fileID: 11500000, guid: cc875d325d533dc468d430cdc168e724, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DamageArea
+  m_EditorClassIdentifier: Assembly-CSharp::SimpleDamageArea
 --- !u!114 &-5446446191158391087
 MonoBehaviour:
   m_ObjectHideFlags: 0

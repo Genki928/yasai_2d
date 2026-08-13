@@ -193,5 +193,15 @@ public class StateIndicater
 
 public static class PlayerPick
 {
-    public static int[] pick = new int[2] { 0, 5 };
+    public static int[] pick = new int[2] { (int)CharId.Corn, (int)CharId.WaterMelon };
+}
+
+public enum CharId
+{
+    Carrot = 0,
+    RedPepper = 1,
+    Leek = 2,
+    Corn = 3,
+    WaterMelon = 4,
+    Mushroom = 5
 }

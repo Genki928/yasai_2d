@@ -37,6 +37,7 @@ public class SoloBattleManager : BattleManagerBase
     [SerializeField] ShakeCamera shake;
     List<TargetBase> tbs = new();
     GameSetDirection FinishDirection;
+    int spawnCount = 0;
 
     void Awake()
     {
@@ -104,6 +105,7 @@ public class SoloBattleManager : BattleManagerBase
 
             // Spriteを調整
             tb.Init(this, player[0].GetComponent<CharBase>(), transform.position.x > tb.transform.position.x ? true : false ,shake);
+            tb.id = ++spawnCount;
 
             // 操作キャラクターと画像が被らないよう調整
             int img = CharPickData.id;
