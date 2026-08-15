@@ -4639,7 +4639,7 @@ MonoBehaviour:
   se1: {fileID: 8300000, guid: 2fc99b164a5a2264dab936df1dd1f900, type: 3}
   followSpeed: 5
   horizontalMargin: 2
-  minZoom: 3
+  minZoom: 4
   maxZoom: 7
   cameraY: 0
   verticalOffset: 2
