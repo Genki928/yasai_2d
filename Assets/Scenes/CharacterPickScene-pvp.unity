@@ -1361,11 +1361,11 @@ MonoBehaviour:
     lore: {fileID: 827913505}
     model: {fileID: 439808938}
     button: {fileID: 1688771324}
+  audioSource: {fileID: 1224603758}
   se:
   - {fileID: 8300000, guid: 49d0744f20e5a2646acf4136e8ac6faa, type: 3}
   - {fileID: 8300000, guid: 2477cbf322039434689f9c8000cfb042, type: 3}
   - {fileID: 8300000, guid: f3a26dd2c4a665f44aaf25227d5d0133, type: 3}
-  audioSource: {fileID: 0}
 --- !u!4 &1224603757
 Transform:
   m_ObjectHideFlags: 0
@@ -1495,7 +1495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1304616790
 RectTransform:
   m_ObjectHideFlags: 0

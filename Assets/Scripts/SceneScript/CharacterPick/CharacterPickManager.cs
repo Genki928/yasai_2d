@@ -1,24 +1,14 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using Const;
-using System.Collections;
-using System.Collections.Generic;
 
 public class CharacterPickManager : PickManagerBase
 {
-    //se用
-    [SerializeField] List<AudioClip> se;
-    public AudioSource audioSource;
-
-    bool isChangingScene = false; // 二重遷移防止
-
     // ----- 定数 ----- //
     protected const int PLAYER_CNT = 2;
 
     protected override void Start()
     {
-        audioSource = GetComponent<AudioSource>();
         base.Start();
 
         for (int i = 0; i < PLAYER_CNT; i++)
@@ -32,16 +22,13 @@ public class CharacterPickManager : PickManagerBase
 
     public override void Interact(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (IsSwitchedScene(ctx))
         {
-            if (isChangingScene) return;
-
             AudioClip clip = se[1];
             audioSource.PlayOneShot(clip);
 
             // 識別
-            if (Gamepad.all[0] == ctx.control.device) current_controller = 0;
-            else current_controller = 1;
+            Identification(ctx);
 
             // すべてのプレイヤーがキャラクターを決定していたら、シーンを遷移
             if (cursor[0].interact && cursor[1].interact)
@@ -75,10 +62,8 @@ public class CharacterPickManager : PickManagerBase
 
     public void Cancel(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (IsSwitchedScene(ctx))
         {
-            if (isChangingScene) return;
-
             AudioClip clip = se[2];
             audioSource.PlayOneShot(clip);
 
@@ -92,38 +77,21 @@ public class CharacterPickManager : PickManagerBase
             if (cursor[0].interact && cursor[1].interact)
             {
                 ready[0].SetActive(false);
-                ready[1].SetActive(false);
             }
 
             // 識別
-            if (Gamepad.all[0] == ctx.control.device) current_controller = 0;
-            else current_controller = 1;
+            Identification(ctx);
 
             base.Cansel(ctx);
         }
     }
 
-    IEnumerator WaitAndLoadScene(AudioClip clip, string sceneName)
-    {
-        isChangingScene = true;
-
-        if (clip != null)
-        {
-            yield return new WaitForSeconds(clip.length);
-        }
-
-        SceneManager.LoadScene(sceneName);
-    }
-
     public override void CursorUp(InputAction.CallbackContext ctx)
     {
-        if (isChangingScene) return;
-        if (ctx.performed)
+        if (IsSwitchedScene(ctx))
         {
-            audioSource.PlayOneShot(se[0]);
             // 識別
-            if (Gamepad.all[0] == ctx.control.device) current_controller = 0;
-            else current_controller = 1;
+            Identification(ctx);
 
             base.CursorUp(ctx);
         }
@@ -131,14 +99,10 @@ public class CharacterPickManager : PickManagerBase
 
     public override void CursorDown(InputAction.CallbackContext ctx)
     {
-        if (isChangingScene) return;
-        if (ctx.performed)
+        if (IsSwitchedScene(ctx))
         {
-            audioSource.PlayOneShot(se[0]);
-
             // 識別
-            if (Gamepad.all[0] == ctx.control.device) current_controller = 0;
-            else current_controller = 1;
+            Identification(ctx);
 
             base.CursorDown(ctx);
         }
@@ -146,13 +110,10 @@ public class CharacterPickManager : PickManagerBase
 
     public override void CursorLeft(InputAction.CallbackContext ctx)
     {
-        if (isChangingScene) return;
-        if (ctx.performed)
+        if(IsSwitchedScene(ctx))
         {
-            audioSource.PlayOneShot(se[0]);
             // 識別
-            if (Gamepad.all[0] == ctx.control.device) current_controller = 0;
-            else current_controller = 1;
+            Identification(ctx);
 
             base.CursorLeft(ctx);
         }
@@ -160,15 +121,19 @@ public class CharacterPickManager : PickManagerBase
 
     public override void CursorRight(InputAction.CallbackContext ctx)
     {
-        if (isChangingScene) return;
-        if (ctx.performed)
+        if (IsSwitchedScene(ctx))
         {
-            audioSource.PlayOneShot(se[0]);
             // 識別
-            if (Gamepad.all[0] == ctx.control.device) current_controller = 0;
-            else current_controller = 1;
+            Identification(ctx);
 
             base.CursorRight(ctx);
         }
+    }
+
+    void Identification(InputAction.CallbackContext ctx)
+    {
+        // 識別
+        if (Gamepad.all[0] == ctx.control.device) current_controller = 0;
+        else current_controller = 1;
     }
 }

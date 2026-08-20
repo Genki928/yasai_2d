@@ -17,14 +17,20 @@ public class SoloPickManager : PickManagerBase
 
     public override void Interact(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (IsSwitchedScene(ctx))
         {
+            // サウンド
+            AudioClip clip = se[1];
+            audioSource.PlayOneShot(clip);
+
             // すべてのプレイヤーがキャラクターを決定していたら、シーンを遷移
             if (cursor[0].interact)
             {
                 CharPickData.id = cursor[0].pos[Y] * ICON_LINEFEED_COUNT + cursor[0].pos[X];
                 if (CharPickData.id == icon_img.Count - 1) CharPickData.id = UnityEngine.Random.Range(0, icon_img.Count - 1);
-                SceneManager.LoadScene(SceneName.BATTLE_PVE);
+
+                // シーン移行（SEが鳴り終わるまで待つ）
+                StartCoroutine(WaitAndLoadScene(clip, SceneName.BATTLE_PVP));
             }
 
             base.Interact(ctx);
@@ -33,11 +39,16 @@ public class SoloPickManager : PickManagerBase
 
     public virtual void Cancel(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (IsSwitchedScene(ctx))
         {
+            // サウンド
+            AudioClip clip = se[2];
+            audioSource.PlayOneShot(clip);
+            
+            // シーン移行
             if (!cursor[0].interact)
             {
-                SceneManager.LoadScene(SceneName.TITLE);
+                StartCoroutine(WaitAndLoadScene(clip, SceneName.TITLE));
                 return;
             }
 
@@ -47,7 +58,7 @@ public class SoloPickManager : PickManagerBase
 
     public override void CursorUp(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (IsSwitchedScene(ctx))
         {
             base.CursorUp(ctx);
         }
@@ -55,7 +66,7 @@ public class SoloPickManager : PickManagerBase
 
     public override void CursorDown(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (IsSwitchedScene(ctx))
         {
             base.CursorDown(ctx);
         }
@@ -63,7 +74,7 @@ public class SoloPickManager : PickManagerBase
 
     public override void CursorLeft(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (IsSwitchedScene(ctx))
         {
             base.CursorLeft(ctx);
         }
@@ -71,7 +82,7 @@ public class SoloPickManager : PickManagerBase
 
     public override void CursorRight(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (IsSwitchedScene(ctx))
         {
             base.CursorRight(ctx);
         }

@@ -26,6 +26,8 @@ public class BattleManagerBase : MonoBehaviour
     [SerializeField] protected AudioClip start_se;
     public Timer timer;
 
+
+    [SerializeField] Text koText;
     protected virtual void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -225,6 +227,49 @@ public class BattleManagerBase : MonoBehaviour
 
         goText.gameObject.SetActive(false);
         datas[0].can_control = true;
-        timer.Init(60);
+        timer.Init(5);
+    }
+    protected IEnumerator ShowKO()
+    {
+        koText.gameObject.SetActive(true);
+
+        Color c = koText.color;
+        c.a = 0;
+        koText.color = c;
+
+        koText.transform.localScale = Vector3.one * 4f;
+
+        float t = 0;
+
+        while (t < 0.2f)
+        {
+            t += Time.deltaTime;
+
+            float p = t / 0.2f;
+
+            koText.transform.localScale =
+                Vector3.Lerp(Vector3.one * 4f, Vector3.one, p);
+
+            c.a = p;
+            koText.color = c;
+
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(1.0f);
+
+        t = 0;
+
+        while (t < 0.3f)
+        {
+            t += Time.deltaTime;
+
+            c.a = 1 - t / 0.3f;
+            koText.color = c;
+
+            yield return null;
+        }
+
+        koText.gameObject.SetActive(false);
     }
 }

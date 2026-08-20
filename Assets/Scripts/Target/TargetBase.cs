@@ -44,12 +44,14 @@ public class TargetBase : MonoBehaviour, IBurst
         else
         {
             if (right) rb.linearVelocity = new(-MoveSpeed, MoveSpeed);
-            if (!right) rb.linearVelocity = new(MoveSpeed, MoveSpeed);
+            else rb.linearVelocity = new(MoveSpeed, MoveSpeed);
         }
     }
 
     public void Damage(Damage damage, int id)
     {
+        if (sbm.gameset) return;
+
         // バースト値が最大なら中断
         if (burst >= max_burst) return;
 
@@ -83,12 +85,13 @@ public class TargetBase : MonoBehaviour, IBurst
         this.camera = camera;
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerStay2D(Collider2D col)
     {
         if (col.TryGetComponent<CharBase>(out var b))
         {
             //b.rigid += 60;
             //b.KnockBack(10, (col.transform.position - transform.position).normalized);
+            b.Damage(new(1, DamageType.Silentable), id);
         }
     }
 

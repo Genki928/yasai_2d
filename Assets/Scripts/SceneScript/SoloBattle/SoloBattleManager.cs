@@ -20,6 +20,7 @@ public class SoloBattleManager : BattleManagerBase
 
     // -----
     int score;
+    public bool gameset = false;
 
     [Header("◇GUI")]
     [SerializeField] GUI gui;
@@ -75,7 +76,7 @@ public class SoloBattleManager : BattleManagerBase
         FinishDirection = GetComponent<GameSetDirection>();
         StartCoroutine(StartBattleEffect());
     }
-    
+
 
     void Update()
     {
@@ -84,7 +85,7 @@ public class SoloBattleManager : BattleManagerBase
         {
             // 時間制限の更新
             score_circle.fillAmount = 1 - (float)++bonus_timer / BONUS_TIMELIMIT_FRAMERATE;
-            
+
             // 時間制限が終わったなら、
             if (score_circle.fillAmount == 0)
             {
@@ -104,7 +105,7 @@ public class SoloBattleManager : BattleManagerBase
             tbs.Add(tb);
 
             // Spriteを調整
-            tb.Init(this, player[0].GetComponent<CharBase>(), transform.position.x > tb.transform.position.x ? true : false ,shake);
+            tb.Init(this, player[0].GetComponent<CharBase>(), transform.position.x > tb.transform.position.x ? true : false, shake);
             tb.id = ++spawnCount;
 
             // 操作キャラクターと画像が被らないよう調整
@@ -125,12 +126,14 @@ public class SoloBattleManager : BattleManagerBase
 
     void Death(int i = 0)
     {
+        if (gameset) return;
+
+        gameset = true;
         timer.TimerStop();
-        StartCoroutine(DeathC());
+        StartCoroutine(GameOverEffect());
     }
 
-
-    IEnumerator DeathC()
+    IEnumerator GameOverEffect()
     {
         Camera cam = Camera.main;
 
@@ -180,6 +183,7 @@ public class SoloBattleManager : BattleManagerBase
 
             yield return null;
         }
+
         audioSource.PlayOneShot(se1);
 
         // エフェクト生成
@@ -203,51 +207,7 @@ public class SoloBattleManager : BattleManagerBase
         SoloBattleResult.score = score;
         SoloBattleResult.img = datas[0].GetDefaultImage();
         SoloBattleResult.win = false;
-        SceneManager.LoadScene("ResultScene-pve");
-    }
-
-    IEnumerator ShowKO()
-    {
-        koText.gameObject.SetActive(true);
-
-        Color c = koText.color;
-        c.a = 0;
-        koText.color = c;
-
-        koText.transform.localScale = Vector3.one * 4f;
-
-        float t = 0;
-
-        while (t < 0.2f)
-        {
-            t += Time.deltaTime;
-
-            float p = t / 0.2f;
-
-            koText.transform.localScale =
-                Vector3.Lerp(Vector3.one * 4f, Vector3.one, p);
-
-            c.a = p;
-            koText.color = c;
-
-            yield return null;
-        }
-
-        yield return new WaitForSeconds(1.0f);
-
-        t = 0;
-
-        while (t < 0.3f)
-        {
-            t += Time.deltaTime;
-
-            c.a = 1 - t / 0.3f;
-            koText.color = c;
-
-            yield return null;
-        }
-
-        koText.gameObject.SetActive(false);
+        SceneManager.LoadScene(SceneName.RESULT_PVE);
     }
 
     protected override IEnumerator StartBattleEffect()
@@ -261,14 +221,6 @@ public class SoloBattleManager : BattleManagerBase
         float zoomSize = 2.5f;
 
         // Player1
-        yield return ZoomToPlayer(
-            player[0].transform.position,
-            zoomSize,
-            0.5f);
-
-        yield return new WaitForSeconds(0.4f);
-
-        // Player2
         yield return ZoomToPlayer(
             player[0].transform.position,
             zoomSize,
@@ -327,6 +279,81 @@ public class SoloBattleManager : BattleManagerBase
         now_score_bonus += 0.1f;
         score_bonus.text = "x " + now_score_bonus.ToString("N1");
         bonus_timer = 0;
+    }
+    IEnumerator GameClearOverEffect(int loseId)
+    {
+
+        Camera cam = Camera.main;
+
+        GameObject loser = player[loseId];
+        Rigidbody2D rb = loser.GetComponent<Rigidbody2D>();
+
+        Vector3 originalPos = cam.transform.position;
+        float originalSize = cam.orthographicSize;
+
+        Vector3 zoomPos = new(loser.transform.position.x, loser.transform.position.y + 0.5f, loser.transform.position.z);
+        zoomPos.z = originalPos.z;
+
+        loser.GetComponent<CharBase>().can_control = false;
+        rb.linearVelocity = Vector2.zero;
+
+        //ズーム
+        //SE
+        audioSource.PlayOneShot(se);
+
+        float targetSize = 2.2f;
+        float t = 0;
+
+        while (t < 0.1f)
+        {
+            t += Time.deltaTime;
+
+            cam.transform.position =
+                Vector3.Lerp(originalPos, zoomPos, t / 0.1f);
+
+            cam.orthographicSize =
+                Mathf.Lerp(originalSize, targetSize, t / 0.1f);
+
+            yield return null;
+        }
+
+        //ス〇ブラ風シェイク
+        float shakeTime = 2.0f;
+
+        while (shakeTime > 0)
+        {
+            shakeTime -= Time.deltaTime;
+
+            Vector2 shake =
+                UnityEngine.Random.insideUnitCircle * 0.25f;
+
+            cam.transform.position =
+                zoomPos + new Vector3(shake.x, shake.y, 0);
+
+            yield return null;
+        }
+
+        audioSource.PlayOneShot(se1);
+
+        // エフェクト生成
+        Instantiate(
+            deathEffect,
+            loser.transform.position,
+            Quaternion.identity);
+
+        // プレイヤーを消す
+        loser.transform.position = new Vector3(1000, 1000, 0);
+        // または
+        // loser.SetActive(false);
+
+        // KO表示
+        koText.text = "Clear!";
+        yield return ShowKO();
+
+        yield return new WaitForSeconds(4.5f);
+
+        // シーン切り替え
+        SceneManager.LoadScene(SceneName.RESULT_PVE);
     }
 }
 

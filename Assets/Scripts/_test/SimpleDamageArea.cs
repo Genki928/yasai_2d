@@ -13,7 +13,6 @@ public class SimpleDamageArea : DamageAreaBase
         {
             // ’†’fˆ—
             int check = _hitId.Find(cId => cb.id == cId);
-            Debug.Log(check > 0 || _id == cb.id);
             if (check > 0 || _id == cb.id) return;
 
             // ƒ_ƒ[ƒW

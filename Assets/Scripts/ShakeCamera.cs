@@ -6,11 +6,13 @@ public class ShakeCamera : MonoBehaviour
     float _size = 0;
     Vector3 _startPos;
     bool _isShaking = false;
+    SoloBattleManager solo;
 
     void Update()
     {
         if (_isShaking)
         {
+            if (solo.gameset) return;
             if (--_shakeTime > 0)
             {
                 float w = Random.Range((int)-_size, (int)_size + 1) / 100.0f;

@@ -1,11 +1,16 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PickManagerBase : MonoBehaviour
 {
+    // ----- プロパティ ----- //
+    protected bool IsSwitchedScene(InputAction.CallbackContext ctx) { return ctx.performed && !isChangingScene; }
+
     // ----- 変数 ----- //
     [Header("◇アイコン")]
     [SerializeField] protected GameObject icon_pf;
@@ -25,6 +30,11 @@ public class PickManagerBase : MonoBehaviour
     [Header("◇モデル")]
     [SerializeField] protected List<PickData> pick_data = new();
     [SerializeField] protected StateIndicater[] state = new StateIndicater[2];
+
+    [Header("◇演出")]
+    [SerializeField] protected AudioSource audioSource;
+    [SerializeField] protected List<AudioClip> se;
+    protected bool isChangingScene = false; // 二重遷移防止
 
     // ----- 定数 ----- //
     protected const float ICON_HORIZONTAL_SPACE = 1.5f;
@@ -62,8 +72,19 @@ public class PickManagerBase : MonoBehaviour
         if (cursor[current_controller].interact && cursor[0].interact)
         {
             ready[0].SetActive(true);
-            ready[1].SetActive(true);
         }
+    }
+
+    protected IEnumerator WaitAndLoadScene(AudioClip clip, string sceneName)
+    {
+        isChangingScene = true;
+
+        if (clip != null)
+        {
+            yield return new WaitForSeconds(clip.length);
+        }
+
+        SceneManager.LoadScene(sceneName);
     }
 
     virtual public void Cansel(InputAction.CallbackContext ctx)
@@ -74,13 +95,15 @@ public class PickManagerBase : MonoBehaviour
             if (cursor[i].interact)
             {
                 ready[0].SetActive(false);
-                ready[1].SetActive(false);
             }
         }
 
         // 決定
         cursor[current_controller].interact = false;
         state[current_controller].button.SetActive(false);
+
+        // 演出
+        audioSource.PlayOneShot(se[0]);
     }
 
     virtual public void CursorUp(InputAction.CallbackContext ctx)
@@ -101,6 +124,9 @@ public class PickManagerBase : MonoBehaviour
 
         // 描画
         Draw(current_controller);
+
+        // 演出
+        audioSource.PlayOneShot(se[0]);
     }
 
     virtual public void CursorDown(InputAction.CallbackContext ctx)
@@ -121,6 +147,9 @@ public class PickManagerBase : MonoBehaviour
 
         // 描画
         Draw(current_controller);
+
+        // 演出
+        audioSource.PlayOneShot(se[0]);
     }
 
     virtual public void CursorRight(InputAction.CallbackContext ctx)
@@ -139,6 +168,9 @@ public class PickManagerBase : MonoBehaviour
 
         // 描画
         Draw(current_controller);
+
+        // 演出
+        audioSource.PlayOneShot(se[0]);
     }
 
     virtual public void CursorLeft(InputAction.CallbackContext ctx)
@@ -156,6 +188,9 @@ public class PickManagerBase : MonoBehaviour
 
         // 描画
         Draw(current_controller);
+
+        // 演出
+        audioSource.PlayOneShot(se[0]);
     }
 
     protected void Draw(int n)

@@ -10,16 +10,17 @@ public class GameSetDirection : MonoBehaviour
     List<TargetBase> tbs;
     bool init = false;
     [SerializeField] Text wintext;
+    AudioSource audioSource;
+    [SerializeField] AudioClip se1;
 
     void Start()
     {
-        ;
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
     {
-        if (!init) return;
-        StartCoroutine(Direction());
+        ;
     }
 
     public void Init(List<TargetBase> targets)
@@ -32,7 +33,8 @@ public class GameSetDirection : MonoBehaviour
         {
             if (tbs[i] == null) continue;
             Rigidbody2D rb = tbs[i].GetComponent<Rigidbody2D>();
-            if (tbs[i].right) tbs[i].escape = true;
+            tbs[i].escape = true;
+            StartCoroutine(Direction());
         }
     }
 
@@ -40,6 +42,7 @@ public class GameSetDirection : MonoBehaviour
     {
         // ââèo
         wintext.gameObject.SetActive(true);
+        audioSource.PlayOneShot(se1);
 
         Color c = wintext.color;
         c.a = 0;
@@ -77,7 +80,9 @@ public class GameSetDirection : MonoBehaviour
 
             yield return null;
         }
+        yield return new WaitForSeconds(2.0f);
 
         SceneManager.LoadScene(SceneName.RESULT_PVE);
     }
+
 }
