@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using Const;
 
 public class SoloPickManager : PickManagerBase
@@ -30,7 +29,7 @@ public class SoloPickManager : PickManagerBase
                 if (CharPickData.id == icon_img.Count - 1) CharPickData.id = UnityEngine.Random.Range(0, icon_img.Count - 1);
 
                 // シーン移行（SEが鳴り終わるまで待つ）
-                StartCoroutine(WaitAndLoadScene(clip, SceneName.BATTLE_PVP));
+                StartCoroutine(WaitAndLoadScene(clip, SceneName.BATTLE_PVE));
             }
 
             base.Interact(ctx);
