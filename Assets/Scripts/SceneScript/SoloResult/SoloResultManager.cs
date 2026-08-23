@@ -5,18 +5,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class SoloResultManager : MonoBehaviour
 {
-    // ----- プロパティ ----- //
-    bool IsFinishedDirection(InputAction.CallbackContext ctx) { return canInput && ctx.performed && !sceneLoading; }
-
     // ----- 定数 ----- //
     [SerializeField] float START_SE_DELAY;
     [SerializeField] float DRAM_TO_TEXT_DELAY;
     [SerializeField] float DISPLAY_SCORE_DELAY;
     [SerializeField] float SCORE_TO_RANK_DELAY;
+
+    // ----- プロパティ ----- //
+    bool IsFinishedDirection(InputAction.CallbackContext ctx) { return ctx.performed &&
+            (currentProcess == PvEResultMenuProcess.Menu || currentProcess == PvEResultMenuProcess.Score); }
 
     // ----- 変数 ----- //
     [Header("◇Result")]
@@ -38,11 +40,15 @@ public class SoloResultManager : MonoBehaviour
 
     [Header("◇Curosr")]
     [SerializeField] GameObject cursor;
-    [SerializeField] GameObject optionCanvas;
     [SerializeField] List<GameObject> option = new();
     int currentOption = 0;
-    bool canInput = false;
-    bool sceneLoading = false;
+    PvEResultMenuProcess currentProcess = PvEResultMenuProcess.direction;
+
+    [Header("◇Score")]
+    [SerializeField] GameObject scoreBackground;
+    [SerializeField] Text characterHighscore;
+    [SerializeField] Text characterHighscoreTitle;
+    [SerializeField] Text allCharacterHighscore;
 
     [Header("◇Sound")]
     [SerializeField] AudioSource audioSource;
@@ -50,21 +56,53 @@ public class SoloResultManager : MonoBehaviour
     [SerializeField] AudioClip interact;
     [SerializeField] AudioClip dram;
 
+    enum PvEResultMenuProcess
+    {
+        direction,
+        Menu,
+        Loading,
+        Score
+    }
+
+    [Serializable]
+    class SoloResultRank
+    {
+        public int needScore = 0;
+        public int sCount = 0;
+    }
+
     void Start()
     {
+        // オブジェクトの無効化
         yourScoreIs.gameObject.SetActive(false);
         scoreUI.gameObject.SetActive(false);
         yourRankIs.gameObject.SetActive(false);
         made.gameObject.SetActive(false);
-        optionCanvas.SetActive(false);
         cursor.SetActive(false);
-        StartCoroutine(Result());
+        scoreBackground.SetActive(false);
+        characterHighscore.gameObject.SetActive(false);
+        characterHighscoreTitle.gameObject.SetActive(false);
+        allCharacterHighscore.gameObject.SetActive(false);
+
+        // リザルトを生産者マークに適用
         skin.sprite = SoloBattleResult.img;
         nameUI.text = SoloBattleResult.name;
         if (!SoloBattleResult.win) winText.text = "頑張りました";
+
+        // ハイスコアの更新
+        //Highscore.character.Add(SoloBattleResult.score);
+        //Highscore.character.Sort();
+        //characterHighscore.text =
+        //    $"1.{ Highscore.character[0] }\n2.{ Highscore.character[1] }\n3.{ Highscore.character[2]}\n" +
+        //    $"----------\n" +
+        //    $"今回.{ SoloBattleResult.score }";
+        //Highscore.allCharacter.Add(SoloBattleResult.score);
+        //Highscore.allCharacter.Sort();
+
+        // 演出の開始
+        StartCoroutine(Result());
     }
 
-    // Update is called once per frame
     void Update()
     {
         ;
@@ -86,11 +124,12 @@ public class SoloResultManager : MonoBehaviour
         // 「あなたの野菜ランクは...」
         yield return new WaitForSeconds(SCORE_TO_RANK_DELAY);
         audioSource.PlayOneShot(dram);
+
+        // 「○○ランク！」
         yield return new WaitForSeconds(DRAM_TO_TEXT_DELAY);
         yourRankIs.gameObject.SetActive(true);
 
-        // 「○○ランク！」
-        yield return new WaitForSeconds(DISPLAY_SCORE_DELAY);
+        // いくつランクを表示させるか数える
         for (int i = 0; i < ranks.Count; i++)
         {
             if (ranks[i].needScore <= SoloBattleResult.score)
@@ -98,52 +137,63 @@ public class SoloResultManager : MonoBehaviour
                 displayCnt = ranks[i].sCount;
             }
         }
+
+        // ランクを表示させる
+        yield return new WaitForSeconds(DISPLAY_SCORE_DELAY);
         StartCoroutine(DisplayRank());
     }
 
     IEnumerator DisplayRank(int n = 0)
     {
+        // ランクを表示する処理
         if (n++ < displayCnt)
         {
+            // オブジェクトを生成 -> 位置を調整
             rankObj.Add(Instantiate(rankUI).gameObject);
             GameObject go = rankObj[rankObj.Count - 1].gameObject;
             go.transform.SetParent(canvas, false);
             go.transform.position = new(transform.position.x + sSpace, transform.position.y);
             sSpace += 1.2f;
+
+            // 再帰
             yield return new WaitForSeconds(0.5f);
             StartCoroutine(DisplayRank(n));
         }
         else
         {
-            // 製作者
+            // 生産者マークの表示
             yield return new WaitForSeconds(0.5f);
             made.gameObject.SetActive(true);
-            nameUI.text = SoloBattleResult.name;
-            canInput = true;
-            optionCanvas.SetActive(true);
-            yield return new WaitForSeconds(0.5f);
+
+            // 選択肢、カーソルの描画
+            currentProcess = PvEResultMenuProcess.Menu;
             cursor.SetActive(true);
             Draw();
         }
     }
 
-    public void SceneChange_CharacterPickScene(InputAction.CallbackContext ctx)
+    public void Interact(InputAction.CallbackContext ctx)
     {
-        if (IsFinishedDirection(ctx))
+        // 演出中なら中断
+        if (!IsFinishedDirection(ctx)) return;
+
+        // カーソル位置によって処理を分岐
+        switch (currentOption)
         {
-            switch (currentOption)
-            {
-                case 0:
-                    break;
+            // ハイスコアの表示
+            case 0:
+                DisplayHighscore();
+                break;
 
-                case 1:
-                    StartCoroutine(WaitAndLoadScene(interact, SceneName.CHARACTER_PICK_PVE));
-                    break;
-
-                case 2:
-                    StartCoroutine(WaitAndLoadScene(interact, SceneName.CHARACTER_PICK_PVE));
-                    break;
-            }
+            // キャラクター選択シーンに移動
+            case 1:
+                StartCoroutine(WaitAndLoadScene(interact, SceneName.CHARACTER_PICK_PVE));
+                break;
+            
+            // タイトル画面に移動
+            case 2:
+                StartCoroutine(WaitAndLoadScene(interact, SceneName.TITLE));
+                break;
         }
     }
 
@@ -176,24 +226,58 @@ public class SoloResultManager : MonoBehaviour
         }
     }
 
+    /// <summary> カーソルの描画 </summary>
     void Draw()
     {
         Vector2 pos = new(option[currentOption].transform.position.x + -5.0f, option[currentOption].transform.position.y + 0.2f);
         cursor.transform.position = pos;
     }
 
+    /// <summary> サウンドが再生し終わるまで、シーンの遷移を待機 </summary>
+    /// <param name="clip"> 待機させるサウンド </param>
+    /// <param name="sceneName"> 遷移するシーン名 </param>
     IEnumerator WaitAndLoadScene(AudioClip clip, string sceneName)
     {
-        sceneLoading = true;
+        currentProcess = PvEResultMenuProcess.Loading;
         audioSource.PlayOneShot(clip);
         yield return new WaitForSeconds(clip.length);
         SceneManager.LoadScene(sceneName);
     }
+
+    void DisplayHighscore()
+    {
+        currentProcess = PvEResultMenuProcess.Score;
+        scoreBackground.SetActive(true);
+
+        // 名前の適用
+        characterHighscore.text = SoloBattleResult.name;
+        characterHighscoreTitle.gameObject.SetActive(true);
+
+        // スコアの適用
+        characterHighscore.gameObject.SetActive(true);
+        allCharacterHighscore.gameObject.SetActive(true);
+    }
 }
 
-[Serializable]
-public class SoloResultRank
+public static class Highscore
 {
-    public int needScore = 0;
-    public int sCount = 0;
+    public static int[] character = new int[3];
+    public static int[] allCharacter = new int[3];
+
+    // バブルソート
+    public static void Sort(int[] arr)
+    {
+        for (int j = 1; j < arr.Length; j++)
+        {
+            for (int i = 0; i < arr.Length - j; i++)
+            {
+                if (arr[i] < arr[i + 1])
+                {
+                    int n = arr[i];
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = n;
+                }
+            }
+        }
+    }
 }
