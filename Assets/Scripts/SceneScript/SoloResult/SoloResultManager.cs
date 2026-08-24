@@ -2,10 +2,10 @@ using Const;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class SoloResultManager : MonoBehaviour
@@ -20,9 +20,12 @@ public class SoloResultManager : MonoBehaviour
     bool IsFinishedDirection(InputAction.CallbackContext ctx) { return ctx.performed &&
             (currentProcess == PvEResultMenuProcess.Menu || currentProcess == PvEResultMenuProcess.Score); }
 
+    bool IsMoveCursor(InputAction.CallbackContext ctx) { return ctx.performed &&
+            currentProcess == PvEResultMenuProcess.Menu; }
+
     // ----- 変数 ----- //
     [Header("◇Result")]
-    [SerializeField] Transform canvas;
+    [SerializeField] Transform rankLayer;
     [SerializeField] Text yourScoreIs;
     [SerializeField] Text scoreUI;
     [SerializeField] Text yourRankIs;
@@ -83,21 +86,30 @@ public class SoloResultManager : MonoBehaviour
         characterHighscore.gameObject.SetActive(false);
         characterHighscoreTitle.gameObject.SetActive(false);
         allCharacterHighscore.gameObject.SetActive(false);
+        foreach (GameObject op in option) op.SetActive(false);
 
         // リザルトを生産者マークに適用
         skin.sprite = SoloBattleResult.img;
         nameUI.text = SoloBattleResult.name;
         if (!SoloBattleResult.win) winText.text = "頑張りました";
 
-        // ハイスコアの更新
-        //Highscore.character.Add(SoloBattleResult.score);
-        //Highscore.character.Sort();
-        //characterHighscore.text =
-        //    $"1.{ Highscore.character[0] }\n2.{ Highscore.character[1] }\n3.{ Highscore.character[2]}\n" +
-        //    $"----------\n" +
-        //    $"今回.{ SoloBattleResult.score }";
-        //Highscore.allCharacter.Add(SoloBattleResult.score);
-        //Highscore.allCharacter.Sort();
+        //ハイスコアの更新
+        int id = CharPickData.id;
+        Highscore.character[id].score.Add(SoloBattleResult.score);
+        Highscore.character[id].score.Sort();
+        Highscore.character[id].score.Reverse();
+        characterHighscore.text =
+            $"1.{Highscore.character[id].score[0]}\n2.{Highscore.character[id].score[1]}\n3.{Highscore.character[id].score[2]}\n" +
+            $"----------\n" +
+            $"今回.{SoloBattleResult.score}";
+
+        Highscore.allCharacter.score.Add(SoloBattleResult.score);
+        Highscore.allCharacter.score.Sort();
+        Highscore.allCharacter.score.Reverse();
+        allCharacterHighscore.text =
+            $"1.{Highscore.allCharacter.score[0]}\n2.{Highscore.allCharacter.score[1]}\n3.{Highscore.allCharacter.score[2]}\n" +
+            $"----------\n" +
+            $"Aボタンで戻る";
 
         // 演出の開始
         StartCoroutine(Result());
@@ -151,7 +163,7 @@ public class SoloResultManager : MonoBehaviour
             // オブジェクトを生成 -> 位置を調整
             rankObj.Add(Instantiate(rankUI).gameObject);
             GameObject go = rankObj[rankObj.Count - 1].gameObject;
-            go.transform.SetParent(canvas, false);
+            go.transform.SetParent(rankLayer, false);
             go.transform.position = new(transform.position.x + sSpace, transform.position.y);
             sSpace += 1.2f;
 
@@ -166,6 +178,7 @@ public class SoloResultManager : MonoBehaviour
             made.gameObject.SetActive(true);
 
             // 選択肢、カーソルの描画
+            foreach (GameObject op in option) op.SetActive(true);
             currentProcess = PvEResultMenuProcess.Menu;
             cursor.SetActive(true);
             Draw();
@@ -177,12 +190,21 @@ public class SoloResultManager : MonoBehaviour
         // 演出中なら中断
         if (!IsFinishedDirection(ctx)) return;
 
+        audioSource.PlayOneShot(interact);
+        if (currentProcess== PvEResultMenuProcess.Score)
+        {
+            currentProcess = PvEResultMenuProcess.Menu;
+            DisplayHighscore(false);
+            return;
+        }
+
         // カーソル位置によって処理を分岐
         switch (currentOption)
         {
             // ハイスコアの表示
             case 0:
-                DisplayHighscore();
+                currentProcess = PvEResultMenuProcess.Score;
+                DisplayHighscore(true);
                 break;
 
             // キャラクター選択シーンに移動
@@ -200,7 +222,7 @@ public class SoloResultManager : MonoBehaviour
 
     public void Up(InputAction.CallbackContext ctx)
     {
-        if (IsFinishedDirection(ctx))
+        if (IsMoveCursor(ctx))
         {
             // はみ出さないように調整
             if (--currentOption < 0)
@@ -214,7 +236,7 @@ public class SoloResultManager : MonoBehaviour
 
     public void Down(InputAction.CallbackContext ctx)
     {
-        if (IsFinishedDirection(ctx))
+        if (IsMoveCursor(ctx))
         {
             // はみ出さないように調整
             if (++currentOption >= option.Count)
@@ -239,45 +261,33 @@ public class SoloResultManager : MonoBehaviour
     IEnumerator WaitAndLoadScene(AudioClip clip, string sceneName)
     {
         currentProcess = PvEResultMenuProcess.Loading;
-        audioSource.PlayOneShot(clip);
         yield return new WaitForSeconds(clip.length);
         SceneManager.LoadScene(sceneName);
     }
 
-    void DisplayHighscore()
+    void DisplayHighscore(bool display)
     {
-        currentProcess = PvEResultMenuProcess.Score;
-        scoreBackground.SetActive(true);
+        scoreBackground.SetActive(display);
 
         // 名前の適用
-        characterHighscore.text = SoloBattleResult.name;
-        characterHighscoreTitle.gameObject.SetActive(true);
+        characterHighscoreTitle.text = SoloBattleResult.name;
+        characterHighscoreTitle.gameObject.SetActive(display);
 
         // スコアの適用
-        characterHighscore.gameObject.SetActive(true);
-        allCharacterHighscore.gameObject.SetActive(true);
+        characterHighscore.gameObject.SetActive(display);
+        allCharacterHighscore.gameObject.SetActive(display);
     }
 }
 
 public static class Highscore
 {
-    public static int[] character = new int[3];
-    public static int[] allCharacter = new int[3];
+    public static CharacterScore[] character =
+        Enumerable.Range(0, 6).Select(_ => new CharacterScore()).ToArray();
 
-    // バブルソート
-    public static void Sort(int[] arr)
+    public static CharacterScore allCharacter = new();
+
+    public class CharacterScore
     {
-        for (int j = 1; j < arr.Length; j++)
-        {
-            for (int i = 0; i < arr.Length - j; i++)
-            {
-                if (arr[i] < arr[i + 1])
-                {
-                    int n = arr[i];
-                    arr[i] = arr[i + 1];
-                    arr[i + 1] = n;
-                }
-            }
-        }
+        public List<int> score = new() { 0, 0, 0 };
     }
 }

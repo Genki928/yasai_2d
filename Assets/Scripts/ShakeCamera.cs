@@ -6,12 +6,13 @@ public class ShakeCamera : MonoBehaviour
     float _size = 0;
     Vector3 _startPos;
     bool _isShaking = false;
-    SoloBattleManager solo;
+    [SerializeField] SoloBattleManager solo;
 
     void Update()
     {
         if (_isShaking)
         {
+            Debug.Log(solo.gameset);
             if (solo.gameset) return;
             if (--_shakeTime > 0)
             {

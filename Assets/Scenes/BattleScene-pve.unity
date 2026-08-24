@@ -1708,6 +1708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c352459970803c14cb95fabe1fe67f34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShakeCamera
+  solo: {fileID: 1873271268}
 --- !u!1 &621092114
 GameObject:
   m_ObjectHideFlags: 0

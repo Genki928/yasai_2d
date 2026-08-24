@@ -52,7 +52,6 @@ public class SoloBattleManager : BattleManagerBase
         base.Start();
 
         // ƒvƒŒƒCƒ„[¶¬
-        Debug.Log(CharPickData.id);
         player[0] = Instantiate(characters[CharPickData.id].chars, spawn_point[0].point.transform.position, Quaternion.identity);
         datas[0] = player[0].GetComponent<CharBase>();
 
