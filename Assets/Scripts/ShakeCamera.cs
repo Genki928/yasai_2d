@@ -12,7 +12,6 @@ public class ShakeCamera : MonoBehaviour
     {
         if (_isShaking)
         {
-            Debug.Log(solo.gameset);
             if (solo.gameset) return;
             if (--_shakeTime > 0)
             {

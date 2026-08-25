@@ -21,6 +21,7 @@ public class SoloBattleManager : BattleManagerBase
     // -----
     int score;
     public bool gameset = false;
+    bool start = false;
 
     [Header("◇GUI")]
     [SerializeField] GUI gui;
@@ -96,31 +97,33 @@ public class SoloBattleManager : BattleManagerBase
                 score_bonus.text = "x " + now_score_bonus.ToString("N1");
             }
         }
-        if (++spawn_cooltime > SPAWN_COOLTIME)
-        {
-            // ランダムな場所からスポーン
-            int spawn = Random.Range(0, target_spawn_point.Count);
-            TargetBase tb = Instantiate(targets[0], target_spawn_point[spawn].point.transform.position, Quaternion.identity);
-            tbs.Add(tb);
 
-            // Spriteを調整
-            tb.Init(this, player[0].GetComponent<CharBase>(), transform.position.x > tb.transform.position.x ? true : false, shake);
-            tb.id = ++spawnCount;
-
-            // 操作キャラクターと画像が被らないよう調整
-            int img = CharPickData.id;
-            do
+        if (start && !gameset)
+            if (++spawn_cooltime > SPAWN_COOLTIME - ((60 - timer.limit) / 10))
             {
-                img = Random.Range(0, target_sprites.Count);
-            } while (img == CharPickData.id);
-            tb.GetComponent<SpriteRenderer>().sprite = target_sprites[img];
+                // ランダムな場所からスポーン
+                int spawn = Random.Range(0, target_spawn_point.Count);
+                TargetBase tb = Instantiate(targets[0], target_spawn_point[spawn].point.transform.position, Quaternion.identity);
+                tbs.Add(tb);
 
-            // 見やすく（黒く）する
-            tb.GetComponent<SpriteRenderer>().color = new Color32(128, 128, 128, 255);
+                // Spriteを調整
+                tb.Init(this, player[0].GetComponent<CharBase>(), transform.position.x > tb.transform.position.x ? true : false, shake, timer.limit);
+                tb.id = ++spawnCount;
 
-            // タイマーをリセット
-            spawn_cooltime = 0;
-        }
+                // 操作キャラクターと画像が被らないよう調整
+                int img = CharPickData.id;
+                do
+                {
+                    img = Random.Range(0, target_sprites.Count);
+                } while (img == CharPickData.id);
+                tb.GetComponent<SpriteRenderer>().sprite = target_sprites[img];
+
+                // 見やすく（黒く）する
+                tb.GetComponent<SpriteRenderer>().color = new Color32(128, 128, 128, 255);
+
+                // タイマーをリセット
+                spawn_cooltime = 0;
+            }
     }
 
     void Death(int i = 0)
@@ -237,6 +240,7 @@ public class SoloBattleManager : BattleManagerBase
         yield return ShowGo();
         datas[0].can_control = true;
         timer.TimerStart();
+        start = true;
     }
 
     void OnDestroy()
@@ -257,6 +261,7 @@ public class SoloBattleManager : BattleManagerBase
 
         datas[0].can_control = false;
         datas[0].rb.linearVelocity = Vector2.zero;
+        gameset = true;
         FinishDirection.Init(tbs);
     }
 

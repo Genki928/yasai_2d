@@ -16,6 +16,7 @@ public class TargetBase : MonoBehaviour, IBurst
     [SerializeField] AudioClip _damage;
     AudioSource audioSource;
     ShakeCamera camera;
+    float speed;
 
     void Start()
     {
@@ -40,7 +41,7 @@ public class TargetBase : MonoBehaviour, IBurst
     {
         const float MoveSpeed = 3.0f;
         if (!escape)
-            rb.linearVelocity = (player.transform.position - transform.position).normalized * 0.5f;
+            rb.linearVelocity = (player.transform.position - transform.position).normalized * speed;
         else
         {
             if (right) rb.linearVelocity = new(-MoveSpeed, MoveSpeed);
@@ -77,12 +78,13 @@ public class TargetBase : MonoBehaviour, IBurst
         }
     }
 
-    public void Init(SoloBattleManager sbm, CharBase player, bool righrt, ShakeCamera camera)
+    public void Init(SoloBattleManager sbm, CharBase player, bool right, ShakeCamera camera, int time)
     {
         this.sbm = sbm;
         this.player = player;
-        this.right = righrt;
+        this.right = right;
         this.camera = camera;
+        speed = (60 - time) / 20.0f + 0.5f;
     }
 
     void OnTriggerStay2D(Collider2D col)

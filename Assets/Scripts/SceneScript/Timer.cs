@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Timer : MonoBehaviour
 {
     int timer = 0;
-    int limit = 60;
+    public int limit = 60;
     bool is_start = false;
     public Text text;
     public event Action OnFinish;
