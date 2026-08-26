@@ -17,6 +17,8 @@ public class TargetBase : MonoBehaviour, IBurst
     AudioSource audioSource;
     ShakeCamera camera;
     float speed;
+    [SerializeField] AudioClip se_low;   //小ダメージ
+    [SerializeField] AudioClip se_high;  //大ダメージ
 
     void Start()
     {
@@ -49,6 +51,19 @@ public class TargetBase : MonoBehaviour, IBurst
         }
     }
 
+    /// <summary> ダメージ量に応じたSEを再生 </summary>
+    void PlayDamageSE(int value)
+    {
+        if (audioSource == null) return;
+
+        AudioClip clip = value > 50 ? se_high : se_low;
+
+        if (clip != null)
+        {
+            audioSource.PlayOneShot(clip);
+        }
+    }
+
     public void Damage(Damage damage, int id)
     {
         if (sbm.gameset) return;
@@ -59,6 +74,7 @@ public class TargetBase : MonoBehaviour, IBurst
         // 受けるダメージが過剰ならセーブする
         burst = burst + damage.Value > max_burst ?
                      max_burst : burst + damage.Value;
+        if (damage.Type == DamageType.Soundable) PlayDamageSE(damage.Value);
 
         // バースト値が最大なら、死亡
         if (burst == max_burst)

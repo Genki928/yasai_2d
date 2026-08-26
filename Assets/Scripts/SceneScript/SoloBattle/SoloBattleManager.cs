@@ -291,5 +291,5 @@ static public class SoloBattleResult
     static public string name = "ƒIƒŒ";
     static public int score = 1000;
     static public Sprite img;
-    static public bool win = false;
+    static public bool win = true;
 }

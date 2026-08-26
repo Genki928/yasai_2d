@@ -686,6 +686,9 @@ MonoBehaviour:
   cursorChanged: {fileID: 8300000, guid: 49d0744f20e5a2646acf4136e8ac6faa, type: 3}
   interact: {fileID: 8300000, guid: 2477cbf322039434689f9c8000cfb042, type: 3}
   dram: {fileID: 8300000, guid: d03675b40ac07624e83b4d2e322ff95d, type: 3}
+  shortDram: {fileID: 8300000, guid: 4cdc17dc11f1aed4db9992e9504298c8, type: 3}
+  winSound: {fileID: 8300000, guid: 93c91f3586c82a4418bdb0c4b2eb2d2c, type: 3}
+  loseSound: {fileID: 8300000, guid: 04d4fa429593b8d4b8bfa8a1c2393cae, type: 3}
 --- !u!82 &308996616
 AudioSource:
   m_ObjectHideFlags: 0

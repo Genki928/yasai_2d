@@ -112,8 +112,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TargetBase
   sbm: {fileID: 0}
   player: {fileID: 0}
+  escape: 0
   bomb: {fileID: 2332055813528760168, guid: 272064b7383e71e4fb1a7ad486a9628f, type: 3}
-  damage: {fileID: 8300000, guid: 8dc5b0a512d3fad4598c7dd58e47e3b1, type: 3}
+  _damage: {fileID: 0}
+  se_low: {fileID: 8300000, guid: c3ec62ca64c77e54d931fe4a2b80a0c3, type: 3}
+  se_high: {fileID: 8300000, guid: 9579f2e1a90afa248a5f6ae6609ed277, type: 3}
 --- !u!114 &7233854405017352951
 MonoBehaviour:
   m_ObjectHideFlags: 0

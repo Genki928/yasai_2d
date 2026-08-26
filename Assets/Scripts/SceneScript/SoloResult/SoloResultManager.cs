@@ -17,11 +17,17 @@ public class SoloResultManager : MonoBehaviour
     [SerializeField] float SCORE_TO_RANK_DELAY;
 
     // ----- プロパティ ----- //
-    bool IsFinishedDirection(InputAction.CallbackContext ctx) { return ctx.performed &&
-            (currentProcess == PvEResultMenuProcess.Menu || currentProcess == PvEResultMenuProcess.Score); }
+    bool IsFinishedDirection(InputAction.CallbackContext ctx)
+    {
+        return ctx.performed &&
+            (currentProcess == PvEResultMenuProcess.Menu || currentProcess == PvEResultMenuProcess.Score);
+    }
 
-    bool IsMoveCursor(InputAction.CallbackContext ctx) { return ctx.performed &&
-            currentProcess == PvEResultMenuProcess.Menu; }
+    bool IsMoveCursor(InputAction.CallbackContext ctx)
+    {
+        return ctx.performed &&
+            currentProcess == PvEResultMenuProcess.Menu;
+    }
 
     // ----- 変数 ----- //
     [Header("◇Result")]
@@ -58,6 +64,9 @@ public class SoloResultManager : MonoBehaviour
     [SerializeField] AudioClip cursorChanged;
     [SerializeField] AudioClip interact;
     [SerializeField] AudioClip dram;
+    [SerializeField] AudioClip shortDram;
+    [SerializeField] AudioClip winSound;
+    [SerializeField] AudioClip loseSound;
 
     enum PvEResultMenuProcess
     {
@@ -168,13 +177,19 @@ public class SoloResultManager : MonoBehaviour
             sSpace += 1.2f;
 
             // 再帰
+            if (n > 0) audioSource.PlayOneShot(shortDram);
             yield return new WaitForSeconds(0.5f);
             StartCoroutine(DisplayRank(n));
         }
         else
         {
+            yield return new WaitForSeconds(1.0f);
+
+            // サウンド
+            if (SoloBattleResult.win == true) audioSource.PlayOneShot(winSound);
+            else audioSource.PlayOneShot(loseSound);
+
             // 生産者マークの表示
-            yield return new WaitForSeconds(0.5f);
             made.gameObject.SetActive(true);
 
             // 選択肢、カーソルの描画
@@ -191,7 +206,7 @@ public class SoloResultManager : MonoBehaviour
         if (!IsFinishedDirection(ctx)) return;
 
         audioSource.PlayOneShot(interact);
-        if (currentProcess== PvEResultMenuProcess.Score)
+        if (currentProcess == PvEResultMenuProcess.Score)
         {
             currentProcess = PvEResultMenuProcess.Menu;
             DisplayHighscore(false);
@@ -211,7 +226,7 @@ public class SoloResultManager : MonoBehaviour
             case 1:
                 StartCoroutine(WaitAndLoadScene(interact, SceneName.CHARACTER_PICK_PVE));
                 break;
-            
+
             // タイトル画面に移動
             case 2:
                 StartCoroutine(WaitAndLoadScene(interact, SceneName.TITLE));
