@@ -151,6 +151,7 @@ public class BattleManager : MonoBehaviour
                 gui[i].name.text = p.data.char_name;    // キャラ名
                 p.cooltimer[0] = gui[i].skill1_cooltimer;   // スキル1のクールタイムを表示
                 p.cooltimer[1] = gui[i].skill2_cooltimer;   // スキル2のクールタイムを表示
+                p.cooltimer[2] = gui[i].dash_cooltimer;   // スキル2のクールタイムを表示
                 gui[i].icon.sprite = characters[pick_nums[i]].icon; // アイコン
             }
             //datas[i].camera = shake;
@@ -606,6 +607,7 @@ public class GUI
     public SpriteRenderer icon;
     public SkillCooltimer skill1_cooltimer;
     public SkillCooltimer skill2_cooltimer;
+    public SkillCooltimer dash_cooltimer;
 }
 
 [Serializable]

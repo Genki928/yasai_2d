@@ -68,6 +68,7 @@ public class SoloBattleManager : BattleManagerBase
             gui.name.text = datas[0].data.char_name;    // キャラ名
             datas[0].cooltimer[0] = gui.skill1_cooltimer;   // スキル1のクールタイムを表示
             datas[0].cooltimer[1] = gui.skill2_cooltimer;   // スキル2のクールタイムを表示
+            datas[0].cooltimer[2] = gui.dash_cooltimer;   // スキル2のクールタイムを表示
             gui.icon.sprite = characters[CharPickData.id].icon; // アイコン
         }
 

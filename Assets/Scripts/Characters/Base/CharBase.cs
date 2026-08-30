@@ -28,7 +28,7 @@ public class CharBase : MonoBehaviour, IBurst
     public int rigid {  get; set; } = 0;
     public int skill_1_cooltime = 0;
     public int skill_2_cooltime = 0;
-    public int dash_cooltime;
+    public int dash_cooltime = 0;
     public bool can_control = true;
     public int regen_burst_timer = 0;
     protected List<State> _states = new();
@@ -40,7 +40,7 @@ public class CharBase : MonoBehaviour, IBurst
 
     [Header("žGUI")]
     [NonSerialized] public BurstBar burst_bar;
-    [NonSerialized] public SkillCooltimer[] cooltimer = new SkillCooltimer[2];
+    [NonSerialized] public SkillCooltimer[] cooltimer = new SkillCooltimer[3];
     public GameObject pointer;
 
     [Header("ž•¨—")]
@@ -86,7 +86,7 @@ public class CharBase : MonoBehaviour, IBurst
         if (rigid > 0) --rigid;
         if (skill_1_cooltime > 0) cooltimer[0].RefreshCooltimer(--skill_1_cooltime, data.skill_1_cooltime);
         if (skill_2_cooltime > 0) cooltimer[1].RefreshCooltimer(--skill_2_cooltime, data.skill_2_cooltime);
-        if (dash_cooltime > 0) --dash_cooltime;
+        if (dash_cooltime > 0) cooltimer[2].RefreshCooltimer(--dash_cooltime, data.dash_cooltime);
 
         if (regen_burst_timer < data.regen_burst_cooltime && burst < max_burst)
         {
