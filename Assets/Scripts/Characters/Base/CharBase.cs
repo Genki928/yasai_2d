@@ -83,17 +83,19 @@ public class CharBase : MonoBehaviour, IBurst
 
     virtual protected void Update()
     {
+        float time = Time.deltaTime;
+
         // 移動速度更新
         foreach (var state in _states)
-            state.UpdateAttribute(Time.deltaTime);
+            state.UpdateAttribute(time);
 
         // 硬直の更新
         if (rigid > 0.0f)
-            rigid = Mathf.Max(0.0f, rigid - Time.deltaTime);
+            rigid = Mathf.Max(0.0f, rigid - time);
 
         // クールタイムの更新
         for (int i = 0; i < 3; i++)
-            if (cooltime[i].Current > 0.0f) cooltimeUI[i].RefreshCooltimer(cooltime[i].RemoveCooltime(Time.deltaTime));
+            if (cooltime[i].Current > 0.0f) cooltimeUI[i].RefreshCooltimer(cooltime[i].RemoveCooltime(time));
 
         // 
         if (regen_burst_timer < data.regen_burst_cooltime && burst < max_burst)
