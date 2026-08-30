@@ -3043,9 +3043,10 @@ MonoBehaviour:
     bar: {fileID: 1848879500}
     name: {fileID: 5040120049556604551}
     icon: {fileID: 5815814983316684988}
-    skill1_cooltimer: {fileID: 960931901166971211}
-    skill2_cooltimer: {fileID: 2274228633886538477}
-    dash_cooltimer: {fileID: 8177637439497030237}
+    skillCooltimer:
+    - {fileID: 960931901166971211}
+    - {fileID: 2274228633886538477}
+    - {fileID: 8177637439497030237}
   score_text: {fileID: 1604341546}
   score_bonus: {fileID: 1568498543}
   score_circle: {fileID: 295903128}

@@ -46,7 +46,7 @@ public class RedPepper : CharBase
             go.GetComponent<SimpleDamageArea>().Init(id, new(60, DamageType.Soundable), new Vector2(0, 0));
 
             // 硬直・クールタイム
-            skill_1_cooltime = data.skill_1_cooltime;
+            cooltime[(int)SkillName.Skill1].SetCooltime();
             rb.linearVelocity = Vector2.zero;
             can_control = false;
             StartCoroutine(Breath());
@@ -70,7 +70,7 @@ public class RedPepper : CharBase
 
             // 硬直・クールタイム
             can_control = false;
-            skill_2_cooltime = data.skill_2_cooltime;
+            cooltime[(int)SkillName.Skill2].SetCooltime();
             StartCoroutine(BackShot());
         }
     }

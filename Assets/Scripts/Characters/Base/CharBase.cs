@@ -7,9 +7,9 @@ using UnityEngine.InputSystem;
 public class CharBase : MonoBehaviour, IBurst
 {
     // ----- プロパティ ----- //
-    protected bool CanUseSkill1 => skill_1_cooltime == 0 && can_control;
-    protected bool CanUseSkill2 => skill_2_cooltime == 0 && can_control;
-    protected bool CanUseDash => dash_cooltime == 0 && can_control;
+    protected bool CanUseSkill1 => cooltime[(int)SkillName.Skill1].Current == 0 && can_control;
+    protected bool CanUseSkill2 => cooltime[(int)SkillName.Skill2].Current == 0 && can_control;
+    protected bool CanUseDash => cooltime[(int)SkillName.Dash].Current == 0 && can_control;
     public List<State> State => _states;
 
     // ----- 定数 ----- //
@@ -25,12 +25,10 @@ public class CharBase : MonoBehaviour, IBurst
     public int id { get; set; } = 0;
     public int max_burst { get; set; } = 100;
     public int burst { get; set; } = 0;
-    public int rigid {  get; set; } = 0;
-    public int skill_1_cooltime = 0;
-    public int skill_2_cooltime = 0;
-    public int dash_cooltime = 0;
+    public float rigid {  get; set; } = 0;
+    public Cooltime[] cooltime = new Cooltime[3];
     public bool can_control = true;
-    public int regen_burst_timer = 0;
+    public float regen_burst_timer = 0;
     protected List<State> _states = new();
 
 
@@ -40,7 +38,7 @@ public class CharBase : MonoBehaviour, IBurst
 
     [Header("◇GUI")]
     [NonSerialized] public BurstBar burst_bar;
-    [NonSerialized] public SkillCooltimer[] cooltimer = new SkillCooltimer[3];
+    [NonSerialized] public SkillCooltimer[] cooltimeUI = new SkillCooltimer[3];
     public GameObject pointer;
 
     [Header("◇物理")]
@@ -62,12 +60,17 @@ public class CharBase : MonoBehaviour, IBurst
 
     virtual protected void Start()
     {
+        //
         rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
         sprite = GetComponent<SpriteRenderer>();
+        
+        //
         cursor_obj = Instantiate(cursor_pf, transform.position, Quaternion.identity).GetComponent<Arrow>();
         cursor_obj.Refresh(direction);
         cursor_obj.Set(this);
+        
+        //
         max_burst = data.max_burst;
         _states.Add(new MoveSpeed(data.speed));
     }
@@ -80,17 +83,23 @@ public class CharBase : MonoBehaviour, IBurst
 
     virtual protected void Update()
     {
+        // 移動速度更新
         foreach (var state in _states)
             state.UpdateAttribute(Time.deltaTime);
 
-        if (rigid > 0) --rigid;
-        if (skill_1_cooltime > 0) cooltimer[0].RefreshCooltimer(--skill_1_cooltime, data.skill_1_cooltime);
-        if (skill_2_cooltime > 0) cooltimer[1].RefreshCooltimer(--skill_2_cooltime, data.skill_2_cooltime);
-        if (dash_cooltime > 0) cooltimer[2].RefreshCooltimer(--dash_cooltime, data.dash_cooltime);
+        // 硬直の更新
+        if (rigid > 0.0f)
+            rigid = Mathf.Max(0.0f, rigid - Time.deltaTime);
 
+        // クールタイムの更新
+        for (int i = 0; i < 3; i++)
+            if (cooltime[i].Current > 0.0f) cooltimeUI[i].RefreshCooltimer(cooltime[i].RemoveCooltime(Time.deltaTime));
+
+        // 
         if (regen_burst_timer < data.regen_burst_cooltime && burst < max_burst)
         {
-            if (++regen_burst_timer == data.regen_burst_cooltime)
+            regen_burst_timer += Time.deltaTime;
+            if (regen_burst_timer >= data.regen_burst_cooltime)
             {
                 regen_burst_timer = data.restart_regen_burst_value;
                 Heal(15);
@@ -178,28 +187,28 @@ public class CharBase : MonoBehaviour, IBurst
     /// <summary>
     /// ラウンド開始時の初期化
     /// </summary>
-    public virtual void ResetRound()
-    {
-        // バースト値リセット
-        burst = 0;
-        burst_bar.Draw(burst, max_burst);
+    //public virtual void ResetRound()
+    //{
+    //    // バースト値リセット
+    //    burst = 0;
+    //    burst_bar.Draw(burst, max_burst);
 
-        // クールタイムリセット
-        skill_1_cooltime = 0;
-        skill_2_cooltime = 0;
+    //    // クールタイムリセット
+    //    skill_1_cooltime = 0;
+    //    skill_2_cooltime = 0;
 
-        // バースト回復タイマー
-        regen_burst_timer = 0;
+    //    // バースト回復タイマー
+    //    regen_burst_timer = 0;
 
-        // 硬直解除
-        rigid = 0;
+    //    // 硬直解除
+    //    rigid = 0;
 
-        // 停止
-        rb.linearVelocity = Vector2.zero;
+    //    // 停止
+    //    rb.linearVelocity = Vector2.zero;
 
-        // 操作禁止（READY→GO後にtrueになる）
-        can_control = false;
-    }
+    //    // 操作禁止（READY→GO後にtrueになる）
+    //    can_control = false;
+    //}
 
     /// <summary> 移動関数 </summary>
     public void Move(InputAction.CallbackContext ctx)
@@ -233,7 +242,7 @@ public class CharBase : MonoBehaviour, IBurst
 
             rb.linearVelocity = direction * DASH_POWER;
             can_control = false;
-            dash_cooltime = data.dash_cooltime;
+            cooltime[(int)SkillName.Dash].SetCooltime();
             StartCoroutine(EDash());
         }
     }
@@ -256,9 +265,25 @@ public class CharBase : MonoBehaviour, IBurst
 
     IEnumerator EDash()
     {
-        Debug.Log("testestse");
         yield return new WaitForSeconds(DASHING_SECONDS);
         rb.linearVelocity = Vector2.zero;
         can_control = true;
     }
+
+    public void InitCooltime()
+    {
+        cooltime = new Cooltime[3]
+        {
+            new Cooltime(data.skill_1_cooltime),
+            new Cooltime(data.skill_2_cooltime),
+            new Cooltime(data.dash_cooltime)
+        };
+    }
+}
+
+public enum SkillName
+{
+    Skill1 = 0,
+    Skill2 = 1,
+    Dash = 2
 }

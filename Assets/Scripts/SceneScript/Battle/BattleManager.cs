@@ -26,7 +26,7 @@ public class BattleManager : MonoBehaviour
     const int PLAYER_CNT = 2;
 
     [Header("◇キャラ生成")]
-    [SerializeField] List<Character> characters = new(); 
+    [SerializeField] List<Character> characters = new();
     public Spawner[] spawn_point = new Spawner[PLAYER_CNT];
     GameObject[] player = new GameObject[PLAYER_CNT];
     CharBase[] datas = new CharBase[PLAYER_CNT];
@@ -88,7 +88,7 @@ public class BattleManager : MonoBehaviour
     int suddendeath_timer_current = 0;
 
     void Awake()
-    { 
+    {
         Winner.Reset();
         Application.targetFrameRate = 60;
         CharBase.OnPlayerDies += Finish;
@@ -148,10 +148,9 @@ public class BattleManager : MonoBehaviour
             if (player[i].TryGetComponent<CharBase>(out var p))
             {
                 p.burst_bar = gui[i].bar;   // バースト
+                p.InitCooltime();
                 gui[i].name.text = p.data.char_name;    // キャラ名
-                p.cooltimer[0] = gui[i].skill1_cooltimer;   // スキル1のクールタイムを表示
-                p.cooltimer[1] = gui[i].skill2_cooltimer;   // スキル2のクールタイムを表示
-                p.cooltimer[2] = gui[i].dash_cooltimer;   // スキル2のクールタイムを表示
+                p.cooltimeUI = gui[i].skillCooltimer;
                 gui[i].icon.sprite = characters[pick_nums[i]].icon; // アイコン
             }
             //datas[i].camera = shake;
@@ -184,7 +183,7 @@ public class BattleManager : MonoBehaviour
                     suddendeath_timer_current = 0;
                 }
             }
-            
+
         }
     }
 
@@ -218,7 +217,7 @@ public class BattleManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator GameOverEffect(int loseId)
     {
-     
+
         Camera cam = Camera.main;
 
         GameObject loser = player[loseId];
@@ -605,9 +604,7 @@ public class GUI
     public BurstBar bar;
     public Text name;
     public SpriteRenderer icon;
-    public SkillCooltimer skill1_cooltimer;
-    public SkillCooltimer skill2_cooltimer;
-    public SkillCooltimer dash_cooltimer;
+    public SkillCooltimer[] skillCooltimer;
 }
 
 [Serializable]

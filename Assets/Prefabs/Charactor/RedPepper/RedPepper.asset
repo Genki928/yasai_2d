@@ -15,10 +15,10 @@ MonoBehaviour:
   char_name: "\u30C8\u30A6\u30AC\u30E9\u30B7"
   speed: 4
   max_burst: 150
-  regen_burst_cooltime: 180
-  restart_regen_burst_value: 60
-  skill_1_rigid: 10
-  skill_1_cooltime: 120
-  skill_2_rigid: 20
-  skill_2_cooltime: 180
-  dash_cooltime: 60
+  regen_burst_cooltime: 3
+  restart_regen_burst_value: 2
+  skill_1_rigid: 0.2
+  skill_1_cooltime: 2
+  skill_2_rigid: 0.3
+  skill_2_cooltime: 3
+  dash_cooltime: 1

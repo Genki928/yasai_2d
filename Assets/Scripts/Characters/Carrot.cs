@@ -56,7 +56,7 @@ public class Carrot : CharBase
 
             rb.linearVelocity = Vector2.zero;
             rigid += data.skill_1_rigid;
-            skill_1_cooltime = data.skill_1_cooltime;
+            cooltime[(int)SkillName.Skill1].SetCooltime();
         }
     }
     private IEnumerator HeadBang()
@@ -126,7 +126,7 @@ public class Carrot : CharBase
 
             // 硬直・クールタイム
             rigid += data.skill_2_rigid;
-            skill_2_cooltime = data.skill_2_cooltime;
+            cooltime[(int)SkillName.Skill2].SetCooltime();
             Vector2 pos = new(transform.position.x, transform.position.y);
             GameObject obj = Instantiate(dust, pos, Quaternion.identity);
             if (direction.x > 0) obj.GetComponent<SpriteRenderer>().flipX = true;

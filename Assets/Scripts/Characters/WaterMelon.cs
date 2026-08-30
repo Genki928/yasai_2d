@@ -55,7 +55,7 @@ public class WaterMelon : CharBase
            
             rb.linearVelocity = Vector2.zero;
             rigid += data.skill_1_rigid;
-            skill_1_cooltime = data.skill_1_cooltime;
+            cooltime[(int)SkillName.Skill1].SetCooltime();
         }
     }
 
@@ -102,7 +102,7 @@ public class WaterMelon : CharBase
             // 硬直・クールタイム
             rb.linearVelocity = Vector2.zero;
             rigid += data.skill_2_rigid;
-            skill_2_cooltime = data.skill_2_cooltime;
+            cooltime[(int)SkillName.Skill2].SetCooltime();
         }
     }
 

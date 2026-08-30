@@ -5009,15 +5009,17 @@ MonoBehaviour:
   - bar: {fileID: 1848879500}
     name: {fileID: 2132095580}
     icon: {fileID: 1466704667}
-    skill1_cooltimer: {fileID: 2127422657}
-    skill2_cooltimer: {fileID: 1699338273}
-    dash_cooltimer: {fileID: 631764148}
+    skillCooltimer:
+    - {fileID: 2127422657}
+    - {fileID: 1699338273}
+    - {fileID: 631764148}
   - bar: {fileID: 1124343632}
     name: {fileID: 68940455}
     icon: {fileID: 559062713}
-    skill1_cooltimer: {fileID: 1225425201}
-    skill2_cooltimer: {fileID: 1584968705}
-    dash_cooltimer: {fileID: 477006918}
+    skillCooltimer:
+    - {fileID: 1225425201}
+    - {fileID: 1584968705}
+    - {fileID: 477006918}
   player_obj:
   - {fileID: 4178201437919755446, guid: c6e495c33560abc4a80b03db369bd4f9, type: 3}
   - {fileID: 7493455991842142285, guid: 69cc6b67633600840b2c059ba36d90ed, type: 3}

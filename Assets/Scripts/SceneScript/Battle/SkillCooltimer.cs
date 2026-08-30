@@ -17,15 +17,15 @@ public class SkillCooltimer : MonoBehaviour
         image = GetComponent<Image>();
     }
 
-    public void RefreshCooltimer(int cooltimer, int cooltime)
+    public void RefreshCooltimer(Cooltime cooltime)
     {
-        image.fillAmount = 1 - cooltimer / (float)cooltime;
-        if (1 - cooltimer != 1) OneShot = true;
-        else if(OneShot==true)
-        {
-            audioSource.PlayOneShot(CtSound);
-            OneShot = false;
-        } 
+        image.fillAmount = 1 - cooltime.Current / cooltime.Max;
+        //if (1 - cooltimer != 1) OneShot = true;
+        //else if(OneShot==true)
+        //{
+        //    audioSource.PlayOneShot(CtSound);
+        //    OneShot = false;
+        //} 
             
     }
 }

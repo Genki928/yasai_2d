@@ -65,7 +65,7 @@ public class Leek : CharBase
 
         // 硬直・クールタイム
         rigid += data.skill_1_rigid;
-        skill_1_cooltime = data.skill_1_cooltime;
+        cooltime[(int)SkillName.Skill1].SetCooltime();
     }
 
     // カウンター構え
@@ -89,7 +89,7 @@ public class Leek : CharBase
 
         // 硬直・クールタイム
         rigid += data.skill_2_rigid;
-        skill_2_cooltime = data.skill_2_cooltime;
+        cooltime[(int)SkillName.Skill2].SetCooltime();
     }
 
     private IEnumerator Counter()

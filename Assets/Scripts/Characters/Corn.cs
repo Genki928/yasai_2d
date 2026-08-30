@@ -51,7 +51,8 @@ public class Corn : CharBase
             sr.sprite = img[1];
 
             // 硬直・クールタイム
-            skill_1_cooltime = data.skill_1_cooltime;
+            rigid += data.skill_1_rigid;
+            cooltime[(int)SkillName.Skill1].SetCooltime();
             rb.linearVelocity = Vector2.zero;
             can_control = false;
             StartCoroutine(Shoot());
@@ -71,8 +72,8 @@ public class Corn : CharBase
             go.GetComponent<Bomb>().Init(id);
 
             // 硬直・クールタイム
-            skill_2_cooltime = data.skill_2_cooltime;
             //rigid += data.skill_2_rigid;
+            cooltime[(int)SkillName.Skill2].SetCooltime();
         }
     }
 
