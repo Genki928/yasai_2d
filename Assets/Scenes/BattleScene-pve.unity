@@ -457,8 +457,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd0ea7a1e6f3f54487bb4e5e7b78be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Timer
-  limit: 60
-  text: {fileID: 132608374}
 --- !u!1001 &138144073
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3014,7 +3012,6 @@ MonoBehaviour:
   readyText: {fileID: 1278168805}
   goText: {fileID: 1554100797}
   start_se: {fileID: 8300000, guid: 322fa8efad03a994980427702808b207, type: 3}
-  timer: {fileID: 1873271269}
   koText: {fileID: 1313794051}
   targets:
   - {fileID: 7686047600830137332, guid: 32bd83d52640b0d49a3d2de5d7824c6d, type: 3}
@@ -3050,6 +3047,7 @@ MonoBehaviour:
   score_text: {fileID: 1604341546}
   score_bonus: {fileID: 1568498543}
   score_circle: {fileID: 295903128}
+  timerUI: {fileID: 132608376}
   se: {fileID: 8300000, guid: 76ed563bda374854f9f31902f46ca644, type: 3}
   se1: {fileID: 8300000, guid: 2fc99b164a5a2264dab936df1dd1f900, type: 3}
   deathEffect: {fileID: 2733761082984051111, guid: c7ac236a659c68945a984f2f44c3d884, type: 3}
@@ -3067,8 +3065,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd0ea7a1e6f3f54487bb4e5e7b78be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Timer
-  limit: 60
-  text: {fileID: 132608374}
 --- !u!82 &1873271270
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3421,10 +3417,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3340f185015d54d93856dacf8b3c52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillCooltimer
-  character: {fileID: 0}
-  CtSound: {fileID: 8300000, guid: 8bb75693643806d478f557037820d378, type: 3}
-  OneShot: 0
-  audioSource: {fileID: 0}
 --- !u!224 &1362193063273923410
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3529,10 +3521,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3340f185015d54d93856dacf8b3c52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillCooltimer
-  character: {fileID: 0}
-  CtSound: {fileID: 8300000, guid: 8bb75693643806d478f557037820d378, type: 3}
-  OneShot: 0
-  audioSource: {fileID: 0}
 --- !u!222 &2585768130995717136
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4044,14 +4032,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -3992745964950632871, guid: ef11b04993cc9bd44a8dadf2872a9bef, type: 3}
+  m_Sprite: {fileID: -7910312829733294347, guid: 1b8f970dddbfa724abe78d12fbc8167f, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4586,10 +4574,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3340f185015d54d93856dacf8b3c52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillCooltimer
-  character: {fileID: 0}
-  CtSound: {fileID: 8300000, guid: 8bb75693643806d478f557037820d378, type: 3}
-  OneShot: 0
-  audioSource: {fileID: 0}
 --- !u!224 &8609001369683810201
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4652,10 +4636,10 @@ SceneRoots:
   - {fileID: 1873271267}
   - {fileID: 90560308}
   - {fileID: 1907355415}
+  - {fileID: 726290579}
   - {fileID: 621092116}
   - {fileID: 42560665}
   - {fileID: 1704567849}
   - {fileID: 21514107}
   - {fileID: 699440592}
   - {fileID: 1107426618}
-  - {fileID: 726290579}

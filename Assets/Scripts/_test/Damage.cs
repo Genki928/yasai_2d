@@ -12,7 +12,7 @@ public class DamageAreaBase : MonoBehaviour
 public enum DamageType
 {
     Soundable,
-    Silentable
+    Silent
 }
 
 public class Damage
@@ -23,7 +23,7 @@ public class Damage
 
     // ----- プロパティ ----- //
     int _value = 0;
-    DamageType _type = DamageType.Silentable;
+    DamageType _type = DamageType.Silent;
 
     public Damage(int value,  DamageType type)
     {

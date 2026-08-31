@@ -170,8 +170,11 @@ public class BattleManager : MonoBehaviour
 
     void Update()
     {
-        p_obj[0].transform.position = new(player[0].transform.position.x, player[0].transform.position.y + 2.0f);
-        p_obj[1].transform.position = new(player[1].transform.position.x, player[1].transform.position.y + 2.0f); timeLeft = updateInterval;
+        // 名前の上の「p〇」表示
+        for (int i = 0; i < 2; i++)
+            p_obj[i].transform.position = new(player[i].transform.position.x, player[i].transform.position.y + 2.0f);
+        
+        timeLeft = updateInterval;
 
         if (battleCamera && !isdeath)
         {
@@ -186,7 +189,7 @@ public class BattleManager : MonoBehaviour
             {
                 for (int i = 0; i < PLAYER_CNT; i++)
                 {
-                    datas[i].Damage(new(10, DamageType.Silentable), i == 0 ? 1 : 0);
+                    datas[i].Damage(new(10, DamageType.Silent), i == 0 ? 1 : 0);
                     currentSuddendeathTimer = 0;
                 }
             }

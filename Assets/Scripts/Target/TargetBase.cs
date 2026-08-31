@@ -109,7 +109,7 @@ public class TargetBase : MonoBehaviour, IBurst
         {
             //b.rigid += 60;
             //b.KnockBack(10, (col.transform.position - transform.position).normalized);
-            b.Damage(new(1, DamageType.Silentable), id);
+            b.Damage(new(1, DamageType.Silent), id);
         }
     }
 
