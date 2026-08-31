@@ -94,7 +94,7 @@ public class TargetBase : MonoBehaviour, IBurst
         }
     }
 
-    public void Init(SoloBattleManager sbm, CharBase player, bool right, ShakeCamera camera, int time)
+    public void Init(SoloBattleManager sbm, CharBase player, bool right, ShakeCamera camera, float time)
     {
         this.sbm = sbm;
         this.player = player;

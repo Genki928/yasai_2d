@@ -49,6 +49,7 @@ public class CharBase : MonoBehaviour, IBurst
     [Header("◇ダメージSE")]
     [SerializeField] AudioClip se_low;   //小ダメージ
     [SerializeField] AudioClip se_high;  //大ダメージ
+    [SerializeField] AudioClip CTSound;
 
 
     //オーディオソース用
@@ -73,6 +74,10 @@ public class CharBase : MonoBehaviour, IBurst
         //
         max_burst = data.max_burst;
         _states.Add(new MoveSpeed(data.speed));
+
+        //
+        foreach (var ct in cooltime)
+            ct.OnCooltimeCharged += PlayCooltimeChargedSound;
     }
     //描画順番
     void LateUpdate()
@@ -280,6 +285,17 @@ public class CharBase : MonoBehaviour, IBurst
             new Cooltime(data.skill_2_cooltime),
             new Cooltime(data.dash_cooltime)
         };
+    }
+
+    public void PlayCooltimeChargedSound()
+    {
+        audioSource.PlayOneShot(CTSound);
+    }
+
+    void OnDestroy()
+    {
+        foreach (var ct in cooltime)
+            ct.OnCooltimeCharged -= PlayCooltimeChargedSound;
     }
 }
 

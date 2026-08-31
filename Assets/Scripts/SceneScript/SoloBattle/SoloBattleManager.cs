@@ -28,6 +28,7 @@ public class SoloBattleManager : BattleManagerBase
     [SerializeField] Text score_text;
     [SerializeField] Text score_bonus;
     [SerializeField] Image score_circle;
+    [SerializeField] TimerUI timerUI;
     float default_score_bonus = 1.0f;
     float now_score_bonus = 1.0f;
     int bonus_timer = 0;
@@ -44,7 +45,7 @@ public class SoloBattleManager : BattleManagerBase
     void Awake()
     {
         Application.targetFrameRate = 60;
-        timer.OnFinish += Finish;
+        timer.OnTimeUp += Finish;
         CharBase.OnPlayerDies += Death;
     }
 
@@ -58,6 +59,7 @@ public class SoloBattleManager : BattleManagerBase
 
         // バーストバーとの紐づけ
         gui.bar.Init(player[0]);
+        timerUI.Init(timer);
 
         // 各種UIとの紐づけ
         if (player[0].TryGetComponent<CharBase>(out var p))
@@ -99,7 +101,9 @@ public class SoloBattleManager : BattleManagerBase
         }
 
         if (start && !gameset)
-            if (++spawn_cooltime > SPAWN_COOLTIME - ((60 - timer.limit) / 10))
+        {
+            timer.Count(Time.deltaTime);
+            if (++spawn_cooltime > SPAWN_COOLTIME - ((60 - timer.TImeLimit) / 10))
             {
                 // ランダムな場所からスポーン
                 int spawn = Random.Range(0, target_spawn_point.Count);
@@ -107,7 +111,7 @@ public class SoloBattleManager : BattleManagerBase
                 tbs.Add(tb);
 
                 // Spriteを調整
-                tb.Init(this, player[0].GetComponent<CharBase>(), transform.position.x > tb.transform.position.x ? true : false, shake, timer.limit);
+                tb.Init(this, player[0].GetComponent<CharBase>(), transform.position.x > tb.transform.position.x ? true : false, shake, timer.TImeLimit);
                 tb.id = ++spawnCount;
 
                 // 操作キャラクターと画像が被らないよう調整
@@ -124,6 +128,7 @@ public class SoloBattleManager : BattleManagerBase
                 // タイマーをリセット
                 spawn_cooltime = 0;
             }
+        }
     }
 
     void Death(int i = 0)
@@ -131,7 +136,7 @@ public class SoloBattleManager : BattleManagerBase
         if (gameset) return;
 
         gameset = true;
-        timer.TimerStop();
+        timer.Switch(false);
         StartCoroutine(GameOverEffect());
     }
 
@@ -239,13 +244,13 @@ public class SoloBattleManager : BattleManagerBase
 
         yield return ShowGo();
         datas[0].can_control = true;
-        timer.TimerStart();
+        timer.Switch(true);
         start = true;
     }
 
     void OnDestroy()
     {
-        timer.OnFinish -= Finish;
+        timer.OnTimeUp -= Finish;
         CharBase.OnPlayerDies -= Death;
     }
 

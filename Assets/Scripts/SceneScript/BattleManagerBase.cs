@@ -24,7 +24,7 @@ public class BattleManagerBase : MonoBehaviour
     [Header("ÅûÉTÉEÉìÉh")]
     protected AudioSource audioSource;
     [SerializeField] protected AudioClip start_se;
-    public Timer timer;
+    public Timer timer = new Timer(60.0f, true);
 
 
     [SerializeField] Text koText;
@@ -227,7 +227,6 @@ public class BattleManagerBase : MonoBehaviour
 
         goText.gameObject.SetActive(false);
         datas[0].can_control = true;
-        timer.Init(60);
     }
     protected IEnumerator ShowKO()
     {

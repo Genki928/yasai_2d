@@ -109,18 +109,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RedPepper
   data: {fileID: 11400000, guid: e1a0c2180491971498baa9a13552494c, type: 2}
-  skill_1_cooltime: 0
-  skill_2_cooltime: 0
-  dash_cooltime: 0
   can_control: 1
   regen_burst_timer: 0
-  state:
-    speed: []
   cursor_pf: {fileID: 5826391187326269229, guid: 50c4b14c6dc55f04f924db6a0c75f818, type: 3}
   pointer: {fileID: 0}
   rb: {fileID: 0}
   se_low: {fileID: 8300000, guid: c3ec62ca64c77e54d931fe4a2b80a0c3, type: 3}
   se_high: {fileID: 8300000, guid: 9579f2e1a90afa248a5f6ae6609ed277, type: 3}
+  CTSound: {fileID: 8300000, guid: 8bb75693643806d478f557037820d378, type: 3}
   audioSource: {fileID: 0}
   sprite: {fileID: 0}
   se1: {fileID: 8300000, guid: 1bae908069a213b4b869babe9e455ef8, type: 3}

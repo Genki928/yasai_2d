@@ -82,17 +82,22 @@ public class BattleManager : MonoBehaviour
     [SerializeField] ShakeCamera shake;
 
     [SerializeField] GameObject sudden;
-    [SerializeField] Timer timer;
-    bool is_suddendeath = false;
-    int suddendeath_timer_limit = 60;
-    int suddendeath_timer_current = 0;
+
+    // タイマー
+    [SerializeField] TimerUI timerUI;
+    Timer timer = new Timer(60.0f, true);
+
+    // サドンデス
+    bool isSuddendeath = false;
+    float suddendeathTimeLimit = 60.0f;
+    float currentSuddendeathTimer = 0.0f;
 
     void Awake()
     {
         Winner.Reset();
         Application.targetFrameRate = 60;
         CharBase.OnPlayerDies += Finish;
-        timer.OnFinish += SuddenDeath;
+        timer.OnTimeUp += SuddenDeath;
         sudden.SetActive(false);
     }
     void Start()
@@ -159,7 +164,7 @@ public class BattleManager : MonoBehaviour
         {
             datas[i].can_control = false;
         }
-        timer.Init(99);
+        timerUI.Init(timer);
         StartCoroutine(StartBattleEffect());
     }
 
@@ -173,14 +178,16 @@ public class BattleManager : MonoBehaviour
             UpdateBattleCamera();
         }
 
-        if (is_suddendeath)
+        timer.Count(Time.deltaTime);
+        if (isSuddendeath)
         {
-            if (++suddendeath_timer_current > suddendeath_timer_limit)
+            currentSuddendeathTimer += Time.deltaTime;
+            if (currentSuddendeathTimer > suddendeathTimeLimit)
             {
                 for (int i = 0; i < PLAYER_CNT; i++)
                 {
                     datas[i].Damage(new(10, DamageType.Silentable), i == 0 ? 1 : 0);
-                    suddendeath_timer_current = 0;
+                    currentSuddendeathTimer = 0;
                 }
             }
 
@@ -198,7 +205,7 @@ public class BattleManager : MonoBehaviour
     {
         if (isdeath) return;
 
-        timer.TimerStop();
+        timer.Switch(false);
         isdeath = true;
         battleCamera = false;
 
@@ -384,7 +391,7 @@ public class BattleManager : MonoBehaviour
 
         // ダイナミックカメラ開始
         battleCamera = true;
-        timer.TimerStart();
+        timer.Switch(true);
     }
     IEnumerator ZoomToPlayer(Vector3 pos, float size, float time)
     {
@@ -593,7 +600,7 @@ public class BattleManager : MonoBehaviour
 
     void SuddenDeath()
     {
-        is_suddendeath = true;
+        isSuddendeath = true;
         sudden.SetActive(true);
     }
 }
