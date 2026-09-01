@@ -25,13 +25,8 @@ public class SoloBattleManager : BattleManagerBase
 
     [Header("◇GUI")]
     [SerializeField] GUI gui;
-    [SerializeField] Text score_text;
-    [SerializeField] Text score_bonus;
-    [SerializeField] Image score_circle;
     [SerializeField] TimerUI timerUI;
-    float default_score_bonus = 1.0f;
-    float now_score_bonus = 1.0f;
-    int bonus_timer = 0;
+    public Score _score;
 
     [SerializeField] AudioClip se;
     [SerializeField] AudioClip se1;
@@ -82,24 +77,6 @@ public class SoloBattleManager : BattleManagerBase
 
     void Update()
     {
-        // スコアボーナスが初期状態じゃない（ボーナスが付与されている）なら、
-        if (now_score_bonus != 1.0f)
-        {
-            // 時間制限の更新
-            score_circle.fillAmount = 1 - (float)++bonus_timer / BONUS_TIMELIMIT_FRAMERATE;
-
-            // 時間制限が終わったなら、
-            if (score_circle.fillAmount == 0)
-            {
-                // タイマー変数や時間制限の初期化
-                score_circle.fillAmount = 1;
-                now_score_bonus = default_score_bonus;
-
-                // UIの更新
-                score_bonus.text = "x " + now_score_bonus.ToString("N1");
-            }
-        }
-
         if (start && !gameset)
         {
             timer.Count(Time.deltaTime);
@@ -260,7 +237,7 @@ public class SoloBattleManager : BattleManagerBase
     {
         // リザルトにデータを反映
         SoloBattleResult.name = datas[0].data.char_name;
-        SoloBattleResult.score = score;
+        SoloBattleResult.score = _score.CurrentScore;
         SoloBattleResult.img = datas[0].GetDefaultImage();
         SoloBattleResult.win = true;
 
@@ -277,17 +254,6 @@ public class SoloBattleManager : BattleManagerBase
         if (direct == DIRECT.UP) return new(0.0f, 1.0f);
         if (direct == DIRECT.DOWN) return new(0.0f, -1.0f);
         return Vector2.zero;
-    }
-
-    public void CalculateScore(int value)
-    {
-        // 計算（0未満になるなら調整）
-        score += score + value < 0 ? -score : Mathf.RoundToInt(value * now_score_bonus);
-        score_text.text = score.ToString();
-        score_circle.fillAmount = 1;
-        now_score_bonus += 0.1f;
-        score_bonus.text = "x " + now_score_bonus.ToString("N1");
-        bonus_timer = 0;
     }
 }
 

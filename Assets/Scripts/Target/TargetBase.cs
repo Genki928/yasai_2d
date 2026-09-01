@@ -87,7 +87,7 @@ public class TargetBase : MonoBehaviour, IBurst
             {
                 rb.linearVelocity = new(10, 10);
             }
-            sbm.CalculateScore(score);
+            sbm._score.CalculateScore(score);
 
             audioSource.PlayOneShot(_damage);
             Destroy(this);

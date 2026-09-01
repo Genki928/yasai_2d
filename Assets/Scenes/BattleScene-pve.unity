@@ -699,8 +699,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 366, y: 142.6}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 366.6, y: 141}
+  m_SizeDelta: {x: 112.03, y: 112.03}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &295903128
 MonoBehaviour:
@@ -2401,8 +2401,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 367.7, y: 137.8}
-  m_SizeDelta: {x: 180.72, y: 38.88}
+  m_AnchoredPosition: {x: 366.60007, y: 129.73999}
+  m_SizeDelta: {x: 416.07, y: 89.51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1568498543
 MonoBehaviour:
@@ -2425,13 +2425,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 25
+    m_Font: {fileID: 12800000, guid: a443139b15d4357469b396fc45979f80, type: 3}
+    m_FontSize: 23
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 1
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -2482,8 +2482,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 271.00003, y: 168.18002}
-  m_SizeDelta: {x: 180.72, y: 38.88}
+  m_AnchoredPosition: {x: 270.99997, y: 168.18}
+  m_SizeDelta: {x: 180.72, y: 56.04}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1604341546
 MonoBehaviour:
@@ -2506,7 +2506,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: a443139b15d4357469b396fc45979f80, type: 3}
     m_FontSize: 34
     m_FontStyle: 0
     m_BestFit: 0
@@ -2786,8 +2786,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 366, y: 142.6}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 366.60004, y: 141}
+  m_SizeDelta: {x: 112.03, y: 112.03}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1696679544
 MonoBehaviour:
@@ -2955,6 +2955,7 @@ GameObject:
   - component: {fileID: 1873271267}
   - component: {fileID: 1873271271}
   - component: {fileID: 1873271268}
+  - component: {fileID: 1873271272}
   - component: {fileID: 1873271269}
   - component: {fileID: 1873271270}
   m_Layer: 0
@@ -3044,10 +3045,8 @@ MonoBehaviour:
     - {fileID: 960931901166971211}
     - {fileID: 2274228633886538477}
     - {fileID: 8177637439497030237}
-  score_text: {fileID: 1604341546}
-  score_bonus: {fileID: 1568498543}
-  score_circle: {fileID: 295903128}
   timerUI: {fileID: 132608376}
+  _score: {fileID: 1873271272}
   se: {fileID: 8300000, guid: 76ed563bda374854f9f31902f46ca644, type: 3}
   se1: {fileID: 8300000, guid: 2fc99b164a5a2264dab936df1dd1f900, type: 3}
   deathEffect: {fileID: 2733761082984051111, guid: c7ac236a659c68945a984f2f44c3d884, type: 3}
@@ -3176,6 +3175,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameSetDirection
   wintext: {fileID: 1313794051}
   se1: {fileID: 8300000, guid: 2fc99b164a5a2264dab936df1dd1f900, type: 3}
+--- !u!114 &1873271272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1873271265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4465ea5d50aa9154b8001f38a4fb8851, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Score
+  BONUS_TIMELIMIT: 3
+  BONUS_UI_BOUNCE_SEC: 0.7
+  _scoreUI: {fileID: 1604341546}
+  _bonusTimerUI: {fileID: 295903128}
+  _scoreBonusUI: {fileID: 1568498543}
 --- !u!1 &1907355412
 GameObject:
   m_ObjectHideFlags: 0
