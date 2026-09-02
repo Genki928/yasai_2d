@@ -5,7 +5,7 @@ public class SimpleDamageArea : DamageAreaBase
 {
     // ----- ƒƒ“ƒo ----- //
     List<int> _hitId = new();
-    bool _delete;
+    bool _delete = false;
 
     void OnTriggerEnter2D(Collider2D col)
     {

@@ -2401,8 +2401,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 366.60007, y: 129.73999}
-  m_SizeDelta: {x: 416.07, y: 89.51}
+  m_AnchoredPosition: {x: 366.60007, y: 141}
+  m_SizeDelta: {x: 108.78, y: 34.33}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1568498543
 MonoBehaviour:
@@ -2510,7 +2510,7 @@ MonoBehaviour:
     m_FontSize: 34
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 3
     m_MaxSize: 40
     m_Alignment: 1
     m_AlignByGeometry: 0
@@ -3188,7 +3188,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Score
   BONUS_TIMELIMIT: 3
-  BONUS_UI_BOUNCE_SEC: 0.7
   _scoreUI: {fileID: 1604341546}
   _bonusTimerUI: {fileID: 295903128}
   _scoreBonusUI: {fileID: 1568498543}

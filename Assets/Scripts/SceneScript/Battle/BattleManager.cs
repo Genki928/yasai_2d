@@ -80,12 +80,11 @@ public class BattleManager : MonoBehaviour
     //オーディオソース用
     public AudioSource audioSource;
     [SerializeField] ShakeCamera shake;
-
     [SerializeField] GameObject sudden;
 
     // タイマー
     [SerializeField] TimerUI timerUI;
-    Timer timer = new Timer(60.0f, true);
+    Timer timer = new Timer(10.0f, true);
 
     // サドンデス
     bool isSuddendeath = false;

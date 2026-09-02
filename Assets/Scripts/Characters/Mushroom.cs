@@ -72,9 +72,9 @@ public class Mushroom : CharBase
             (Vector2)transform.position +
             direction.normalized * 1.5f;
 
-        
+
         Instantiate(collision, spawnPos, Quaternion.identity).GetComponent<SimpleDamageArea>().
-            Init(id, new(headBangDamage, DamageType.Soundable), Vector2.zero);
+            Init(id, new(headBangDamage, DamageType.Soundable), Vector2.zero, 0.3f);
 
         // =========================
 

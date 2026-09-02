@@ -22,7 +22,7 @@ public class Carrot : CharBase
     [SerializeField] private float rotateSpeed = 350f;
     [SerializeField] private int headBangDamage = 30;
     private List<CharBase> hitList = new List<CharBase>();
-    [SerializeField] private CapsuleCollider2D headBangCol;
+    //[SerializeField] private CapsuleCollider2D headBangCol;
     [SerializeField] AudioClip se2;
 
     private Vector2 defaultSize;
@@ -32,7 +32,7 @@ public class Carrot : CharBase
     {
         base.Start();
         sprite = GetComponent<SpriteRenderer>();
-        defaultSize = headBangCol.size;
+        //defaultSize = headBangCol.size;
     }
 
     override protected void Update()
@@ -107,7 +107,7 @@ public class Carrot : CharBase
         transform.rotation =
             Quaternion.Euler(0, 0, startZ);
 
-        headBangCol.size = defaultSize;
+        //headBangCol.size = defaultSize;
         isHeadBanging = false;
     }
 
@@ -144,7 +144,7 @@ public class Carrot : CharBase
         GameObject obj = Instantiate(collision);
 
         obj.GetComponent<SimpleDamageArea>().
-            Init(id, new(headBangDamage, DamageType.Soundable), Vector2.zero, 0.3f);
+            Init(id, new(headBangDamage, DamageType.Soundable), Vector2.zero);
 
         Vector2 offset = direction.normalized * 1.0f;
 

@@ -89,6 +89,7 @@ public class TargetBase : MonoBehaviour, IBurst
             }
             sbm._score.CalculateScore(score);
 
+            if (audioSource == null) return;
             audioSource.PlayOneShot(_damage);
             Destroy(this);
         }

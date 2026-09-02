@@ -90,5 +90,5 @@ public class SoloPickManager : PickManagerBase
 
 public static class CharPickData
 {
-    public static int id = 0;
+    public static int id = (int)CharId.Carrot;
 }
