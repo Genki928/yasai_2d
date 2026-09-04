@@ -78,17 +78,22 @@ public class BattleManager : MonoBehaviour
     bool battleCamera = false;
 
     //オーディオソース用
-    public AudioSource audioSource;
+    [SerializeField] AudioSource _audioSourceSE;
+    [SerializeField] AudioSource _audioSourceBgm;
     [SerializeField] ShakeCamera shake;
     [SerializeField] GameObject sudden;
+    [SerializeField] AudioClip _defaultBgm;
+    [SerializeField] AudioClip _suddendeathBgm;
+    [SerializeField] AudioClip _killSound;
 
     // タイマー
     [SerializeField] TimerUI timerUI;
-    Timer timer = new Timer(10.0f, true);
+    Timer timer = new Timer(5.0f, true);
 
     // サドンデス
+    [SerializeField] float suddendeathTimeLimit = 1.0f;
     bool isSuddendeath = false;
-    float suddendeathTimeLimit = 60.0f;
+    bool _firstSuddendeathProcess = true;
     float currentSuddendeathTimer = 0.0f;
 
     void Awake()
@@ -106,9 +111,6 @@ public class BattleManager : MonoBehaviour
 
         defaultCameraPos = cam.transform.position;
         defaultCameraSize = cam.orthographicSize;
-
-
-        audioSource = GetComponent<AudioSource>();
 
         for (int i = 0; i < PLAYER_CNT; i++)
         {
@@ -164,6 +166,8 @@ public class BattleManager : MonoBehaviour
             datas[i].can_control = false;
         }
         timerUI.Init(timer);
+        _audioSourceBgm.clip = _defaultBgm;
+        _audioSourceBgm.Play();
         StartCoroutine(StartBattleEffect());
     }
 
@@ -172,7 +176,7 @@ public class BattleManager : MonoBehaviour
         // 名前の上の「p〇」表示
         for (int i = 0; i < 2; i++)
             p_obj[i].transform.position = new(player[i].transform.position.x, player[i].transform.position.y + 2.0f);
-        
+
         timeLeft = updateInterval;
 
         if (battleCamera && !isdeath)
@@ -180,20 +184,32 @@ public class BattleManager : MonoBehaviour
             UpdateBattleCamera();
         }
 
+        // タイマーを進める
         timer.Count(Time.deltaTime);
-        if (isSuddendeath)
-        {
-            currentSuddendeathTimer += Time.deltaTime;
-            if (currentSuddendeathTimer > suddendeathTimeLimit)
-            {
-                for (int i = 0; i < PLAYER_CNT; i++)
-                {
-                    datas[i].Damage(new(10, DamageType.Silent), i == 0 ? 1 : 0);
-                    currentSuddendeathTimer = 0;
-                }
-            }
 
+        // サドンデス処理
+        if (!isSuddendeath) return;
+
+        // タイマーが一定以上になれば、
+        currentSuddendeathTimer += Time.deltaTime;
+        if (currentSuddendeathTimer > suddendeathTimeLimit)
+        {
+            // 各プレイヤーにダメージ
+            for (int i = 0; i < PLAYER_CNT; i++)
+            {
+                datas[i].Damage(new(10, DamageType.Silent), i == 0 ? 1 : 0);
+                currentSuddendeathTimer = 0;
+            }
         }
+
+        // サドンデス突入時の処理
+        if (!_firstSuddendeathProcess) return;
+
+        // BGM変更
+        _firstSuddendeathProcess = false;
+        _audioSourceBgm.Stop();
+        _audioSourceBgm.clip = _suddendeathBgm;
+        _audioSourceBgm.Play();
     }
 
     void OnDestroy()
@@ -216,6 +232,7 @@ public class BattleManager : MonoBehaviour
         Winner.sprite = datas[id].GetDefaultImage();
 
         int loseId = id == 0 ? 1 : 0;
+        _audioSourceBgm.volume = 0.4f;
 
         StartCoroutine(GameOverEffect(loseId));
     }
@@ -243,7 +260,7 @@ public class BattleManager : MonoBehaviour
 
         //ズーム
         //SE
-        audioSource.PlayOneShot(se);
+        _audioSourceSE.PlayOneShot(se);
 
         float targetSize = 2.2f;
         float t = 0;
@@ -277,13 +294,16 @@ public class BattleManager : MonoBehaviour
             yield return null;
         }
 
-        audioSource.PlayOneShot(se1);
+        _audioSourceSE.PlayOneShot(se1);
 
         // エフェクト生成
         Instantiate(
             deathEffect,
             loser.transform.position,
             Quaternion.identity);
+
+        // 
+        _audioSourceSE.PlayOneShot(_killSound);
 
         // プレイヤーを消す
         loser.transform.position = new Vector3(1000, 1000, 0);
@@ -528,7 +548,7 @@ public class BattleManager : MonoBehaviour
 
             yield return null;
         }
-        audioSource.PlayOneShot(start_se);
+        _audioSourceSE.PlayOneShot(start_se);
 
         yield return new WaitForSeconds(0.5f);
 
