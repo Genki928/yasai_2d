@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.PlayerSettings;
 
 public class Corn : CharBase
 {
@@ -12,9 +13,10 @@ public class Corn : CharBase
     SpriteRenderer sr;
     [SerializeField] List<Sprite> img = new();
     [NonSerialized] public GameObject bullet_obj;
-    public GameObject bomb_obj;
+    GameObject _bomb;
     [SerializeField] Sprite popcorn;
-    
+    [SerializeField] GameObject _explode;
+
     //炎SE
     override protected void Start()
     {
@@ -25,7 +27,6 @@ public class Corn : CharBase
     override protected void Update()
     {
         base.Update();
-        //speed.generic = data.speed + burst / 20;
     }
 
     protected override void FixedUpdate()
@@ -61,29 +62,30 @@ public class Corn : CharBase
 
     public override void Skill2(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        // 中断処理
+        if (!(ctx.performed && CanUseSkill2)) return;
+
+        if (_bomb != null)
         {
-            // 中断処理
-            if (!CanUseSkill2) return;
-            //audioSource.PlayOneShot(se1);
+            // 位置の入れ替え
+            var pos = _bomb.transform.position;
+            _bomb.transform.position = transform.position;
+            transform.position = pos;
 
-            // 処理
-            GameObject go = Instantiate(bomb, transform.position, Quaternion.identity);
-            go.GetComponent<Bomb>().Init(id);
-
-            // 硬直・クールタイム
-            //rigid += data.skill_2_rigid;
+            //
             cooltime[(int)SkillName.Skill2].SetCooltime();
-        }
-    }
 
-    //IEnumerator BackShot()
-    //{
-    //    yield return new WaitForSeconds(0.05f);
-    //    can_control = true;
-    //    rb.linearVelocity = Vector2.zero;
-    //    rigid += data.skill_2_rigid;
-    //}
+            return;
+        }
+
+        // 処理
+        _bomb = Instantiate(bomb, transform.position, Quaternion.identity);
+        _bomb.GetComponent<Bomb>().Init(id, cooltime[(int)SkillName.Skill2]);
+
+        // 硬直・クールタイム
+        cooltime[(int)SkillName.Skill2].SetCooltime();
+
+    }
 
     IEnumerator Shoot()
     {

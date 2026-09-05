@@ -154,9 +154,9 @@ public class BattleManager : MonoBehaviour
             if (player[i].TryGetComponent<CharBase>(out var p))
             {
                 p.burst_bar = gui[i].bar;   // バースト
+                p.cooltimeUI = gui[i].skillCooltimer;
                 p.InitCooltime();
                 gui[i].name.text = p.data.char_name;    // キャラ名
-                p.cooltimeUI = gui[i].skillCooltimer;
                 gui[i].icon.sprite = characters[pick_nums[i]].icon; // アイコン
             }
             //datas[i].camera = shake;

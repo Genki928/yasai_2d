@@ -120,7 +120,7 @@ Transform:
   m_GameObject: {fileID: 4871254515045110137}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -172,11 +172,11 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 433740513
-  m_SortingLayer: 2
+  m_SortingLayerID: -654726763
+  m_SortingLayer: -1
   m_SortingOrder: -1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -1299064349303955867, guid: 5bf712038d9fdb941bb95ff84790f848, type: 3}
+  m_Sprite: {fileID: 2138976915490336560, guid: 41c2e5a3714861745bec22c22530586d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -198,7 +198,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7206f238ca960ae49b956cc0fbb881ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bomb
-  go: {fileID: 2733761082984051111, guid: c7ac236a659c68945a984f2f44c3d884, type: 3}
+  bomb: {fileID: 97301194803623408, guid: c7ac236a659c68945a984f2f44c3d884, type: 3}
+  _circleSpriteRenderer: {fileID: 1760279911935643145}
+  _circleSprite:
+  - {fileID: 7912924055995117553, guid: 83f3291aa2fad2540b2bed8eb2a70bef, type: 3}
+  - {fileID: -3320418183320529682, guid: 3b03f7ee56057e64a8509e1178f82a2c, type: 3}
 --- !u!58 &-1400295346025957780
 CircleCollider2D:
   m_ObjectHideFlags: 0

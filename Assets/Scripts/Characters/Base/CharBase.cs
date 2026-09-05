@@ -100,7 +100,7 @@ public class CharBase : MonoBehaviour, IBurst
 
         // クールタイムの更新
         for (int i = 0; i < 3; i++)
-            if (cooltime[i].Current > 0.0f) cooltimeUI[i].RefreshCooltimer(cooltime[i].RemoveCooltime(time));
+            if (cooltime[i].Current > 0.0f) cooltime[i].RemoveCooltime(time);
 
         // 
         if (regen_burst_timer < data.regen_burst_cooltime && burst < max_burst)
@@ -147,8 +147,7 @@ public class CharBase : MonoBehaviour, IBurst
         regen_burst_timer = 0;
 
         // 受けるダメージが過剰ならセーブする
-        burst = burst + damage.Value > max_burst ?
-                     max_burst : burst + damage.Value;
+        burst = Math.Min(max_burst, burst +  damage.Value);
 
         // 描画
         burst_bar.Draw(burst, max_burst);
@@ -281,9 +280,9 @@ public class CharBase : MonoBehaviour, IBurst
     {
         cooltime = new Cooltime[3]
         {
-            new Cooltime(data.skill_1_cooltime),
-            new Cooltime(data.skill_2_cooltime),
-            new Cooltime(data.dash_cooltime)
+            new Cooltime(cooltimeUI[0], data.skill_1_cooltime),
+            new Cooltime(cooltimeUI[1], data.skill_2_cooltime),
+            new Cooltime(cooltimeUI[2], data.dash_cooltime)
         };
     }
 

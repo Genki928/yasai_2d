@@ -228,7 +228,7 @@ public class StateIndicater
 
 public static class PlayerPick
 {
-    public static int[] pick = new int[2] { (int)CharId.Corn, (int)CharId.Carrot };
+    public static int[] pick = new int[2] { (int)CharId.Corn, (int)CharId.Corn };
 }
 
 public enum CharId
