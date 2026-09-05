@@ -9,6 +9,7 @@ public class Timer
     // ----- 変数
     float _currentTime = 0.0f;
     bool _countdown = true;
+    bool _isTimeUp = false;
     bool _stop = true;
 
     // イベント
@@ -20,6 +21,7 @@ public class Timer
         _currentTime = startTime;
         _countdown = countdown;
         _stop = stop;
+        OnTimeUp += TimeUp;
     }
 
     public void Count(float deltaTime)
@@ -35,9 +37,13 @@ public class Timer
         // カウントアップなら中断
         if (!_countdown) return;
 
+        if (_isTimeUp) return;
+
         // タイマーが0.0fになったらイベント起動
         if (_currentTime == 0.0f) OnTimeUp?.Invoke();
     }
+
+    void TimeUp() => _isTimeUp = true;
 
     public void Switch(bool swtich)
     {

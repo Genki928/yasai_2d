@@ -26,13 +26,9 @@ public class Bomb : MonoBehaviour
             // オブジェクトが持つ識別idが、攻撃主（自分が持つid）と異なれば、
             if (cb.id != _id)
             {
-                // ダメージ
-                _cooltime.RefleshCooltime(0.4f);
-                cb.rigid += 0.5f;
-
                 // 爆発
                 var damage = Instantiate(bomb, transform.position, Quaternion.identity);
-                damage.Init(_id ,new(50, DamageType.Soundable), new(0.0f, 0.0f));
+                damage.Init(_id ,new(50, DamageType.Soundable), new(0.0f, 0.0f), 0.0f, false, 0.5f);
                 Destroy(gameObject);
             }
         }

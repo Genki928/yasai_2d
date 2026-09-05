@@ -4895,8 +4895,8 @@ MonoBehaviour:
   shake: {fileID: 519420033}
   sudden: {fileID: 2050718654}
   _defaultBgm: {fileID: 8300000, guid: 8c4248fe8bac64e43b500ed9c9411d62, type: 3}
-  _suddendeathBgm: {fileID: 8300000, guid: d4e28f72919c6bc45967a9533b820f8d, type: 3}
   _killSound: {fileID: 8300000, guid: 93c91f3586c82a4418bdb0c4b2eb2d2c, type: 3}
+  _enterSuddendeathSound: {fileID: 8300000, guid: 65d442c5efb20304390ab25893695f0a, type: 3}
   timerUI: {fileID: 1159107982}
   suddendeathTimeLimit: 2
 --- !u!4 &1873271267
@@ -4931,7 +4931,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -5024,8 +5024,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_Resource: {fileID: 8300000, guid: 65d442c5efb20304390ab25893695f0a, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

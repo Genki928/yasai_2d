@@ -83,8 +83,8 @@ public class BattleManager : MonoBehaviour
     [SerializeField] ShakeCamera shake;
     [SerializeField] GameObject sudden;
     [SerializeField] AudioClip _defaultBgm;
-    [SerializeField] AudioClip _suddendeathBgm;
     [SerializeField] AudioClip _killSound;
+    [SerializeField] AudioClip _enterSuddendeathSound;
 
     // タイマー
     [SerializeField] TimerUI timerUI;
@@ -93,7 +93,6 @@ public class BattleManager : MonoBehaviour
     // サドンデス
     [SerializeField] float suddendeathTimeLimit = 1.0f;
     bool isSuddendeath = false;
-    bool _firstSuddendeathProcess = true;
     float currentSuddendeathTimer = 0.0f;
 
     void Awake()
@@ -201,15 +200,6 @@ public class BattleManager : MonoBehaviour
                 currentSuddendeathTimer = 0;
             }
         }
-
-        // サドンデス突入時の処理
-        if (!_firstSuddendeathProcess) return;
-
-        // BGM変更
-        _firstSuddendeathProcess = false;
-        _audioSourceBgm.Stop();
-        _audioSourceBgm.clip = _suddendeathBgm;
-        _audioSourceBgm.Play();
     }
 
     void OnDestroy()
@@ -624,6 +614,8 @@ public class BattleManager : MonoBehaviour
     {
         isSuddendeath = true;
         sudden.SetActive(true);
+        //_audioSourceSE.PlayOneShot(_enterSuddendeathSound);
+        _audioSourceBgm.pitch = 1.1f;
     }
 }
 

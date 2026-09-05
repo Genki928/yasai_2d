@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7076349337479716503}
   - component: {fileID: 1544878729598838018}
+  - component: {fileID: -140988550290799118}
   - component: {fileID: 9004816321486073050}
   m_Layer: 0
   m_Name: pop
@@ -92,6 +93,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &-140988550290799118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7904351637732503768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9fc028d16468cc40a2957a3b927280c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pop
 --- !u!50 &9004816321486073050
 Rigidbody2D:
   serializedVersion: 5

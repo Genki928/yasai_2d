@@ -14,8 +14,9 @@ public class Corn : CharBase
     [SerializeField] List<Sprite> img = new();
     [NonSerialized] public GameObject bullet_obj;
     GameObject _bomb;
-    [SerializeField] Sprite popcorn;
+    [SerializeField] GameObject _popcorn;
     [SerializeField] GameObject _explode;
+    [SerializeField] AudioClip _move;
 
     //炎SE
     override protected void Start()
@@ -68,11 +69,11 @@ public class Corn : CharBase
         if (_bomb != null)
         {
             // 位置の入れ替え
-            var pos = _bomb.transform.position;
+            Instantiate(_popcorn, _bomb.transform.position, Quaternion.identity);
             _bomb.transform.position = transform.position;
-            transform.position = pos;
 
             //
+            audioSource.PlayOneShot(_move);
             cooltime[(int)SkillName.Skill2].SetCooltime();
 
             return;
@@ -84,6 +85,7 @@ public class Corn : CharBase
 
         // 硬直・クールタイム
         cooltime[(int)SkillName.Skill2].SetCooltime();
+        cooltime[(int)SkillName.Skill2].RefleshCooltime(0.5f);
 
     }
 

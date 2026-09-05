@@ -125,8 +125,9 @@ MonoBehaviour:
   img:
   - {fileID: 612600066695323494, guid: 9708a9172e4d4274792f0b16cf04ede2, type: 3}
   - {fileID: -8424772587211142023, guid: 4927850162a06b141bc196dee4ddd8ba, type: 3}
-  popcorn: {fileID: 2138976915490336560, guid: 41c2e5a3714861745bec22c22530586d, type: 3}
+  _popcorn: {fileID: 7904351637732503768, guid: 9a8280e38b0c9934eacb084792a5d728, type: 3}
   _explode: {fileID: 2733761082984051111, guid: c7ac236a659c68945a984f2f44c3d884, type: 3}
+  _move: {fileID: 8300000, guid: c3c529712fab43444baeba2dd4e29408, type: 3}
 --- !u!114 &1188915898407229779
 MonoBehaviour:
   m_ObjectHideFlags: 0

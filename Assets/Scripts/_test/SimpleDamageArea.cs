@@ -6,6 +6,7 @@ public class SimpleDamageArea : DamageAreaBase
     // ----- メンバ ----- //
     List<int> _hitId = new();
     bool _delete = false;
+    float _rigid;
 
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -16,6 +17,7 @@ public class SimpleDamageArea : DamageAreaBase
             if (check > 0 || _id == cb.id) return;
 
             // ダメージ
+            cb.rigid += _rigid;
             cb.Damage(_damage, _id);
             if (_delete) Destroy(gameObject);
         }
@@ -35,12 +37,13 @@ public class SimpleDamageArea : DamageAreaBase
     /// <param name="vec"> 移動させるベクトル </param>
     /// <param name="lifeTime"> 残留する時間 </param>
     /// <param name="delete"> 削除するかどうか </param>
-    public void Init(int id, Damage damage, Vector2 vec, float lifeTime = 0.0f, bool delete = false)
+    public void Init(int id, Damage damage, Vector2 vec, float lifeTime = 0.0f, bool delete = false, float rigid = 0.0f)
     {
         _id = id;
         _damage = damage;
         if (lifeTime > 0.0f) Destroy(gameObject, lifeTime);
         _delete = delete;
+        _rigid = rigid;
 
         // 物理
         _rigidbody = GetComponent<Rigidbody2D>();
