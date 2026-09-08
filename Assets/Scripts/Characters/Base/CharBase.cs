@@ -51,6 +51,13 @@ public class CharBase : MonoBehaviour, IBurst
     [SerializeField] AudioClip se_high;  //大ダメージ
     [SerializeField] AudioClip CTSound;
 
+    //点滅演出用
+    [SerializeField] Color flash_color = Color.white;
+    [SerializeField] float flash_duration = 0.5f;
+    //点滅マテリアル用
+    MaterialPropertyBlock flash_mpb;
+    static readonly int FlashAmountID = Shader.PropertyToID("_FlashAmount");
+    static readonly int FlashColorID = Shader.PropertyToID("_FlashColor");
 
     //オーディオソース用
     public AudioSource audioSource;
@@ -78,6 +85,8 @@ public class CharBase : MonoBehaviour, IBurst
         //
         foreach (var ct in cooltime)
             ct.OnCooltimeCharged += PlayCooltimeChargedSound;
+        //マテリアルの初期化
+        flash_mpb = new MaterialPropertyBlock();
     }
     //描画順番
     void LateUpdate()
@@ -146,8 +155,11 @@ public class CharBase : MonoBehaviour, IBurst
         if (burst >= max_burst) return;
         regen_burst_timer = 0;
 
+        // 点滅演出
+        StartCoroutine(FlashDamage());
+
         // 受けるダメージが過剰ならセーブする
-        burst = Math.Min(max_burst, burst +  damage.Value);
+        burst = Math.Min(max_burst, burst + damage.Value);
 
         // 描画
         burst_bar.Draw(burst, max_burst);
@@ -161,7 +173,6 @@ public class CharBase : MonoBehaviour, IBurst
             OnPlayerDies?.Invoke(id);
         }
     }
-
     /// <summary> ダメージ量に応じたSEを再生 </summary>
     void PlayDamageSE(int value)
     {
@@ -260,6 +271,33 @@ public class CharBase : MonoBehaviour, IBurst
         Debug.Log("knockback");
         rb.linearVelocity = Vector2.zero;
         rb.AddForce(hitDirection.normalized * knockbackPower, ForceMode2D.Impulse);
+    }
+
+    /// <summary>
+    /// 点滅用コルーチン
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator FlashDamage()
+    {
+        //いつものcolorを直接いじるのはspriteの仕組み的に厳しいからマテリアルを使って色を変えることにした
+        //マテリアル本体はゲツヨビの個人フォルダにある
+        float t = 0f;
+        sprite.GetPropertyBlock(flash_mpb);
+
+        flash_mpb.SetColor(FlashColorID, flash_color);
+
+        while (t < flash_duration)
+        {
+            t += Time.deltaTime;
+            float amount = 1f - Mathf.Clamp01(t / flash_duration); // これで滑らかに遷移するらしい
+            flash_mpb.SetFloat(FlashAmountID, amount);
+            sprite.SetPropertyBlock(flash_mpb);
+            yield return null;
+        }
+
+        // 念のため確実に0にしておく
+        flash_mpb.SetFloat(FlashAmountID, 0f);
+        sprite.SetPropertyBlock(flash_mpb);
     }
 
     /// <summary> リザルトに画像を渡す関数の雛型 </summary>

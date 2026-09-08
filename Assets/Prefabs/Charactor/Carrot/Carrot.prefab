@@ -63,7 +63,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: ad761ffb051b42948bfaef5828b37e40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -117,6 +117,8 @@ MonoBehaviour:
   se_low: {fileID: 8300000, guid: c3ec62ca64c77e54d931fe4a2b80a0c3, type: 3}
   se_high: {fileID: 8300000, guid: 9579f2e1a90afa248a5f6ae6609ed277, type: 3}
   CTSound: {fileID: 8300000, guid: 8bb75693643806d478f557037820d378, type: 3}
+  flash_color: {r: 1, g: 1, b: 1, a: 1}
+  flash_duration: 0.3
   audioSource: {fileID: 0}
   sprite: {fileID: 0}
   carrot_default: {fileID: 2950869812727453837, guid: 3dcda9a40728eef4ca8ee47555100ab1, type: 3}
@@ -130,7 +132,6 @@ MonoBehaviour:
   headBangAngle: 90
   rotateSpeed: 500
   headBangDamage: 15
-  headBangCol: {fileID: 0}
   se2: {fileID: 8300000, guid: 6b86bf8af024f7d4a9894b59048fc879, type: 3}
 --- !u!114 &2387769583341587097
 MonoBehaviour:
