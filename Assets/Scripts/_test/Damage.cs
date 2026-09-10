@@ -17,11 +17,11 @@ public enum DamageType
 
 public class Damage
 {
-    // ----- メンバ ----- //
+    // ----- プロパティ ----- //
     public int Value => _value;
     public DamageType Type => _type;
 
-    // ----- プロパティ ----- //
+    // ----- メンバ ----- //
     int _value = 0;
     DamageType _type = DamageType.Silent;
 

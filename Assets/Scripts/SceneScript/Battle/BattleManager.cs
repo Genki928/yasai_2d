@@ -81,17 +81,20 @@ public class BattleManager : MonoBehaviour
     [SerializeField] AudioSource _audioSourceSE;
     [SerializeField] AudioSource _audioSourceBgm;
     [SerializeField] ShakeCamera shake;
-    [SerializeField] GameObject sudden;
     [SerializeField] AudioClip _defaultBgm;
     [SerializeField] AudioClip _killSound;
-    [SerializeField] AudioClip _enterSuddendeathSound;
 
     // タイマー
+    [Header("◇ Timer")]
     [SerializeField] TimerUI timerUI;
     Timer timer = new Timer(5.0f, true);
 
     // サドンデス
+    [Header("◇ Suddendeath")]
+    [SerializeField] Flash flash;
     [SerializeField] float suddendeathTimeLimit = 1.0f;
+    [SerializeField] AudioClip _enterSuddendeathSound;
+    [SerializeField] GameObject sudden;
     bool isSuddendeath = false;
     float currentSuddendeathTimer = 0.0f;
 
@@ -187,7 +190,7 @@ public class BattleManager : MonoBehaviour
         timer.Count(Time.deltaTime);
 
         // サドンデス処理
-        if (!isSuddendeath) return;
+        if (!isSuddendeath || isdeath) return;
 
         // タイマーが一定以上になれば、
         currentSuddendeathTimer += Time.deltaTime;
@@ -233,7 +236,7 @@ public class BattleManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator GameOverEffect(int loseId)
     {
-
+        flash.gameObject.SetActive(false);
         Camera cam = Camera.main;
 
         GameObject loser = player[loseId];
@@ -614,8 +617,10 @@ public class BattleManager : MonoBehaviour
     {
         isSuddendeath = true;
         sudden.SetActive(true);
-        //_audioSourceSE.PlayOneShot(_enterSuddendeathSound);
-        _audioSourceBgm.pitch = 1.1f;
+        flash.StartFlash();
+        _audioSourceSE.volume = 5.0f;
+        _audioSourceSE.PlayOneShot(_enterSuddendeathSound);
+        //_audioSourceSE.volume = 1.0f;
     }
 }
 
@@ -624,7 +629,7 @@ public class GUI
 {
     public BurstBar bar;
     public Text name;
-    public SpriteRenderer icon;
+    public Image icon;
     public SkillCooltimer[] skillCooltimer;
 }
 
