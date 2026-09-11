@@ -9,7 +9,6 @@ public class SoloBattleManager : BattleManagerBase
 {
     // ----- ’è” -----
     const int SPAWN_COOLTIME = 40;
-    const int BONUS_TIMELIMIT_FRAMERATE = 400;
 
     // ----- •Ï” -----
     [Header("“I¶¬")]
@@ -19,7 +18,6 @@ public class SoloBattleManager : BattleManagerBase
     public int spawn_cooltime = 0;
 
     // -----
-    int score;
     public bool gameset = false;
     bool start = false;
 
@@ -189,7 +187,7 @@ public class SoloBattleManager : BattleManagerBase
 
         // ƒV[ƒ“Ø‚è‘Ö‚¦
         SoloBattleResult.name = datas[0].data.char_name;
-        SoloBattleResult.score = score;
+        SoloBattleResult.score = _score.CurrentScore;
         SoloBattleResult.img = datas[0].GetDefaultImage();
         SoloBattleResult.win = false;
         SceneManager.LoadScene(SceneName.RESULT_PVE);
