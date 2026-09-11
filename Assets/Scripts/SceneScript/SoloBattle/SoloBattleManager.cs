@@ -62,6 +62,7 @@ public class SoloBattleManager : BattleManagerBase
             datas[0].id = 0;   // id
             datas[0].direction = SetDirect(spawn_point[0].direct);    // 方向
             datas[0].burst_bar = gui.bar;   // バースト
+            p.cooltimeUI = gui.skillCooltimer;
             p.InitCooltime();
             gui.name.text = datas[0].data.char_name;    // キャラ名
             p.cooltimeUI = gui.skillCooltimer;

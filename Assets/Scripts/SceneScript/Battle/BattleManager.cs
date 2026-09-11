@@ -87,7 +87,7 @@ public class BattleManager : MonoBehaviour
     // タイマー
     [Header("◇ Timer")]
     [SerializeField] TimerUI timerUI;
-    Timer timer = new Timer(5.0f, true);
+    Timer timer = new Timer(99.0f, true);
 
     // サドンデス
     [Header("◇ Suddendeath")]
