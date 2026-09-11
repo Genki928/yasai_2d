@@ -177,7 +177,7 @@ public class SoloResultManager : MonoBehaviour
             sSpace += 1.2f;
 
             // Ä‹A
-            if (n > 0) audioSource.PlayOneShot(shortDram);
+            if (n > 1) audioSource.PlayOneShot(shortDram);
             yield return new WaitForSeconds(0.5f);
             StartCoroutine(DisplayRank(n));
         }
