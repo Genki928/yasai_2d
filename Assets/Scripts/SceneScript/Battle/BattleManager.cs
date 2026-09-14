@@ -74,6 +74,8 @@ public class BattleManager : MonoBehaviour
 
     [SerializeField] float bottomLimit = -1f;
     [SerializeField] float topLimit = 6f;
+    [SerializeField] float leftLimit = -10f;
+    [SerializeField] float rightLimit = 10f;
     // ‰‰o’†‚Ífalse
     bool battleCamera = false;
 
@@ -575,10 +577,8 @@ public class BattleManager : MonoBehaviour
         // c‚Í’†ŠÔ‚ğ­‚µ‚¾‚¯’Ç‚¤
         float centerY = (p1.y + p2.y) * 0.5f + verticalOffset;
 
-        centerY = Mathf.Clamp(
-            centerY,
-            bottomLimit,
-            topLimit);
+        centerX = Mathf.Clamp(centerX, leftLimit, rightLimit);
+        centerY = Mathf.Clamp(centerY,bottomLimit,topLimit);
 
         Vector3 targetPos = new Vector3(
             centerX,

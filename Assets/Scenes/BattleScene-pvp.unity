@@ -4798,12 +4798,14 @@ MonoBehaviour:
   se1: {fileID: 8300000, guid: 2fc99b164a5a2264dab936df1dd1f900, type: 3}
   followSpeed: 5
   horizontalMargin: 2
-  minZoom: 4
+  minZoom: 5
   maxZoom: 7
   cameraY: 0
   verticalOffset: 2
-  bottomLimit: -2
+  bottomLimit: -3.5
   topLimit: 3
+  leftLimit: -3.5
+  rightLimit: 3.5
   _audioSourceSE: {fileID: 1873271269}
   _audioSourceBgm: {fileID: 1873271268}
   shake: {fileID: 519420033}
