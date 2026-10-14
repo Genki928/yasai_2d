@@ -386,7 +386,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1636967673
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2950869812727453837, guid: 3dcda9a40728eef4ca8ee47555100ab1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -461,8 +461,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TextArrow
   arrow_pos: 0
   texts:
-  - {fileID: 8567859}
-  - {fileID: 195988322}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!212 &119324507
 SpriteRenderer:
   serializedVersion: 2
@@ -758,7 +758,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ResultManager
   arrow_max: 1
   arrow_min: 0
-  winner_name: {fileID: 1890990383}
+  winner_name: {fileID: 0}
   se:
   - {fileID: 8300000, guid: 49d0744f20e5a2646acf4136e8ac6faa, type: 3}
   - {fileID: 8300000, guid: 2477cbf322039434689f9c8000cfb042, type: 3}
