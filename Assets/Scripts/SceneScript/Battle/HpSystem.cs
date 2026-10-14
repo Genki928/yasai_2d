@@ -25,6 +25,6 @@ public class BurstBar : MonoBehaviour
 
     public void Draw(int burst, int max)
     {
-        image.fillAmount = targetPlayer.burst / (float)max;
+        image.fillAmount = 1.0f - ( targetPlayer.burst / (float)max);
     }
 }
