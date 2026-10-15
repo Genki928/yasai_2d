@@ -13,14 +13,18 @@ public class BackGroundMover : MonoBehaviour
 
     private Material m_copiedMaterial;
 
+
     private void Start()
     {
         var image = GetComponent<Image>();
-        m_copiedMaterial = image.material;
 
-        // マテリアルがnullだったら例外が出ます。
+        // マテリアルを複製して、このImage専用にする
+        m_copiedMaterial = new Material(image.material);
+        image.material = m_copiedMaterial;
+
         Assert.IsNotNull(m_copiedMaterial);
     }
+
 
     private void Update()
     {
@@ -34,5 +38,13 @@ public class BackGroundMover : MonoBehaviour
         var y = Mathf.Repeat(Time.time * m_offsetSpeed.y, k_maxLength);
         var offset = new Vector2(x, y);
         m_copiedMaterial.SetTextureOffset(k_propName, offset);
+    }
+
+    private void OnDestroy()
+    {
+        if (m_copiedMaterial != null)
+        {
+            Destroy(m_copiedMaterial);
+        }
     }
 }
