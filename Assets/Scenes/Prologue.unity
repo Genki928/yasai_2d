@@ -749,6 +749,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1462061950}
   - component: {fileID: 1462061953}
+  - component: {fileID: 1462061954}
   - component: {fileID: 1462061952}
   m_Layer: 5
   m_Name: press A
@@ -821,6 +822,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1462061949}
   m_CullTransparentMesh: 1
+--- !u!114 &1462061954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462061949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 879a1581439370b4c95b7a233ce61494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TextBlink
+  interval: 0.5
 --- !u!1 &1658942573
 GameObject:
   m_ObjectHideFlags: 0
