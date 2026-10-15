@@ -104,6 +104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 223abdd3f528ad944918fa1184b287d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CursorDirection
-  scaleSizeMax: 6
-  scaleSizeMin: 5
-  scalingSize: 1.05
+  scaleSizeMax: 7.5
+  scaleSizeMin: 6.5
+  scalingSize: 1.005
