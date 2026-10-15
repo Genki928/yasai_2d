@@ -476,7 +476,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -485,7 +485,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 38800e7d407068d4bbe7f9b2d9c48d5e, type: 3}
-    m_FontSize: 60
+    m_FontSize: 91
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -632,7 +632,7 @@ MonoBehaviour:
   START_SE_DELAY: 2
   DRAM_TO_TEXT_DELAY: 0.5
   DISPLAY_SCORE_DELAY: 2.6
-  SCORE_TO_RANK_DELAY: 2
+  SCORE_TO_RANK_DELAY: 1.5
   rankLayer: {fileID: 1460673027}
   yourScoreIs: {fileID: 386648589}
   scoreUI: {fileID: 1188971729}
@@ -2098,7 +2098,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1688065116
 RectTransform:
   m_ObjectHideFlags: 0

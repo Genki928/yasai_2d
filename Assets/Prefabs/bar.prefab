@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3435204195261457139}
   - component: {fileID: 3695473406261183852}
-  - component: {fileID: 331089445514249282}
   - component: {fileID: 7453176735328298715}
+  - component: {fileID: 331089445514249282}
   m_Layer: 5
   m_Name: bar
   m_TagString: Untagged
@@ -46,6 +46,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6802150335604622819}
   m_CullTransparentMesh: 1
+--- !u!114 &7453176735328298715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6802150335604622819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45960ba2a2f23424f9102082c5f523a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BurstBar
+  gageColor:
+  - ratio: 0.25
+    color: {r: 1, g: 0, b: 0, a: 1}
+  - ratio: 0.5
+    color: {r: 1, g: 0.49803922, b: 0, a: 1}
+  - ratio: 0.75
+    color: {r: 1, g: 1, b: 0, a: 1}
+  - ratio: 1
+    color: {r: 0, g: 1, b: 0, a: 1}
 --- !u!114 &331089445514249282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,16 +97,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7453176735328298715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6802150335604622819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45960ba2a2f23424f9102082c5f523a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BurstBar
-  targetPlayer: {fileID: 0}

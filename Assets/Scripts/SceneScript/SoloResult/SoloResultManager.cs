@@ -17,17 +17,12 @@ public class SoloResultManager : MonoBehaviour
     [SerializeField] float SCORE_TO_RANK_DELAY;
 
     // ----- プロパティ ----- //
-    bool IsFinishedDirection(InputAction.CallbackContext ctx)
-    {
-        return ctx.performed &&
+    bool IsFinishedDirection(InputAction.CallbackContext ctx) => ctx.performed &&
             (currentProcess == PvEResultMenuProcess.Menu || currentProcess == PvEResultMenuProcess.Score);
-    }
+    
 
-    bool IsMoveCursor(InputAction.CallbackContext ctx)
-    {
-        return ctx.performed &&
+    bool IsMoveCursor(InputAction.CallbackContext ctx) => ctx.performed &&
             currentProcess == PvEResultMenuProcess.Menu;
-    }
 
     // ----- 変数 ----- //
     [Header("◇Result")]
@@ -102,7 +97,7 @@ public class SoloResultManager : MonoBehaviour
         nameUI.text = SoloBattleResult.name;
         if (!SoloBattleResult.win) winText.text = "頑張りました";
 
-        //ハイスコアの更新
+        // ハイスコアの更新
         int id = CharPickData.id;
         Highscore.character[id].score.Add(SoloBattleResult.score);
         Highscore.character[id].score.Sort();
