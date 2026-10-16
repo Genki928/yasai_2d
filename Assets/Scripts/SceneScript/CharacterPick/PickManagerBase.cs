@@ -37,9 +37,9 @@ public class PickManagerBase : MonoBehaviour
     protected bool isChangingScene = false; // ìÒèdëJà⁄ñhé~
 
     // ----- íËêî ----- //
+    [SerializeField] protected int ICON_LINEFEED_COUNT = 3;
     protected const float ICON_HORIZONTAL_SPACE = 1.5f;
     protected const float ICON_VERTICAL_SPACE = 2.0f;
-    protected const int ICON_LINEFEED_COUNT = 3;
     protected const int X = 0;
     protected const int Y = 1;
 
@@ -238,5 +238,7 @@ public enum CharId
     Leek = 2,
     Corn = 3,
     WaterMelon = 4,
-    Mushroom = 5
+    Mushroom = 5,
+    potato = 6,
+    random = 7
 }
