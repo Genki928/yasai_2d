@@ -238,5 +238,7 @@ public enum CharId
     Leek = 2,
     Corn = 3,
     WaterMelon = 4,
-    Mushroom = 5
+    Mushroom = 5,
+    potato = 6,
+    random = 7
 }

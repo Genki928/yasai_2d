@@ -11,7 +11,6 @@ public class CursorDirection : MonoBehaviour
     {
         Application.targetFrameRate = 60;
         transform.localScale = transform.localScale;
-        Debug.Log(transform.localScale);
     }
 
     void Update()
@@ -41,6 +40,5 @@ public class CursorDirection : MonoBehaviour
             if (transform.localScale.magnitude < scaleSizeMin)
                 scale = true;
         }
-        Debug.Log(transform.localScale.magnitude + " / " + scaleSizeMin);
     }
 }
