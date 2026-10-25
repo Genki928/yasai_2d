@@ -121,7 +121,7 @@ public class BattleManager : MonoBehaviour
             p_obj[i] = Instantiate(player_obj[i]);
 
             // ƒvƒŒƒCƒ„[¶¬
-            pick_nums[i] = PlayerPick.pick[i];
+            pick_nums[i] = (int)PlayerPick.pick[i];
             PlayerInput pi;
 
             if (i == 0)

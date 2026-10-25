@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: CharacterSelectSceneAA
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterSelectAA
+  CursorMoveSE: {fileID: 8300000, guid: 49d0744f20e5a2646acf4136e8ac6faa, type: 3}
+  CancelSE: {fileID: 8300000, guid: f3a26dd2c4a665f44aaf25227d5d0133, type: 3}
+  SelectSE: {fileID: 8300000, guid: 2477cbf322039434689f9c8000cfb042, type: 3}

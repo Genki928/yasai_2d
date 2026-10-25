@@ -47,7 +47,7 @@ public class SoloBattleManager : BattleManagerBase
         base.Start();
 
         // プレイヤー生成
-        player[0] = Instantiate(characters[CharPickData.id].chars, spawn_point[0].point.transform.position, Quaternion.identity);
+        player[0] = Instantiate(characters[(int)PVESelectedCharId.id].chars, spawn_point[0].point.transform.position, Quaternion.identity);
         datas[0] = player[0].GetComponent<CharBase>();
 
         // バーストバーとの紐づけ
@@ -64,7 +64,7 @@ public class SoloBattleManager : BattleManagerBase
             p.InitCooltime();
             gui.name.text = datas[0].data.char_name;    // キャラ名
             p.cooltimeUI = gui.skillCooltimer;
-            gui.icon.sprite = characters[CharPickData.id].icon; // アイコン
+            gui.icon.sprite = characters[(int)PVESelectedCharId.id].icon; // アイコン
         }
 
         //boss = Instantiate(bosses[0], new(-10.0f, -5.0f), Quaternion.identity);
@@ -91,11 +91,11 @@ public class SoloBattleManager : BattleManagerBase
                 tb.id = ++spawnCount;
 
                 // 操作キャラクターと画像が被らないよう調整
-                int img = CharPickData.id;
+                int img = (int)PVESelectedCharId.id;
                 do
                 {
                     img = Random.Range(0, target_sprites.Count);
-                } while (img == CharPickData.id);
+                } while (img == (int)PVESelectedCharId.id);
                 tb.GetComponent<SpriteRenderer>().sprite = target_sprites[img];
 
                 // 見やすく（黒く）する

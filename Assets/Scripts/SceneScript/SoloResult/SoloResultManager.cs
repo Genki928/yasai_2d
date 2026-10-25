@@ -98,7 +98,7 @@ public class SoloResultManager : MonoBehaviour
         if (!SoloBattleResult.win) winText.text = "頑張りました";
 
         // ハイスコアの更新
-        int id = CharPickData.id;
+        int id = (int)PVESelectedCharId.id;
         Highscore.character[id].score.Add(SoloBattleResult.score);
         Highscore.character[id].score.Sort();
         Highscore.character[id].score.Reverse();

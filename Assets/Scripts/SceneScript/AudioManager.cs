@@ -1,37 +1,23 @@
-using System;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
-    // ----- シングルトン ----- //
+    // シングルトンの定義
     public static AudioManager Instance;
 
     void Awake()
     {
         Instance = this;
     }
-
-    // ----- メンバ ----- //
-    AudioSource _audioSource;
-    [SerializeField] AudioDataSO _soundData;
-
-    public void PlaySE(int n)
+    protected IEnumerator WaitAndLoadScene(AudioClip clip, string sceneName)
     {
-        _audioSource.PlayOneShot(_soundData.SE[n].clip);
+        if (clip != null)
+        {
+            yield return new WaitForSeconds(clip.length);
+        }
+
+        SceneManager.LoadScene(sceneName);
     }
-}
-
-[CreateAssetMenu(menuName = "AudioData")]
-public class AudioDataSO : ScriptableObject
-{
-    public List<AudioData> SE;
-    public List<AudioData> Bgm;
-}
-
-[Serializable]
-public class AudioData
-{
-    public AudioClip clip;
-    public string key;
 }
