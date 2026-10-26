@@ -1219,7 +1219,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -2050293391
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
@@ -1538,7 +1538,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -2050293391
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -1133394757938896077, guid: 09fdb4bf12e9b9344aeb45798ad8a387, type: 3}
@@ -2033,7 +2033,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3340f185015d54d93856dacf8b3c52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillCooltimer
-  character: {fileID: 0}
 --- !u!1 &1466704665
 GameObject:
   m_ObjectHideFlags: 0
@@ -2304,7 +2303,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3340f185015d54d93856dacf8b3c52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillCooltimer
-  character: {fileID: 0}
 --- !u!1 &1617470174
 GameObject:
   m_ObjectHideFlags: 0
@@ -2603,7 +2601,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3340f185015d54d93856dacf8b3c52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillCooltimer
-  character: {fileID: 0}
 --- !u!1001 &1717845529
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2756,22 +2753,51 @@ MonoBehaviour:
   - chars: {fileID: 3071852468601324621, guid: 64283c1ffb5f301459530948e200146d, type: 3}
     icon: {fileID: 768890679745972150, guid: 75c74399fea79714f8d239d20bfe2443, type: 3}
   spawn_point:
-  - {fileID: 666596767}
-  - {fileID: 1661029962}
+  - point: {fileID: 0}
+    direct: 0
+  - point: {fileID: 0}
+    direct: 0
   gui:
   - bar: {fileID: 1848879500}
     name: {fileID: 2132095580}
     icon: {fileID: 1466704667}
-    skill1_cooltimer: {fileID: 2127422657}
-    skill2_cooltimer: {fileID: 1699338273}
+    skillCooltimer: []
   - bar: {fileID: 1124343632}
     name: {fileID: 68940455}
     icon: {fileID: 559062713}
-    skill1_cooltimer: {fileID: 1225425201}
-    skill2_cooltimer: {fileID: 1584968705}
+    skillCooltimer: []
   player_obj:
   - {fileID: 4178201437919755446, guid: c6e495c33560abc4a80b03db369bd4f9, type: 3}
   - {fileID: 7493455991842142285, guid: 69cc6b67633600840b2c059ba36d90ed, type: 3}
+  fpsText: {fileID: 0}
+  readyText: {fileID: 0}
+  goText: {fileID: 0}
+  start_se: {fileID: 0}
+  deathEffect: {fileID: 0}
+  burstEffect: {fileID: 0}
+  koText: {fileID: 0}
+  se: {fileID: 0}
+  se1: {fileID: 0}
+  followSpeed: 5
+  horizontalMargin: 2
+  minZoom: 5
+  maxZoom: 9
+  cameraY: 0
+  verticalOffset: 1.5
+  bottomLimit: -1
+  topLimit: 6
+  leftLimit: -10
+  rightLimit: 10
+  _audioSourceSE: {fileID: 0}
+  _audioSourceBgm: {fileID: 0}
+  shake: {fileID: 0}
+  _defaultBgm: {fileID: 0}
+  _killSound: {fileID: 0}
+  timerUI: {fileID: 0}
+  flash: {fileID: 0}
+  suddendeathTimeLimit: 1
+  _enterSuddendeathSound: {fileID: 0}
+  sudden: {fileID: 0}
 --- !u!4 &1873271267
 Transform:
   m_ObjectHideFlags: 0
@@ -3047,7 +3073,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3340f185015d54d93856dacf8b3c52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillCooltimer
-  character: {fileID: 0}
 --- !u!1 &2132095578
 GameObject:
   m_ObjectHideFlags: 0

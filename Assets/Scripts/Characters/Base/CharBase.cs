@@ -174,7 +174,7 @@ public class CharBase : MonoBehaviour, IBurst
         }
     }
     /// <summary> ダメージ量に応じたSEを再生 </summary>
-    void PlayDamageSE(int value)
+     protected void PlayDamageSE(int value)
     {
         if (audioSource == null) return;
 
@@ -277,10 +277,11 @@ public class CharBase : MonoBehaviour, IBurst
     /// 点滅用コルーチン
     /// </summary>
     /// <returns></returns>
-    IEnumerator FlashDamage()
+    protected IEnumerator FlashDamage()
     {
         //いつものcolorを直接いじるのはspriteの仕組み的に厳しいからマテリアルを使って色を変えることにした
         //マテリアル本体はゲツヨビの個人フォルダにある
+        flash_mpb ??= new MaterialPropertyBlock();
         float t = 0f;
         sprite.GetPropertyBlock(flash_mpb);
 
