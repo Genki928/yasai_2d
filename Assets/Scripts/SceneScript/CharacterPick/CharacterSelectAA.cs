@@ -1,7 +1,5 @@
 using UnityEngine;
 
-public class AudioAssets : ScriptableObject { }
-
 [CreateAssetMenu(menuName = "AudioAssets/CharacterSelect")]
 public class CharacterSelectAA : AudioAssets
 {
