@@ -161,6 +161,7 @@ public class CharacterSelectManagerBase : MonoBehaviour
     {
         // –¼‘O‚ğ•ÏX
         model[id].name.text = cursor[id].Icon.CharacterData.Name;
+        model[id].lore.text = cursor[id].Icon.CharacterData.Lore.lore;
 
         // ‰æ‘œ‚ğ•ÏX
         model[id].model.sprite = cursor[id].Icon.CharacterData.Sprite;
@@ -211,6 +212,7 @@ public class CharacterSelectManagerBase : MonoBehaviour
     {
         public Image model;
         public Text name;
+        public Text lore;
     }
 }
 

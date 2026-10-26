@@ -28,7 +28,7 @@ public class Bomb : MonoBehaviour
             {
                 // ”š”­
                 var damage = Instantiate(bomb, transform.position, Quaternion.identity);
-                damage.Init(_id ,new(50, DamageType.Soundable), new(0.0f, 0.0f), 0.0f, false, 0.5f);
+                damage.Init(_id ,new(30, DamageType.Soundable), new(0.0f, 0.0f), 0.0f, false, 0.5f);
                 Destroy(gameObject);
             }
         }
