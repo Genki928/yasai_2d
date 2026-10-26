@@ -28,7 +28,7 @@ RectTransform:
   m_GameObject: {fileID: 6802150335604622819}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 0.5, z: 1}
+  m_LocalScale: {x: -5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -59,12 +59,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BurstBar
   gageColor:
-  - ratio: 0.25
+  - ratio: 0.33
     color: {r: 1, g: 0, b: 0, a: 1}
-  - ratio: 0.5
+  - ratio: 0.66
     color: {r: 1, g: 0.49803922, b: 0, a: 1}
-  - ratio: 0.75
-    color: {r: 1, g: 1, b: 0, a: 1}
   - ratio: 1
     color: {r: 0, g: 1, b: 0, a: 1}
 --- !u!114 &331089445514249282
@@ -80,19 +78,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -3992745964950632871, guid: ef11b04993cc9bd44a8dadf2872a9bef, type: 3}
+  m_Sprite: {fileID: 5972140380756631857, guid: 7b4a89db61d6b11469e737bb1288f636, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2562251283018559567}
   - component: {fileID: -6538652259089977183}
   - component: {fileID: 6969689766149355251}
+  - component: {fileID: 1139973819601718374}
   - component: {fileID: -3930978692484959935}
   - component: {fileID: -7278509432473855036}
   - component: {fileID: -786213672902833054}
@@ -115,11 +116,23 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3303797620011567552}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc875d325d533dc468d430cdc168e724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SimpleDamageArea
+--- !u!114 &1139973819601718374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3303797620011567552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09f69a072561e5141a626a4128568f8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DoubleDamageArea
 --- !u!95 &-3930978692484959935
 Animator:
   serializedVersion: 7
