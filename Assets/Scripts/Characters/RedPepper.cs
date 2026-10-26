@@ -43,7 +43,7 @@ public class RedPepper : CharBase
 
             // 炎を生成 -> idの紐づけ
             GameObject go = Instantiate(breath, pos , Quaternion.Euler(0, 0, angle - 90));
-            go.GetComponent<DoubleDamageArea>().Init(id, new(1, DamageType.Soundable), new Vector2(0, 0));
+            go.GetComponent<DoubleDamageArea>().Init(id, new(10, DamageType.Soundable), new Vector2(0, 0));
 
             // 硬直・クールタイム
             cooltime[(int)SkillName.Skill1].SetCooltime();

@@ -1,19 +1,40 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DoubleDamageArea : DamageAreaBase
 {
     // ----- メンバ ----- //
     bool _delete = false;
+    List<DamageLimit> _damageLimit = new();
     float _rigid;
 
-    void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerStay2D(Collider2D col)
     {
         if (col.TryGetComponent<IBurst>(out var cb))
         {
-            // ダメージ
-            cb.rigid += _rigid;
-            cb.Damage(_damage, _id);
-            if (_delete) Destroy(gameObject);
+            if (cb.id == _id) return;
+
+            int index = _damageLimit.FindIndex(dl => dl.id == cb.id);
+            if (index != -1)
+            {
+                if (_damageLimit[index].cooltime > 0)
+                {
+                    --_damageLimit[index].cooltime;
+                    return;
+                }
+
+                _damageLimit[index].cooltime = 7;
+                cb.rigid += _rigid;
+                cb.Damage(_damage, _id);
+                if (_delete) Destroy(gameObject);
+            }
+            else
+            {
+                _damageLimit.Add(new(cb.id));
+                cb.rigid += _rigid;
+                cb.Damage(_damage, _id);
+                if (_delete) Destroy(gameObject);
+            }
         }
     }
 
@@ -42,5 +63,16 @@ public class DoubleDamageArea : DamageAreaBase
         // 物理
         _rigidbody = GetComponent<Rigidbody2D>();
         _rigidbody.linearVelocity = vec;
+    }
+
+    class DamageLimit
+    {
+        public int id;
+        public int cooltime;
+
+        public DamageLimit(int id)
+        {
+            this.id = id;
+        }
     }
 }
