@@ -2140,6 +2140,10 @@ PrefabInstance:
       propertyPath: 'icons.Array.data[3]'
       value: 
       objectReference: {fileID: 4096264478434804781}
+    - target: {fileID: 1081700274305460004, guid: 0f897709eb52ba24e9c43931fce5eeb8, type: 3}
+      propertyPath: data.interactedSprite
+      value: 
+      objectReference: {fileID: 1525206707007516452, guid: 850024e63ec5db648967e3662f640778, type: 3}
     - target: {fileID: 1835855316210872811, guid: 0f897709eb52ba24e9c43931fce5eeb8, type: 3}
       propertyPath: 'icons.Array.data[0]'
       value: 
@@ -2172,6 +2176,10 @@ PrefabInstance:
       propertyPath: 'icons.Array.data[3]'
       value: 
       objectReference: {fileID: 8106880255823556711}
+    - target: {fileID: 4448193177379633986, guid: 0f897709eb52ba24e9c43931fce5eeb8, type: 3}
+      propertyPath: data.interactedSprite
+      value: 
+      objectReference: {fileID: -1672949009701632659, guid: 991c802f78e15564ab21cac69a70fcd8, type: 3}
     - target: {fileID: 4618156151337208691, guid: 0f897709eb52ba24e9c43931fce5eeb8, type: 3}
       propertyPath: 'icons.Array.data[0]'
       value: 
