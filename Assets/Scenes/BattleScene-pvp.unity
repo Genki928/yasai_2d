@@ -407,9 +407,9 @@ RectTransform:
   - {fileID: 190762297}
   - {fileID: 830670397}
   - {fileID: 278573676}
-  - {fileID: 1159107979}
   - {fileID: 179975451}
   - {fileID: 2050718655}
+  - {fileID: 1185835665}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -527,7 +527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Flash
   alphaPower: 0.5
-  maxAlpha: 0.5
+  maxAlpha: 0.3
   minAlpha: 0
   startDelay: 0.8
 --- !u!114 &179975453
@@ -3181,7 +3181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45960ba2a2f23424f9102082c5f523a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BurstBar
---- !u!1 &1159107978
+--- !u!1 &1185835664
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3189,24 +3189,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1159107979}
-  - component: {fileID: 1159107981}
-  - component: {fileID: 1159107980}
-  - component: {fileID: 1159107982}
+  - component: {fileID: 1185835665}
+  - component: {fileID: 1185835668}
+  - component: {fileID: 1185835667}
+  - component: {fileID: 1185835666}
   m_Layer: 5
-  m_Name: timer
+  m_Name: Text (Legacy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &1159107979
+--- !u!224 &1185835665
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1159107978}
+  m_GameObject: {fileID: 1185835664}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -3216,16 +3216,28 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 167.6}
-  m_SizeDelta: {x: 166.68, y: 91.87}
+  m_AnchoredPosition: {x: -0, y: 144}
+  m_SizeDelta: {x: 282.82, y: 109.95}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1159107980
+--- !u!114 &1185835666
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1159107978}
+  m_GameObject: {fileID: 1185835664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdd0ea7a1e6f3f54487bb4e5e7b78be2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Timer
+--- !u!114 &1185835667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185835664}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
@@ -3241,12 +3253,12 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 38800e7d407068d4bbe7f9b2d9c48d5e, type: 3}
-    m_FontSize: 44
+    m_FontSize: 43
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 4
-    m_MaxSize: 60
-    m_Alignment: 4
+    m_MinSize: 10
+    m_MaxSize: 78
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -3255,26 +3267,14 @@ MonoBehaviour:
   m_Text: '99
 
 '
---- !u!222 &1159107981
+--- !u!222 &1185835668
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1159107978}
+  m_GameObject: {fileID: 1185835664}
   m_CullTransparentMesh: 1
---- !u!114 &1159107982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1159107978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdd0ea7a1e6f3f54487bb4e5e7b78be2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Timer
 --- !u!1 &1225425197
 GameObject:
   m_ObjectHideFlags: 0
@@ -4631,7 +4631,7 @@ MonoBehaviour:
   shake: {fileID: 519420033}
   _defaultBgm: {fileID: 8300000, guid: 8c4248fe8bac64e43b500ed9c9411d62, type: 3}
   _killSound: {fileID: 8300000, guid: 93c91f3586c82a4418bdb0c4b2eb2d2c, type: 3}
-  timerUI: {fileID: 1159107982}
+  timerUI: {fileID: 1185835666}
   flash: {fileID: 179975452}
   suddendeathTimeLimit: 2
   _enterSuddendeathSound: {fileID: 8300000, guid: 65d442c5efb20304390ab25893695f0a, type: 3}
@@ -5406,7 +5406,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000030518, y: 132.7}
+  m_AnchoredPosition: {x: -0.000030518, y: 118.4}
   m_SizeDelta: {x: 250.71, y: 167.71}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2050718656

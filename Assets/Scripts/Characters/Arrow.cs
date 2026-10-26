@@ -3,6 +3,7 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     CharBase player;
+    [SerializeField] GameObject parent;
 
     void Update()
     {
@@ -14,7 +15,7 @@ public class Arrow : MonoBehaviour
     public void Refresh(Vector2 direction)
     { 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.localRotation = Quaternion.Euler(0, 0, angle - 90);
+        parent.transform.localRotation = Quaternion.Euler(0, 0, angle - 90);
     }
 
     /// <summary> í«è]êÊÇÃï€ë∂ </summary>
