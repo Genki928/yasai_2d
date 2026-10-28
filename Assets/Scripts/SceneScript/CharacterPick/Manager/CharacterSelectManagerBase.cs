@@ -20,6 +20,7 @@ public class CharacterSelectManagerBase : MonoBehaviour
 
     [Header("▼ UI")]
     [SerializeField] protected List<Model> model = new();
+    [SerializeField] protected GameObject readyObj;
 
     [Header("▼ Audio")]
     [SerializeField] protected CharacterSelectAA audioAssets;
@@ -60,9 +61,13 @@ public class CharacterSelectManagerBase : MonoBehaviour
         // 入力を真に切り替える
         Identification(ctx);
         cursor[currentController].SetInteract(true);
-        
+
         // カーソルの描画
         Draw(currentController);
+        if (cursor.Count(n => n.Interact) == PLAYER_COUNT)
+        {
+            Ready(true);
+        }
 
         // SEの再生
         audioSource.PlayOneShot(audioAssets.SelectSE);
@@ -79,6 +84,8 @@ public class CharacterSelectManagerBase : MonoBehaviour
             StartCoroutine(WaitAndLoadScene(audioAssets.CancelSE, SceneName.TITLE));
             return;
         }
+
+        Ready(false);
 
         // 入力を偽に切り替える
         Identification(ctx);
@@ -177,6 +184,11 @@ public class CharacterSelectManagerBase : MonoBehaviour
         audioSource.PlayOneShot(clip);
         yield return new WaitForSeconds(clip.length);
         SceneManager.LoadScene(sceneName);
+    }
+
+    protected void Ready(bool ready)
+    {
+        readyObj.SetActive(ready);
     }
 
     protected class CursorData

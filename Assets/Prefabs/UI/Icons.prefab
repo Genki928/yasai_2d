@@ -142,6 +142,7 @@ MonoBehaviour:
   - {fileID: 1036899143619382529}
   data:
     name: "\u30E2\u30ED\u30B3\u30B7"
+    lore: {fileID: 11400000, guid: 77ab89fc544a00c43841551ffaff41eb, type: 2}
     id: 3
     size: {x: 700, y: 900}
     sprite: {fileID: 612600066695323494, guid: 9708a9172e4d4274792f0b16cf04ede2, type: 3}
@@ -461,6 +462,7 @@ MonoBehaviour:
   - {fileID: 4618156151337208691}
   data:
     name: "\u30AD\u30CE\u30B3"
+    lore: {fileID: 11400000, guid: bc398cef82aebeb47b803c62d5a0cf95, type: 2}
     id: 5
     size: {x: 700, y: 900}
     sprite: {fileID: 357749872346554099, guid: 417097bc21ad2b14285fe45a8de8cda5, type: 3}
@@ -532,6 +534,7 @@ MonoBehaviour:
   - {fileID: 9016883946788575289}
   data:
     name: "\u30B9\u30A4\u30AB"
+    lore: {fileID: 11400000, guid: 2fafaec0bb3a9d04dba3f78473d99451, type: 2}
     id: 4
     size: {x: 900, y: 900}
     sprite: {fileID: 8237331089931671458, guid: 43594a20325ca844fa75bef2d9fc9e8d, type: 3}
@@ -753,10 +756,11 @@ MonoBehaviour:
   - {fileID: 1081700274305460004}
   data:
     name: "\u30CB\u30F3\u30B8\u30F3"
+    lore: {fileID: 11400000, guid: 2d8e11964444ea14587d164833d55b9b, type: 2}
     id: 0
     size: {x: 700, y: 900}
     sprite: {fileID: 2950869812727453837, guid: 3dcda9a40728eef4ca8ee47555100ab1, type: 3}
-    interactedSprite: {fileID: 1824413040164408261, guid: b205cf7e6d820bf45bb4267f2ea3f8c1, type: 3}
+    interactedSprite: {fileID: 1525206707007516452, guid: 850024e63ec5db648967e3662f640778, type: 3}
 --- !u!1 &3523384263174195707
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,10 +903,11 @@ MonoBehaviour:
   - {fileID: 1835855316210872811}
   data:
     name: "\u304A\u307E\u304B\u305B"
+    lore: {fileID: 11400000, guid: de6d822c134e69d40aa9c73829eaaf4c, type: 2}
     id: 7
-    size: {x: 0, y: 0}
-    sprite: {fileID: 0}
-    interactedSprite: {fileID: 0}
+    size: {x: 500, y: 500}
+    sprite: {fileID: -5607665994977009084, guid: 5e5181d04afd86f4582999e3fc5e3616, type: 3}
+    interactedSprite: {fileID: -5607665994977009084, guid: 5e5181d04afd86f4582999e3fc5e3616, type: 3}
 --- !u!1 &4178193926330471589
 GameObject:
   m_ObjectHideFlags: 0
@@ -1120,10 +1125,11 @@ MonoBehaviour:
   - {fileID: 4448193177379633986}
   data:
     name: "\u30CA\u30AC\u30CD\u30AE"
+    lore: {fileID: 11400000, guid: 8142dcd90fcf4f94d836004bcb008180, type: 2}
     id: 2
     size: {x: 700, y: 900}
     sprite: {fileID: 5392735662954531422, guid: 7ec81b149c24d5e49a32fc669cda03bd, type: 3}
-    interactedSprite: {fileID: 7332616297026234698, guid: d10a89a93760c8748a7eea9368b287d5, type: 3}
+    interactedSprite: {fileID: -1672949009701632659, guid: 991c802f78e15564ab21cac69a70fcd8, type: 3}
 --- !u!1 &7080932043013412912
 GameObject:
   m_ObjectHideFlags: 0
@@ -1566,6 +1572,7 @@ MonoBehaviour:
   - {fileID: 7296355241227842971}
   data:
     name: "\u30C8\u30A6\u30AC\u30E9\u30B7"
+    lore: {fileID: 11400000, guid: ed1c03f5dbbc46f4ea784d2506294ac1, type: 2}
     id: 1
     size: {x: 700, y: 900}
     sprite: {fileID: -9177740170459379683, guid: 598803ad020e83c4cb796473f4370800, type: 3}

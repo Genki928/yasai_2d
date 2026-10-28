@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PVPCharacterSelectManager : CharacterSelectManagerBase
 {
-
     protected override void Start()
     {
         PLAYER_COUNT = 2;
