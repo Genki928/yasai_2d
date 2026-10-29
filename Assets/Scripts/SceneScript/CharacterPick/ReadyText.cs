@@ -1,42 +1,46 @@
-﻿using System;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets.Scripts.SceneScript.CharacterPick
+public class ReadyText : MonoBehaviour
 {
-    public class ReadyText : MonoBehaviour
+    float time = 0.0f;
+
+    // テキスト
+    [SerializeField] Transform textTransform;
+    [SerializeField] float moveSpeed = 2.0f;
+    public Vector3 textStartPos;
+    Vector3 myPos;
+
+    // 背景
+    [SerializeField] Transform backTransform;
+
+    void OnEnable()
     {
-        // テキスト
-        [SerializeField] Transform textTransform;
-        [SerializeField] float moveSpeed = 2.0f;
-        public Vector3 textStartPos;
-        Vector3 myPos;
+        myPos = transform.position;
+        textStartPos = textTransform.position;
+    }
 
-        // 背景
-        [SerializeField] Transform backTransform;
+    void OnDisable()
+    {
+        time = 0.0f;
+        textTransform.position = textStartPos;
+    }
 
-        void Start()
-        {
-            myPos = transform.position;
-            textStartPos = textTransform.position;
-        }
+    void Update()
+    {
+        time += Time.deltaTime;
+        Move();
+        Scaling();
+    }
 
-        void Update()
-        {
-            Move();
-            Scaling();
-        }
+    bool Move()
+    {
+        textTransform.position = Vector3.Lerp(textStartPos, myPos, time * moveSpeed);
+        return Vector3.Distance(textTransform.position, myPos) < 0.01;
+    }
 
-        bool Move()
-        {
-            textTransform.position = Vector3.Lerp(textStartPos, myPos, Time.time * moveSpeed);
-            return Vector3.Distance(textTransform.position, myPos) < 0.01;
-        }
-
-        bool Scaling()
-        {
-            backTransform.localScale = Vector3.Lerp(new(1.0f, 0.0f, 1.0f), new(1.0f, 1.0f, 1.0f), Time.time * moveSpeed);
-            return Vector3.Distance(backTransform.localScale, new(1.0f, 1.0f, 1.0f)) < 0.01;
-        }
+    bool Scaling()
+    {
+        backTransform.localScale = Vector3.Lerp(new(1.0f, 0.0f, 1.0f), new(1.0f, 1.0f, 1.0f), time * moveSpeed);
+        return Vector3.Distance(backTransform.localScale, new(1.0f, 1.0f, 1.0f)) < 0.01;
     }
 }
