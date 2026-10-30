@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 20, y: 19.554993}
+  m_AnchoredPosition: {x: 1411, y: 0}
   m_SizeDelta: {x: 1003.26, y: 507.61}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2961011517148432426
@@ -80,7 +80,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Press to A
 
-    GAME START'
+    GAME START !'
 --- !u!1 &5725695792665828364
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,14 +108,14 @@ RectTransform:
   m_GameObject: {fileID: 5725695792665828364}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1808134666378659516}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6.47, y: 11.303}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1941.3, y: 122.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2495805412944654952
@@ -165,13 +165,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1808134666378659516}
+  - component: {fileID: 7113714900407200249}
   m_Layer: 5
   m_Name: ready
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1808134666378659516
 RectTransform:
   m_ObjectHideFlags: 0
@@ -193,3 +194,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 233}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7113714900407200249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7868253318545637614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56d9890ccda9d9f48a049e975da53029, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.SceneScript.CharacterPick.ReadyText
+  textTransform: {fileID: 6137920379147975914}
+  moveSpeed: 2
+  textStartPos: {x: 0, y: 0, z: 0}
+  backTransform: {fileID: 7114610625425814118}
