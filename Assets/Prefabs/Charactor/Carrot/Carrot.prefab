@@ -125,13 +125,13 @@ MonoBehaviour:
   tackle: {fileID: 1824413040164408261, guid: b205cf7e6d820bf45bb4267f2ea3f8c1, type: 3}
   tackleSpeed: 20
   tackleTime: 0.2
-  tackleDamage: 25
+  tackleDamage: 30
   dust: {fileID: 1560168367213963595, guid: 31c763f52fdaf2d45885cba010fc705b, type: 3}
   collision: {fileID: 9138792514576026239, guid: 5a4d1edade8353449bbdfabf13041c1a, type: 3}
   se1: {fileID: 8300000, guid: 448a5754cbe316f4097b31c33ad2b5ed, type: 3}
   headBangAngle: 90
   rotateSpeed: 500
-  headBangDamage: 25
+  headBangDamage: 15
   se2: {fileID: 8300000, guid: 6b86bf8af024f7d4a9894b59048fc879, type: 3}
 --- !u!114 &2387769583341587097
 MonoBehaviour:

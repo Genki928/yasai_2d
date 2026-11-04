@@ -18,7 +18,7 @@ MonoBehaviour:
   regen_burst_cooltime: 3
   restart_regen_burst_value: 2
   skill_1_rigid: 0
-  skill_1_cooltime: 0.6
+  skill_1_cooltime: 0.7
   skill_2_rigid: 0.2
-  skill_2_cooltime: 7
+  skill_2_cooltime: 10
   dash_cooltime: 1

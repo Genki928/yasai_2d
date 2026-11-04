@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 5207152893271807671}
   - component: {fileID: 1831904213278125074}
   - component: {fileID: 4810898864095441222}
-  - component: {fileID: 8846925006098968180}
-  - component: {fileID: 7870971187861871800}
   - component: {fileID: 5576119467424593753}
+  - component: {fileID: 8846925006098968180}
+  - component: {fileID: 1309368895821975965}
   - component: {fileID: -1746768912094102130}
   m_Layer: 0
   m_Name: srash
@@ -108,6 +108,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba602167c268c7a4d9365c14fe933b53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RedPepperBreath
+--- !u!114 &5576119467424593753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4175897494506351822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc875d325d533dc468d430cdc168e724, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SimpleDamageArea
 --- !u!95 &8846925006098968180
 Animator:
   serializedVersion: 7
@@ -130,8 +142,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!58 &7870971187861871800
-CircleCollider2D:
+--- !u!61 &1309368895821975965
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -164,20 +176,18 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.1
---- !u!114 &5576119467424593753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4175897494506351822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc875d325d533dc468d430cdc168e724, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SimpleDamageArea
+  m_Offset: {x: 0.0059603937, y: 0.019371271}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.32, y: 0.32}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.1590693, y: 0.2305941}
+  m_EdgeRadius: 0
 --- !u!50 &-1746768912094102130
 Rigidbody2D:
   serializedVersion: 5

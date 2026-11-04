@@ -15,6 +15,9 @@ GameObject:
   - component: {fileID: 8785239974707632202}
   - component: {fileID: -523274106162449980}
   - component: {fileID: 329559975475562997}
+  - component: {fileID: 2987401258688071605}
+  - component: {fileID: 1579335020732595261}
+  - component: {fileID: -5572309227155847356}
   m_Layer: 3
   m_Name: Leek
   m_TagString: Untagged
@@ -127,11 +130,14 @@ MonoBehaviour:
   isSrash: 0
   countercircle: {fileID: 7072312434174299672, guid: eb08d284ce84b3d43acf9b6517c6004c, type: 3}
   counterTime: 1
-  counterDamage: 60
-  counterDashPower: 10
+  counterDamage: 70
   se2: {fileID: 8300000, guid: 489a91f4c1f04884aac6a4912018e955, type: 3}
   se3: {fileID: 8300000, guid: fe6aa65115709e242a7ea893adf08b40, type: 3}
   leek_default: {fileID: 7332616297026234698, guid: d10a89a93760c8748a7eea9368b287d5, type: 3}
+  counterDashPower: 20
+  counterDashDuration: 0.1
+  afterImage: {fileID: 2987401258688071605}
+  hitStop: {fileID: -5572309227155847356}
 --- !u!114 &2387769583341587097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,3 +393,44 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2987401258688071605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3071852468601324621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ebdc475cbe3d8845ad2aa01780bc982, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LeekAfterImage
+  interval: 0.025
+  lifeTime: 0.2
+  isActive: 0
+--- !u!114 &1579335020732595261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3071852468601324621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 928bc8fe1080f5243931aec608663e5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LeekGhostFade
+--- !u!114 &-5572309227155847356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3071852468601324621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd9669951fc864c47a55ced9e66a1759, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitStop
+  stopTime: 0.08
+  stopScale: 0.05
