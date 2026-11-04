@@ -16,7 +16,6 @@ public class CharacterSelectManagerBase : MonoBehaviour
     [SerializeField] protected List<IconSelecter> baseIcon = new();
     protected List<CursorData> cursor = new();
     protected List<GameObject> cursorObj = new();
-    protected int currentController = 0;
 
     [Header("▼ UI")]
     [SerializeField] protected List<Model> model = new();
@@ -49,21 +48,21 @@ public class CharacterSelectManagerBase : MonoBehaviour
         }
     }
 
-    protected virtual void Identification(InputAction.CallbackContext ctx)
+    protected virtual int Identification(InputAction.CallbackContext ctx)
     {
         // 識別
-        if (Gamepad.all[0] == ctx.control.device) currentController = 0;
-        else currentController = 1;
+        if (Gamepad.all[0] == ctx.control.device) return 0;
+        else return 1;
     }
 
     public virtual void Interact(InputAction.CallbackContext ctx)
     {
         // 入力を真に切り替える
-        Identification(ctx);
-        cursor[currentController].SetInteract(true);
+        var id = Identification(ctx);
+        cursor[id].SetInteract(true);
 
         // カーソルの描画
-        Draw(currentController);
+        Draw(id);
         if (cursor.Count(n => n.Interact) == PLAYER_COUNT)
         {
             Ready(true);
@@ -88,11 +87,11 @@ public class CharacterSelectManagerBase : MonoBehaviour
         Ready(false);
 
         // 入力を偽に切り替える
-        Identification(ctx);
-        cursor[currentController].SetInteract(false);
+        var id = Identification(ctx);
+        cursor[id].SetInteract(false);
 
         // カーソルの描画
-        Draw(currentController);
+        Draw(id);
 
         // SEの再生
         audioSource.PlayOneShot(audioAssets.CancelSE);
@@ -104,11 +103,11 @@ public class CharacterSelectManagerBase : MonoBehaviour
         if (!ctx.performed) return;
 
         // 決定中なら中断
-        Identification(ctx);
-        if (cursor[currentController].Interact) return;
+        var id = Identification(ctx);
+        if (cursor[id].Interact) return;
 
         // カーソルを移動
-        CursorMove(DIRECT.RIGHT);
+        CursorMove(DIRECT.RIGHT, id);
     }
 
     public void CursorMoveLeft(InputAction.CallbackContext ctx)
@@ -117,11 +116,11 @@ public class CharacterSelectManagerBase : MonoBehaviour
         if (!ctx.performed) return;
 
         // 決定中なら中断
-        Identification(ctx);
-        if (cursor[currentController].Interact) return;
+        var id = Identification(ctx);
+        if (cursor[id].Interact) return;
 
         // カーソルを移動
-        CursorMove(DIRECT.LEFT);
+        CursorMove(DIRECT.LEFT, id);
     }
 
     public void CursorMoveUp(InputAction.CallbackContext ctx)
@@ -130,11 +129,11 @@ public class CharacterSelectManagerBase : MonoBehaviour
         if (!ctx.performed) return;
 
         // 決定中なら中断
-        Identification(ctx);
-        if (cursor[currentController].Interact) return;
+        var id = Identification(ctx);
+        if (cursor[id].Interact) return;
 
         // カーソルを移動
-        CursorMove(DIRECT.UP);
+        CursorMove(DIRECT.UP, id);
     }
 
     public void CursorMoveDown(InputAction.CallbackContext ctx)
@@ -143,22 +142,22 @@ public class CharacterSelectManagerBase : MonoBehaviour
         if (!ctx.performed) return;
 
         // 決定中なら中断
-        Identification(ctx);
-        if (cursor[currentController].Interact) return;
+        var id = Identification(ctx);
+        if (cursor[id].Interact) return;
 
         // カーソルを移動
-        CursorMove(DIRECT.DOWN);
+        CursorMove(DIRECT.DOWN, id);
     }
 
-    protected void CursorMove(DIRECT direct)
+    protected void CursorMove(DIRECT direct, int id)
     {
         // カーソルを移動
-        var nextIcon = cursor[currentController].Icon.Icons[(int)direct];
-        cursorObj[currentController].transform.position = nextIcon.transform.position;
+        var nextIcon = cursor[id].Icon.Icons[(int)direct];
+        cursorObj[id].transform.position = nextIcon.transform.position;
 
         // カーソルの描画
-        cursor[currentController].SetIcon(nextIcon);
-        Draw(currentController);
+        cursor[id].SetIcon(nextIcon);
+        Draw(id);
 
         // SEの再生
         audioSource.PlayOneShot(audioAssets.CursorMoveSE);
@@ -175,8 +174,8 @@ public class CharacterSelectManagerBase : MonoBehaviour
         model[id].model.rectTransform.sizeDelta = cursor[id].Icon.CharacterData.Size;
 
         // 決定中かどうかで、変更する画像を切り替える
-        var cur = cursor[currentController].Icon.CharacterData;
-        model[currentController].model.sprite = (cursor[id].Interact) ? cur.InteractedSprite : cur.Sprite;
+        var cur = cursor[id].Icon.CharacterData;
+        model[id].model.sprite = (cursor[id].Interact) ? cur.InteractedSprite : cur.Sprite;
     }
 
     protected IEnumerator WaitAndLoadScene(AudioClip clip, string sceneName)

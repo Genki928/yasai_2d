@@ -38,5 +38,5 @@ public class PVECharacterSelectManager : CharacterSelectManagerBase
         base.Interact(ctx);
     }
 
-    protected override void Identification(InputAction.CallbackContext ctx) { }
+    protected override int Identification(InputAction.CallbackContext ctx) { return 0; }
 }

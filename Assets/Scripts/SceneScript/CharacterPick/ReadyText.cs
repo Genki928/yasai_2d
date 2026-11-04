@@ -7,7 +7,7 @@ public class ReadyText : MonoBehaviour
     // テキスト
     [SerializeField] Transform textTransform;
     [SerializeField] float moveSpeed = 2.0f;
-    public Vector3 textStartPos;
+    Vector3 textStartPos;
     Vector3 myPos;
 
     // 背景
