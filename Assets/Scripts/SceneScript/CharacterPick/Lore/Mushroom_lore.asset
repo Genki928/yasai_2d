@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Mushroom_lore
   m_EditorClassIdentifier: Assembly-CSharp::PickData
   char_name: "\u30B7\u30A4\u30BF\u30B1"
-  lore: "\uFF21\u30DC\u30BF\u30F3\uFF1A\u30AB\u30B5\u30D0\u30F3\n\n\uFF22\u30DC\u30BF\u30F3\uFF1A\u80DE\u5B50\u6295\u3052\n"
+  lore: "\uFF21\u30DC\u30BF\u30F3\uFF1A\u30AB\u30B5\u30D0\u30F3\n\uFF22\u30DC\u30BF\u30F3\uFF1A\u80DE\u5B50\u6295\u3052\n"

@@ -716,8 +716,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -611.74, y: -284}
-  m_SizeDelta: {x: 647.46, y: 367.96}
+  m_AnchoredPosition: {x: -467.75, y: -284}
+  m_SizeDelta: {x: 935.42, y: 367.96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &732857878
 PrefabInstance:
@@ -727,10 +727,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1568022434}
     m_Modifications:
-    - target: {fileID: 404638235875733967, guid: 0f897709eb52ba24e9c43931fce5eeb8, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 3939098522201311849, guid: e87972cb61c228f4cbe16ff9f0bf0ba2, type: 3}
     - target: {fileID: 1080163192632820843, guid: 0f897709eb52ba24e9c43931fce5eeb8, type: 3}
       propertyPath: m_Name
       value: Icons

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Carrot_lore
   m_EditorClassIdentifier: Assembly-CSharp::PickData
   char_name: "\u30CB\u30F3\u30B8\u30F3"
-  lore: "\uFF21\u30DC\u30BF\u30F3\uFF1A\u30D8\u30C9\u30D0\u30F3\n\n\uFF22\u30DC\u30BF\u30F3\uFF1A\u7A81\u9032"
+  lore: "\uFF21\u30DC\u30BF\u30F3\uFF1A\u30D8\u30C9\u30D0\u30F3\n\uFF22\u30DC\u30BF\u30F3\uFF1A\u7A81\u9032"
