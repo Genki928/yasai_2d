@@ -727,6 +727,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1568022434}
     m_Modifications:
+    - target: {fileID: 404638235875733967, guid: 0f897709eb52ba24e9c43931fce5eeb8, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 3939098522201311849, guid: e87972cb61c228f4cbe16ff9f0bf0ba2, type: 3}
     - target: {fileID: 1080163192632820843, guid: 0f897709eb52ba24e9c43931fce5eeb8, type: 3}
       propertyPath: m_Name
       value: Icons
