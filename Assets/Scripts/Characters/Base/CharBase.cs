@@ -51,6 +51,8 @@ public class CharBase : MonoBehaviour, IBurst
     [SerializeField] AudioClip se_high;  //大ダメージ
     [SerializeField] AudioClip CTSound;
 
+    [Header("◇ダッシュSE")]
+    [SerializeField] AudioClip dash_se;  
     //点滅演出用
     [SerializeField] Color flash_color = Color.white;
     [SerializeField] float flash_duration = 0.5f;
@@ -151,6 +153,8 @@ public class CharBase : MonoBehaviour, IBurst
     /// <param name="damage"> 与えるダメージ量 </param>
     virtual public void Damage(Damage damage, int id)
     {
+        Debug.Log($"Damage呼び出し！ 被弾キャラID:{this.id} / 攻撃者ID:{id}");
+
         // バースト値が最大なら中断
         if (burst >= max_burst) return;
         regen_burst_timer = 0;
@@ -198,7 +202,14 @@ public class CharBase : MonoBehaviour, IBurst
                      0 : burst - value;
 
         // 描画
-        burst_bar.Draw(burst, max_burst);
+        if (burst_bar != null)
+        {
+            burst_bar.Draw(burst, max_burst);
+        }
+        else
+        {
+            Debug.LogError($"BurstBarが未設定！ キャラクターID:{this.id}");
+        }
     }
 
     /// <summary>
@@ -256,7 +267,7 @@ public class CharBase : MonoBehaviour, IBurst
         if (ctx.performed)
         {
             if (!CanUseDash) return;
-
+            audioSource.PlayOneShot(dash_se);
             rb.linearVelocity = direction * DASH_POWER;
             can_control = false;
             cooltime[(int)SkillName.Dash].SetCooltime();

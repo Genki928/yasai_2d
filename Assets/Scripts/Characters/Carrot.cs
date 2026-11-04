@@ -17,6 +17,7 @@ public class Carrot : CharBase
     [SerializeField] GameObject dust;
     [SerializeField] GameObject collision;
     [SerializeField] AudioClip se1;
+    [SerializeField] AfterImage afterImage;
     //ヘドバン関連
     [SerializeField] private float headBangAngle = 60f;
     [SerializeField] private float rotateSpeed = 350f;
@@ -121,6 +122,8 @@ public class Carrot : CharBase
             // タックル開始
             audioSource.PlayOneShot(se2);
 
+            afterImage.isActive = true;
+
             StartCoroutine(Tackle());
             Debug.Log("tackle");
 
@@ -166,6 +169,7 @@ public class Carrot : CharBase
         rb.linearVelocity = Vector2.zero;
 
         can_control = true;
+        afterImage.isActive = false;
         sprite.sprite = carrot_default;
         transform.rotation = Quaternion.identity;
     }

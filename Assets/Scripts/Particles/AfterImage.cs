@@ -6,6 +6,7 @@ public class AfterImage : MonoBehaviour
     [SerializeField] float lifeTime = 0.3f;  // c‘œ‚Ìõ–½
 
     float timer;
+    public bool isActive = false;
     SpriteRenderer sr;
 
     void Start()
@@ -15,6 +16,7 @@ public class AfterImage : MonoBehaviour
 
     void Update()
     {
+        if (!isActive) return;
         timer += Time.deltaTime;
 
         if (timer >= interval)

@@ -117,6 +117,7 @@ MonoBehaviour:
   se_low: {fileID: 8300000, guid: c3ec62ca64c77e54d931fe4a2b80a0c3, type: 3}
   se_high: {fileID: 8300000, guid: 9579f2e1a90afa248a5f6ae6609ed277, type: 3}
   CTSound: {fileID: 8300000, guid: 8bb75693643806d478f557037820d378, type: 3}
+  dash_se: {fileID: 8300000, guid: 514afbb96d09ea54490962cb68d9ada0, type: 3}
   flash_color: {r: 1, g: 1, b: 1, a: 1}
   flash_duration: 0.3
   audioSource: {fileID: 0}

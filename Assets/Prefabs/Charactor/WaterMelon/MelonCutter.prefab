@@ -134,6 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AfterImage
   interval: 0.02
   lifeTime: 0.3
+  isActive: 1
 --- !u!50 &8178554706918018616
 Rigidbody2D:
   serializedVersion: 5

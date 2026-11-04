@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7264720181401941110}
   - component: {fileID: 7844761951757042004}
   - component: {fileID: 7386155764327058538}
+  - component: {fileID: 1445348526669289684}
   - component: {fileID: 2387769583341587097}
   - component: {fileID: 8785239974707632202}
   - component: {fileID: -523274106162449980}
@@ -117,6 +118,7 @@ MonoBehaviour:
   se_low: {fileID: 8300000, guid: c3ec62ca64c77e54d931fe4a2b80a0c3, type: 3}
   se_high: {fileID: 8300000, guid: 9579f2e1a90afa248a5f6ae6609ed277, type: 3}
   CTSound: {fileID: 8300000, guid: 8bb75693643806d478f557037820d378, type: 3}
+  dash_se: {fileID: 8300000, guid: 514afbb96d09ea54490962cb68d9ada0, type: 3}
   flash_color: {r: 1, g: 1, b: 1, a: 1}
   flash_duration: 0.3
   audioSource: {fileID: 0}
@@ -129,10 +131,26 @@ MonoBehaviour:
   dust: {fileID: 1560168367213963595, guid: 31c763f52fdaf2d45885cba010fc705b, type: 3}
   collision: {fileID: 9138792514576026239, guid: 5a4d1edade8353449bbdfabf13041c1a, type: 3}
   se1: {fileID: 8300000, guid: 448a5754cbe316f4097b31c33ad2b5ed, type: 3}
+  afterImage: {fileID: 1445348526669289684}
   headBangAngle: 90
   rotateSpeed: 500
   headBangDamage: 15
   se2: {fileID: 8300000, guid: 6b86bf8af024f7d4a9894b59048fc879, type: 3}
+--- !u!114 &1445348526669289684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3071852468601324621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 161c67caaf1c5c94da669c2c2cab5210, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AfterImage
+  interval: 0.05
+  lifeTime: 0.3
+  isActive: 0
 --- !u!114 &2387769583341587097
 MonoBehaviour:
   m_ObjectHideFlags: 0

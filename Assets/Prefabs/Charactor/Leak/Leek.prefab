@@ -15,9 +15,7 @@ GameObject:
   - component: {fileID: 8785239974707632202}
   - component: {fileID: -523274106162449980}
   - component: {fileID: 329559975475562997}
-  - component: {fileID: 2987401258688071605}
-  - component: {fileID: 1579335020732595261}
-  - component: {fileID: -5572309227155847356}
+  - component: {fileID: 5509008597776982204}
   m_Layer: 3
   m_Name: Leek
   m_TagString: Untagged
@@ -120,6 +118,7 @@ MonoBehaviour:
   se_low: {fileID: 8300000, guid: c3ec62ca64c77e54d931fe4a2b80a0c3, type: 3}
   se_high: {fileID: 8300000, guid: 9579f2e1a90afa248a5f6ae6609ed277, type: 3}
   CTSound: {fileID: 8300000, guid: 8bb75693643806d478f557037820d378, type: 3}
+  dash_se: {fileID: 8300000, guid: 514afbb96d09ea54490962cb68d9ada0, type: 3}
   flash_color: {r: 1, g: 1, b: 1, a: 1}
   flash_duration: 0.3
   audioSource: {fileID: 0}
@@ -136,8 +135,7 @@ MonoBehaviour:
   leek_default: {fileID: 7332616297026234698, guid: d10a89a93760c8748a7eea9368b287d5, type: 3}
   counterDashPower: 20
   counterDashDuration: 0.1
-  afterImage: {fileID: 2987401258688071605}
-  hitStop: {fileID: -5572309227155847356}
+  afterImage: {fileID: 5509008597776982204}
 --- !u!114 &2387769583341587097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,7 +391,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2987401258688071605
+--- !u!114 &5509008597776982204
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -402,35 +400,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3071852468601324621}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ebdc475cbe3d8845ad2aa01780bc982, type: 3}
+  m_Script: {fileID: 11500000, guid: 161c67caaf1c5c94da669c2c2cab5210, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LeekAfterImage
-  interval: 0.025
-  lifeTime: 0.2
+  m_EditorClassIdentifier: Assembly-CSharp::AfterImage
+  interval: 0.15
+  lifeTime: 0.1
   isActive: 0
---- !u!114 &1579335020732595261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3071852468601324621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 928bc8fe1080f5243931aec608663e5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LeekGhostFade
---- !u!114 &-5572309227155847356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3071852468601324621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd9669951fc864c47a55ced9e66a1759, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HitStop
-  stopTime: 0.08
-  stopScale: 0.05

@@ -12,6 +12,8 @@ public class DoubleDamageArea : DamageAreaBase
     {
         if (col.TryGetComponent<IBurst>(out var cb))
         {
+            Debug.Log($"ÚG‘ÎÛID:{cb.id} / UŒ‚ŽÒID:{_id}");
+
             if (cb.id == _id) return;
 
             int index = _damageLimit.FindIndex(dl => dl.id == cb.id);

@@ -25,11 +25,10 @@ public class Leek : CharBase
     [Header("Counter Dash")]
     [SerializeField] private float counterDashPower = 40f;
     [SerializeField] private float counterDashDuration = 0.05f;
-    [SerializeField] LeekAfterImage afterImage;
+    [SerializeField] AfterImage afterImage;
 
     private bool isCounter = false;
     private Coroutine counterCoroutine;
-    [SerializeField] HitStop hitStop;
 
     // 通常攻撃
     public override void Skill1(InputAction.CallbackContext ctx)
@@ -123,8 +122,6 @@ public class Leek : CharBase
             }
 
             EndCounter();
-
-            hitStop.Stop(); // ヒットストップ発生
 
             CounterAttack();
 
