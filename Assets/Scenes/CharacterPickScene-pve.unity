@@ -1502,7 +1502,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6995749512459249528, guid: 8e5e2986af8a4e045b1f62cfe0221c5e, type: 3}
       propertyPath: m_FontData.m_FontSize
-      value: 50
+      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2017,7 +2017,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6995749512459249528, guid: 8e5e2986af8a4e045b1f62cfe0221c5e, type: 3}
       propertyPath: m_FontData.m_FontSize
-      value: 50
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 9121462041268236965, guid: 8e5e2986af8a4e045b1f62cfe0221c5e, type: 3}
       propertyPath: m_Text
