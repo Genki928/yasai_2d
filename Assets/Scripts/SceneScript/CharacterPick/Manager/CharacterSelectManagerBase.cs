@@ -26,6 +26,10 @@ public class CharacterSelectManagerBase : MonoBehaviour
     protected AudioSource audioSource;
     protected bool isChangingScene = false; // ìÒèdëJà⁄ñhé~
 
+    [Header("Å• Signboard")]
+    [SerializeField] GameObject[] _signboard = new GameObject[2];
+    bool[] _isDisplaySignboard = new bool[2] { false, false };
+
     // --- íËêî --- //
     protected int PLAYER_COUNT = 1;
     protected string NEXT_SCENE = "";
@@ -167,7 +171,10 @@ public class CharacterSelectManagerBase : MonoBehaviour
     {
         // ñºëOÇïœçX
         model[id].name.text = cursor[id].Icon.CharacterData.Name;
-        model[id].lore.text = cursor[id].Icon.CharacterData.Lore.lore;
+        model[id].skill1.text = cursor[id].Icon.CharacterData.Lore.skill1Name;
+        model[id].lore1.text = cursor[id].Icon.CharacterData.Lore.lore1;
+        model[id].skill2.text = cursor[id].Icon.CharacterData.Lore.skill2Name;
+        model[id].lore2.text = cursor[id].Icon.CharacterData.Lore.lore2;
 
         // âÊëúÇïœçX
         model[id].model.sprite = cursor[id].Icon.CharacterData.Sprite;
@@ -188,6 +195,16 @@ public class CharacterSelectManagerBase : MonoBehaviour
     protected void Ready(bool ready)
     {
         readyObj.SetActive(ready);
+    }
+
+    public void ToggleDoDisplaySignboard(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed) return;
+
+        Debug.Log("testes");
+        var id = Identification(ctx);
+        _isDisplaySignboard[id] = !_isDisplaySignboard[id];
+        _signboard[id].SetActive(_isDisplaySignboard[id]);
     }
 
     protected class CursorData
@@ -223,11 +240,31 @@ public class CharacterSelectManagerBase : MonoBehaviour
     {
         public Image model;
         public Text name;
-        public Text lore;
+        public Text skill1;
+        public Text lore1;
+        public Text skill2;
+        public Text lore2;
     }
 }
 
 public static class PVESelectedCharId
 {
     public static CharId id = CharId.Carrot;
+}
+
+public static class PlayerPick
+{
+    public static CharId[] pick = new CharId[2] { CharId.Corn, CharId.Corn };
+}
+
+public enum CharId
+{
+    Carrot = 0,
+    RedPepper = 1,
+    Leek = 2,
+    Corn = 3,
+    WaterMelon = 4,
+    Mushroom = 5,
+    potato = 6,
+    random = 7
 }

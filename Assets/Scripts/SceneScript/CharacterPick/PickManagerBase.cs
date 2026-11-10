@@ -199,7 +199,7 @@ public class PickManagerBase : MonoBehaviour
         cursor_obj[n].transform.position = new(pos.x + ICON_HORIZONTAL_SPACE * cursor[n].pos[X], pos.y - ICON_VERTICAL_SPACE * cursor[n].pos[Y]);
         state[n].model.GetComponent<SpriteRenderer>().sprite = icon_img[cursor[n].pos[Y] * ICON_LINEFEED_COUNT + cursor[n].pos[X]];
         state[n].name.text = pick_data[cursor[n].pos[Y] * ICON_LINEFEED_COUNT + cursor[n].pos[X]].char_name;
-        state[n].lore.text = pick_data[cursor[n].pos[Y] * ICON_LINEFEED_COUNT + cursor[n].pos[X]].lore;
+        //state[n].lore.text = pick_data[cursor[n].pos[Y] * ICON_LINEFEED_COUNT + cursor[n].pos[X]].lore;
     }
 
     private void OnDrawGizmos()
@@ -224,21 +224,4 @@ public class StateIndicater
     public Text lore;
     public GameObject model;
     public GameObject button;
-}
-
-public static class PlayerPick
-{
-    public static CharId[] pick = new CharId[2] { CharId.Corn, CharId.Corn };
-}
-
-public enum CharId
-{
-    Carrot = 0,
-    RedPepper = 1,
-    Leek = 2,
-    Corn = 3,
-    WaterMelon = 4,
-    Mushroom = 5,
-    potato = 6,
-    random = 7
 }
