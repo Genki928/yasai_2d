@@ -27,8 +27,7 @@ public class CharacterSelectManagerBase : MonoBehaviour
     protected bool isChangingScene = false; // 二重遷移防止
 
     [Header("▼ Signboard")]
-    [SerializeField] GameObject[] _signboard = new GameObject[2];
-    bool[] _isDisplaySignboard = new bool[2] { false, false };
+    protected Signboard signboard;
 
     // --- 定数 --- //
     protected int PLAYER_COUNT = 1;
@@ -37,6 +36,7 @@ public class CharacterSelectManagerBase : MonoBehaviour
     protected virtual void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        signboard = GetComponent<Signboard>();
 
         // カーソルの初期設定
         for (int i = 0; i < PLAYER_COUNT; i++)
@@ -63,6 +63,8 @@ public class CharacterSelectManagerBase : MonoBehaviour
     {
         // 入力を真に切り替える
         var id = Identification(ctx);
+        if (signboard.GetOption(id)) return;
+
         cursor[id].SetInteract(true);
 
         // カーソルの描画
@@ -195,16 +197,6 @@ public class CharacterSelectManagerBase : MonoBehaviour
     protected void Ready(bool ready)
     {
         readyObj.SetActive(ready);
-    }
-
-    public void ToggleDoDisplaySignboard(InputAction.CallbackContext ctx)
-    {
-        if (!ctx.performed) return;
-
-        Debug.Log("testes");
-        var id = Identification(ctx);
-        _isDisplaySignboard[id] = !_isDisplaySignboard[id];
-        _signboard[id].SetActive(_isDisplaySignboard[id]);
     }
 
     protected class CursorData

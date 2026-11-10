@@ -24,6 +24,8 @@ public class Signboard : MonoBehaviour
         else return 1;
     }
 
+    public bool GetOption(int id) { return _isDisplaySignboard[id]; }
+
     class MoveSignboard
     {
         bool _isDisplaySignboard = false;

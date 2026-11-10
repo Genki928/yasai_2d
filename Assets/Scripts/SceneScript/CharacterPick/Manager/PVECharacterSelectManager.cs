@@ -16,6 +16,7 @@ public class PVECharacterSelectManager : CharacterSelectManagerBase
     {
         // 入力中じゃなければ中断
         if (!ctx.performed) return;
+        if (signboard.GetOption(0)) return;
 
         // いずれのプレイヤーも決定中なら、対戦シーンに移行する
         if (cursor.Count(n => n.Interact) == PLAYER_COUNT)
