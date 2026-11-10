@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CornLore
   m_EditorClassIdentifier: Assembly-CSharp::PickData
   char_name: "\u30E2\u30ED\u30B3\u30B7"
-  skill1Name: moro
-  lore1: test
-  skill2Name: kosi
-  lore2: test
+  skill1Name: "\u30B3\u30FC\u30F3\u5C04\u51FA"
+  lore1: "\u76F8\u624B\u3081\u304C\u3051\u3066\u7206\u767A\u7269\u3092\u6483\u3061\u51FA\u3059"
+  skill2Name: "\u30DD\u30C3\u30D7\u30B3\u30FC\u30F3\u5730\u96F7"
+  lore2: "\u30DD\u30C3\u30D7\u30B3\u30FC\u30F3\u578B\u306E\u5730\u96F7\u3092\u8A2D\u7F6E\u3059\u308B\n\u63A5\u89E6\u3059\u308B\u3068\u7206\u767A\u3059\u308B"

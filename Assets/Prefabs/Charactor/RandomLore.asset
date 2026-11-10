@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RandomLore
   m_EditorClassIdentifier: Assembly-CSharp::PickData
   char_name: "\u304A\u307E\u304B\u305B"
-  skill1Name: '?'
-  lore1: test
-  skill2Name: '?'
-  lore2: test
+  skill1Name: "\u304A\u307E\u304B\u305B"
+  lore1: 
+  skill2Name: "\u304A\u307E\u304B\u305B"
+  lore2: 

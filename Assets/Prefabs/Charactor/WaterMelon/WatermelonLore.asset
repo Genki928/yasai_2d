@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WatermelonLore
   m_EditorClassIdentifier: Assembly-CSharp::PickData
   char_name: "\u30B9\u30A4\u30AB"
-  skill1Name: sumi
-  lore1: test
-  skill2Name: ka
-  lore2: test
+  skill1Name: "3\u9023\u30D0\u30FC\u30B9\u30C8"
+  lore1: "\u30B9\u30A4\u30AB\u306E\u7A2E\u30923\u56DE\u767A\u5C04\u3059\u308B"
+  skill2Name: "\u5207\u308A\u8EAB\u30AB\u30C3\u30BF\u30FC"
+  lore2: "\u5207\u308A\u8EAB\u3092\u98DB\u3070\u3059"

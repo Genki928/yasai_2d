@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MushroomLore
   m_EditorClassIdentifier: Assembly-CSharp::PickData
   char_name: "\u30B7\u30A4\u30BF\u30B1"
-  skill1Name: sii
-  lore1: test
-  skill2Name: take
-  lore2: test
+  skill1Name: "\u30D8\u30C9\u30D0\u30F3"
+  lore1: "\u982D\u3092\u30AD\u30CE\u30AD\u30CE\u632F\u308A\u56DE\u3059"
+  skill2Name: "\u80DE\u5B50\u7206\u5F3E"
+  lore2: "\u63A5\u5730\u3057\u305F\u5730\u9762\u306B\u6BD2\u3092\u3070\u3089\u307E\u304F\n\u89E6\u308B\u3068\u52D5\u304D\u304C\u920D\u304F\u306A\u308B"

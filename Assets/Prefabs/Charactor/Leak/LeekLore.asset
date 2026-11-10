@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PickData
   char_name: "\u30CD\u30AE"
   skill1Name: "\u30CD\u30AE\u3057\u3070\u304D"
-  lore1: test
+  lore1: "\u30CD\u30AE\u3067\u3057\u3070\u304F"
   skill2Name: "\u30AB\u30A6\u30F3\u30BF\u30FC"
-  lore2: test
+  lore2: "\u9752\u3005\u3068\u3057\u305F\u30D5\u30A3\u30FC\u30EB\u30C9\u3092\u5C55\u958B\u3059\u308B\n\u653B\u6483\u3055\u308C\u308B\u3068\u53CD\u6483\u3059\u308B"
