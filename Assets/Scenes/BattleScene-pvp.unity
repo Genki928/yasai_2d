@@ -297,6 +297,7 @@ GameObject:
   - component: {fileID: 68940454}
   - component: {fileID: 68940456}
   - component: {fileID: 68940455}
+  - component: {fileID: 68940457}
   m_Layer: 5
   m_Name: Name
   m_TagString: Untagged
@@ -365,6 +366,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 68940453}
   m_CullTransparentMesh: 1
+--- !u!114 &68940457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68940453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 4, y: -4}
+  m_UseGraphicAlpha: 1
 --- !u!1 &90560304
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,6 +908,7 @@ GameObject:
   - component: {fileID: 278573676}
   - component: {fileID: 278573678}
   - component: {fileID: 278573677}
+  - component: {fileID: 278573679}
   m_Layer: 5
   m_Name: Text (Legacy)
   m_TagString: Untagged
@@ -951,7 +968,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Burst!
+  m_Text: Burst
 --- !u!222 &278573678
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -960,6 +977,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 278573675}
   m_CullTransparentMesh: 1
+--- !u!114 &278573679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278573675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 10, y: -10}
+  m_UseGraphicAlpha: 1
 --- !u!1 &338062831
 GameObject:
   m_ObjectHideFlags: 0
@@ -2234,6 +2266,7 @@ GameObject:
   - component: {fileID: 555334164}
   - component: {fileID: 555334166}
   - component: {fileID: 555334165}
+  - component: {fileID: 555334167}
   m_Layer: 5
   m_Name: GoText
   m_TagString: Untagged
@@ -2293,7 +2326,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Go!
+  m_Text: Go
 --- !u!222 &555334166
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2302,6 +2335,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 555334163}
   m_CullTransparentMesh: 1
+--- !u!114 &555334167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555334163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 10, y: -10}
+  m_UseGraphicAlpha: 1
 --- !u!1 &571109038
 GameObject:
   m_ObjectHideFlags: 0
@@ -3250,6 +3298,7 @@ GameObject:
   - component: {fileID: 1185835668}
   - component: {fileID: 1185835667}
   - component: {fileID: 1185835666}
+  - component: {fileID: 1185835669}
   m_Layer: 5
   m_Name: Text (Legacy)
   m_TagString: Untagged
@@ -3332,6 +3381,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1185835664}
   m_CullTransparentMesh: 1
+--- !u!114 &1185835669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185835664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 4, y: -4}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1225425197
 GameObject:
   m_ObjectHideFlags: 0
@@ -4915,6 +4979,7 @@ GameObject:
   - component: {fileID: 1884264678}
   - component: {fileID: 1884264680}
   - component: {fileID: 1884264679}
+  - component: {fileID: 1884264681}
   m_Layer: 5
   m_Name: ReadyText
   m_TagString: Untagged
@@ -4983,6 +5048,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1884264677}
   m_CullTransparentMesh: 1
+--- !u!114 &1884264681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884264677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 10, y: -10}
+  m_UseGraphicAlpha: 0
 --- !u!1 &1884855738
 GameObject:
   m_ObjectHideFlags: 0
@@ -5440,6 +5520,7 @@ GameObject:
   - component: {fileID: 2050718655}
   - component: {fileID: 2050718657}
   - component: {fileID: 2050718656}
+  - component: {fileID: 2050718658}
   m_Layer: 5
   m_Name: suddendeath
   m_TagString: Untagged
@@ -5510,6 +5591,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2050718654}
   m_CullTransparentMesh: 1
+--- !u!114 &2050718658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2050718654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.972549}
+  m_EffectDistance: {x: 4, y: -4}
+  m_UseGraphicAlpha: 1
 --- !u!1001 &2075047626
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5765,6 +5861,7 @@ GameObject:
   - component: {fileID: 2132095579}
   - component: {fileID: 2132095581}
   - component: {fileID: 2132095580}
+  - component: {fileID: 2132095582}
   m_Layer: 5
   m_Name: Name
   m_TagString: Untagged
@@ -5833,6 +5930,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2132095578}
   m_CullTransparentMesh: 1
+--- !u!114 &2132095582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132095578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 4, y: -4}
+  m_UseGraphicAlpha: 1
 --- !u!222 &910458862743596325
 CanvasRenderer:
   m_ObjectHideFlags: 0
