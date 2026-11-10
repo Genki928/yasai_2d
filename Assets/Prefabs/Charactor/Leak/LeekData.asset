@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 414cba326641da042aacc708ac76fb71, type: 3}
-  m_Name: Carrot
+  m_Name: LeekData
   m_EditorClassIdentifier: Assembly-CSharp::CharData
-  char_name: "\u30CB\u30F3\u30B8\u30F3"
+  char_name: "\u30CA\u30AC\u30CD\u30AE"
   speed: 4
-  max_burst: 220
+  max_burst: 200
   regen_burst_cooltime: 3
   restart_regen_burst_value: 2
-  skill_1_rigid: 0
+  skill_1_rigid: 0.3
   skill_1_cooltime: 0.5
-  skill_2_rigid: 0.2
-  skill_2_cooltime: 2
+  skill_2_rigid: 0
+  skill_2_cooltime: 3
   dash_cooltime: 1

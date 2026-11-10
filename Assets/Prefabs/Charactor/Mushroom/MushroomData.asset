@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 414cba326641da042aacc708ac76fb71, type: 3}
-  m_Name: RedPepper
+  m_Name: MushroomData
   m_EditorClassIdentifier: Assembly-CSharp::CharData
-  char_name: "\u30C8\u30A6\u30AC\u30E9\u30B7"
+  char_name: "\u30B7\u30A4\u30BF\u30B1"
   speed: 4
-  max_burst: 180
+  max_burst: 200
   regen_burst_cooltime: 3
   restart_regen_burst_value: 2
-  skill_1_rigid: 0.2
-  skill_1_cooltime: 1
-  skill_2_rigid: 0.3
-  skill_2_cooltime: 3
+  skill_1_rigid: 0
+  skill_1_cooltime: 0.5
+  skill_2_rigid: 0.5
+  skill_2_cooltime: 0.7
   dash_cooltime: 1
