@@ -6,11 +6,18 @@ public class Signboard : MonoBehaviour
 {
     [SerializeField] GameObject[] _signboard = new GameObject[2];
     bool[] _isDisplaySignboard = new bool[2] { false, false };
+    PVECharacterSelectManager _characterSelectManager;
+
+    void Start()
+    {
+        _characterSelectManager = GetComponent<PVECharacterSelectManager>();
+    }
 
     // 
     public void ToggleDoDisplaySignboard(InputAction.CallbackContext ctx)
     {
         if (!ctx.performed) return;
+        if (_characterSelectManager.GetReady(Identification(ctx))) return;
 
         var id = Identification(ctx);
         _isDisplaySignboard[id] = !_signboard[id].activeSelf;

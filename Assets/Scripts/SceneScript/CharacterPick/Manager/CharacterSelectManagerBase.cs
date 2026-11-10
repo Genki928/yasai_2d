@@ -52,6 +52,8 @@ public class CharacterSelectManagerBase : MonoBehaviour
         }
     }
 
+    public bool GetReady(int id) { return cursor[id].Interact; }
+
     protected virtual int Identification(InputAction.CallbackContext ctx)
     {
         // Ž¯•Ê
