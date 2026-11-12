@@ -79,7 +79,7 @@ public class SoloBattleManager : BattleManagerBase
         if (start && !gameset)
         {
             timer.Count(Time.deltaTime);
-            if (++spawn_cooltime > SPAWN_COOLTIME - ((60 - timer.TImeLimit) / 10))
+            if (++spawn_cooltime > SPAWN_COOLTIME - ((60 - timer.TImeLimit) / 3))
             {
                 // ランダムな場所からスポーン
                 int spawn = Random.Range(0, target_spawn_point.Count);
