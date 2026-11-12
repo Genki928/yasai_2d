@@ -173,7 +173,7 @@ public class SoloResultManager : MonoBehaviour
 
             // Ä‹A
             if (n > 1) audioSource.PlayOneShot(shortDram);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.25f);
             StartCoroutine(DisplayRank(n));
         }
         else
