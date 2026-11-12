@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,11 +5,14 @@ public class Signboard : MonoBehaviour
 {
     [SerializeField] GameObject[] _signboard = new GameObject[2];
     bool[] _isDisplaySignboard = new bool[2] { false, false };
-    PVECharacterSelectManager _characterSelectManager;
+    CharacterSelectManagerBase _characterSelectManager;
+    AudioSource _audioSource;
+    [SerializeField] AudioClip _audioClip;
 
     void Start()
     {
-        _characterSelectManager = GetComponent<PVECharacterSelectManager>();
+        _characterSelectManager = GetComponent<CharacterSelectManagerBase>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // 
@@ -22,6 +24,7 @@ public class Signboard : MonoBehaviour
         var id = Identification(ctx);
         _isDisplaySignboard[id] = !_signboard[id].activeSelf;
         _signboard[id].SetActive(_isDisplaySignboard[id]);
+        _audioSource.PlayOneShot(_audioClip);
     }
 
     protected virtual int Identification(InputAction.CallbackContext ctx)
