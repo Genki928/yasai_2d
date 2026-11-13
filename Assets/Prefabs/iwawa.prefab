@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1082595374057625771}
   - component: {fileID: 743019370929440880}
+  - component: {fileID: 1685728008487968582}
   - component: {fileID: 6878644459104500533}
   m_Layer: 0
   m_Name: iwawa
@@ -78,8 +79,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1851983597
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -209476004654104678, guid: 331193cacf141ef4ab630b0147268f44, type: 3}
@@ -92,6 +93,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1685728008487968582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804312136588902973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fd841aa498a8d64487b4a594b588661, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::iwa
 --- !u!58 &6878644459104500533
 CircleCollider2D:
   m_ObjectHideFlags: 0
