@@ -30,7 +30,7 @@ public class PVPCharacterSelectManager : CharacterSelectManagerBase
 
                 // ランダムが選択されているなら、キャラクターを抽選
                 if (num[i] == CharId.random)
-                    num[i] = (CharId)UnityEngine.Random.Range(0, Enum.GetValues(typeof(CharId)).Length - 1);
+                    num[i] = (CharId)UnityEngine.Random.Range(0, 6);
             }
 
             // スタティック変数に代入

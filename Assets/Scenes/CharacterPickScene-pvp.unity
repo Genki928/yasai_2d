@@ -1924,6 +1924,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Icons
       objectReference: {fileID: 0}
+    - target: {fileID: 1835855316210872811, guid: 0f897709eb52ba24e9c43931fce5eeb8, type: 3}
+      propertyPath: data.id
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4884599716596106737, guid: 0f897709eb52ba24e9c43931fce5eeb8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
