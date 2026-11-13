@@ -129,6 +129,10 @@ PrefabInstance:
       propertyPath: m_Text
       value: "\u30BF\u30C3\u30AF\u30EB"
       objectReference: {fileID: 0}
+    - target: {fileID: 4209225120481553925, guid: 8e5e2986af8a4e045b1f62cfe0221c5e, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 74bf922aaed22b644ad1b20948419791, type: 3}
     - target: {fileID: 4221863589908547520, guid: 8e5e2986af8a4e045b1f62cfe0221c5e, type: 3}
       propertyPath: m_SizeDelta.x
       value: 676.9554
@@ -230,6 +234,10 @@ PrefabInstance:
       value: "\u92ED\u5229\u306A\u4F53\u8EAF\u3092\u751F\u304B\u3057\u3001\n\u4F53\u5F53\u305F\u308A\u3059\u308B"
       objectReference: {fileID: 0}
     - target: {fileID: 6995749512459249528, guid: 8e5e2986af8a4e045b1f62cfe0221c5e, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 74bf922aaed22b644ad1b20948419791, type: 3}
+    - target: {fileID: 6995749512459249528, guid: 8e5e2986af8a4e045b1f62cfe0221c5e, type: 3}
       propertyPath: m_FontData.m_FontSize
       value: 60
       objectReference: {fileID: 0}
@@ -259,6 +267,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skill 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4209225120481553925, guid: 8e5e2986af8a4e045b1f62cfe0221c5e, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 74bf922aaed22b644ad1b20948419791, type: 3}
     - target: {fileID: 4221863589908547520, guid: 8e5e2986af8a4e045b1f62cfe0221c5e, type: 3}
       propertyPath: m_SizeDelta.x
       value: 670.1262
@@ -355,6 +367,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6995749512459249528, guid: 8e5e2986af8a4e045b1f62cfe0221c5e, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 74bf922aaed22b644ad1b20948419791, type: 3}
     - target: {fileID: 6995749512459249528, guid: 8e5e2986af8a4e045b1f62cfe0221c5e, type: 3}
       propertyPath: m_FontData.m_FontSize
       value: 60

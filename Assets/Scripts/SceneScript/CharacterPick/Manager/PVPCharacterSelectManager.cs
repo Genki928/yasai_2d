@@ -35,6 +35,7 @@ public class PVPCharacterSelectManager : CharacterSelectManagerBase
 
             // スタティック変数に代入
             PlayerPick.pick = num;
+            Debug.Log(num[0] + " / " + num[1]);
 
             // SEの再生
             StartCoroutine(WaitAndLoadScene(audioAssets.SelectSE, NEXT_SCENE));
