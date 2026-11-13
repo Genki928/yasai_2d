@@ -461,7 +461,7 @@ MonoBehaviour:
   - {fileID: 4618156151337208691}
   - {fileID: 4618156151337208691}
   data:
-    name: "\u30AD\u30CE\u30B3"
+    name: "\u30B7\u30A4\u30BF\u30B1"
     lore: {fileID: 11400000, guid: bc398cef82aebeb47b803c62d5a0cf95, type: 2}
     id: 5
     size: {x: 700, y: 900}
@@ -904,7 +904,7 @@ MonoBehaviour:
   data:
     name: "\u304A\u307E\u304B\u305B"
     lore: {fileID: 11400000, guid: de6d822c134e69d40aa9c73829eaaf4c, type: 2}
-    id: 7
+    id: 6
     size: {x: 500, y: 500}
     sprite: {fileID: -5607665994977009084, guid: 5e5181d04afd86f4582999e3fc5e3616, type: 3}
     interactedSprite: {fileID: -5607665994977009084, guid: 5e5181d04afd86f4582999e3fc5e3616, type: 3}
