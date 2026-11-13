@@ -6077,10 +6077,7 @@ PrefabInstance:
     - {fileID: 6345200015972988572, guid: 06b28635ff86a6d4793ee4e5ac0ae9a7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1804312136588902973, guid: 06b28635ff86a6d4793ee4e5ac0ae9a7, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 4446739380433507288}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06b28635ff86a6d4793ee4e5ac0ae9a7, type: 3}
 --- !u!1 &4446739380433507282 stripped
 GameObject:
@@ -6092,18 +6089,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1082595374057625771, guid: 06b28635ff86a6d4793ee4e5ac0ae9a7, type: 3}
   m_PrefabInstance: {fileID: 4446739380433507281}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4446739380433507288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4446739380433507282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fd841aa498a8d64487b4a594b588661, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::iwa
 --- !u!1 &7029128668122017194
 GameObject:
   m_ObjectHideFlags: 0
