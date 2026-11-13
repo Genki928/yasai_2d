@@ -9,9 +9,9 @@ public class CornBullet : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent<CharBase>(out var cb) && cb.id != id)
-            Bomb();
+            Destroy(gameObject);
         if (collision.CompareTag("Wall"))
-            Bomb();
+            Destroy(gameObject);
 
     }
 
@@ -22,11 +22,21 @@ public class CornBullet : MonoBehaviour
 
     void Bomb()
     {
-
+        Debug.Log("testetestests");
         // îöî≠ê∂ê¨
+        //Instantiate(popcorn, transform.position, Quaternion.identity);
+        //GameObject particle = Instantiate(bomb_obj, transform.position, Quaternion.identity);
+        //particle.GetComponent<SimpleDamageArea>().Init(id, new(15, DamageType.Soundable), new(0, 0));
+        //Debug.Log(particle);
+        //Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
         Instantiate(popcorn, transform.position, Quaternion.identity);
         GameObject particle = Instantiate(bomb_obj, transform.position, Quaternion.identity);
         particle.GetComponent<SimpleDamageArea>().Init(id, new(15, DamageType.Soundable), new(0, 0));
+        Debug.Log(particle);
         Destroy(gameObject);
     }
 }
