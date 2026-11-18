@@ -9,35 +9,58 @@ public class TitleManager : MonoBehaviour
 {
     [SerializeField] int arrow_max = 1;
     [SerializeField] int arrow_min = 0;
-    [SerializeField] int timer = 0;
-    //se用
+
+    // 無操作時間
+    float timer = 0f;
+
+    // 20秒で自動遷移
+    [SerializeField] float autoTransitionTime = 20f;
+
+    // SE用
     [SerializeField] List<AudioClip> se;
     public AudioSource audioSource;
 
-    bool isChangingScene = false; // 二重遷移防止
+    bool isChangingScene = false;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+
+        // タイマーを初期化
+        timer = 0f;
     }
 
     void Update()
     {
-        timer++;
-        if (timer / 60 == 20) SceneManager.LoadScene(SceneName.PROLOGUE);
+        // シーン遷移中はタイマーを動かさない
+        if (isChangingScene) return;
+
+        timer += Time.deltaTime;
+
+        // 20秒経過したらプロローグへ
+        if (timer >= autoTransitionTime)
+        {
+            isChangingScene = true;
+            SceneManager.LoadScene(SceneName.PROLOGUE);
+        }
     }
 
     public void SceneChange_CharacterPickScene(InputAction.CallbackContext ctx)
     {
         if (isChangingScene) return;
+        if (!ctx.performed) return;
 
-        if (ctx.performed && TextArrow.instance.arrow_pos == 0)
+        if (TextArrow.instance.arrow_pos == 0)
         {
-            StartCoroutine(PlaySEAndLoadScene(se[1], SceneName.CHARACTER_PICK_PVP));
+            StartCoroutine(
+                PlaySEAndLoadScene(se[1], SceneName.CHARACTER_PICK_PVP)
+            );
         }
-        if (ctx.performed && TextArrow.instance.arrow_pos == 1)
+        else if (TextArrow.instance.arrow_pos == 1)
         {
-            StartCoroutine(PlaySEAndLoadScene(se[1], SceneName.CHARACTER_PICK_PVE));
+            StartCoroutine(
+                PlaySEAndLoadScene(se[1], SceneName.CHARACTER_PICK_PVE)
+            );
         }
     }
 
@@ -57,26 +80,34 @@ public class TitleManager : MonoBehaviour
     public void Up(InputAction.CallbackContext ctx)
     {
         if (isChangingScene) return;
+
         if (ctx.performed)
         {
+            timer = 0f;
+
             audioSource.PlayOneShot(se[0]);
+
             TextArrow.instance.arrow_pos++;
+
             if (TextArrow.instance.arrow_pos > arrow_max)
                 TextArrow.instance.arrow_pos = arrow_min;
-            timer = 0;
         }
     }
 
     public void Down(InputAction.CallbackContext ctx)
     {
         if (isChangingScene) return;
+
         if (ctx.performed)
         {
+            timer = 0f;
+
             audioSource.PlayOneShot(se[0]);
+
             TextArrow.instance.arrow_pos--;
+
             if (TextArrow.instance.arrow_pos < arrow_min)
                 TextArrow.instance.arrow_pos = arrow_max;
-            timer = 0;
         }
     }
 }
