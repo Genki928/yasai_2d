@@ -320,8 +320,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextMove
   speed: 10
-  startPos: {x: -2000, y: 10}
-  targetPos: {x: 0, y: 10}
+  startPos: {x: -2000, y: 170}
+  targetPos: {x: 0, y: 170}
 --- !u!114 &122730334
 MonoBehaviour:
   m_ObjectHideFlags: 0
