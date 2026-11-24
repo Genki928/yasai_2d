@@ -1,10 +1,12 @@
+
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SimpleDamageArea : DamageAreaBase
 {
-    // ----- メンバ ----- //
-    List<int> _hitId = new();
+    // 命中済みのプレイヤーID
+    HashSet<int> _hitId = new();
+
     bool _delete = false;
     float _rigid;
 
@@ -12,13 +14,17 @@ public class SimpleDamageArea : DamageAreaBase
     {
         if (col.TryGetComponent<IBurst>(out var cb))
         {
-            // 中断処理
-            int check = _hitId.Find(cId => cb.id == cId);
-            if (check > 0 || _id == cb.id) return;
+            // 自分自身・命中済みの相手は無視
+            if (_id == cb.id || _hitId.Contains(cb.id)) return;
+
+            // 命中済みIDに追加
+            _hitId.Add(cb.id);
 
             // ダメージ
             cb.rigid += _rigid;
             cb.Damage(_damage, _id);
+
+            // 削除設定が有効なら破棄
             if (_delete) Destroy(gameObject);
         }
     }
@@ -32,16 +38,20 @@ public class SimpleDamageArea : DamageAreaBase
     }
 
     /// <summary> 初期化 </summary>
-    /// <param name="id"> 攻撃者のID </param>
-    /// <param name="damage"> 与えるダメージ </param>
-    /// <param name="vec"> 移動させるベクトル </param>
-    /// <param name="lifeTime"> 残留する時間 </param>
-    /// <param name="delete"> 削除するかどうか </param>
-    public void Init(int id, Damage damage, Vector2 vec, float lifeTime = 0.0f, bool delete = false, float rigid = 0.0f)
+    public void Init(
+        int id,
+        Damage damage,
+        Vector2 vec,
+        float lifeTime = 0.0f,
+        bool delete = false,
+        float rigid = 0.0f)
     {
         _id = id;
         _damage = damage;
-        if (lifeTime > 0.0f) Destroy(gameObject, lifeTime);
+
+        if (lifeTime > 0.0f)
+            Destroy(gameObject, lifeTime);
+
         _delete = delete;
         _rigid = rigid;
 

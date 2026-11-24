@@ -18,6 +18,8 @@ public class Carrot : CharBase
     [SerializeField] GameObject collision;
     [SerializeField] AudioClip se1;
     [SerializeField] AfterImage afterImage;
+    // タックル中の無敵判定
+    private bool isTackling = false;
     //ヘドバン関連
     [SerializeField] private float headBangAngle = 60f;
     [SerializeField] private float rotateSpeed = 350f;
@@ -137,6 +139,8 @@ public class Carrot : CharBase
     }
     private IEnumerator Tackle()
     {
+        isTackling = true;
+
         sprite.sprite = tackle;
         can_control = false;
 
@@ -158,7 +162,11 @@ public class Carrot : CharBase
             rb.linearVelocity = direction * tackleSpeed;
 
             // プレイヤーの前方に追従
-            obj.transform.position = (Vector2)transform.position + offset;
+            // 攻撃判定が存在している場合のみ追従
+            if (obj != null)
+            {
+                obj.transform.position = (Vector2)transform.position + offset;
+            }
 
             timer += Time.deltaTime;
             yield return null;
@@ -172,6 +180,8 @@ public class Carrot : CharBase
         afterImage.isActive = false;
         sprite.sprite = carrot_default;
         transform.rotation = Quaternion.identity;
+
+        isTackling = false;
     }
     public override Sprite GetDefaultImage()
     {
@@ -180,6 +190,9 @@ public class Carrot : CharBase
 
     public override void Damage(Damage value, int id)
     {
+        // タックル中はダメージを受けない
+        if (isTackling) return;
+
         base.Damage(value, id);
     }
 }

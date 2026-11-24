@@ -18,8 +18,11 @@ public class WaterMelon : CharBase
 
     //skill2
     [SerializeField] GameObject cutter;
+    [SerializeField] GameObject charge;
     [SerializeField] static int cutter_damage = 100;
+    [SerializeField] private float cutterOffsetY = 0.1f;
     private bool isCutter;
+    [SerializeField] private float chargeAnimationSpeed = 2.0f;
     [SerializeField] AudioClip cutter_sound;
     [SerializeField] AudioClip charge_sound;
 
@@ -109,17 +112,49 @@ public class WaterMelon : CharBase
     private IEnumerator WaterMelonCutter()
     {
         audioSource.PlayOneShot(charge_sound);
+
+        GameObject chargeEffect = Instantiate(
+            charge,
+            transform
+        );
+        // キャラクターの中心に配置
+        chargeEffect.transform.localPosition = new Vector3(0f, cutterOffsetY, 0f);
+        chargeEffect.transform.localRotation = Quaternion.identity;
+        // アニメーション速度を設定
+        Animator chargeAnimator = chargeEffect.GetComponent<Animator>();
+
+        if (chargeAnimator != null)
+        {
+            chargeAnimator.speed = chargeAnimationSpeed;
+        }
+
         isCutter = true;
         sprite.sprite = WaterMelon_skill;
         _states[(int)StateName.Speed].AddSpecialContent(new SpecialState(0, -2.0f));
+
         yield return new WaitForSeconds(0.7f);
-        // 座標・ベクトルの算出
+
+        // カッター生成
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        // 弾を生成 -> idの紐づけ
-        GameObject go = Instantiate(cutter, transform.position, Quaternion.Euler(0, 0, angle - 270f));
-        go.GetComponent<SimpleDamageArea>().Init(id, new(cutter_damage, DamageType.Soundable), direction * 45.0f / 2, 0.0f, true);
+
+        GameObject go = Instantiate(
+            cutter,
+            transform.position + new Vector3(0f, cutterOffsetY+0.4f, 0f),
+            Quaternion.Euler(0, 0, angle - 270f)
+        );
+
+        go.GetComponent<SimpleDamageArea>().Init(
+            id,
+            new(cutter_damage, DamageType.Soundable),
+            direction * 45.0f / 2,
+            0.0f,
+            false
+        );
+
         audioSource.PlayOneShot(cutter_sound);
+
         yield return new WaitForSeconds(0.2f);
+
         sprite.sprite = WaterMelon_default;
         isCutter = false;
         _states[(int)StateName.Speed].RemoveSpecialContent(0);

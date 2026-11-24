@@ -127,6 +127,7 @@ MonoBehaviour:
   bullet: {fileID: 5890270591182050869, guid: 1d6accef285da9f4c92c40d450da4332, type: 3}
   bullet_sound: {fileID: 8300000, guid: bf2fd588f3f3e0d41a648f2f186444f4, type: 3}
   cutter: {fileID: 5890270591182050869, guid: 2cab72ce24dddaa4ba86c4814e55259a, type: 3}
+  charge: {fileID: 5098228383535599702, guid: 750af2d6e14a3194080f6d8408344978, type: 3}
   cutter_sound: {fileID: 8300000, guid: f7aa04aa2af87f54db1371e4c79bdfda, type: 3}
   charge_sound: {fileID: 8300000, guid: 76ed563bda374854f9f31902f46ca644, type: 3}
 --- !u!114 &2387769583341587097
