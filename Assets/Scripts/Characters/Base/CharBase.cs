@@ -25,7 +25,7 @@ public class CharBase : MonoBehaviour, IBurst
     public int id { get; set; } = 0;
     public int max_burst { get; set; } = 100;
     public int burst { get; set; } = 0;
-    public float rigid {  get; set; } = 0;
+    public float rigid { get; set; } = 0;
     public Cooltime[] cooltime = new Cooltime[3];
     public bool can_control = true;
     public float regen_burst_timer = 0;
@@ -52,7 +52,7 @@ public class CharBase : MonoBehaviour, IBurst
     [SerializeField] AudioClip CTSound;
 
     [Header("◇ダッシュSE")]
-    [SerializeField] AudioClip dash_se;  
+    [SerializeField] AudioClip dash_se;
     //点滅演出用
     [SerializeField] Color flash_color = Color.white;
     [SerializeField] float flash_duration = 0.5f;
@@ -74,12 +74,12 @@ public class CharBase : MonoBehaviour, IBurst
         rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
         sprite = GetComponent<SpriteRenderer>();
-        
+
         //
         cursor_obj = Instantiate(cursor_pf, transform.position, Quaternion.identity).GetComponent<Arrow>();
         cursor_obj.Refresh(direction);
         cursor_obj.Set(this);
-        
+
         //
         max_burst = data.max_burst;
         _states.Add(new MoveSpeed(data.speed));
@@ -146,7 +146,7 @@ public class CharBase : MonoBehaviour, IBurst
             else
                 rb.linearVelocity = Vector2.zero;
         }
-        else if(burst>=max_burst)rb.linearVelocity = Vector2.zero;
+        else if (burst >= max_burst) rb.linearVelocity = Vector2.zero;
     }
 
     /// <summary> プレイヤーにダメージを与える </summary>
@@ -178,7 +178,7 @@ public class CharBase : MonoBehaviour, IBurst
         }
     }
     /// <summary> ダメージ量に応じたSEを再生 </summary>
-     protected void PlayDamageSE(int value)
+    protected void PlayDamageSE(int value)
     {
         if (audioSource == null) return;
 
@@ -319,7 +319,7 @@ public class CharBase : MonoBehaviour, IBurst
         return null;
     }
 
-    IEnumerator EDash()
+    virtual protected IEnumerator EDash()
     {
         yield return new WaitForSeconds(DASHING_SECONDS);
         rb.linearVelocity = Vector2.zero;

@@ -243,7 +243,7 @@ public class CharacterSelectManagerBase : MonoBehaviour
 
 public static class PVESelectedCharId
 {
-    public static CharId id = CharId.Corn;
+    public static CharId id = CharId.Bamboo;
 }
 
 public static class PlayerPick
@@ -259,5 +259,6 @@ public enum CharId
     Corn = 3,
     WaterMelon = 4,
     Mushroom = 5,
-    random = 6
+    Bamboo = 6,
+    random = 7,
 }
