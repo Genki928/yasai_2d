@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ public class CharBase : MonoBehaviour, IBurst
     const float DASHING_SECONDS = 0.2f;
 
     // ----- 変数 ----- //
+
     /// <summary> プレイヤーが死亡した際に起動するイベント </summary>
     public static event Action<int> OnPlayerDies;
 
@@ -25,12 +27,11 @@ public class CharBase : MonoBehaviour, IBurst
     public int id { get; set; } = 0;
     public int max_burst { get; set; } = 100;
     public int burst { get; set; } = 0;
-    public float rigid {  get; set; } = 0;
+    public float rigid { get; set; } = 0;
     public Cooltime[] cooltime = new Cooltime[3];
     public bool can_control = true;
     public float regen_burst_timer = 0;
     protected List<State> _states = new();
-
 
     [Header("◇カーソル")]
     [SerializeField] protected GameObject cursor_pf;
@@ -52,10 +53,28 @@ public class CharBase : MonoBehaviour, IBurst
     [SerializeField] AudioClip CTSound;
 
     [Header("◇ダッシュSE")]
-    [SerializeField] AudioClip dash_se;  
+    [SerializeField] AudioClip dash_se;
+
+    [Header("◇ヒットストップ")]
+    [SerializeField] float strongHitStopSe = 0.2f; //大ダメージ時の停止時間
+    [SerializeField] int HitThreshold = 50;        //ヒットストップが発生するダメージ量
+
+    // ヒットストップ管理用
+    private float hitStopTimer = 0f;
+    private Vector2 hitStopVelocity;
+    private bool isHitStopped = false;
+
+    [Header("◇ヒットストップ振動")]
+    [SerializeField] float StopShakeAmount = 0.05f; //振動の大きさ
+    [SerializeField] float StopShakeSpeed = 50f;    //振動の速さ
+
+    private Vector3 hitStopDefaultPosition;
+    private float shakeTime;
+
     //点滅演出用
     [SerializeField] Color flash_color = Color.white;
     [SerializeField] float flash_duration = 0.5f;
+
     //点滅マテリアル用
     MaterialPropertyBlock flash_mpb;
     static readonly int FlashAmountID = Shader.PropertyToID("_FlashAmount");
@@ -70,16 +89,19 @@ public class CharBase : MonoBehaviour, IBurst
 
     virtual protected void Start()
     {
-        //
+        // ヒットストップ時の初期位置を保存
+        hitStopDefaultPosition = transform.position;
+
+        // コンポーネント取得
         rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
         sprite = GetComponent<SpriteRenderer>();
-        
+
         //
         cursor_obj = Instantiate(cursor_pf, transform.position, Quaternion.identity).GetComponent<Arrow>();
         cursor_obj.Refresh(direction);
         cursor_obj.Set(this);
-        
+
         //
         max_burst = data.max_burst;
         _states.Add(new MoveSpeed(data.speed));
@@ -87,9 +109,11 @@ public class CharBase : MonoBehaviour, IBurst
         //
         foreach (var ct in cooltime)
             ct.OnCooltimeCharged += PlayCooltimeChargedSound;
+
         //マテリアルの初期化
         flash_mpb = new MaterialPropertyBlock();
     }
+
     //描画順番
     void LateUpdate()
     {
@@ -99,6 +123,46 @@ public class CharBase : MonoBehaviour, IBurst
 
     virtual protected void Update()
     {
+        // ----- ヒットストップ更新 ----- //
+
+        if (isHitStopped)
+        {
+            // 経過時間を減らす
+            hitStopTimer -= Time.unscaledDeltaTime;
+
+            // ヒットストップ終了
+            if (hitStopTimer <= 0f)
+            {
+                hitStopTimer = 0f;
+                isHitStopped = false;
+
+                // 速度を復元
+                rb.linearVelocity = hitStopVelocity;
+            }
+        }
+
+        // ----- ヒットストップ中の振動 ----- //
+
+        if (isHitStopped)
+        {
+            // 振動時間を進める
+            shakeTime += Time.unscaledDeltaTime * StopShakeSpeed;
+
+            // X・Y方向に振動させる
+            float offsetX = Mathf.Sin(shakeTime) * StopShakeAmount;
+            float offsetY = Mathf.Cos(shakeTime * 1.3f) * StopShakeAmount;
+
+            // 初期位置を基準に位置をずらす
+            transform.position = hitStopDefaultPosition
+                + new Vector3(offsetX, offsetY, 0f);
+        }
+        else
+        {
+            // 振動をリセット
+            shakeTime = 0f;
+            hitStopDefaultPosition = transform.position;
+        }
+
         float time = Time.deltaTime;
 
         // 移動速度更新
@@ -111,12 +175,14 @@ public class CharBase : MonoBehaviour, IBurst
 
         // クールタイムの更新
         for (int i = 0; i < 3; i++)
-            if (cooltime[i].Current > 0.0f) cooltime[i].RemoveCooltime(time);
+            if (cooltime[i].Current > 0.0f)
+                cooltime[i].RemoveCooltime(time);
 
-        // 
+        //
         if (regen_burst_timer < data.regen_burst_cooltime && burst < max_burst)
         {
             regen_burst_timer += Time.deltaTime;
+
             if (regen_burst_timer >= data.regen_burst_cooltime)
             {
                 regen_burst_timer = data.restart_regen_burst_value;
@@ -135,18 +201,30 @@ public class CharBase : MonoBehaviour, IBurst
         }
     }
 
+
     virtual protected void FixedUpdate()
     {
+        // ヒットストップ中は物理移動を停止
+        if (isHitStopped)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
         if (can_control)
         {
             // 硬直が無ければ移動
             if (rigid == 0)
                 rb.linearVelocity = vec * _states[(int)StateName.Speed].CurrentState;
+
             // 硬直があれば移動不可
             else
                 rb.linearVelocity = Vector2.zero;
         }
-        else if(burst>=max_burst)rb.linearVelocity = Vector2.zero;
+        else if (burst >= max_burst)
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
     }
 
     /// <summary> プレイヤーにダメージを与える </summary>
@@ -157,6 +235,14 @@ public class CharBase : MonoBehaviour, IBurst
 
         // バースト値が最大なら中断
         if (burst >= max_burst) return;
+
+        // ----- 大ダメージ時のみヒットストップ ----- //
+
+        if (damage.Value >= HitThreshold)
+        {
+            HitStop(strongHitStopSe);
+        }
+
         regen_burst_timer = 0;
 
         // 点滅演出
@@ -169,7 +255,8 @@ public class CharBase : MonoBehaviour, IBurst
         burst_bar.Draw(burst, max_burst);
 
         // ダメージ量に応じたSE再生
-        if (damage.Type == DamageType.Soundable) PlayDamageSE(damage.Value);
+        if (damage.Type == DamageType.Soundable)
+            PlayDamageSE(damage.Value);
 
         // バースト値が最大なら、死亡
         if (burst == max_burst)
@@ -177,8 +264,9 @@ public class CharBase : MonoBehaviour, IBurst
             OnPlayerDies?.Invoke(id);
         }
     }
+
     /// <summary> ダメージ量に応じたSEを再生 </summary>
-     protected void PlayDamageSE(int value)
+    protected void PlayDamageSE(int value)
     {
         if (audioSource == null) return;
 
@@ -189,17 +277,20 @@ public class CharBase : MonoBehaviour, IBurst
             audioSource.PlayOneShot(clip);
         }
     }
+
     /// <summary> プレイヤーを回復する </summary>
     /// <param name="value"> 回復する量 </param>
     virtual public void Heal(int value)
     {
         // バースト値が最低なら中断
         if (burst <= 0) return;
+
         regen_burst_timer = 0;
 
         // 回復が過剰ならセーブする
-        burst = burst - value < 0 ?
-                     0 : burst - value;
+        burst = burst - value < 0
+            ? 0
+            : burst - value;
 
         // 描画
         if (burst_bar != null)
@@ -211,32 +302,6 @@ public class CharBase : MonoBehaviour, IBurst
             Debug.LogError($"BurstBarが未設定！ キャラクターID:{this.id}");
         }
     }
-
-    /// <summary>
-    /// ラウンド開始時の初期化
-    /// </summary>
-    //public virtual void ResetRound()
-    //{
-    //    // バースト値リセット
-    //    burst = 0;
-    //    burst_bar.Draw(burst, max_burst);
-
-    //    // クールタイムリセット
-    //    skill_1_cooltime = 0;
-    //    skill_2_cooltime = 0;
-
-    //    // バースト回復タイマー
-    //    regen_burst_timer = 0;
-
-    //    // 硬直解除
-    //    rigid = 0;
-
-    //    // 停止
-    //    rb.linearVelocity = Vector2.zero;
-
-    //    // 操作禁止（READY→GO後にtrueになる）
-    //    can_control = false;
-    //}
 
     /// <summary> 移動関数 </summary>
     public void Move(InputAction.CallbackContext ctx)
@@ -267,6 +332,7 @@ public class CharBase : MonoBehaviour, IBurst
         if (ctx.performed)
         {
             if (!CanUseDash) return;
+
             audioSource.PlayOneShot(dash_se);
             rb.linearVelocity = direction * DASH_POWER;
             can_control = false;
@@ -285,14 +351,36 @@ public class CharBase : MonoBehaviour, IBurst
     }
 
     /// <summary>
+    /// ヒットストップ
+    /// </summary>
+    public void HitStop(float duration)
+    {
+        if (duration <= 0f) return;
+
+        // 初回のみ速度を保存
+        if (!isHitStopped)
+        {
+            hitStopVelocity = rb.linearVelocity;
+            isHitStopped = true;
+        }
+
+        // 連続ヒット時は長い方を優先
+        hitStopTimer = Mathf.Max(hitStopTimer, duration);
+
+        // 停止
+        rb.linearVelocity = Vector2.zero;
+    }
+
+    /// <summary>
     /// 点滅用コルーチン
     /// </summary>
     /// <returns></returns>
     protected IEnumerator FlashDamage()
     {
-        //いつものcolorを直接いじるのはspriteの仕組み的に厳しいからマテリアルを使って色を変えることにした
+        //いつものcolorを直接いじるのはspriteの仕組み的に厳しいからマテリアルを使うことにした
         //マテリアル本体はゲツヨビの個人フォルダにある
         flash_mpb ??= new MaterialPropertyBlock();
+
         float t = 0f;
         sprite.GetPropertyBlock(flash_mpb);
 
@@ -301,7 +389,7 @@ public class CharBase : MonoBehaviour, IBurst
         while (t < flash_duration)
         {
             t += Time.deltaTime;
-            float amount = 1f - Mathf.Clamp01(t / flash_duration); // これで滑らかに遷移するらしい
+            float amount = 1f - Mathf.Clamp01(t / flash_duration);
             flash_mpb.SetFloat(FlashAmountID, amount);
             sprite.SetPropertyBlock(flash_mpb);
             yield return null;
@@ -347,6 +435,7 @@ public class CharBase : MonoBehaviour, IBurst
             ct.OnCooltimeCharged -= PlayCooltimeChargedSound;
     }
 }
+
 
 public enum SkillName
 {
