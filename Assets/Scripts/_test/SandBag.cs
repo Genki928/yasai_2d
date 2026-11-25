@@ -66,7 +66,7 @@ public class SandBag : CharBase
         // プレイヤーのidと被らない値にする(攻撃側が id で自分を除外しているため)
         id = 99;
         //シイタケの毒沼用
-        _states.Add(new MoveSpeed(0f)); // State[Speed]を参照する攻撃対策
+        moveSpeed = new(0.0f); // State[Speed]を参照する攻撃対策
 
         // ノックバックで動かないようにする
         if (rb != null) rb.bodyType = RigidbodyType2D.Kinematic;

@@ -67,9 +67,7 @@ public class MushroomDamageArea : MonoBehaviour
 
         if (character != null)
         {
-            character.State[(int)StateName.Speed].AddState(
-                new Attribute(slowValue, slowDuration)
-            );
+            character.MoveSpeed.AddEffect(new(slowValue, slowDuration));
         }
 
         // É_ÉÅÅ[ÉW

@@ -66,7 +66,7 @@ public class WaterMelon : CharBase
     {
         isShoot = true;
         sprite.sprite = WaterMelon_skill;
-        _states[(int)StateName.Speed].AddSpecialContent(new SpecialState(0, -2.0f));
+        moveSpeed.AddEffect(new(-2.0f, 0.0f, 0, false));
         // À•WEƒxƒNƒgƒ‹‚ÌŽZo
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         // ’e‚ð¶¬ -> id‚Ì•R‚Ã‚¯
@@ -89,7 +89,7 @@ public class WaterMelon : CharBase
         audioSource.PlayOneShot(bullet_sound);
         yield return new WaitForSeconds(0.1f);
         sprite.sprite = WaterMelon_default;
-        _states[(int)StateName.Speed].RemoveSpecialContent(0);
+        moveSpeed.RemoveEffect(0);
         isShoot = false;
     }
    
@@ -130,7 +130,7 @@ public class WaterMelon : CharBase
 
         isCutter = true;
         sprite.sprite = WaterMelon_skill;
-        _states[(int)StateName.Speed].AddSpecialContent(new SpecialState(0, -2.0f));
+        moveSpeed.AddEffect(new(-2.0f, 0.0f, 0, false));
 
         yield return new WaitForSeconds(0.7f);
 
@@ -157,7 +157,7 @@ public class WaterMelon : CharBase
 
         sprite.sprite = WaterMelon_default;
         isCutter = false;
-        _states[(int)StateName.Speed].RemoveSpecialContent(0);
+        moveSpeed.RemoveEffect(0);
     }
 
     public override Sprite GetDefaultImage()

@@ -10,7 +10,7 @@ public class CharBase : MonoBehaviour, IBurst
     protected bool CanUseSkill1 => cooltime[(int)SkillName.Skill1].Current == 0 && can_control;
     protected bool CanUseSkill2 => cooltime[(int)SkillName.Skill2].Current == 0 && can_control;
     protected bool CanUseDash => cooltime[(int)SkillName.Dash].Current == 0 && can_control;
-    public List<State> State => _states;
+    public MoveSpeed MoveSpeed => moveSpeed;
 
     // ----- 定数 ----- //
     const float DASH_POWER = 15.0f;
@@ -29,7 +29,7 @@ public class CharBase : MonoBehaviour, IBurst
     public Cooltime[] cooltime = new Cooltime[3];
     public bool can_control = true;
     public float regen_burst_timer = 0;
-    protected List<State> _states = new();
+    protected MoveSpeed moveSpeed = new(1);
 
 
     [Header("◇カーソル")]
@@ -82,7 +82,7 @@ public class CharBase : MonoBehaviour, IBurst
 
         //
         max_burst = data.max_burst;
-        _states.Add(new MoveSpeed(data.speed));
+        moveSpeed = new(data.speed);
 
         //
         foreach (var ct in cooltime)
@@ -102,8 +102,7 @@ public class CharBase : MonoBehaviour, IBurst
         float time = Time.deltaTime;
 
         // 移動速度更新
-        foreach (var state in _states)
-            state.UpdateAttribute(time);
+        moveSpeed.AttributeUpdate(Time.deltaTime);
 
         // 硬直の更新
         if (rigid > 0.0f)
@@ -141,7 +140,7 @@ public class CharBase : MonoBehaviour, IBurst
         {
             // 硬直が無ければ移動
             if (rigid == 0)
-                rb.linearVelocity = vec * _states[(int)StateName.Speed].CurrentState;
+                rb.linearVelocity = vec * moveSpeed.Value;
             // 硬直があれば移動不可
             else
                 rb.linearVelocity = Vector2.zero;

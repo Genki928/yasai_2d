@@ -63,8 +63,7 @@ public class Leek : CharBase
 
         isCounter = true;
 
-        _states[(int)StateName.Speed]
-            .AddSpecialContent(new SpecialState(0, -3));
+        moveSpeed.AddEffect(new(-3.0f, 0.0f, 0, false));
 
         audioSource.PlayOneShot(se2);
 
@@ -94,8 +93,7 @@ public class Leek : CharBase
 
         isCounter = false;
 
-        _states[(int)StateName.Speed]
-            .RemoveSpecialContent(0);
+        moveSpeed.RemoveEffect(0);
 
         counterCoroutine = null;
     }
