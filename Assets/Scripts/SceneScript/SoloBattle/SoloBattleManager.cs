@@ -9,6 +9,7 @@ public class SoloBattleManager : BattleManagerBase
 {
     // ----- ’è” -----
     const int SPAWN_COOLTIME = 40;
+    [SerializeField] bool isSpawn = true;
 
     // ----- •Ï” -----
     [Header("ž“I¶¬")]
@@ -76,7 +77,7 @@ public class SoloBattleManager : BattleManagerBase
 
     void Update()
     {
-        if (start && !gameset)
+        if (start && !gameset && isSpawn)
         {
             timer.Count(Time.deltaTime);
             if (++spawn_cooltime > SPAWN_COOLTIME - ((60 - timer.TImeLimit) / 3))

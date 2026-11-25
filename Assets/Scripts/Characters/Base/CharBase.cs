@@ -239,7 +239,7 @@ public class CharBase : MonoBehaviour, IBurst
     //}
 
     /// <summary> ˆÚ“®ŠÖ” </summary>
-    public void Move(InputAction.CallbackContext ctx)
+    virtual public void Move(InputAction.CallbackContext ctx)
     {
         // ƒxƒNƒgƒ‹‚Ìæ“¾
         vec = ctx.ReadValue<Vector2>();

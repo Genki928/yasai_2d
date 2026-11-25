@@ -125,6 +125,9 @@ MonoBehaviour:
   sprite: {fileID: 0}
   spear: {fileID: 823284730550854255, guid: 205178f843d96cc47b4eeed30afe2b4e, type: 3}
   wall: {fileID: 3039591459505138851, guid: 422c7e7c0a8b148409dfaaacdd69d842, type: 3}
+  hold: {fileID: 6566573281922820664, guid: fc12df9124a60c5449374add4d5e3276, type: 3}
+  createPointPrefab: {fileID: 5607859952205750569, guid: ebf10e5f2de97424297213363ff4093f, type: 3}
+  MAX_DISTANCE: 5
 --- !u!114 &79983851847183952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
-  m_Actions: {fileID: -944628639613478452, guid: 071164c0841ad17479ba8fbe74896ece, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: fc12df9124a60c5449374add4d5e3276, type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -229,6 +232,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: dea649c5-98ea-43cc-a587-0c7ff317da3b
     m_ActionName: 'Player/Skill3[/Keyboard/3]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f0a29f58-45c0-4d29-8dde-03683017e92a
+    m_ActionName: 'Player/Skill2_hold[/Keyboard/2,/Keyboard/numpad2]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
