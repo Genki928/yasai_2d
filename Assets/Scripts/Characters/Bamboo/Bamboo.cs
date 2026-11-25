@@ -37,7 +37,29 @@ public class Bamboo : CharBase
 
     public override void Move(InputAction.CallbackContext ctx)
     {
-        base.Move(ctx);
+        // ベクトルの取得
+        vec = ctx.ReadValue<Vector2>();
+
+        // 向きを保存
+        if (vec != new Vector2(0, 0) && holdPer == 0.0f)
+        {
+            direction = vec;
+            cursor_obj.Refresh(vec);
+        }
+    }
+
+    protected override void FixedUpdate()
+    {
+        if (can_control)
+        {
+            // 硬直が無ければ移動
+            if (rigid == 0 && holdPer == 0.0f)
+                rb.linearVelocity = vec * _states[(int)StateName.Speed].CurrentState;
+            // 硬直があれば移動不可
+            else
+                rb.linearVelocity = Vector2.zero;
+        }
+        else if (burst >= max_burst) rb.linearVelocity = Vector2.zero;
     }
 
     override public void Skill1(InputAction.CallbackContext ctx)
