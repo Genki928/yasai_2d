@@ -148,7 +148,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 467ebb231bc9714418df2b438615915f, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.369
   m_Pitch: 1
   Loop: 1
@@ -2528,6 +2528,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1372949238}
   - component: {fileID: 1372949240}
+  - component: {fileID: 1372949243}
   - component: {fileID: 1372949239}
   - component: {fileID: 1372949241}
   - component: {fileID: 1372949242}
@@ -2638,6 +2639,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1372949243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372949237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 637976d7f26d515418123ebadf37a21e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RainbowText
+  speed: 1
 --- !u!1 &1617470174
 GameObject:
   m_ObjectHideFlags: 0
@@ -3423,6 +3437,8 @@ MonoBehaviour:
     icon: {fileID: 8237331089931671458, guid: c123102f84019df47988b54ad73ee2c3, type: 3}
   - chars: {fileID: 3071852468601324621, guid: 9ccaed661c6440e4580c8c647995b766, type: 3}
     icon: {fileID: 582658220279402993, guid: db2c5882fd2696c46907ee5236bacd3d, type: 3}
+  - chars: {fileID: 3071852468601324621, guid: 2d89e1870f9b486498627bd52eceaa9d, type: 3}
+    icon: {fileID: 8621175409208223273, guid: f690d899253831a43b94598b0f70ba64, type: 3}
   playerSpawn:
     point: {fileID: 666596767}
     direct: 0
@@ -3439,6 +3455,7 @@ MonoBehaviour:
     - {fileID: 1699338273}
     - {fileID: 631764148}
   playerMarkerPrefab: {fileID: 0}
+  titleSceneName: TitleScene
   audioSourceBgm: {fileID: 0}
   defaultBgm: {fileID: 0}
   followSpeed: 5

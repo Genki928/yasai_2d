@@ -108,8 +108,8 @@ public class TitleManager : MonoBehaviour
             if (pad.dpad.down.wasPressedThisFrame) { cmd = Cmd.Down; return true; }
             if (pad.dpad.left.wasPressedThisFrame) { cmd = Cmd.Left; return true; }
             if (pad.dpad.right.wasPressedThisFrame) { cmd = Cmd.Right; return true; }
-            if (pad.buttonEast.wasPressedThisFrame) { cmd = Cmd.B; return true; }   // B(Xbox配置の右)
-            if (pad.buttonSouth.wasPressedThisFrame) { cmd = Cmd.A; return true; }  // A(Xbox配置の下)
+            if (pad.buttonEast.wasPressedThisFrame) { cmd = Cmd.B; return true; }   
+            if (pad.buttonSouth.wasPressedThisFrame) { cmd = Cmd.A; return true; }  
         }
 
         cmd = default;
