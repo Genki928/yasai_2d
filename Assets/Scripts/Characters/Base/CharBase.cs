@@ -344,6 +344,10 @@ public class CharBase : MonoBehaviour, IBurst
     {
         foreach (var ct in cooltime)
             ct.OnCooltimeCharged -= PlayCooltimeChargedSound;
+
+        // ƒLƒƒƒ‰‚Æˆê‚É–îˆó‚à”jŠü‚·‚é
+        if (cursor_obj != null)
+            Destroy(cursor_obj.gameObject);
     }
 }
 

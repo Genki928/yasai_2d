@@ -22,6 +22,24 @@ public class TitleManager : MonoBehaviour
 
     bool isChangingScene = false;
 
+    // ----- コナミコマンド ----- //
+    [Header("◇コナミコマンド")]
+    [Tooltip("成功時に飛ぶシーン名(Build Settings に登録が必要)")]
+    [SerializeField] string trainingSceneName = "TOREMO";
+    [Tooltip("成功時に鳴らすSE(空なら鳴らさない)")]
+    [SerializeField] AudioClip konamiSe;
+
+    enum Cmd { Up, Down, Left, Right, B, A }
+
+    // ↑↑↓↓←→←→BA
+    static readonly Cmd[] KONAMI =
+    {
+        Cmd.Up, Cmd.Up, Cmd.Down, Cmd.Down,
+        Cmd.Left, Cmd.Right, Cmd.Left, Cmd.Right,
+        Cmd.B, Cmd.A
+    };
+    int konamiIndex = 0;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -32,6 +50,10 @@ public class TitleManager : MonoBehaviour
 
     void Update()
     {
+        // コナミコマンドは遷移判定より先に見る
+        // (最後のAが決定ボタンと被っても、こちらを優先するため)
+        if (CheckKonami()) return;
+
         // シーン遷移中はタイマーを動かさない
         if (isChangingScene) return;
 
@@ -43,6 +65,55 @@ public class TitleManager : MonoBehaviour
             isChangingScene = true;
             SceneManager.LoadScene(SceneName.PROLOGUE);
         }
+    }
+
+    /// <summary> コナミコマンドの入力を監視する。成功してシーン遷移したら true </summary>
+    bool CheckKonami()
+    {
+        if (!TryGetPressedCmd(out Cmd cmd)) return false;
+
+        // 何か押している間は無操作扱いにしない
+        timer = 0f;
+
+        if (cmd == KONAMI[konamiIndex])
+        {
+            konamiIndex++;
+        }
+        else
+        {
+            // 間違えたら最初から(押したのが先頭の↑なら1つ目として数える)
+            konamiIndex = cmd == KONAMI[0] ? 1 : 0;
+        }
+
+        if (konamiIndex < KONAMI.Length) return false;
+
+        // 成功
+        konamiIndex = 0;
+        isChangingScene = true;
+        StopAllCoroutines();    // 決定ボタン側の遷移待ちが走っていても止める
+
+        if (konamiSe != null && audioSource != null)
+            audioSource.PlayOneShot(konamiSe);
+
+        SceneManager.LoadScene(trainingSceneName);
+        return true;
+    }
+
+    /// <summary> このフレームに押されたコマンド入力を取得する(接続中の全パッド対象) </summary>
+    bool TryGetPressedCmd(out Cmd cmd)
+    {
+        foreach (var pad in Gamepad.all)
+        {
+            if (pad.dpad.up.wasPressedThisFrame) { cmd = Cmd.Up; return true; }
+            if (pad.dpad.down.wasPressedThisFrame) { cmd = Cmd.Down; return true; }
+            if (pad.dpad.left.wasPressedThisFrame) { cmd = Cmd.Left; return true; }
+            if (pad.dpad.right.wasPressedThisFrame) { cmd = Cmd.Right; return true; }
+            if (pad.buttonEast.wasPressedThisFrame) { cmd = Cmd.B; return true; }   // B(Xbox配置の右)
+            if (pad.buttonSouth.wasPressedThisFrame) { cmd = Cmd.A; return true; }  // A(Xbox配置の下)
+        }
+
+        cmd = default;
+        return false;
     }
 
     public void SceneChange_CharacterPickScene(InputAction.CallbackContext ctx)
