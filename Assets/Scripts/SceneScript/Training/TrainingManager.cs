@@ -1,16 +1,10 @@
+//だいぶ思い付きで作ったからバグったらスマン
+
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-/// <summary>
-/// トレーニングモード用マネージャー
-/// ・一人用(プレイヤー1のみ生成。任意でサンドバッグなどのダミーを配置)
-/// ・十字キー左右でキャラ切り替え
-/// ・L+R同時押しでシーン再読み込み(リセット)
-/// ・スタートボタンでタイトルシーンへ
-/// ※ Winner / GUI / Character / Spawner / DIRECT は BattleManager.cs 側の定義を使い回します
-/// </summary>
 public class TrainingManager : MonoBehaviour
 {
     // シーン再読み込み後も選択キャラを保持する
@@ -65,16 +59,13 @@ public class TrainingManager : MonoBehaviour
     {
         if (currentIndex < 0)
         {
-            // このシーンを単体で再生した場合、PlayerPick が未設定の可能性があるので 0 番にフォールバック
             try { currentIndex = (int)PlayerPick.pick[0]; }
             catch (System.Exception) { currentIndex = 0; }
         }
         currentIndex = Mathf.Clamp(currentIndex, 0, characters.Length - 1);
 
-        // CharBase.InitCooltime は Skill1 / Skill2 / Dash の3つを参照する
         if (gui.skillCooltimer == null || gui.skillCooltimer.Length < 3)
-        {
-            Debug.LogError("Gui > Skill Cooltimer は 3 つ必要です(Skill1CT, Skill2CT, DashCT)", this);
+        { 
             enabled = false;
             return;
         }
@@ -107,7 +98,7 @@ public class TrainingManager : MonoBehaviour
     {
         var pad = Gamepad.all.Count > 0 ? Gamepad.all[0] : null;
 
-        // L+R同時押しでリセット(どちらかが押された瞬間に両方押されていればOK)
+        // L+R同時押しでリセット
         if (pad != null
             && pad.leftShoulder.isPressed && pad.rightShoulder.isPressed
             && (pad.leftShoulder.wasPressedThisFrame || pad.rightShoulder.wasPressedThisFrame))
@@ -116,7 +107,7 @@ public class TrainingManager : MonoBehaviour
             return;
         }
 
-        // スタートボタンでタイトルへ
+        // スタートボタンでタイトル
         if (pad != null && !resetting && pad.startButton.wasPressedThisFrame)
         {
             resetting = true;
@@ -139,9 +130,6 @@ public class TrainingManager : MonoBehaviour
         UpdateCamera();
     }
 
-    // ---------------------------------------------------------
-    // 生成
-    // ---------------------------------------------------------
     void SpawnPlayer(int index, Vector3 pos, Vector2 direction)
     {
         PlayerInput pi;
@@ -156,7 +144,7 @@ public class TrainingManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("ゲームパッドが接続されていません");
+            Debug.LogWarning("ゲームパッド、ナシ");
             pi = PlayerInput.Instantiate(characters[index].chars, playerIndex: 0);
         }
 
@@ -178,18 +166,18 @@ public class TrainingManager : MonoBehaviour
         gui.icon.sprite = characters[index].icon;
     }
 
-    // Characters[index].chars のルートに PlayerInput があるか確認(なければプレハブ名つきでエラー表示)
+
     bool IsValidChar(int index)
     {
         var prefab = characters[index].chars;
         if (prefab == null)
         {
-            Debug.LogError($"Characters[{index}] の Chars が空です", this);
+            Debug.LogError($"Characters[{index}]", this);
             return false;
         }
         if (!prefab.TryGetComponent<PlayerInput>(out _))
         {
-            Debug.LogError($"Characters[{index}] '{prefab.name}' のルートに PlayerInput がありません", prefab);
+            Debug.LogError($"Characters[{index}] '{prefab.name}'", prefab);
             return false;
         }
         return true;
@@ -207,9 +195,6 @@ public class TrainingManager : MonoBehaviour
         }
     }
 
-    // ---------------------------------------------------------
-    // キャラ切り替え
-    // ---------------------------------------------------------
     IEnumerator SwitchCharacter(int dir)
     {
         if (characters.Length <= 1) yield break;
@@ -235,16 +220,12 @@ public class TrainingManager : MonoBehaviour
         Vector2 direction = playerData.direction;
 
         Destroy(player);
-        // Destroy は フレーム終了時に実行されるので、デバイスのペアリングが解除されるまで1フレーム待つ
         yield return null;
 
         SpawnPlayer(currentIndex, pos, direction);
         switching = false;
     }
 
-    // ---------------------------------------------------------
-    // リセット
-    // ---------------------------------------------------------
     void ResetScene()
     {
         if (resetting) return;
@@ -253,7 +234,6 @@ public class TrainingManager : MonoBehaviour
     }
 
     // プレイヤーが倒れたら少し待ってリセット
-    // ※ OnPlayerDies の id は「倒された側」ではなく「攻撃した側(勝者)」の id
     void OnPlayerDies(int winnerId)
     {
         if (winnerId == 0 || resetting) return;
@@ -266,9 +246,6 @@ public class TrainingManager : MonoBehaviour
         ResetScene();
     }
 
-    // ---------------------------------------------------------
-    // カメラ(プレイヤー+ダミーを映す)
-    // ---------------------------------------------------------
     void UpdateCamera()
     {
         Camera cam = Camera.main;

@@ -24,9 +24,8 @@ public class TitleManager : MonoBehaviour
 
     // ----- コナミコマンド ----- //
     [Header("◇コナミコマンド")]
-    [Tooltip("成功時に飛ぶシーン名(Build Settings に登録が必要)")]
+    [Tooltip("成功時に飛ぶシーン名")]
     [SerializeField] string trainingSceneName = "TOREMO";
-    [Tooltip("成功時に鳴らすSE(空なら鳴らさない)")]
     [SerializeField] AudioClip konamiSe;
 
     enum Cmd { Up, Down, Left, Right, B, A }
@@ -51,7 +50,7 @@ public class TitleManager : MonoBehaviour
     void Update()
     {
         // コナミコマンドは遷移判定より先に見る
-        // (最後のAが決定ボタンと被っても、こちらを優先するため)
+        // 最後のAが決定ボタンと被っても、こちらを優先する
         if (CheckKonami()) return;
 
         // シーン遷移中はタイマーを動かさない
@@ -67,7 +66,7 @@ public class TitleManager : MonoBehaviour
         }
     }
 
-    /// <summary> コナミコマンドの入力を監視する。成功してシーン遷移したら true </summary>
+    /// <summary> 迫真のコナミコマンドの入力を監視する。成功してシーン遷移したら true </summary>
     bool CheckKonami()
     {
         if (!TryGetPressedCmd(out Cmd cmd)) return false;
@@ -99,7 +98,7 @@ public class TitleManager : MonoBehaviour
         return true;
     }
 
-    /// <summary> このフレームに押されたコマンド入力を取得する(接続中の全パッド対象) </summary>
+    /// <summary> このフレームに押されたコマンド入力を取得する </summary>
     bool TryGetPressedCmd(out Cmd cmd)
     {
         foreach (var pad in Gamepad.all)

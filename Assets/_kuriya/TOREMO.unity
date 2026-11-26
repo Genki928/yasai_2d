@@ -148,8 +148,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 467ebb231bc9714418df2b438615915f, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 0.369
+  m_PlayOnAwake: 1
+  m_Volume: 0.119
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2555,8 +2555,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 543.25, y: -215}
-  m_SizeDelta: {x: 1367.33, y: 51.61}
+  m_AnchoredPosition: {x: 761.5, y: -220}
+  m_SizeDelta: {x: 845.95, y: 51.61}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1372949239
 MonoBehaviour:
@@ -2591,7 +2591,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5341\u5B57\u30AD\u30FC\u5DE6\u53F3\u3000\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC\u5207\u308A\u66FF\u3048\t\tRB+LB\u3000\u30EA\u30BB\u30C3\u30C8\t\tSTART\u3000\u30BF\u30A4\u30C8\u30EB"
+  m_Text: "\u5341\u5B57\u30AD\u30FC\u5DE6\u53F3:\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC\u5207\u308A\u66FF\u3048
+    RB+LB:\u30EA\u30BB\u30C3\u30C8 START:\u30BF\u30A4\u30C8\u30EB"
 --- !u!222 &1372949240
 CanvasRenderer:
   m_ObjectHideFlags: 0
