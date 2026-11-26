@@ -41,10 +41,11 @@ public class Bamboo : CharBase
         vec = ctx.ReadValue<Vector2>();
 
         // 向きを保存
-        if (vec != new Vector2(0, 0) && holdPer == 0.0f)
+        if (vec != new Vector2(0, 0))
         {
-            direction = vec;
             cursor_obj.Refresh(vec);
+            if (holdPer == 0.0f)
+                direction = vec;
         }
     }
 
@@ -54,7 +55,7 @@ public class Bamboo : CharBase
         {
             // 硬直が無ければ移動
             if (rigid == 0 && holdPer == 0.0f)
-                rb.linearVelocity = vec * _states[(int)StateName.Speed].CurrentState;
+                rb.linearVelocity = vec * moveSpeed.Value;
             // 硬直があれば移動不可
             else
                 rb.linearVelocity = Vector2.zero;

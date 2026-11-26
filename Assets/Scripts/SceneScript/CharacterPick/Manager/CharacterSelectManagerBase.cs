@@ -243,7 +243,7 @@ public class CharacterSelectManagerBase : MonoBehaviour
 
 public static class PVESelectedCharId
 {
-    public static CharId id = CharId.Mushroom;
+    public static CharId id = CharId.Corn;
 }
 
 public static class PlayerPick
