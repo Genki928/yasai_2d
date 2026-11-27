@@ -259,6 +259,7 @@ public enum CharId
     Corn = 3,
     WaterMelon = 4,
     Mushroom = 5,
-    Bamboo = 6,
-    random = 7,
+    Cabbage = 6,
+    Bamboo = 7,
+    random = 8,
 }

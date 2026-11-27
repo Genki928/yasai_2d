@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Bamboo : CharBase
 {
-    [SerializeField] SimpleDamageArea spear;
+    [SerializeField] GameObject spear;
     [SerializeField] GameObject wall;
 
     // 長押し検知
@@ -68,8 +68,11 @@ public class Bamboo : CharBase
         if (!CanUseSkill1 || !ctx.performed) return;
 
         // 生成
-        var obj = Instantiate(spear, transform.position, new(0.0f, 0.0f, 0.0f, 0.0f));
-        obj.Init(id, new(10, DamageType.Soundable), new(0.0f, 0.0f), 1.0f, false);
+        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90.0f;
+        Vector2 pos = new(transform.position.x, transform.position.y + 0.5f);
+        var obj = Instantiate(spear, pos, Quaternion.Euler(0.0f, 0.0f, angle));
+        StartCoroutine(obj.GetComponent<BambooSpear>().Spear(direction));
+        obj.GetComponent<SimpleDamageArea>().Init(id, new(15, DamageType.Soundable), new(0.0f, 0.0f), 0.5f, false);
 
         rigid += data.skill_1_rigid;
         cooltime[(int)SkillName.Skill1].SetCooltime();
@@ -105,8 +108,8 @@ public class Bamboo : CharBase
         // 左右に2個ずつ
         for (int i = 1; i <= 2; i++)
         {
-            Destroy(Instantiate(wall, center + perpendicular * 1.0f * i, Quaternion.identity), 2.0f);
-            Destroy(Instantiate(wall, center - perpendicular * 1.0f * i, Quaternion.identity), 2.0f);
+            Destroy(Instantiate(wall, center + perpendicular * 0.8f * i, Quaternion.identity), 2.0f);
+            Destroy(Instantiate(wall, center - perpendicular * 0.8f * i, Quaternion.identity), 2.0f);
             yield return new WaitForSeconds(0.1f);
         }
     }

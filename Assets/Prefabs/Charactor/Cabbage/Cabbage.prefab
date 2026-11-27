@@ -241,8 +241,8 @@ MonoBehaviour:
   chargeStages: 5
   chargeStageSe: {fileID: 8300000, guid: 75303838d388f314bbbe988186c85986, type: 3}
   chargeMaxSe: {fileID: 8300000, guid: 75303838d388f314bbbe988186c85986, type: 3}
-  minDamage: 2
-  maxDamage: 12
+  minDamage: 8
+  maxDamage: 30
   maxScale: 1.5
   boomerangSpeed: 12
   outDistance: 8

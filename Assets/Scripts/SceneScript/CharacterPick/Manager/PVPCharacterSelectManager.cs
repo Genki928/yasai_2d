@@ -1,4 +1,5 @@
 using Const;
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -29,7 +30,7 @@ public class PVPCharacterSelectManager : CharacterSelectManagerBase
 
                 // ランダムが選択されているなら、キャラクターを抽選
                 if (num[i] == CharId.random)
-                    num[i] = (CharId)UnityEngine.Random.Range(0, 6);
+                    num[i] = (CharId)UnityEngine.Random.Range(0, (int)CharId.random);
             }
 
             // スタティック変数に代入

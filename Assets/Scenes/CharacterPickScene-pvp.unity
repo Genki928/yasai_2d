@@ -269,6 +269,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
+--- !u!114 &152824156 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4618156151337208691, guid: 0f897709eb52ba24e9c43931fce5eeb8, type: 3}
+  m_PrefabInstance: {fileID: 3567650348561058932}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17dcc070bc3850647b265720f1f4a92a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IconSelecter
 --- !u!1 &394705918
 GameObject:
   m_ObjectHideFlags: 0
@@ -1458,6 +1469,28 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7868253318545637614, guid: 096a9c2ded2d4b84db76807878f4296c, type: 3}
   m_PrefabInstance: {fileID: 1611819624}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1738713964 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1835855316210872811, guid: 0f897709eb52ba24e9c43931fce5eeb8, type: 3}
+  m_PrefabInstance: {fileID: 3567650348561058932}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17dcc070bc3850647b265720f1f4a92a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IconSelecter
+--- !u!114 &1761809974 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4707102964198317625, guid: 0f897709eb52ba24e9c43931fce5eeb8, type: 3}
+  m_PrefabInstance: {fileID: 3567650348561058932}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17dcc070bc3850647b265720f1f4a92a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IconSelecter
 --- !u!1 &1829376448
 GameObject:
   m_ObjectHideFlags: 0
@@ -1595,6 +1628,17 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &1909123893 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8133548690774025587, guid: 0f897709eb52ba24e9c43931fce5eeb8, type: 3}
+  m_PrefabInstance: {fileID: 3567650348561058932}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17dcc070bc3850647b265720f1f4a92a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IconSelecter
 --- !u!1 &1978089991
 GameObject:
   m_ObjectHideFlags: 0
@@ -1865,6 +1909,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Icons
       objectReference: {fileID: 0}
+    - target: {fileID: 1081700274305460004, guid: 0f897709eb52ba24e9c43931fce5eeb8, type: 3}
+      propertyPath: 'icons.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1909123893}
+    - target: {fileID: 4618156151337208691, guid: 0f897709eb52ba24e9c43931fce5eeb8, type: 3}
+      propertyPath: 'icons.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1761809974}
+    - target: {fileID: 4707102964198317625, guid: 0f897709eb52ba24e9c43931fce5eeb8, type: 3}
+      propertyPath: data.id
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4707102964198317625, guid: 0f897709eb52ba24e9c43931fce5eeb8, type: 3}
+      propertyPath: 'icons.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1909123893}
+    - target: {fileID: 4707102964198317625, guid: 0f897709eb52ba24e9c43931fce5eeb8, type: 3}
+      propertyPath: 'icons.Array.data[1]'
+      value: 
+      objectReference: {fileID: 152824156}
     - target: {fileID: 4884599716596106737, guid: 0f897709eb52ba24e9c43931fce5eeb8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1905,6 +1969,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8133548690774025587, guid: 0f897709eb52ba24e9c43931fce5eeb8, type: 3}
+      propertyPath: data.id
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8133548690774025587, guid: 0f897709eb52ba24e9c43931fce5eeb8, type: 3}
+      propertyPath: 'icons.Array.data[0]'
+      value: 
+      objectReference: {fileID: 4096264478434804781}
+    - target: {fileID: 8133548690774025587, guid: 0f897709eb52ba24e9c43931fce5eeb8, type: 3}
+      propertyPath: 'icons.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1761809974}
+    - target: {fileID: 9016883946788575289, guid: 0f897709eb52ba24e9c43931fce5eeb8, type: 3}
+      propertyPath: 'icons.Array.data[0]'
+      value: 
+      objectReference: {fileID: 152824156}
+    - target: {fileID: 9016883946788575289, guid: 0f897709eb52ba24e9c43931fce5eeb8, type: 3}
+      propertyPath: 'icons.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1738713964}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -4705,6 +4705,10 @@ MonoBehaviour:
     icon: {fileID: 8237331089931671458, guid: c123102f84019df47988b54ad73ee2c3, type: 3}
   - chars: {fileID: 3071852468601324621, guid: 9ccaed661c6440e4580c8c647995b766, type: 3}
     icon: {fileID: 582658220279402993, guid: db2c5882fd2696c46907ee5236bacd3d, type: 3}
+  - chars: {fileID: 3071852468601324621, guid: 2d89e1870f9b486498627bd52eceaa9d, type: 3}
+    icon: {fileID: 8621175409208223273, guid: f690d899253831a43b94598b0f70ba64, type: 3}
+  - chars: {fileID: 5840830310646451926, guid: 39e89c83d1bde02418c5e111ed71ec22, type: 3}
+    icon: {fileID: 8621175409208223273, guid: f690d899253831a43b94598b0f70ba64, type: 3}
   spawn_point:
   - point: {fileID: 666596767}
     direct: 0
